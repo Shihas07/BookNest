@@ -7,6 +7,8 @@ const app = express();
 const hbs = require("hbs");
 const userRouter = require("./router/user");
 const adminRouter = require("./router/admin");
+const vendorRouter = require("./router/vendor");
+
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 const port = 7000;
@@ -20,7 +22,9 @@ app.use(cookieParser());
 
 // Mount user and admin routers directly onto the main app
 app.use("/", userRouter); // User routes will be handled at '/'
-app.use("/", adminRouter); // Admin routes will be handled at '/admin'
+app.use("/", adminRouter);
+app.use("/", vendorRouter);
+ // Admin routes will be handled at '/admin'
 
 // Connect to MongoDB
 const mongoURI = 'mongodb://localhost:27017/mydatabase';
