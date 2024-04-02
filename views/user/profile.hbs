@@ -1,0 +1,247 @@
+{{!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Profile</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+{{#if user}}
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-header">
+          <h3 class="text-center">User Profile</h3>
+        </div>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <p id="name">{{ user.userName }}</p>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <p id="email">{{ user.email }}</p>
+          </div>
+          <a id="logoutBtn" class="btn btn-danger btn-block" href="/userLogout" >Logout</a>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{/if}}
+
+<!-- Bootstrap JS (Optional) -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> --}}
+{{!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Profile</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <!-- Navigation Links -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="#orders">Orders</a></li>
+                <li class="nav-item"><a class="nav-link" href="#edit-profile">Edit Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="#view-profile">View Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main class="container">
+        <!-- Orders Section -->
+        <section id="orders" class="mt-5">
+            <h2>My Orders</h2>
+            <!-- Display user's orders here -->
+        </section>
+
+        <!-- Edit Profile Section -->
+        <section id="edit-profile" class="mt-5">
+            <h2>Edit Profile</h2>
+            <!-- Form to edit profile information -->
+            {{#if user}}
+            <div class="card bg-light mb-3" style="max-width: 400px;">
+                <div class="card-header">Edit Profile</div>
+                <div class="card-body">
+                    <form action="/edit-profile" method="post">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{user.userName}}">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" value="{{user.email}}">
+                        </div>
+                        <!-- Other profile fields -->
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+            {{/if}}
+        </section>
+
+        <!-- View Profile Section -->
+        <section id="view-profile" class="mt-5">
+            <h2>View Profile</h2>
+            <!-- Display user's profile details here -->
+            <div class="card bg-light mb-3" style="max-width: 400px;">
+                <div class="card-header">Profile</div>
+                <div class="card-body">
+                    <p><strong>Name:</strong> {{user.userName}}</p>
+                    <p><strong>Email:</strong> {{user.email}}</p>
+                    <!-- Other profile details -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bootstrap JS (optional, only required if you need Bootstrap JavaScript features) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html> --}}
+
+
+
+-- <!DOCTYPE html>
+  <html lang="en">
+  <head>
+              <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+          
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+       <style>
+    * {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    background-color: #000
+}
+
+.card {
+    width: 350px;
+    background-color: #efefef;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.image img {
+    transition: all 0.5s
+}
+
+.card:hover .image img {
+    transform: scale(1.5)
+}
+
+.btn {
+    height: 140px;
+    width: 140px;
+    border-radius: 50%
+}
+
+.name {
+    font-size: 22px;
+    font-weight: bold
+}
+
+.idd {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.idd1 {
+    font-size: 12px
+}
+
+.number {
+    font-size: 22px;
+    font-weight: bold
+}
+
+.follow {
+    font-size: 12px;
+    font-weight: 500;
+    color: #444444
+}
+
+.btn1 {
+    height: 40px;
+    width: 150px;
+    border: none;
+    background-color: #000;
+    color: #aeaeae;
+    font-size: 15px
+}
+
+.text span {
+    font-size: 13px;
+    color: #545454;
+    font-weight: 500
+}
+
+.icons i {
+    font-size: 19px
+}
+
+hr .new1 {
+    border: 1px solid
+}
+
+.join {
+    font-size: 14px;
+    color: #a0a0a0;
+    font-weight: bold
+}
+
+.date {
+    background-color: #ccc
+}
+</style>
+  </head>
+
+  <body>
+    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center"> 
+      <div class="card p-4"> <div class=" image d-flex flex-column justify-content-center align-items-center">
+         <button class="btn btn-secondary"> <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
+         </button> <span class="name mt-3">{{user.userName}}</span> <span class="idd">{{user.email}}</span>
+          <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1"></span>
+          <span><i class="fa fa-copy"></i></span> 
+          </div> <div class="d-flex flex-row justify-content-center align-items-center mt-3"> 
+            <span class="number"> <span class="follow">Followers</span></span> </div> 
+            <div class=" d-flex mt-2"> <button class="btn1 btn-dark">Edit Profile</button> </div>
+             {{!-- <div class="text mt-3"> <span>Eleanor Pena is a creator of minimalistic x bold graphics and digital artwork.<br><br> Artist/ Creative Director by Day #NFT minting@ with FND night. </span> </div>  --}}
+             <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span> </div>
+              {{!-- <div class=" px-2 rounded mt-4 date "> <span class="join">Joined May,2021</span> </div> </div> </div> --}}
+</div>
+
+
+             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  </body>
+  </html> 
+
+
+
+
+
