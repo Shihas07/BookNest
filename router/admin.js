@@ -3,10 +3,11 @@
   const router=  express.Router()
   const adminController = require("../controller/admin")
 const adminAuth = require("../midilware/admin_jwt")
+
   // const adminAuth = require('../midilware/admin_jwt');
 
    
-  // const Admin=require('../model/admin')
+  // const Admin=require('../model/admin/admin')
 
 
     
@@ -18,5 +19,9 @@ const adminAuth = require("../midilware/admin_jwt")
      router.post("/admin/login",adminController.loginPostPage)
 
      router.get('/admin/adminLogout',adminController.adminLogout)
+     router.get("/admin/category",adminAuth,adminController.getCategorey)
+     router.post("/admin/add-category",adminController.postaddcategory)
+
+    //  router.post("/admin/editCategory/:id",adminController.editpostCategory)
 
      module.exports=router

@@ -16,7 +16,13 @@
   password:{
       type:String,
       required:true
-  }
+  },
+  category:[{
+    categoryName:{
+        type:String,
+        required:true
+    },
+  }]
   
 })
   

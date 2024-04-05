@@ -6,6 +6,7 @@ const jwt=require("jsonwebtoken")
 
 
 
+
 const cookieparser=require("cookie-parser")
 
 require('dotenv').config()
@@ -16,7 +17,9 @@ const homePage = async (req, res) => {
       if (req.cookies.user_jwt) {
       
           const decodedToken = jwt.verify(req.cookies.user_jwt, process.env.JWT_SECRET);
+          console.log(decodedToken);
           const userId = decodedToken.id;
+          console.log(userId);
           const user = await User.findById(userId);
           res.render('user/index', { user });
       } else {

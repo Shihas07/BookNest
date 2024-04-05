@@ -1060,8 +1060,13 @@
                       alt="user photo"
                       />
                     <span class="ltr:ms-2 rtl:ms-0 rtl:me-2 hidden text-left xl:block">
-                      <span class="block font-medium text-slate-600 dark:text-gray-300">Maria Gibson</span>
-                      <span class="-mt-0.5 block text-xs text-slate-500 dark:text-gray-400">Admin</span>
+                          
+                          {{#if vendor}}
+                      <span class="block font-medium text-slate-600 dark:text-gray-300">{{vendor.vendorName}}</span>
+                      {{else}}
+ 
+                      <span class="-mt-0.5 block text-xs text-slate-500 dark:text-gray-400">no one</span>
+                        {{/if}}
                     </span>
                   </button>
 
@@ -1104,13 +1109,14 @@
                       </li>
                       <li>
                         <a
-                          href="auth-lockscreen.html"
+                          href="/vendor/signout"
                           class="flex items-center py-2 px-3 text-sm text-red-500 hover:bg-gray-50 hover:text-red-600
                           dark:text-red-500 dark:hover:bg-gray-900/20
                           dark:hover:text-red-500">
                           <span data-lucide="power"
                                           class="w-4 h-4 inline-block text-red-500 dark:text-red-500 me-2"></span>
                           Sign out</a>
+                          {{!-- {{/if}} --}}
                       </li>
                     </ul>
                   </div>
@@ -1118,7 +1124,7 @@
               </div>
             </div>
           </nav>
-
+          
 
         <div class="ltr:flex flex-1 rtl:flex-row-reverse">
             <div class="page-wrapper relative ltr:ml-auto rtl:mr-auto rtl:ml-0 w-[calc(100%-260px)] px-4 pt-[64px] duration-300">
