@@ -133,23 +133,50 @@
 
           const editpostCategory = async(req, res) => {
             try {
-              const roomId = req.params.id;
-              console.log(roomId); // Check if roomId is correctly received
-          
-              // You can access form data sent with the request using req.body
-              const category = req.body.category; // Assuming category is being sent from the form
-              // Check if category is received correctly
-          
-              // Now you can process the data as needed
-              // For example, update the room with the received roomId and category
+              const {id, category} = req.body
+              console.log(id);
+              // console.log(req);
+
+              const admin = await Admin.findOne()
+              let index = admin.category.findIndex(cate => cate._id.toString() === id)
+              admin.category[index].categoryName = category
+
+              admin.save()
+              
           
               // Respond back to the client
-              res.status(200).send("Success"); // Sending a success response
+              res.status(200).json({message : "category added successful"}); // Sending a success response
             } catch (error) {
               console.error(error);
               res.status(500).send("Error occurred"); // Sending an error response
             }
           }
+
+            const deletePostCategory=async(req,res)=>{
+              const categoryId = req.params.id;
+              console.log('Category ID to delete:', categoryId);
+          
+              try {
+              
+                  let admin = await Admin.findOne();
+                  if (!admin) {
+                      return res.status(400).send('Admin not found');
+                  }
+          
+                  
+                  admin.category = admin.category.filter(category => category._id.toString() !== categoryId);
+          
+                  // Save the modified Admin document
+                  await admin.save();
+          
+                  // Redirect or respond as necessary
+                  return res.redirect('/admin/category'); 
+              } catch (error) {
+                  console.log('Error deleting category:', error);
+                  return res.status(500).send('Internal server error');
+              }
+          };
+          
 
           
 
@@ -168,7 +195,8 @@
         adminLogout,
         getCategorey,
         postaddcategory,
-        editpostCategory
+        editpostCategory,
+        deletePostCategory
      }
 
 

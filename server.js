@@ -19,6 +19,8 @@ app.set("views", __dirname + "/views");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(express.json()); // This line is important!
+
 
 // Mount user and admin routers directly onto the main app
 app.use("/", userRouter); // User routes will be handled at '/'

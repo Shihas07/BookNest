@@ -904,7 +904,9 @@
                   <input type="hidden" id="categoryId" name="categoryId">
                   <button type="button" class="btn btn-warning btn-sm" style="font-size: 0.7rem;" onclick="openEditModal('{{this._id}}', '{{this.categoryName}}')">Edit</button>
                 </form>
-                <button type="button" class="btn btn-danger btn-sm" style="font-size: 0.7rem;" onclick="deleteRoom('{{this._id}}')">Delete</button>
+                <form action="/admin/deleteCategory/{{id}}" method="post">
+                <button type="submit" class="btn btn-danger btn-sm" style="font-size: 0.7rem;"   >Delete</button>
+                </form>
               </td>
             </tr>
             {{/each}}
@@ -959,7 +961,7 @@
               </div>
               <div class="modal-footer">
                 {{!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
-                <button type="submit" id="buttonEditCategory" class="btn btn-primary">Save changes</button>
+                <button type="button" id="buttonEditCategory" class="btn btn-primary">Save changes</button>
               </div>
             </div>
           </div>
@@ -1221,18 +1223,34 @@
 </script>
 
 
-
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-  function openEditModal(categoryId, categoryName) {
-    document.getElementById('editRoomId').value = categoryId;
-    document.getElementById('editCategory').value = categoryName;
-    $('#editRoomModal').modal('show');
+    function openEditModal(categoryId, categoryName) {
+        document.getElementById('editRoomId').value = categoryId;
+        document.getElementById('editCategory').value = categoryName;
+        $('#editRoomModal').modal('show');
 
-    document.getElementById("buttonEditCategory").addEventListener(()=>{
-        let id = document.getElementById("editRoomId").value
-        console.log("ddd:",id)
-    })
-}
+        document.getElementById("buttonEditCategory").addEventListener("click",()=>{
+            let id = document.getElementById("editRoomId").value
+            let category = document.getElementById("editCategory").value
+            console.log("ddd:",id,category)
+            const data = {
+                id,
+                category
+            }
+
+            console.log(data)
+
+            axios.post("/admin/editCategory",{id:id, category:category})
+            .then((data)=>{
+                window.location.href="/admin/category"
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+
+        })
+    }
 </script>
 
 <!-- Script for Deleting Room -->
