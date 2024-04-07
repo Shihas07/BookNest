@@ -122,13 +122,23 @@ const postLogin = async (req, res) => {
 
      }
 
+      const roomgetPage=async(req,res)=>{
+             
+            res.render("vendor/roomlist")
+      }
+       const getaddproduect=(req,res)=>{
+             res.render("vendor/add-product")
+       }
+
 module.exports = {
     index,
     signupGetPage,
     signupPostPage,
     getlogin,
     postLogin,
-    signout
+    signout,
+    roomgetPage,
+    getaddproduect
 };
 
 

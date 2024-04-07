@@ -119,17 +119,9 @@
 
 
             
-          //  const editpostCategory=async(req,res)=>{
-                                       
-          //             try {
-                         
-          //               const  roomId =   req.params.id
-          //               console.log(roomId);
-          //             } catch (error) {
-                        
-          //             }
+         
 
-          //  }
+          
 
           const editpostCategory = async(req, res) => {
             try {
@@ -176,6 +168,8 @@
                   return res.status(500).send('Internal server error');
               }
           };
+
+            
           
 
           
