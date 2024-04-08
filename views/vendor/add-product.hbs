@@ -1181,8 +1181,10 @@
                                     <div class="mb-2">
                                         <label for="category" class="font-medium text-sm text-slate-600 dark:text-slate-400">Category</label>
                                         <select id="category" class="w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500  dark:hover:border-slate-700">
-                                            {{!-- <option  class="dark:text-slate-700">All Category</option> --}}
+                                            <option  class="dark:text-slate-700" placeholder="location"></option>
                                              {{#each Category}}
+                                          {{!-- <option  class="dark:text-slate-700">All Category</option>  --}}
+
                                             <option  class="dark:text-slate-700">{{this.categoryName}}</option>
                                            
 
@@ -1200,12 +1202,16 @@
                                     <div class="mb-2">
                                         <div class="grid grid-cols-2 gap-3">
                                             <div class="col-span-1">
-                                                <label for="Product-date" class="font-medium text-sm text-slate-600 dark:text-slate-400">Product Date</label>
+                                                <label for="Product-date" class="font-medium text-sm text-slate-600 dark:text-slate-400">room add Date</label>
                                                 <input type="text" id="Product-date" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-primary-500 dark:focus:border-primary-500  dark:hover:border-slate-700" name="foo">
                                             </div>
                                             <div class="col-span-1">
                                                 <label for="price" class="font-medium text-sm text-slate-600 dark:text-slate-400">Price</label>
                                                 <input type="title" id="price" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-brand-500 dark:focus:border-brand-500  dark:hover:border-slate-700" placeholder="Price" required>
+                                            </div>
+                                              <div class="col-span-1">
+                                                <label for="location" class="font-medium text-sm text-slate-600 dark:text-slate-400">Location</label>
+                                                <input type="title" id="Location" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-brand-500 dark:focus:border-brand-500  dark:hover:border-slate-700" placeholder="location" required>
                                             </div>
                                         </div>
                                     </div>
@@ -1233,7 +1239,9 @@
 
                                     <div class="">
                                         <button class="px-2 py-2 lg:px-4 bg-brand  text-white text-sm  rounded hover:bg-brand-600 border border-brand-500">Add Product</button>
+                                        <form action="/vendor/addproduct" method="post">
                                         <button class="px-2 py-2 lg:px-4 bg-transparent  text-brand text-sm  rounded transition hover:bg-brand-500 hover:text-white border border-brand font-medium">Save Product</button>
+                                        </form>
                                     </div>
                                 </div><!--end card-body--> 
                             </div><!--end card-->                                  

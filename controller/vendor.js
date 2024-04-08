@@ -7,6 +7,8 @@
 const Vendor = require('../model/vendor/vendor');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Admin = require('../model/admin/admin');
+
 
 require('dotenv').config();
 
@@ -124,11 +126,36 @@ const postLogin = async (req, res) => {
 
       const roomgetPage=async(req,res)=>{
              
+          
             res.render("vendor/roomlist")
       }
-       const getaddproduect=(req,res)=>{
-             res.render("vendor/add-product")
-       }
+      const getaddproduect = async (req, res) => {
+        try {
+            const adminData = await Admin.findOne();
+            let Category = [];
+              
+            if (adminData && adminData.category) {
+                Category = adminData.category;
+            }
+    
+
+            // products.forEach(product => {
+            //     Category = Admin.concat(product.category);
+            // });
+            // console.log(Category);
+
+            res.render("vendor/add-product", { Category, error: ' ' });
+        } catch (error) {
+            console.log('Error fetching Category:', error);
+            res.render("vendor/add-product", { error: 'Error fetching Category' });
+        }
+    };
+
+       
+  
+          
+            
+       
 
 module.exports = {
     index,

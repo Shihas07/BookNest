@@ -18,6 +18,7 @@
       router.get("/vendor/signout",vendorController.signout)
       router.get("/vendor/roomlist",vendorController.roomgetPage)
       router.get("/vendor/addproduct",vendorController.getaddproduect)
+    //   router.post("/vendor/addproduct",vendorController.)
 
 module.exports=router
 
