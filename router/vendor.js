@@ -3,6 +3,14 @@
     const router=  express.Router()
     const vendorController=require("../controller/vendor")
     const vendorAuth = require("../midilware/vendor_jwt")
+    
+    // const upload = require("../config/multer")
+
+
+    const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
+//    const upload = multer({ dest: '/tmp/' });
+    
 
 
 
@@ -18,7 +26,8 @@
       router.get("/vendor/signout",vendorController.signout)
       router.get("/vendor/roomlist",vendorController.roomgetPage)
       router.get("/vendor/addproduct",vendorController.getaddproduect)
-    //   router.post("/vendor/addproduct",vendorController.)
+
+      router.post("/vendor/addroom",vendorAuth, upload.array('roomImage',3),vendorController.postaddroom)
 
 module.exports=router
 

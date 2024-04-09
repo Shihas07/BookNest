@@ -12,6 +12,8 @@ router.post("/login",userController.login)
 router.get('/userLogout',userController.userLogout)
 router.get("/profile",userController.profile)
 
+router.get("/roomlist",userController.getroompage)
+
 
 
 module.exports = router;

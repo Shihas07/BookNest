@@ -8,6 +8,11 @@ const Vendor = require('../model/vendor/vendor');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Admin = require('../model/admin/admin');
+const Room=require("../model/room")
+const cloudinary=require("../config/cloudinary")
+// const upload = require("../config/multer"); // Import Multer configuration
+// const bodyParser = require("body-parser")
+
 
 
 require('dotenv').config();
@@ -151,9 +156,47 @@ const postLogin = async (req, res) => {
         }
     };
 
-       
-  
-          
+    const postaddroom = async (req, res) => {
+        console.log("req.files:", req.files);
+        const roomImages = req.files; // Assuming this is an array of files
+        const roomData = req.body;
+        console.log(roomImages);
+    
+        try {
+            // Destructure directly from req.body for clarity and simplicity
+            const { roomName, description, category, location, price } = roomData;
+            const imageUrls = [];
+    
+            // Ensure you have logic here to handle when `req.files` is undefined or empty
+            for (const file of roomImages) {
+                const result = await cloudinary.uploader.upload(file.path);
+                imageUrls.push(result.secure_url);
+                console.log("image link", imageUrls);
+            }
+    
+            // Correct the property names according to your schema
+            const newRoom = new Room({
+                roomName, // corrected from RoomName
+                price, // corrected from productPrice
+                description,
+                category,
+                location,
+                roomImages: imageUrls
+            });
+    
+            await newRoom.save();
+    
+            res.redirect('/vendor/roomlist');
+            console.log("Success: Room added");
+            
+        } catch (error) {
+            console.log(error);
+            res.status(500).send('Internal Server Error');
+        }
+    }
+    
+    
+    
             
        
 
@@ -165,7 +208,8 @@ module.exports = {
     postLogin,
     signout,
     roomgetPage,
-    getaddproduect
+    getaddproduect,
+    postaddroom
 };
 
 

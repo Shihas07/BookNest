@@ -8,6 +8,8 @@ const hbs = require("hbs");
 const userRouter = require("./router/user");
 const adminRouter = require("./router/admin");
 const vendorRouter = require("./router/vendor");
+const bodyParser=require('body-parser')
+
 
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
@@ -18,8 +20,12 @@ app.set("view engine", "hbs");
 app.set("views", __dirname + "/views");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(cookieParser());
 app.use(express.json()); // This line is important!
+
+
 
 
 // Mount user and admin routers directly onto the main app

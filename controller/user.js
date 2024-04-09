@@ -1,5 +1,6 @@
 
   const User=require('../model/user/user')
+  const Rooms = require('../model/room');
   const express=require("express")
 const bcrypt=require('bcrypt')
 const jwt=require("jsonwebtoken")
@@ -159,11 +160,18 @@ const profile = async (req, res) => {
 };
 
 
+const getroompage=async(req,res)=>{
+  let rooms = await Rooms.find();
+  console.log("rooms :",rooms);
+  res.render("user/room-grid-style",{rooms})
+}
+
 module.exports = {
   homePage,
   signup,
   signupPage,
   login,
   userLogout,
-  profile
+  profile,
+  getroompage
 };
