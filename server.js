@@ -9,6 +9,10 @@ const userRouter = require("./router/user");
 const adminRouter = require("./router/admin");
 const vendorRouter = require("./router/vendor");
 const bodyParser=require('body-parser')
+const session=require("express-session")
+const passport=require("passport")
+require('dotenv').config()
+const passportSetup=require("./helpers/passport")
 
 
 const mongoose = require("mongoose");
@@ -25,7 +29,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.json()); // This line is important!
 
+app.use(session({
+  secret: 'your_secret_key',
+  resave: false,
+  saveUninitialized: false
+}));
 
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // Mount user and admin routers directly onto the main app

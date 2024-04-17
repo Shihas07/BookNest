@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router(); // Use express.Router() to create a router instance
 const userController = require('../controller/user');
 const { application } = require('express')
+const passport=require("passport")
 
 
 router.get("/", userController.homePage);
@@ -12,7 +13,19 @@ router.post("/login",userController.login)
 router.get('/userLogout',userController.userLogout)
 router.get("/profile",userController.profile)
 
+//google login//
+
+router.get('/auth/google',passport.authenticate('google',{scope:['email','profile']}))
+
+router.get('/auth/google/callback',
+passport.authenticate('google',{successRedirect:'/success',failureRedirect:'/failure'}))
+
+router.get('/success',userController.googleLogin)
+router.get('/failure',userController.failureGoogleLogin)
+
+
 router.get("/roomlist",userController.getroompage)
+
 
 
 

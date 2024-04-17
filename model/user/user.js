@@ -14,7 +14,7 @@ const mongoose=require("mongoose")
     },
     password:{
         type:String,
-        required:true
+        required:false
     },
     phoneNumber:{
         type:String

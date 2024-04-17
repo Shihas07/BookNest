@@ -141,6 +141,83 @@ const homePage = async (req, res) => {
       }
   };
   
+
+
+  //google auth//
+
+//   const googleLogin=async(req,res)=>{
+//       if(!req.user){
+//        return res.redirect('/failure')
+//       }
+//      //  console.log('google login email :',req.user.email);
+//        let user=await User.findOne({email:req.user.email})
+//          if(!user){
+//              user=new User({
+//                  username:req.user.displayName,
+//                  email:req.user.email
+//              })
+//              await user.save()
+//              console.log('user data saved');
+//             return res.redirect('/login')
+//      }
+   
+//      console.log('login with google');
+//      const token=jwt.sign({
+//          id:User._id,
+//          name:User.userName,
+//          email:User.email,
+//      },
+//      process.env.JWT_SECRET,
+//      {
+//          expiresIn:'24h',
+//      }
+//      );
+//      res.cookie('user_jwt',token,{httpOnly:true,maxAge:86400000})
+//      console.log('user logged in successfully: token created');
+//     return res.redirect('/')
+//  }
+
+const googleLogin = async (req, res) => {
+  if (!req.user) {
+      return res.redirect('/failure');
+  }
+
+  try {
+      let user = await User.findOne({ email: req.user.email });
+
+      if (!user) {
+          user = new User({
+              username: req.user.displayName,
+              email: req.user.email
+          });
+
+          await user.save(); // Corrected here
+          console.log('New user data saved');
+          return res.redirect('/user/login');
+      }
+
+      console.log('Login with Google');
+      const token = jwt.sign({
+          id: user._id, // Corrected from User._id
+          name: user.userName, // Corrected from User.userName
+          email: user.email // Corrected from User.email
+      }, process.env.JWT_SECRET, { expiresIn: '24h' });
+
+      res.cookie('user_jwt', token, { httpOnly: true, maxAge: 86400000 });
+      console.log('User logged in successfully: token created');
+      return res.redirect('/');
+  } catch (error) {
+      console.error('Error during Google login:', error);
+      return res.redirect('/failure');
+  }
+};
+
+
+ let failureGoogleLogin=async(req,res)=>{
+  res.send('error')
+}
+        
+  
   
 
   let userLogout=async(req,res)=>{
@@ -166,6 +243,8 @@ const getroompage=async(req,res)=>{
   res.render("user/room-grid-style",{rooms})
 }
 
+
+
 module.exports = {
   homePage,
   signup,
@@ -173,5 +252,7 @@ module.exports = {
   login,
   userLogout,
   profile,
-  getroompage
+  getroompage,
+  googleLogin,
+  failureGoogleLogin
 };
