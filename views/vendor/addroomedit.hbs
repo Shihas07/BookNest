@@ -1,0 +1,205 @@
+{{!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Room</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        .centered-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .card-form {
+            padding: 20px;
+        }
+        .card-form .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container centered-form">
+        <div class="card shadow card-form" style="max-width: 400px;">
+            <h1 class="card-title text-center mb-4">Add Room</h1>
+            <form action="/vendor/editroom" method="post" enctype="multipart/form-data">
+              <div id="imageUploadContainer">
+    {{#each edit.roomImages}}
+    <div class="imageUploadItem">
+        <input type="file" id="roomImages" name="roomImages" >
+        <img src="{{this}}" alt="No image added" style="max-width: 100px;"><br>
+    </div>
+    {{/each}}
+
+                <div class="form-group">
+                    <label for="roomName" class="form-label">Room Name</label>
+                    <input type="text" id="roomName" class="form-control" name="roomName" placeholder="Room Name" value="{{edit.roomName}}>
+                 </div>
+
+
+             
+<div class="mb-2">
+    <label for="category" class="form-label">Category</label>
+    <select id="category" name="category" class="form-select">
+        <option value="" selected disabled>Select Category</option>
+        {{#each Category}}
+            <option value="{{this.categoryName}}">{{this.categoryName}}</option>
+        {{/each}}
+    </select>
+</div>
+
+                <div class="form-group">
+                    <label for="description" class="form-label">Description</label>
+                
+                    <textarea id="description" class="form-control" name="description" rows="3" placeholder="Description..." "></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="price" class="form-label">Price</label>
+                    <input type="number" id="price" class="form-control" name="price" placeholder="Price" value="{{edit.price}}">
+                </div>
+                <div class="form-group">
+                    <label for="location" class="form-label">Location</label>
+                    <input type="text" id="location" class="form-control" name="location" placeholder="Location" value="{{edit.location}}" >
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html> --}}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Room</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #f8f9fa; /* Light gray background */
+        }
+        .card {
+            border: none; /* Remove card border */
+            border-radius: 15px; /* Rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        }
+        .card-form {
+            padding: 20px;
+        }
+        .card-form .form-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container centered-form">
+        <div class="card bg-white card-form" style="max-width: 800px;">
+            <h1 class="card-title text-center mb-4">Edit Room</h1>
+            <form action="/vendor/editroom" method="post" enctype="multipart/form-data">
+                <table class="table center-table"> 
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label for="roomName" class="form-label">Room Name</label>
+                            </td>
+                            <td>
+                                <input type="text" id="roomName" class="form-control" name="roomName" placeholder="Room Name" value="{{edit.roomName}}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="hidden" name="roomId" id="roomId" value="{{edit.id}}">
+                            </td>
+                            <td>
+                                <label for="category" class="form-label">Category</label>
+                            </td>
+                            <td>
+                             <input type="text" id="category" class="form-control" name="category" placeholder="category" value="{{edit.category}}">
+
+                                   
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="description" class="form-label">Description</label>
+
+                            </td>
+                            <td>
+                                            {{!-- <input type="text" id="roomName" class="form-control" rows="3" name="roomName" placeholder="Room Name" value="{{edit.description}}"> --}}
+
+                                <textarea id="description" class="form- " name="description" rows="5" cols="70" placeholder="Description...">{{edit.description}}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+
+                            <td>
+                                <label for="price" class="form-label">Price</label>
+                            </td>
+                            <td>
+                                <input type="number" id="price" class="form-control" name="price" placeholder="Price" value="{{edit.price}}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="location" class="form-label">Location</label>
+                            </td>
+                            <td>
+                                <input type="text" id="location" class="form-control" name="location" placeholder="Location" value="{{edit.location}}">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="roomImages" class="form-label">Room Images</label>
+                            </td>
+                            <td>
+                                <div id="imageUploadContainer">
+                                    {{#each edit.roomImages}}
+                                    <div class="imageUploadItem">
+                                        <input type="file" id="roomImages" name="roomImages">
+                                        <img src="{{this}}" alt="No image added" style="max-width: 100px;"><br>
+                                    </div>
+                                    {{/each}}
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+
+
