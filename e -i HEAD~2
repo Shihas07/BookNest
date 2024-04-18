@@ -1,0 +1,28 @@
+[33mcommit 36a39256da05c9d7fc938ab4b8ee9722d40df234[m
+Author: shihas07 <shihas732@gmail.com>
+Date:   Wed Apr 17 12:52:12 2024 +0530
+
+    login with google
+
+[1mdiff --git a/.env b/.env[m
+[1mindex 32a0a86..09d2739 100644[m
+[1m--- a/.env[m
+[1m+++ b/.env[m
+[36m@@ -2,7 +2,6 @@[m [mJWT_SECRET="Booknest"[m
+ CLOUDINARY_CLOUD_NAME="danbtoxld"[m
+ CLOUDINARY_API_KEY="614636393324229"[m
+ CLOUDINARY_API_SECRET="Xzx1QUbacg7nX1Dh69Q41AIMNVU"[m
+[31m-[m
+ GOOGLE_CLIENT_ID="853954921560-su4ia1hd9ii32bb0jv6r0oilcmg4jrej.apps.googleusercontent.com"[m
+ GOOGLE_CLIENT_SECRET="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"[m
+ GOOGLE_CALLBACK_URL="http://localhost:7000/auth/google/callback"[m
+\ No newline at end of file[m
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mindex 10f868f..4cb512e 100644[m
+[1m--- a/.gitignore[m
+[1m+++ b/.gitignore[m
+[36m@@ -1,2 +1 @@[m
+[31m-JWT_SECRET="Booknest"[m
+[31m-[m
+[32m+[m[32m/.env[m
+\ No newline at end of file[m
