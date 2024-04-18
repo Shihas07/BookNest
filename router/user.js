@@ -22,6 +22,10 @@ passport.authenticate('google',{successRedirect:'/success',failureRedirect:'/fai
 
 router.get('/success',userController.googleLogin)
 router.get('/failure',userController.failureGoogleLogin)
+// /otp//
+router.get('/loginwithotp',userController.loginGetOtpPage)
+router.post("/otpemail",userController.postEmail)
+router.post("/otpverify",userController.postOtpVerify)
 
 
 router.get("/roomlist",userController.getroompage)

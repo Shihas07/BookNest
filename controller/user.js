@@ -4,6 +4,7 @@
   const express=require("express")
 const bcrypt=require('bcrypt')
 const jwt=require("jsonwebtoken")
+const otpService=require("../services/otp")
 
 
 
@@ -218,7 +219,144 @@ const googleLogin = async (req, res) => {
 }
         
   
-  
+
+let  loginGetOtpPage=async(req,res)=>{
+       
+  res.render("user/emailotp")
+}
+
+//     let postEmail=async(req,res)=>{
+
+//          const {email}=req.body;
+//          console.log(email);
+
+//          try {
+//           // Check if the email already exists in the database
+//           const existingUser = await User.findOne({ email });
+
+//           if (existingUser) {
+//             // If the email exists, generate and send the OTP for verification
+//             const otp = otpService.generateOTP();
+//              // Replace generateOTP with your OTP generation logic
+     
+//             await otpService.sendOTP(email, otp);
+
+//             return res.status(200).render("user/otpverify",{email});
+//           }
+
+//           // If the email doesn't exist, return an error
+//           return res.status(400).json({ error: 'Email does not exist' });
+//         } catch (error) {
+//           console.error('Error sending OTP:', error);
+//           res.status(500).json({ error: 'Failed to send OTP' });
+//         }
+ 
+//     }
+
+
+// const postOtpVerify = async (req, res) => {
+//   try {
+//     const { email, otp } = req.body;
+//     console.log(email, otp);
+
+//     // Check if the provided email and OTP match the stored values
+//     if (email && otp) {
+//       // Verify the OTP using the getStoredOTP function
+//       const storedOTP = otpService.getStoredOTP(email);
+
+//       // Check if the stored OTP matches the provided OTP
+//       if (storedOTP && storedOTP === otp) {
+//         // If OTP is verified, you can proceed with further actions
+//         return res.status(200).json({ message: 'OTP verified successfully' });
+//       } else {
+//         // If OTP is invalid, return an error
+//         return res.status(400).json({ error: 'Invalid OTP' });
+//       }
+//     } else {
+//       // If email or OTP is missing, return an error
+//       return res.status(400).json({ error: 'Email and OTP are required' });
+//     }
+//   } catch (error) {
+//     console.error('Error verifying OTP:', error);
+//     res.status(500).json({ error: 'Failed to verify OTP' });
+//   }
+// };
+
+
+
+
+
+
+let postEmail = async (req, res) => {
+const { email } = req.body;
+console.log(email);
+
+try {
+// Check if the email already exists in the database
+const existingUser = await User.findOne({ email });
+
+if (existingUser) {
+// If the email exists, generate and send the OTP for verification
+const otp = otpService.generateOTP();
+// Replace generateOTP with your OTP generation logic
+
+
+await otpService.sendOTP(email, otp);
+
+// Set OTP in a cookie
+res.cookie('otp', otp, { maxAge: 900000 }); // Cookie expires in 15 minutes (900000 milliseconds)
+
+return res.status(200).render("user/otpverify", { email });
+}
+
+// If the email doesn't exist, return an error
+return res.status(400).json({ error: 'Email does not exist' });
+} catch (error) {
+console.error('Error sending OTP:', error);
+res.status(500).json({ error: 'Failed to send OTP' });
+}
+};
+
+
+const postOtpVerify = async (req, res) => {
+try {
+const { email, otp } = req.body;
+console.log(email, otp);
+
+// Check if the provided email and OTP match the stored values
+if (email && otp) {
+// Retrieve the stored OTP from the cookie
+const storedOTP = req.cookies.otp;
+
+let user=await User.findOne({email})
+// Check if the stored OTP matches the provided OTP
+if ( storedOTP === otp) {
+ const token = jwt.sign({
+   id: user._id,
+   name: user.userName,
+   email: user.email,
+}, process.env.JWT_SECRET, {
+   expiresIn: '24h'
+});
+
+res.cookie('user_jwt', token, { httpOnly: true, maxAge: 86400000 });
+
+ // If OTP is verified, you can proceed with further actions
+ return res.status(200).redirect("/");
+} else {
+ // If OTP is invalid, return an error
+ return res.status(400).json({ error: 'Invalid OTP' });
+}
+} else {
+// If email or OTP is missing, return an error
+return res.status(400).json({ error: 'Email and OTP are required' });
+}
+} catch (error) {
+console.error('Error verifying OTP:', error);
+res.status(500).json({ error: 'Failed to verify OTP' });
+}
+};  
+
 
   let userLogout=async(req,res)=>{
     res.clearCookie('user_jwt')
@@ -254,5 +392,8 @@ module.exports = {
   profile,
   getroompage,
   googleLogin,
-  failureGoogleLogin
+  failureGoogleLogin,
+  loginGetOtpPage,
+  postEmail,
+  postOtpVerify
 };

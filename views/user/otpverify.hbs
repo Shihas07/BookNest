@@ -16,9 +16,9 @@
             <h4 class="text-center">OTP Verification</h4>
           </div>
           <div class="card-body">
-            <form action="otpverify" method="post">
+            <form action="/otpverify" method="post">
               <div class="form-group">
-                    <input type="hidden" name="email" value="<%= email %>">
+                                <input type="hidden" name="email" value="{{ email }}">
 
                 <label for="otp">Enter OTP</label>
                 <input type="text" name="otp" class="form-control form-control-sm" id="otp" placeholder="Enter OTP">
