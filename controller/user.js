@@ -381,6 +381,19 @@ const getroompage=async(req,res)=>{
   res.render("user/room-grid-style",{rooms})
 }
 
+ const getsingleroom=async(req,res)=>{
+     
+    const id= req.query.id
+    console.log(req.query);
+
+    console.log(id);
+
+    const room=await Rooms.findById(id)
+    console.log(room);
+     
+     res.render("user/singleroom",{room})
+ }
+
 
 
 module.exports = {
@@ -395,5 +408,6 @@ module.exports = {
   failureGoogleLogin,
   loginGetOtpPage,
   postEmail,
-  postOtpVerify
+  postOtpVerify,
+  getsingleroom
 };

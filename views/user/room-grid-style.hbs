@@ -7,7 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Hotale &#8211; Hotel HTML Template</title>
-
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome (optional, if you're using font awesome icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    
 
 
     <link rel="stylesheet"  href="/js/plugins/goodlayers-core/plugins/fontawesome/font-awesome.css" type="text/css" media="all" />
@@ -496,22 +499,25 @@
             </div>
 
 
-            <div class="hotale-page-title-wrap hotale-style-custom hotale-center-align">
+             <div class="hotale-page-title-wrap hotale-style-custom hotale-center-align">
                 <div class="hotale-header-transparent-substitute"></div>
                 <div class="hotale-page-title-overlay"></div>
-                <div class="hotale-page-title-container hotale-container">
+                <div class="hotale-page-title-container hotale-container"> 
                     <div class="hotale-page-title-content hotale-item-pdlr"><h1 class="hotale-page-title">Room Grid Style 1</h1></div>
                 </div>
             </div>
-            {{!-- <div class="hotale-page-wrapper" id="hotale-page-wrapper">
-                <div class="gdlr-core-page-builder-body">
-                    <div class="gdlr-core-pbf-wrapper" style="padding: 80px 0px 15px 0px;">
-                        <div class="gdlr-core-pbf-background-wrap"></div>
-                        <div class="gdlr-core-pbf-wrapper-content gdlr-core-js">
-                            <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container">
-                                <div class="gdlr-core-pbf-element">
-                                    <div class="tourmaster-room-item clearfix tourmaster-room-item-style-grid">
-                                        <div class="tourmaster-room-item-holder gdlr-core-js-2 clearfix row col-12" data-layout="fitrows">
+
+
+{{!--             
+<div class="hotale-page-wrapper" id="hotale-page-wrapper">
+    <div class="gdlr-core-page-builder-body">
+        <div class="gdlr-core-pbf-wrapper" style="padding: 80px 0px 15px 0px;">
+             <div class="gdlr-core-pbf-background-wrap"></div>
+            <div class="gdlr-core-pbf-wrapper-content gdlr-core-js">
+                  <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container">
+                    <div class="gdlr-core-pbf-element">
+                        <div class="tourmaster-room-item clearfix tourmaster-room-item-style-grid">
+                            <div class="tourmaster-room-item-holder gdlr-core-js-2 clearfix row col-12" data-layout="fitrows">
 <div class="gdlr-core-item-list tourmaster-item-pdlr tourmaster-column-20 tourmaster-column-first col-4 g-0">
     <div class="row">
         {{#each rooms}}
@@ -552,18 +558,80 @@
         {{/each}}
     </div>
 </div>
+    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+ --}}
+<div class="hotale-page-wrapper" id="hotale-page-wrapper">
+    <div class="gdlr-core-page-builder-body">
+        <div class="gdlr-core-pbf-wrapper" style="padding: 80px 0px 15px 0px;">
+            <div class="gdlr-core-pbf-background-wrap"></div>
+            <div class="gdlr-core-pbf-wrapper-content gdlr-core-js">
+                <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container">
+                    <div class="gdlr-core-pbf-element">
+                        <div class="tourmaster-room-item clearfix tourmaster-room-item-style-grid">
+                            <div class="tourmaster-room-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
+                                <div class="row">
+                                    {{#each rooms}}
+                                    <div class="col-md-4">
+                                        <div class="gdlr-core-item-list tourmaster-item-pdlr tourmaster-column-100 tourmaster-column-first">
+                                            <div class="tourmaster-room-grid tourmaster-grid-frame" style="margin-bottom: 40px;">
+                                                <div class="tourmaster-room-grid-inner" style="box-shadow: 0px 20px 35px rgba(10, 10, 10, 0.06); border-radius: 20px;">
+                                                    <div class="tourmaster-room-thumbnail tourmaster-media-image gdlr-core-outer-frame-element tourmaster-with-price">
+                                                        <a href="single-room.html">
+                                                            <img src="{{this.roomImages.[0]}}" alt="" width="700" height="450" />
+                                                        </a>
+                                                        <div class="tourmaster-price-wrap tourmaster-with-bg" style="border-radius: 10px;">
+                                                            <span class="tourmaster-head">From</span><span class="tourmaster-price">{{this.price}}</span><span class="tourmaster-tail"> / night</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tourmaster-room-content-wrap gdlr-core-skin-e-background gdlr-core-js" data-sync-height="room-item-10" style="padding-top: 45px; padding-bottom: 30px;">
+                                                        <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
+                                                            <a href="single-room.html">{{this.roomName}}</a>
+                                                        </h3>
+                                                        <p class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
+                                                            <a href="single-room.html">{{this.category}}</a>
+                                                        </p>
+                                                        <div class="tourmaster-info-wrap clearfix">
+                                                            <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">{{this.bedType}}</span></div>
+                                                            <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">{{this.guests}} Guests</span></div>
+                                                        </div>
+                                                        <div class="tourmaster-room-rating">
+                                                            {{#if this.rating}}
+                                                                {{#each this.rating}}
+                                                                    <i class="fa fa-star"></i>
+                                                                {{/each}}
+                                                                <span class="tourmaster-room-rating-text">{{this.reviews}} Review{{#unless (eq this.reviews 1)}}s{{/unless}}</span>
+                                                            {{else}}
+                                                                <span class="tourmaster-room-rating-text">No reviews yet</span>
+                                                            {{/if}}
+                                                        </div>
+                                                        
+                                                        {{!-- <a class="tourmaster-read-more tourmaster-type-text" href="/singleroom?{{id}}">Book Now<i class="icon-arrow-right"></i></a> --}}
+                                                      <a class="tourmaster-read-more tourmaster-type-text" href="/singleroom?id={{id}}">Book Now<i class="icon-arrow-right"></i></a>
 
-
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/each}}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
+        </div>
+    </div>
+</div>
 
+ 
 
-
-
+{{!-- 
 
                      <div class="hotale-page-wrapper" id="hotale-page-wrapper">
     <div class="gdlr-core-page-builder-body">
@@ -623,7 +691,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 
@@ -762,7 +830,7 @@
     </script>
 
     <script type="text/javascript" src="js/ui/core.min.js" id="jquery-ui-core-js"></script>
-    <script type="text/javascript" src="js/ui/datepicker.min.js" id="jquery-ui-datepicker-js"></script>
+    {{!-- <script type="text/javascript" src="js/ui/datepicker.min.js" id="jquery-ui-datepicker-js"></script>
     <script type="text/javascript" id="jquery-ui-datepicker-js-after">
         jQuery(function (jQuery) {
             jQuery.datepicker.setDefaults({
@@ -780,11 +848,11 @@
                 isRTL: false,
             });
         });
-    </script>
+    </script> --}}
     <script type="text/javascript" src="js/ui/effect.min.js" id="jquery-effects-core-js"></script>
     <script type="text/javascript" id="tourmaster-script-js-extra">
         /* <![CDATA[ */
-        var TMi18n = {
+        - var TMi18n = {
             closeText: "Done",
             currentText: "Today",
             monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
@@ -793,7 +861,7 @@
             dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
             dayNamesMin: ["S", "M", "T", "W", "T", "F", "S"],
             firstDay: "1",
-        };
+        }; 
         /* ]]> */
     </script>
     <script type="text/javascript" src="js/plugins/tourmaster/tourmaster.js" id="tourmaster-script-js"></script>
@@ -809,6 +877,8 @@
         /* ]]> */
     </script>
     <script type="text/javascript" src="js/plugins/goodlayers-core/include/js/page-builderd36b.js?ver=1.3.9" id="gdlr-core-page-builder-js"></script>
+           <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 

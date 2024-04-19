@@ -30,6 +30,7 @@ router.post("/otpverify",userController.postOtpVerify)
 
 router.get("/roomlist",userController.getroompage)
 
+router.get("/singleroom",userController.getsingleroom)
 
 
 

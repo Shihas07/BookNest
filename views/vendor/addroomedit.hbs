@@ -173,13 +173,13 @@
                         </tr>
                         <tr>
                             <td>
-                                <label for="roomImages" class="form-label">Room Images</label>
+                                <label for="roomImages" name="roomImages" class="form-label">Room Images</label>
                             </td>
                             <td>
                                 <div id="imageUploadContainer">
                                     {{#each edit.roomImages}}
                                     <div class="imageUploadItem">
-                                        <input type="file" id="roomImages" name="roomImages">
+                                        <input type="file" id="roomImages" name="roomImage" required>
                                         <img src="{{this}}" alt="No image added" style="max-width: 100px;"><br>
                                     </div>
                                     {{/each}}
