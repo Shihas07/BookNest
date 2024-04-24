@@ -3,12 +3,13 @@ const router = express.Router(); // Use express.Router() to create a router inst
 const userController = require('../controller/user');
 const { application } = require('express')
 const passport=require("passport")
+const {userMiddleware,disableCache}=require("../midilware/usermidilware")
 
 
 router.get("/", userController.homePage);
-router.get("/signup",userController.signup)
+router.get("/signup",userMiddleware,userController.signup)
 router.post("/signup",userController.signupPage)
-router.post("/login",userController.login)
+router.post("/login",disableCache,userMiddleware,userController.login)
 // router.get("login",userController.login)
 router.get('/userLogout',userController.userLogout)
 router.get("/profile",userController.profile)
@@ -23,14 +24,18 @@ passport.authenticate('google',{successRedirect:'/success',failureRedirect:'/fai
 router.get('/success',userController.googleLogin)
 router.get('/failure',userController.failureGoogleLogin)
 // /otp//
-router.get('/loginwithotp',userController.loginGetOtpPage)
-router.post("/otpemail",userController.postEmail)
-router.post("/otpverify",userController.postOtpVerify)
+router.get('/loginwithotp',disableCache,userMiddleware,userController.loginGetOtpPage)
+router.get("/otpverify",disableCache,userMiddleware,userController.getOtpPage)
+router.post("/otpemail",disableCache,userMiddleware,userController.postEmail)
+router.post("/otpverify",disableCache,userMiddleware,userController.postOtpVerify)
+
 
 
 router.get("/roomlist",userController.getroompage)
 
 router.get("/singleroom",userController.getsingleroom)
+router.get("/room-search",userController.getRoomSearch)
+router.post("/price",userController.postPrice)
 
 
 

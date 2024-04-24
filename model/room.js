@@ -24,8 +24,17 @@
            }, 
            roomImages:{
              type: Array
-             }
-            
+             },
+             amenities:[String],
+           
+               bedtype:{
+                type:String
+               },
+               
+            guest:{
+                
+              type:Number
+            }
 
    })
 

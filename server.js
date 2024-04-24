@@ -27,6 +27,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'no-store');
+  next();
+});
+
+app.use(bodyParser.json());
+
 app.use(cookieParser());
 app.use(express.json()); // This line is important!
 

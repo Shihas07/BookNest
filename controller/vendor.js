@@ -134,7 +134,7 @@ const roomgetPage = async (req, res) => {
   try {
     // Fetch room data from the database
     const rooms = await Room.find();
-    console.log(rooms);
+    // console.log(rooms);
     // Render the template and pass the room data
     res.render("vendor/roomlist", { rooms });
   } catch (error) {
@@ -165,23 +165,29 @@ const getaddproduect = async (req, res) => {
 };
 
 const postaddroom = async (req, res) => {
-  console.log("req.files:", req.files);
+  // console.log("req.files:", req.files);
   const roomImages = req.files; // Assuming this is an array of files
   const roomData = req.body;
-  console.log(roomImages);
-  console.log(roomData);
+  // console.log(roomImages);
+  // console.log(roomData);
+  console.log(req.body);
+
 
   try {
     // Destructure directly from req.body for clarity and simplicity
-    const { roomName, description, category, location, price } = roomData;
+    const { roomName, description, category, location, price,bedtype,guest } = roomData;
     const imageUrls = [];
 
+
+      //  console.log("hbhvhv",aminities,bedtype,);
     // Ensure you have logic here to handle when `req.files` is undefined or empty
     for (const file of roomImages) {
       const result = await cloudinary.uploader.upload(file.path);
       imageUrls.push(result.secure_url);
-      console.log("image link", imageUrls);
+      // console.log("image link", imageUrls);
     }
+
+
 
     // Correct the property names according to your schema
     const newRoom = new Room({
@@ -191,6 +197,9 @@ const postaddroom = async (req, res) => {
       category,
       location,
       roomImages: imageUrls,
+      amenities:roomData.amenities,
+      bedtype,
+      guest
     });
 
     await newRoom.save();
@@ -236,8 +245,10 @@ const roomData = req.body;
   //    console.log(id);
   try {
     // Destructure directly from req.body for clarity and simplicity
-    const { roomName, description, category, location, price, roomId } = roomData;
+    const { roomName, description, category, location, price, roomId,bedtype,guest} = roomData;
+    console.log(roomData)
     const imageUrls = [];
+    
 
     // Check if new images are uploaded and upload them to Cloudinary
     if (roomImages && roomImages.length > 0) {
@@ -260,6 +271,9 @@ const roomData = req.body;
     room.description = description;
     room.category = category;
     room.location = location;
+    room.amenities=roomData.amenities;
+    room.bedtype=bedtype;
+    room.guest=guest;
 
     // Update roomImages if new images are uploaded
     if (imageUrls.length > 0) {
@@ -276,6 +290,31 @@ const roomData = req.body;
   }
 };
 
+let deleteRoom = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+      
+      const room = await Room.findById(id);
+
+      if (!room) {
+          return res.status(404).json({ error: 'Room not found' });
+      }
+
+      
+      await room.deleteOne();
+
+      res.status(200).redirect("/vendor/roomlist")
+      console.log(delete succes);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Server error' });
+  }
+};
+
+
+
+
 module.exports = {
   index,
   signupGetPage,
@@ -288,4 +327,6 @@ module.exports = {
   postaddroom,
   getEditRoompage,
   postEditRoompage,
+  deleteRoom,
+  
 };

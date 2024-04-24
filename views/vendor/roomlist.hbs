@@ -1232,12 +1232,12 @@
                                                                     <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                         Categories
                                                                     </th>
-                                                                    <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
+                                                                    {{!-- <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                         Stock status
                                                                     </th>
                                                                     <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                       Description
-                                                                    </th>
+                                                                    </th> --}}
                                                                     <th scope="col" class="p-3 text-xs font-medium tracking-wider text-left text-gray-700 dark:text-gray-400 uppercase">
                                                                         Price
                                                                     </th>
@@ -1277,10 +1277,10 @@
                                                                         <a href="#" class="text-brand-500 underline">{{category}}</a>,
                                                                         <a href="#" class="text-brand-500 underline"></a>
                                                                     </td>
-                                                                    <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                                    {{!-- <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                                                         <span class="bg-green-600/5 text-green-600 text-[11px] font-medium px-2.5 py-0.5 rounded h-5">In stock</span>
-                                                                    </td>
-                                                                    <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+                                                                    </td> --}}
+                                                                    {{!-- <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                                                         <div>color : 
                                                                             <span class="ms-2">
                                                                                 <i class="icofont-brand-mts text-purple-500"></i> 
@@ -1296,7 +1296,7 @@
                                                                             <span class="mx-1">XL</span>
                                                                             <span class="mx-1">XXL</span>
                                                                         </div>
-                                                                    </td>
+                                                                    </td> --}}
 
                                                                     <td class="p-3 font-semibold text-lg text-gray-800 whitespace-nowrap dark:text-gray-400">
                                                                        {{price}} <del class="text-slate-500 font-normal">10000</del>
@@ -1304,10 +1304,18 @@
                                                                     <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
                                                                     12 Sep 2023
                                                                     </td>
-                                                                    <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
-                                                                        <a href="/vendor/editroom/{{id}}"><i class="icofont-ui-edit text-lg text-gray-500 dark:text-gray-400"></i></a>
-                                                                        <a href="#"><i class="icofont-ui-delete text-lg text-red-500 dark:text-red-400"></i></a>
-                                                                    </td>                                                                    
+                                                                 <td class="p-3 text-sm text-gray-500 whitespace-nowrap dark:text-gray-400">
+    <!-- Edit Link -->
+    <a href="/vendor/editroom/{{id}}"><i class="icofont-ui-edit text-lg text-gray-500 dark:text-gray-400"></i></a>
+
+    <!-- Delete Form -->
+    <form action="/vendor/deleteroom/{{id}}" method="post" style="display: inline;">
+        <button type="submit" style="background: none; border: none; cursor: pointer;">
+            <i class="icofont-ui-delete text-lg text-red-500 dark:text-red-400"></i>
+        </button>
+    </form>
+</td>
+                                                                  
 
                                                                 
                                                                 </tr>

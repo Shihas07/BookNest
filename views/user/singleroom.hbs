@@ -37,6 +37,7 @@
         type="text/css"
         media="all"
     />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
 </head>
@@ -543,153 +544,149 @@
                                     <div class="gdlr-core-pbf-column gdlr-core-column-60 gdlr-core-column-first" id="gdlr-core-column-1">
                                         <div class="gdlr-core-pbf-column-content-margin gdlr-core-js" style="margin: 0px 0px 0px 0px; padding: 10px 0px 20px 0px;">
                                             <div class="gdlr-core-pbf-background-wrap"></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="tourmaster-room-title-item tourmaster-item-mglr tourmaster-item-pdb clearfix" style="padding-bottom: 35px;">
-                                                        <h3 class="tourmaster-room-title-item-title">{{room.roomName}}</h3>
-                                                        <div class="tourmaster-room-title-item-caption">Room Features</div>
-                                                        <div class="tourmaster-room-title-price">
-                                                            <div class="tourmaster-head">
-                                                                <span class="tourmaster-label">From</span><span class="tourmaster-price-discount">5000</span><span class="tourmaster-price">{{room.price}}</span>
-                                                            </div>
-                                                            <div class="tourmaster-tail">per night</div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-divider-item gdlr-core-divider-item-normal gdlr-core-item-pdlr gdlr-core-center-align"><div class="gdlr-core-divider-line gdlr-core-skin-divider"></div></div>
-                                                </div>
-                                            </div>
+                                            <div class="tourmaster-room-title-item tourmaster-item-mglr tourmaster-item-pdb clearfix" style="padding-bottom: 35px;">
+    <h3 class="tourmaster-room-title-item-title">{{room.roomName}}</h3>
+    <div class="tourmaster-room-title-item-caption">Room Features</div>
+    <div class="tourmaster-room-title-price">
+        <div class="tourmaster-head">
+            <span class="tourmaster-label">From</span>
+            <span class="tourmaster-price-discount">5000</span> <!-- Placeholder for initial price -->
+            <span class="tourmaster-price" id="displayed-price">{{room.price}}</span> <!-- Updated with JavaScript -->
+        </div>
+       {{!-- <span class="tourmaster-price" id="displayed-price">{{room.price}}</span> <!-- Updated with JavaScript --> --}}
+
+    </div>
+</div>
                                         </div>
                                     </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20 gdlr-core-column-first" id="gdlr-core-column-2">
-                                        <div class="gdlr-core-pbf-column-content-margin gdlr-core-js">
-                                            <div class="gdlr-core-pbf-background-wrap"></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div
-                                                        class="gdlr-core-column-service-item gdlr-core-item-pdb gdlr-core-left-align gdlr-core-column-service-icon-left gdlr-core-with-caption gdlr-core-item-pdlr"
-                                                        style="padding-bottom: 20px;"
-                                                    >
-                                                        <div class="gdlr-core-column-service-media gdlr-core-media-icon">
-                                                            <i class="gdlr-icon-double-bed2" style="font-size: 33px; line-height: 33px; width: 33px; color: #0a0a0a;"></i>
-                                                        </div>
-                                                        <div class="gdlr-core-column-service-content-wrapper">
-                                                            <div class="gdlr-core-column-service-title-wrap">
-                                                                <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" style="font-size: 19px; font-weight: 600; text-transform: none;">Bed</h3>
-                                                                <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 17px; font-weight: 500; font-style: normal; margin-top: 0px;">
-                                                                    1 King Bed
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20" id="gdlr-core-column-3">
-                                        <div class="gdlr-core-pbf-column-content-margin gdlr-core-js">
-                                            <div class="gdlr-core-pbf-background-wrap"></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div
-                                                        class="gdlr-core-column-service-item gdlr-core-item-pdb gdlr-core-left-align gdlr-core-column-service-icon-left gdlr-core-with-caption gdlr-core-item-pdlr"
-                                                        style="padding-bottom: 20px;"
-                                                    >
-                                                        <div class="gdlr-core-column-service-media gdlr-core-media-icon" style="margin-top: 0px; margin-right: 26px;">
-                                                            <i class="gdlr-icon-group" style="font-size: 40px; line-height: 40px; width: 40px; color: #0a0a0a;"></i>
-                                                        </div>
-                                                        <div class="gdlr-core-column-service-content-wrapper">
-                                                            <div class="gdlr-core-column-service-title-wrap">
-                                                                <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" style="font-size: 19px; font-weight: 600; text-transform: none;">Max Guest</h3>
-                                                                <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 17px; font-weight: 500; font-style: normal; margin-top: 0px;">
-                                                                    3 Guests
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20">
-                                        <div class="gdlr-core-pbf-column-content-margin gdlr-core-js"><div class="gdlr-core-pbf-column-content clearfix gdlr-core-js"></div></div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20 gdlr-core-column-first" id="gdlr-core-column-4">
-                                        <div class="gdlr-core-pbf-column-content-margin gdlr-core-js">
-                                            <div class="gdlr-core-pbf-background-wrap"></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div
-                                                        class="gdlr-core-column-service-item gdlr-core-item-pdb gdlr-core-left-align gdlr-core-column-service-icon-left gdlr-core-with-caption gdlr-core-item-pdlr"
-                                                        style="padding-bottom: 20px;"
-                                                    >
-                                                        <div class="gdlr-core-column-service-media gdlr-core-media-icon"><i class="gdlr-icon-resize" style="font-size: 34px; line-height: 34px; width: 34px; color: #0a0a0a;"></i></div>
-                                                        <div class="gdlr-core-column-service-content-wrapper">
-                                                            <div class="gdlr-core-column-service-title-wrap">
-                                                                <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" style="font-size: 19px; font-weight: 600; text-transform: none;">Room Space</h3>
-                                                                <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 17px; font-weight: 500; font-style: normal; margin-top: 0px;">
-                                                                    30 sqm.
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20" id="gdlr-core-column-5">
-                                        <div class="gdlr-core-pbf-column-content-margin gdlr-core-js">
-                                            <div class="gdlr-core-pbf-background-wrap"></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div
-                                                        class="gdlr-core-column-service-item gdlr-core-item-pdb gdlr-core-left-align gdlr-core-column-service-icon-left gdlr-core-with-caption gdlr-core-item-pdlr"
-                                                        style="padding-bottom: 20px;"
-                                                    >
-                                                        <div class="gdlr-core-column-service-media gdlr-core-media-icon" style="margin-right: 27px;">
-                                                            <i class="gdlr-icon-nature" style="font-size: 37px; line-height: 37px; width: 37px; color: #0a0a0a;"></i>
-                                                        </div>
-                                                        <div class="gdlr-core-column-service-content-wrapper">
-                                                            <div class="gdlr-core-column-service-title-wrap">
-                                                                <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" style="font-size: 19px; font-weight: 600; text-transform: none;">Room View</h3>
-                                                                <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 17px; font-weight: 500; font-style: normal; margin-top: 0px;">
-                                                                    Forest View
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20">
-                                        <div class="gdlr-core-pbf-column-content-margin gdlr-core-js"><div class="gdlr-core-pbf-column-content clearfix gdlr-core-js"></div></div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-60 gdlr-core-column-first" id="gdlr-core-column-6">
-                                        <div class="gdlr-core-pbf-column-content-margin gdlr-core-js" style="padding: 10px 0px 0px 0px;">
-                                            <div class="gdlr-core-pbf-background-wrap"></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-text-box-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align">
-                                                        <div class="gdlr-core-text-box-item-content" style="font-size: 18px; text-transform: none;">
-                                                            <p>
-                                                                Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the
-                                                                coast of the Semantics, a large language ocean. A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country,
-                                                                in which roasted parts of sentences fly into your mouth. Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day
-                                                                however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.
-                                                            </p>
-                                                            <p>
-                                                                The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She
-                                                                packed her seven versalia, put her initial into the belt and made herself on the way. When she reached the first hills of the Italic Mountains, she had a last view back on
-                                                                the skyline of her hometown
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+
+                                          {{!-- {{#if room}}    --}}
+                                          
+{{#if room}}
+<div class="gdlr-core-pbf-column gdlr-core-column-20 gdlr-core-column-first" id="gdlr-core-column-2">
+    <div class="gdlr-core-pbf-column-content-margin gdlr-core-js">
+        <div class="gdlr-core-pbf-background-wrap"></div>
+        <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
+            <div class="gdlr-core-pbf-element">
+                <div class="gdlr-core-column-service-item gdlr-core-item-pdb gdlr-core-left-align gdlr-core-column-service-icon-left gdlr-core-with-caption gdlr-core-item-pdlr" style="padding-bottom: 20px;">
+                    <div class="gdlr-core-column-service-media gdlr-core-media-icon">
+                        <i class="gdlr-icon-double-bed2" style="font-size: 33px; line-height: 33px; width: 33px; color: #0a0a0a;"></i>
+                    </div>
+                    <div class="gdlr-core-column-service-content-wrapper">
+                        <div class="gdlr-core-column-service-title-wrap">
+                            <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" style="font-size: 19px; font-weight: 600; text-transform: none;">Bed</h3>
+                            <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 17px; font-weight: 500; font-style: normal; margin-top: 0px;">
+                                {{room.bedtype}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+
+{{#if room}}
+<div class="gdlr-core-pbf-column gdlr-core-column-20" id="gdlr-core-column-3">
+    <div class="gdlr-core-pbf-column-content-margin gdlr-core-js">
+        <div class="gdlr-core-pbf-background-wrap"></div>
+        <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
+            <div class="gdlr-core-pbf-element">
+                <div class="gdlr-core-column-service-item gdlr-core-item-pdb gdlr-core-left-align gdlr-core-column-service-icon-left gdlr-core-with-caption gdlr-core-item-pdlr" style="padding-bottom: 20px;">
+                    <div class="gdlr-core-column-service-media gdlr-core-media-icon" style="margin-top: 0px; margin-right: 26px;">
+                        <i class="gdlr-icon-group" style="font-size: 40px; line-height: 40px; width: 40px; color: #0a0a0a;"></i>
+                    </div>
+                    <div class="gdlr-core-column-service-content-wrapper">
+                        <div class="gdlr-core-column-service-title-wrap">
+                            <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" style="font-size: 19px; font-weight: 600; text-transform: none;">Max</h3>
+                            <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 17px; font-weight: 500; font-style: normal; margin-top: 0px;">
+                                {{room.guest}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+{{!-- 
+{{#if room}}
+<div class="gdlr-core-pbf-column gdlr-core-column-20">
+    <div class="gdlr-core-pbf-column-content-margin gdlr-core-js"><div class="gdlr-core-pbf-column-content clearfix gdlr-core-js"></div></div>
+</div>
+
+<div class="gdlr-core-pbf-column gdlr-core-column-20 gdlr-core-column-first" id="gdlr-core-column-4">
+    <div class="gdlr-core-pbf-column-content-margin gdlr-core-js">
+        <div class="gdlr-core-pbf-background-wrap"></div>
+        <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
+            <div class="gdlr-core-pbf-element">
+                <div class="gdlr-core-column-service-item gdlr-core-item-pdb gdlr-core-left-align gdlr-core-column-service-icon-left gdlr-core-with-caption gdlr-core-item-pdlr" style="padding-bottom: 20px;">
+                    <div class="gdlr-core-column-service-media gdlr-core-media-icon"><i class="gdlr-icon-resize" style="font-size: 34px; line-height: 34px; width: 34px; color: #0a0a0a;"></i></div>
+                    <div class="gdlr-core-column-service-content-wrapper">
+                        <div class="gdlr-core-column-service-title-wrap">
+                            <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" style="font-size: 19px; font-weight: 600; text-transform: none;">Room Space</h3>
+                            <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 17px; font-weight: 500; font-style: normal; margin-top: 0px;">
+                                30 sqm.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+
+{{#if room}}
+<div class="gdlr-core-pbf-column gdlr-core-column-20" id="gdlr-core-column-5">
+    <div class="gdlr-core-pbf-column-content-margin gdlr-core-js">
+        <div class="gdlr-core-pbf-background-wrap"></div>
+        <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
+            <div class="gdlr-core-pbf-element">
+                <div class="gdlr-core-column-service-item gdlr-core-item-pdb gdlr-core-left-align gdlr-core-column-service-icon-left gdlr-core-with-caption gdlr-core-item-pdlr" style="padding-bottom: 20px;">
+                    <div class="gdlr-core-column-service-media gdlr-core-media-icon" style="margin-right: 27px;">
+                        <i class="gdlr-icon-nature" style="font-size: 37px; line-height: 37px; width: 37px; color: #0a0a0a;"></i>
+                    </div>
+                    <div class="gdlr-core-column-service-content-wrapper">
+                        <div class="gdlr-core-column-service-title-wrap">
+                            <h3 class="gdlr-core-column-service-title gdlr-core-skin-title" style="font-size: 19px; font-weight: 600; text-transform: none;">Room View</h3>
+                            <div class="gdlr-core-column-service-caption gdlr-core-info-font gdlr-core-skin-caption" style="font-size: 17px; font-weight: 500; font-style: normal; margin-top: 0px;">
+                                Forest View
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}} --}}
+
+{{#if room}}
+<div class="gdlr-core-pbf-column gdlr-core-column-20">
+    <div class="gdlr-core-pbf-column-content-margin gdlr-core-js"><div class="gdlr-core-pbf-column-content clearfix gdlr-core-js"></div></div>
+</div>
+
+<div class="gdlr-core-pbf-column gdlr-core-column-60 gdlr-core-column-first" id="gdlr-core-column-6">
+    <div class="gdlr-core-pbf-column-content-margin gdlr-core-js" style="padding: 10px 0px 0px 0px;">
+        <div class="gdlr-core-pbf-background-wrap"></div>
+        <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
+            <div class="gdlr-core-pbf-element">
+                <div class="gdlr-core-text-box-item gdlr-core-item-pdlr gdlr-core-item-pdb gdlr-core-left-align">
+                    <div class="gdlr-core-text-box-item-content" style="font-size: 18px; text-transform: none;">
+                        <p>
+                            {{room.description}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
+
                                     <div class="gdlr-core-pbf-column gdlr-core-column-60 gdlr-core-column-first" id="gdlr-core-column-7">
                                         <div class="gdlr-core-pbf-column-content-margin gdlr-core-js" style="margin: 0px 0px 0px 0px; padding: 0px 0px 25px 0px;">
                                             <div class="gdlr-core-pbf-background-wrap"></div>
@@ -700,7 +697,7 @@
                                             </div>
                                         </div>
                                     </div>
-
+{{!-- 
                                     {{#if room.amenities}}
                                     <div class="gdlr-core-pbf-column gdlr-core-column-60 gdlr-core-column-first">
                                         <div class="gdlr-core-pbf-column-content-margin gdlr-core-js">
@@ -778,7 +775,7 @@
                                                                     class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
                                                                     style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
                                                                 >
-                                                                    Free Wifi<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
+                                                                   wifi<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
                                                                 </h3>
                                                             </div>
                                                         </div>
@@ -1000,233 +997,52 @@
                                     {{else}}
     <!-- No amenities available -->
     <p>No amenities available for this room.</p>
-    {{/if}}
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-60 gdlr-core-column-first" id="gdlr-core-column-16">
-                                        <div class="gdlr-core-pbf-column-content-margin gdlr-core-js" style="margin: 0px 0px 0px 0px; padding: 45px 0px 0px 0px;">
-                                            <div class="gdlr-core-pbf-background-wrap"></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 40px;">
-                                                        <div class="gdlr-core-title-item-title-wrap">
-                                                            <h3 class="gdlr-core-title-item-title gdlr-core-skin-title class-test" style="font-size: 25px; font-weight: 500; letter-spacing: 0px; text-transform: none;">
-                                                                Hotel Amenities<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                            </h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20 gdlr-core-column-first" id="gdlr-core-column-17">
-                                        <div
-                                            class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow"
-                                            style="margin: 0px 10px 20px 20px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;"
-                                        >
-                                            <div
-                                                class="gdlr-core-pbf-background-wrap"
-                                                style="
-                                                    border-radius: 20px 20px 20px 20px;
-                                                    -moz-border-radius: 20px 20px 20px 20px;
-                                                    -webkit-border-radius: 20px 20px 20px 20px;
-                                                    border-width: 1px 1px 1px 1px;
-                                                    border-color: #e5e5e5;
-                                                    border-style: solid;
-                                                "
-                                            ></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
-                                                        <div class="gdlr-core-title-item-left-icon" style="margin: -12px 16px 0px 0px; font-size: 35px;"><i class="gdlr-icon-weights" style="color: #1e1e1e;"></i></div>
-                                                        <div class="gdlr-core-title-item-left-icon-wrap">
-                                                            <div class="gdlr-core-title-item-title-wrap">
-                                                                <h3
-                                                                    class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
-                                                                    style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
-                                                                >
-                                                                    Gym<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20" id="gdlr-core-column-18">
-                                        <div
-                                            class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow"
-                                            style="margin: 0px 10px 20px 10px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;"
-                                        >
-                                            <div
-                                                class="gdlr-core-pbf-background-wrap"
-                                                style="
-                                                    border-radius: 20px 20px 20px 20px;
-                                                    -moz-border-radius: 20px 20px 20px 20px;
-                                                    -webkit-border-radius: 20px 20px 20px 20px;
-                                                    border-width: 1px 1px 1px 1px;
-                                                    border-color: #e5e5e5;
-                                                    border-style: solid;
-                                                "
-                                            ></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
-                                                        <div class="gdlr-core-title-item-left-icon" style="margin: -12px 15px 0px 0px; font-size: 35px;"><i class="gdlr-icon-parking" style="color: #1e1e1e;"></i></div>
-                                                        <div class="gdlr-core-title-item-left-icon-wrap">
-                                                            <div class="gdlr-core-title-item-title-wrap">
-                                                                <h3
-                                                                    class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
-                                                                    style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
-                                                                >
-                                                                    Parking<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20" id="gdlr-core-column-19">
-                                        <div
-                                            class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow"
-                                            style="margin: 0px 20px 20px 10px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;"
-                                        >
-                                            <div
-                                                class="gdlr-core-pbf-background-wrap"
-                                                style="
-                                                    border-radius: 20px 20px 20px 20px;
-                                                    -moz-border-radius: 20px 20px 20px 20px;
-                                                    -webkit-border-radius: 20px 20px 20px 20px;
-                                                    border-width: 1px 1px 1px 1px;
-                                                    border-color: #e5e5e5;
-                                                    border-style: solid;
-                                                "
-                                            ></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
-                                                        <div class="gdlr-core-title-item-left-icon" style="margin: -12px 15px 0px 0px; font-size: 35px;"><i class="gdlr-icon-massage" style="color: #1e1e1e;"></i></div>
-                                                        <div class="gdlr-core-title-item-left-icon-wrap">
-                                                            <div class="gdlr-core-title-item-title-wrap">
-                                                                <h3
-                                                                    class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
-                                                                    style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
-                                                                >
-                                                                    Spa<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20 gdlr-core-column-first" id="gdlr-core-column-20">
-                                        <div
-                                            class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow"
-                                            style="margin: 0px 10px 20px 20px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;"
-                                        >
-                                            <div
-                                                class="gdlr-core-pbf-background-wrap"
-                                                style="
-                                                    border-radius: 20px 20px 20px 20px;
-                                                    -moz-border-radius: 20px 20px 20px 20px;
-                                                    -webkit-border-radius: 20px 20px 20px 20px;
-                                                    border-width: 1px 1px 1px 1px;
-                                                    border-color: #e5e5e5;
-                                                    border-style: solid;
-                                                "
-                                            ></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
-                                                        <div class="gdlr-core-title-item-left-icon" style="margin: -12px 16px 0px 0px; font-size: 35px;"><i class="gdlr-icon-dish" style="color: #1e1e1e;"></i></div>
-                                                        <div class="gdlr-core-title-item-left-icon-wrap">
-                                                            <div class="gdlr-core-title-item-title-wrap">
-                                                                <h3
-                                                                    class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
-                                                                    style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
-                                                                >
-                                                                    Restaurant<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20" id="gdlr-core-column-21">
-                                        <div
-                                            class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow"
-                                            style="margin: 0px 10px 20px 10px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;"
-                                        >
-                                            <div
-                                                class="gdlr-core-pbf-background-wrap"
-                                                style="
-                                                    border-radius: 20px 20px 20px 20px;
-                                                    -moz-border-radius: 20px 20px 20px 20px;
-                                                    -webkit-border-radius: 20px 20px 20px 20px;
-                                                    border-width: 1px 1px 1px 1px;
-                                                    border-color: #e5e5e5;
-                                                    border-style: solid;
-                                                "
-                                            ></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
-                                                        <div class="gdlr-core-title-item-left-icon" style="margin: -12px 15px 0px 0px; font-size: 35px;"><i class="gdlr-icon-food-service-copy" style="color: #1e1e1e;"></i></div>
-                                                        <div class="gdlr-core-title-item-left-icon-wrap">
-                                                            <div class="gdlr-core-title-item-title-wrap">
-                                                                <h3
-                                                                    class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
-                                                                    style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
-                                                                >
-                                                                    Room Service<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20" id="gdlr-core-column-22">
-                                        <div
-                                            class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow"
-                                            style="margin: 0px 20px 20px 10px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;"
-                                        >
-                                            <div
-                                                class="gdlr-core-pbf-background-wrap"
-                                                style="
-                                                    border-radius: 20px 20px 20px 20px;
-                                                    -moz-border-radius: 20px 20px 20px 20px;
-                                                    -webkit-border-radius: 20px 20px 20px 20px;
-                                                    border-width: 1px 1px 1px 1px;
-                                                    border-color: #e5e5e5;
-                                                    border-style: solid;
-                                                "
-                                            ></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
-                                                        <div class="gdlr-core-title-item-left-icon" style="margin: -12px 15px 0px 0px; font-size: 35px;"><i class="gdlr-icon-swimming-pool1" style="color: #1e1e1e;"></i></div>
-                                                        <div class="gdlr-core-title-item-left-icon-wrap">
-                                                            <div class="gdlr-core-title-item-title-wrap">
-                                                                <h3
-                                                                    class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
-                                                                    style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
-                                                                >
-                                                                    Swimming Pool<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+    {{/if}} --}}
+
+
+
+    {{#if room.amenities}}
+<div class="gdlr-core-pbf-column gdlr-core-column-60 gdlr-core-column-first">
+    <div class="gdlr-core-pbf-column-content-margin gdlr-core-js">
+        <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
+            <div class="gdlr-core-pbf-element">
+                <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 40px;">
+                    <div class="gdlr-core-title-item-title-wrap">
+                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title class-test" style="font-size: 25px; font-weight: 500; letter-spacing: 0px; text-transform: none;">
+                            Room Amenities<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{#each room.amenities}}
+<div class="gdlr-core-pbf-column gdlr-core-column-20" id="gdlr-core-column-{{@index}}">
+    <div class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow" style="margin: 0px 10px 20px 20px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;">
+        <div class="gdlr-core-pbf-background-wrap" style="border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px; border-width: 1px 1px 1px 1px; border-color: #e5e5e5; border-style: solid;"></div>
+        <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
+            <div class="gdlr-core-pbf-element">
+                <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
+                    <div class="gdlr-core-title-item-left-icon" style="margin: -12px 16px 0px 0px; font-size: 35px;"><i class="gdlr-icon-watch-tv" style="color: #1e1e1e;"></i></div>
+                    <div class="gdlr-core-title-item-left-icon-wrap">
+                        <div class="gdlr-core-title-item-title-wrap">
+                            <h3 class="gdlr-core-title-item-title gdlr-core-skin-title class-test" style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;">
+                                {{this}}<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+
+{{/if}}
+
+                                 
                                 </div>
                             </div>
                             <div class="gdlr-core-pbf-sidebar-right gdlr-core-column-extend-right hotale-sidebar-area gdlr-core-column-15 gdlr-core-pbf-sidebar-padding gdlr-core-line-height">
@@ -1238,29 +1054,31 @@
                                                 <form
                                                     class="tourmaster-room-booking-form clearfix"
                                                     id="tourmaster-room-booking-form"
-                                                    action="#"
+                                                    {{!-- action="#" --}}
                                                     data-action="tourmaster_room_booking_form"
-                                                    method="POST"
+                                                    {{!-- method="POST" --}}
                                                 >
                                                     <div
                                                         class="tourmaster-room-date-selection tourmaster-vertical"
                                                     >
-                                                        <div class="tourmaster-custom-start-date gdlr-core-skin-e-background">
-                                                            <div class="tourmaster-head gdlr-core-skin-e-content">Check In</div>
-                                                            <div class="tourmaster-tail gdlr-core-skin-e-content">Jul 28, 2022</div>
-                                                            <input type="hidden" name="start_date" value="2022-07-28" />
-                                                        </div>
-                                                        <div class="tourmaster-custom-end-date gdlr-core-skin-e-background">
-                                                            <div class="tourmaster-head gdlr-core-skin-e-content">Check Out</div>
-                                                            <div class="tourmaster-tail gdlr-core-skin-e-content">Jul 29, 2022</div>
-                                                            <input type="hidden" name="end_date" value="2022-07-29" />
-                                                        </div>
+                                                      <div class="tourmaster-custom-start-date gdlr-core-skin-e-background">
+    <div class="tourmaster-head gdlr-core-skin-e-content">Check In</div>
+    <div class="tourmaster-tail gdlr-core-skin-e-content" id="hi"  >
+    <input type="date" name="check-in-date" id="check-in-date" value="{{getCurrentDate}}"/></div>
+</div>
+<div class="tourmaster-custom-end-date gdlr-core-skin-e-background">
+    <div class="tourmaster-head gdlr-core-skin-e-content">Check Out</div>
+    <div class="tourmaster-tail gdlr-core-skin-e-content ">
+    <input  type="date"  id="check-out-date" name="check-out-date" value="{{defaultCheckOutDate}}"/></div>
+</div>
                                                         <div class="tourmaster-custom-datepicker-wrap" data-date-format="d M yy">
                                                             <i class="tourmaster-custom-datepicker-close icon_close"></i>
                                                             <div class="tourmaster-custom-datepicker-title"></div>
                                                             <div class="tourmaster-custom-datepicker-calendar"></div>
                                                         </div>
                                                     </div>
+                                             
+
                                                     <div class="tourmaster-room-amount-selection">
                                                         <div class="tourmaster-custom-amount-display gdlr-core-skin-e-background">
                                                             <div class="tourmaster-head gdlr-core-skin-e-content">Room</div>
@@ -1281,7 +1099,7 @@
                                                         <div class="tourmaster-room-amount-selection">
                                                             <div class="tourmaster-custom-amount-display gdlr-core-skin-e-background">
                                                                 <div class="tourmaster-head gdlr-core-skin-e-content">
-                                                                    <span>Room<span class="tourmaster-number">1</span> : </span>Guests
+                                                                    <span>Room<span class="tourmaster-number">1</span> : </span>Guest
                                                                 </div>
                                                                 <div class="tourmaster-tail gdlr-core-skin-e-content"><span class="tourmaster-space"></span>Adults 2<span class="tourmaster-space"></span>Children 0</div>
                                                             </div>
@@ -1486,373 +1304,7 @@
                         </div>
                     </div>
                     
-                    {{!-- <div class="gdlr-core-pbf-section">
-                        <div class="gdlr-core-pbf-section-container gdlr-core-container clearfix">
-                            <div class="gdlr-core-pbf-column gdlr-core-column-60 gdlr-core-column-first" id="gdlr-core-column-23">
-                                <div class="gdlr-core-pbf-column-content-margin gdlr-core-js" style="margin: 0px 0px 0px 0px; padding: 30px 0px 10px 0px;">
-                                    <div class="gdlr-core-pbf-background-wrap"></div>
-                                    <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                        <div class="gdlr-core-pbf-element">
-                                            <div class="gdlr-core-divider-item gdlr-core-divider-item-normal gdlr-core-item-pdlr gdlr-core-center-align" style="margin-bottom: 20px;">
-                                                <div class="gdlr-core-divider-line gdlr-core-skin-divider"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="gdlr-core-pbf-wrapper" style="padding: 20px 0px 0px 0px;">
-                        <div class="gdlr-core-pbf-background-wrap"></div>
-                        <div class="gdlr-core-pbf-wrapper-content gdlr-core-js">
-                            <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container">
-                                <div class="gdlr-core-pbf-column gdlr-core-column-60 gdlr-core-column-first" id="gdlr-core-column-24">
-                                    <div class="gdlr-core-pbf-column-content-margin gdlr-core-js" style="margin: 0px 0px 0px 0px; padding: 30px 0px 0px 0px;">
-                                        <div class="gdlr-core-pbf-background-wrap"></div>
-                                        <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                            <div class="gdlr-core-pbf-element">
-                                                <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-center-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 60px;">
-                                                    <div class="gdlr-core-title-item-title-wrap">
-                                                        <h3 class="gdlr-core-title-item-title gdlr-core-skin-title class-test" style="font-size: 31px; font-weight: 500; letter-spacing: 0px; text-transform: none;">
-                                                            More Rooms<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                        </h3>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gdlr-core-pbf-column gdlr-core-column-60 gdlr-core-column-first" id="gdlr-core-column-25">
-                                    <div class="gdlr-core-pbf-column-content-margin gdlr-core-js" style="padding: 0px 0px 20px 0px;">
-                                        <div class="gdlr-core-pbf-background-wrap"></div>
-                                        <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                            <div class="gdlr-core-pbf-element">
-                                                <div class="tourmaster-room-item clearfix tourmaster-room-item-style-grid" id="gdlr-core-room-1">
-                                                    <div class="gdlr-core-flexslider flexslider gdlr-core-js-2" data-type="carousel" data-column="3" data-move="1" data-nav="navigation-outer" data-nav-parent="self" data-vcenter-nav="1">
-                                                        <div class="gdlr-core-flexslider-custom-nav gdlr-core-style-navigation-outer gdlr-core-center-align" style="margin-top: -60px;">
-                                                            <i class="icon-arrow-left flex-prev" style="color: #c4c4c4; font-size: 34px; left: -90px;"></i>
-                                                            <i class="icon-arrow-right flex-next" style="color: #c4c4c4; font-size: 34px; right: -90px;"></i>
-                                                        </div>
-                                                            
-                                                        <ul class="slides">
-                                                           
-                                                            <li class="gdlr-core-item-mglr">
-                                                                 {{#each room}}
-                                                                <div class="tourmaster-room-grid">
-                                                                    <div class="tourmaster-room-grid-inner">
-                                                                        <div class="tourmaster-room-thumbnail tourmaster-media-image tourmaster-with-price">
-                                                                            <a href="single-room.html">
-                                                                                <img
-                                                                                    src="{{this.roomImages}}"
-                                                                                    alt=""
-                                                                                    width="780"
-                                                                                    height="595"
-                                                                                />
-                                                                            </a>
-                                                                            <div class="tourmaster-price-wrap tourmaster-with-bg">
-                                                                                <span class="tourmaster-head">From</span><span class="tourmaster-price">CHF 86</span><span class="tourmaster-tail"> / night</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="tourmaster-room-content-wrap">
-                                                                            <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                                <a href="single-room.html">{{this.roomName}}</a>
-                                                                            </h3>
-                                                                            <div class="tourmaster-info-wrap clearfix">
-                                                                                <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">1 King Bed</span></div>
-                                                                                <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">4 Guests</span></div>
-                                                                            </div>
-                                                                            <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">
-                                                                                Book Now<i class="icon-arrow-right"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                 {{/each }}
-                                                            </li>
-                                                            <li class="gdlr-core-item-mglr">
-                                                                <div class="tourmaster-room-grid">
-                                                                    <div class="tourmaster-room-grid-inner">
-                                                                        <div class="tourmaster-room-thumbnail tourmaster-media-image tourmaster-with-price">
-                                                                            <a href="https://demo.goodlayers.com/hotale/resort/room/standard-deluxe/">
-                                                                                <img
-                                                                                    src="upload/shop-slo-vhztm9QC0L0-unsplash-780x595.jpg"
-                                                                                    alt=""
-                                                                                    width="780"
-                                                                                    height="595"
-                                                                                />
-                                                                            </a>
-                                                                            <div class="tourmaster-price-wrap tourmaster-with-bg">
-                                                                                <span class="tourmaster-head">From</span><span class="tourmaster-price">CHF 72</span><span class="tourmaster-tail"> / night</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="tourmaster-room-content-wrap">
-                                                                            <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                                <a href="https://demo.goodlayers.com/hotale/resort/room/standard-deluxe/">Standard Deluxe</a>
-                                                                            </h3>
-                                                                            <div class="tourmaster-info-wrap clearfix">
-                                                                                <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">2 Single Beds</span></div>
-                                                                                <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">6 Guests</span></div>
-                                                                            </div>
-                                                                            <a class="tourmaster-read-more tourmaster-type-text" href="https://demo.goodlayers.com/hotale/resort/room/standard-deluxe/">
-                                                                                Book Now<i class="icon-arrow-right"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="gdlr-core-item-mglr">
-                                                                <div class="tourmaster-room-grid">
-                                                                    <div class="tourmaster-room-grid-inner">
-                                                                        <div class="tourmaster-room-thumbnail tourmaster-media-image tourmaster-with-price tourmaster-with-ribbon">
-                                                                            <a href="single-room.html">
-                                                                                <img
-                                                                                    src="upload/roberto-nickson-emqnSQwQQDo-unsplash-scaled-780x595.jpg"
-                                                                                    alt=""
-                                                                                    width="780"
-                                                                                    height="595"
-                                                                                />
-                                                                            </a>
-                                                                            <div class="tourmaster-price-wrap tourmaster-with-bg">
-                                                                                <span class="tourmaster-head">From</span><span class="tourmaster-price-discount">CHF 240</span><span class="tourmaster-price">CHF 192</span>
-                                                                                <span class="tourmaster-tail"> / night</span>
-                                                                            </div>
-                                                                            <div class="tourmaster-ribbon">20% Off</div>
-                                                                        </div>
-                                                                        <div class="tourmaster-room-content-wrap">
-                                                                            <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                                <a href="single-room.html">The Penthouse</a>
-                                                                            </h3>
-                                                                            <div class="tourmaster-info-wrap clearfix">
-                                                                                <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">2 King Beds</span></div>
-                                                                                <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">6 Guests</span></div>
-                                                                            </div>
-                                                                            <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">
-                                                                                Book Now<i class="icon-arrow-right"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="gdlr-core-item-mglr">
-                                                                <div class="tourmaster-room-grid">
-                                                                    <div class="tourmaster-room-grid-inner">
-                                                                        <div class="tourmaster-room-thumbnail tourmaster-media-image tourmaster-with-price">
-                                                                            <a href="single-room.html">
-                                                                                <img
-                                                                                    src="upload/shutterstock_560973166-780x595.jpg"
-                                                                                    alt=""
-                                                                                    width="780"
-                                                                                    height="595"
-                                                                                />
-                                                                            </a>
-                                                                            <div class="tourmaster-price-wrap tourmaster-with-bg">
-                                                                                <span class="tourmaster-head">From</span><span class="tourmaster-price">CHF 77</span><span class="tourmaster-tail"> / night</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="tourmaster-room-content-wrap">
-                                                                            <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                                <a href="single-room.html">Grand Suite Room</a>
-                                                                            </h3>
-                                                                            <div class="tourmaster-info-wrap clearfix">
-                                                                                <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">1 King Bed</span></div>
-                                                                                <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">4 Guests</span></div>
-                                                                            </div>
-                                                                            <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">
-                                                                                Book Now<i class="icon-arrow-right"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="gdlr-core-item-mglr">
-                                                                <div class="tourmaster-room-grid">
-                                                                    <div class="tourmaster-room-grid-inner">
-                                                                        <div class="tourmaster-room-thumbnail tourmaster-media-image tourmaster-with-price tourmaster-with-ribbon">
-                                                                            <a href="single-room.html">
-                                                                                <img
-                                                                                    src="upload/andrea-davis-1uNh3B3ppl4-unsplash-780x595.jpg"
-                                                                                    alt=""
-                                                                                    width="780"
-                                                                                    height="595"
-                                                                                />
-                                                                            </a>
-                                                                            <div class="tourmaster-price-wrap tourmaster-with-bg">
-                                                                                <span class="tourmaster-head">From</span><span class="tourmaster-price-discount">CHF 77</span><span class="tourmaster-price">CHF 66</span>
-                                                                                <span class="tourmaster-tail"> / night</span>
-                                                                            </div>
-                                                                            <div class="tourmaster-ribbon">15% Off</div>
-                                                                        </div>
-                                                                        <div class="tourmaster-room-content-wrap">
-                                                                            <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                                <a href="single-room.html">Junior Suite Room</a>
-                                                                            </h3>
-                                                                            <div class="tourmaster-info-wrap clearfix">
-                                                                                <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">1 Double Bed</span></div>
-                                                                                <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">3 Guests</span></div>
-                                                                            </div>
-                                                                            <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">
-                                                                                Book Now<i class="icon-arrow-right"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="gdlr-core-item-mglr">
-                                                                <div class="tourmaster-room-grid">
-                                                                    <div class="tourmaster-room-grid-inner">
-                                                                        <div class="tourmaster-room-thumbnail tourmaster-media-image tourmaster-with-price">
-                                                                            <a href="single-room.html">
-                                                                                <img
-                                                                                    src="upload/collov-home-design-LSpkE5OCD_8-unsplash-780x595.jpg"
-                                                                                    alt=""
-                                                                                    width="780"
-                                                                                    height="595"
-                                                                                />
-                                                                            </a>
-                                                                            <div class="tourmaster-price-wrap tourmaster-with-bg">
-                                                                                <span class="tourmaster-head">From</span><span class="tourmaster-price">CHF 77</span><span class="tourmaster-tail"> / night</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="tourmaster-room-content-wrap">
-                                                                            <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                                <a href="single-room.html">Standard Room</a>
-                                                                            </h3>
-                                                                            <div class="tourmaster-info-wrap clearfix">
-                                                                                <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">1 Double Bed</span></div>
-                                                                                <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">4 Guests</span></div>
-                                                                            </div>
-                                                                            <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">
-                                                                                Book Now<i class="icon-arrow-right"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="gdlr-core-item-mglr">
-                                                                <div class="tourmaster-room-grid">
-                                                                    <div class="tourmaster-room-grid-inner">
-                                                                        <div class="tourmaster-room-thumbnail tourmaster-media-image tourmaster-with-price">
-                                                                            <a href="single-room.html">
-                                                                                <img
-                                                                                    src="upload/shutterstock_324822821-780x595.jpg"
-                                                                                    alt=""
-                                                                                    width="780"
-                                                                                    height="595"
-                                                                                />
-                                                                            </a>
-                                                                            <div class="tourmaster-price-wrap tourmaster-with-bg">
-                                                                                <span class="tourmaster-head">From</span><span class="tourmaster-price">CHF 173</span><span class="tourmaster-tail"> / night</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="tourmaster-room-content-wrap">
-                                                                            <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                                <a href="single-room.html">Family Special Room</a>
-                                                                            </h3>
-                                                                            <div class="tourmaster-info-wrap clearfix">
-                                                                                <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">2 Double Beds</span></div>
-                                                                                <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">6 Guests</span></div>
-                                                                            </div>
-                                                                            <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">
-                                                                                Book Now<i class="icon-arrow-right"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                            <li class="gdlr-core-item-mglr">
-                                                                <div class="tourmaster-room-grid">
-                                                                    <div class="tourmaster-room-grid-inner">
-                                                                        <div class="tourmaster-room-thumbnail tourmaster-media-image tourmaster-with-price">
-                                                                            <a href="single-room.html">
-                                                                                <img
-                                                                                    src="upload/paul-postema-mr0Dp231IEw-unsplash-780x595.jpg"
-                                                                                    alt=""
-                                                                                    width="780"
-                                                                                    height="595"
-                                                                                />
-                                                                            </a>
-                                                                            <div class="tourmaster-price-wrap tourmaster-with-bg">
-                                                                                <span class="tourmaster-head">From</span><span class="tourmaster-price">CHF 72</span><span class="tourmaster-tail"> / night</span>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="tourmaster-room-content-wrap">
-                                                                            <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                                <a href="single-room.html">Premium Room</a>
-                                                                            </h3>
-                                                                            <div class="tourmaster-info-wrap clearfix">
-                                                                                <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">2 Single Beds</span></div>
-                                                                                <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">4 Guests</span></div>
-                                                                            </div>
-                                                                            <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">
-                                                                                Book Now<i class="icon-arrow-right"></i>
-                                                                            </a>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
-
-
-
-{{!-- 
-                <div class="gdlr-core-pbf-column gdlr-core-column-60 gdlr-core-column-first" id="gdlr-core-column-25">
-    <div class="gdlr-core-pbf-column-content-margin gdlr-core-js" style="padding: 0px 0px 20px 0px;">
-        <div class="gdlr-core-pbf-background-wrap"></div>
-        <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-            <div class="gdlr-core-pbf-element">
-                <div class="tourmaster-room-item clearfix tourmaster-room-item-style-grid" id="gdlr-core-room-1">
-                    <div class="gdlr-core-flexslider flexslider gdlr-core-js-2" data-type="carousel" data-column="3" data-move="1" data-nav="navigation-outer" data-nav-parent="self" data-vcenter-nav="1">
-                        <div class="gdlr-core-flexslider-custom-nav gdlr-core-style-navigation-outer gdlr-core-center-align" style="margin-top: -60px;">
-                            <i class="icon-arrow-left flex-prev" style="color: #c4c4c4; font-size: 34px; left: -90px;"></i>
-                            <i class="icon-arrow-right flex-next" style="color: #c4c4c4; font-size: 34px; right: -90px;"></i>
-                        </div>
-                            
-                        <ul class="slides">
-                            {{#each room}}
-                            <li class="gdlr-core-item-mglr">
-                                <div class="tourmaster-room-grid">
-                                    <div class="tourmaster-room-grid-inner">
-                                        <div class="tourmaster-room-thumbnail tourmaster-media-image tourmaster-with-price">
-                                            <a href="{{this.link}}">
-                                                <img src="{{this.roomImages}}" alt="{{this.roomName}}" width="780" height="595" />
-                                            </a>
-                                            <div class="tourmaster-price-wrap tourmaster-with-bg">
-                                                <span class="tourmaster-head">From</span><span class="tourmaster-price">{{this.price}}</span><span class="tourmaster-tail"> / night</span>
-                                            </div>
-                                        </div>
-                                        <div class="tourmaster-room-content-wrap">
-                                            <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                <a href="{{this.link}}">{{this.roomName}}</a>
-                                            </h3>
-                                            <div class="tourmaster-info-wrap clearfix">
-                                                <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">{{this.bedType}}</span></div>
-                                                <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">{{this.guests}} Guests</span></div>
-                                            </div>
-                                            <a class="tourmaster-read-more tourmaster-type-text" href="{{this.link}}">
-                                                Book Now<i class="icon-arrow-right"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            {{/each}}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
+                  
 
 
 
@@ -2015,6 +1467,7 @@
     <script type="text/javascript" src="js/jquery-migrate.mind617.js?ver=3.3.2" id="jquery-migrate-js"></script>
     <script type="text/javascript" id="snazzymaps-js-js-extra">
         /* <![CDATA[ */
+
         var SnazzyDataForSnazzyMaps = [];
         SnazzyDataForSnazzyMaps = {
             id: 15,
@@ -2067,7 +1520,7 @@
             dayNamesMin: ["S", "M", "T", "W", "T", "F", "S"],
             firstDay: "1",
         };
-        /* ]]> */
+       
     </script>
     <script type="text/javascript" src="js/plugins/tourmaster/tourmaster.js" id="tourmaster-script-js"></script>
     <script type="text/javascript" src="js/plugins/tourmaster/room/tourmaster-room.js" id="tourmaster-room-script-js"></script>
@@ -2083,6 +1536,92 @@
     </script>
     <script type="text/javascript" src="js/plugins/goodlayers-core/include/js/page-builderd36b.js?ver=1.3.9" id="gdlr-core-page-builder-js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+      <!-- jQuery CDN -->
+
+  
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+ 
+    
+
+
+<script>
+
+ const hh=   document.getElementById("hi")
+  const rr=   hh.textContent
+ console.log(rr)
+
+document.addEventListener("DOMContentLoaded", function() {
+    const roomPrice = parseFloat("{{room.price}}");
+
+    function calculateNights(checkInDate, checkOutDate) {
+        const oneDay = 24 * 60 * 60 * 1000;
+        const firstDate = new Date(checkInDate);
+        const secondDate = new Date(checkOutDate);
+        const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay));
+        return diffDays;
+    }
+
+    function updateDisplayedPrice() {
+        const checkInDate = document.getElementById('check-in-date').value;
+        const checkOutDate = document.getElementById('check-out-date').value;
+
+        let totalPrice = roomPrice; // Default to roomPrice
+
+        // If both check-in and check-out dates are valid, calculate total price
+        if (checkInDate && checkOutDate) {
+            const numberOfNights = calculateNights(checkInDate, checkOutDate);
+            totalPrice = roomPrice * numberOfNights;
+        }
+
+        document.getElementById('displayed-price').textContent = totalPrice;
+
+        // Optional: If you want to send the price to the server
+        axios.post('/price', {
+            checkInDate: checkInDate,
+            checkOutDate: checkOutDate,
+            totalPrice: totalPrice
+        })
+        .then(function(response) {
+            console.log("Server response:", response.data);
+        })
+        .catch(function(error) {
+            console.error("Error sending data:", error);
+        });
+    }
+
+    const checkInDateInput = document.getElementById('check-in-date');
+    const checkOutDateInput = document.getElementById('check-out-date');
+
+    // Listen for changes to date inputs
+    checkInDateInput.addEventListener('change', updateDisplayedPrice);
+    checkOutDateInput.addEventListener('change', updateDisplayedPrice);
+
+    // Set default check-in date to today
+    const today = new Date();
+    checkInDateInput.valueAsDate = today;
+
+    // Set default check-out date to tomorrow
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    checkOutDateInput.valueAsDate = tomorrow;
+
+    // Call updateDisplayedPrice to set initial price
+    updateDisplayedPrice();
+});
+
+
+
+
+
+
+
+</script>
+
+
+
 
 
 </body>

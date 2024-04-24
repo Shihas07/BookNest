@@ -27,6 +27,13 @@
     margin-right: 10px; /* Space between icon and text */
 }
 
+
+  ::placeholder {
+    font-weight: bold;
+  }
+
+
+
     </style>
 
     
@@ -365,21 +372,24 @@
             <i class="tourmaster-lightbox-close icon_close"></i>
         </div>
         <div class="tourmaster-lightbox-content">
-            <form class="tourmaster-login-form tourmaster-form-field tourmaster-with-border" method="post" action="/login"  >
+<form class="tourmaster-login-form tourmaster-form-field tourmaster-with-border" id="loginForm" method="post" action="/login" >
     <div class="tourmaster-login-form-fields clearfix">
         <p class="tourmaster-login-user">
             <label>Username or E-Mail</label>
             <input type="text" name="email" id="email" />
-            <small id="emailError" class="text-danger"></small>
+            {{#if erroremail}}
+            <small id="emailError" class="text-danger">{{erroremail}}</small>
+            {{/if}}
         </p>
         <p class="tourmaster-login-pass">
             <label>Password</label>
             <input type="password" name="password" id="password" />
+            
             <small id="passwordError" class="text-danger"></small>
         </p>
     </div>
     <p class="tourmaster-login-submit">
-        <input type="submit"  name="wp-submit" class="tourmaster-button" value="Sign in!"  />
+        <input type="submit"   name="wp-submit" class="tourmaster-button" value="Sign in!"  />
 
     </p>
     <p class="tourmaster-login-lost-password">
@@ -702,7 +712,7 @@
                                                 <div class="tourmaster-room-search-item tourmaster-item-pdlr clearfix">
                                                     <form
                                                         class="tourmaster-room-search-form tourmaster-radius-round tourmaster-style-box tourmaster-align-horizontal"
-                                                        action="https://max-themes.net/demos/hotale/hotale/resort/room-search.html"
+                                                        action="/room-search"
                                                         method="get"
                                                     >
                                                         <div class="tourmaster-room-search-size10">
@@ -710,12 +720,12 @@
                                                                 <div class="tourmaster-custom-start-date gdlr-core-skin-e-background">
                                                                     <div class="tourmaster-head gdlr-core-skin-e-content">Check In</div>
                                                                     <div class="tourmaster-tail gdlr-core-skin-e-content">Jul 28, 2022</div>
-                                                                    <input type="hidden" name="start_date" value="2022-07-28" />
+                                                                    <input type="hidden" name="start_date" value="2023-07-28" />
                                                                 </div>
                                                                 <div class="tourmaster-custom-end-date gdlr-core-skin-e-background">
                                                                     <div class="tourmaster-head gdlr-core-skin-e-content">Check Out</div>
-                                                                    <div class="tourmaster-tail gdlr-core-skin-e-content">Jul 29, 2022</div>
-                                                                    <input type="hidden" name="end_date" value="2022-07-29" />
+                                                                    <div class="tourmaster-tail gdlr-core-skin-e-content">Jul 29, 2023</div>
+                                                                    <input type="hidden" name="end_date" value="2023-07-29" />
                                                                 </div>
                                                                 <div class="tourmaster-custom-datepicker-wrap" data-date-format="d M yy">
                                                                     <i class="tourmaster-custom-datepicker-close icon_close"></i>
@@ -726,23 +736,25 @@
                                                         </div>
                                                         <div class="tourmaster-room-size2">
                                                             <div class="tourmaster-room-amount-selection">
-                                                                <div class="tourmaster-custom-amount-display gdlr-core-skin-e-background">
-                                                                    <div class="tourmaster-head gdlr-core-skin-e-content">Room</div>
-                                                                    <div class="tourmaster-tail gdlr-core-skin-e-content"><span class="tourmaster-space"></span>1</div>
-                                                                </div>
+                                                                <div class="mb-3">
+                                                                 <label for="location" class="form-label"></label>
+                                                                 <input type="text" class="form-control" id="location" name="location" placeholder="Enter location..."
+                                                                          style="width: 200px; height: 85px; border-radius: 10px; border: 1px solid  #ced4da;">
+
+                                                               </div>
                                                                 <div class="tourmaster-custom-amount-selection-wrap">
                                                                     <div class="tourmaster-custom-amount-selection-item clearfix">
                                                                         <div class="tourmaster-head">Room</div>
-                                                                        <div class="tourmaster-tail">
+                                                                         <div class="tourmaster-tail">
                                                                             <span class="tourmaster-minus"><i class="icon_minus-06"></i></span><span class="tourmaster-amount">1</span>
                                                                             <span class="tourmaster-plus"><i class="icon_plus"></i></span>
-                                                                        </div>
-                                                                        <input type="hidden" name="room_amount" value="1" />
+                                                                        </div> 
+                                                                        <input type="hidden" name="location" value="1" />
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="tourmaster-room-search-size5">
+                                                        {{!-- <div class="tourmaster-room-search-size5">
                                                             <div class="tourmaster-room-amount-selection">
                                                                 <div class="tourmaster-custom-amount-display gdlr-core-skin-e-background">
                                                                     <div class="tourmaster-head gdlr-core-skin-e-content">Guests</div>
@@ -767,7 +779,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                         <div class="tourmaster-room-search-size4 tourmaster-room-search-submit-wrap">
                                                             <input class="tourmaster-room-search-submit tourmaster-style-border" type="submit" value="Search Room" style="background: #ffffff; color: #ffffff; border-color: #ffffff;" />
                                                         </div>
@@ -2861,34 +2873,68 @@
         /* ]]> */
     </script>
     <script type="text/javascript" src="/js/plugins/goodlayers-core/include/js/page-builderd36b.js?ver=1.3.9" id="gdlr-core-page-builder-js"></script>
-  <script>
 
-        function validateLoginForm() {
-        var email = document.getElementById('email').value;
-        var password = document.getElementById('password').value;
+        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-        var emailError = document.getElementById('emailError');
-        var passwordError = document.getElementById('passwordError');
 
-        var isValid = true;
 
-        if (email.trim() === '') {
-            emailError.textContent = 'Email/Username is required.';
-            isValid = false;
-        } else {
-            emailError.textContent = '';
+
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var form = document.getElementById("loginForm");
+
+    form.addEventListener("submit", async function(event) {
+        event.preventDefault();
+        var email = document.getElementById("email").value.trim();
+        var password = document.getElementById("password").value.trim();
+
+        if (email === "" || password === "") {
+            Toastify({
+                text: "Invalid password or email.",
+                duration: 3000,
+            }).showToast();
+            return;
         }
 
-        if (password.trim() === '') {
-            passwordError.textContent = 'Password is required.';
-            isValid = false;
-        } else {
-            passwordError.textContent = '';
-        }
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
 
-        return isValid;
-    }
-  </script>
+            const data = await response.json();
+            if (response.ok) {
+                // Success, redirect or show success message
+                window.location.href = '/';
+            } else {
+                // Error, show error message
+                Toastify({
+                    text: data.message,
+                    duration: 3000,
+                }).showToast();
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            Toastify({
+                text: "An error occurred. Please try again later.",
+                duration: 3000,
+            }).showToast();
+        }
+    });
+});
+
+
+
+
+
+
+</script>
 </body>
 
 <!-- Mirrored from max-themes.net/demos/hotale/hotale/resort/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 12 Mar 2024 06:33:01 GMT -->

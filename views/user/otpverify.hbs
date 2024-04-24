@@ -6,6 +6,7 @@
   <title>OTP Verification Form</title>
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 <body>
   <div class="container mt-5">
@@ -16,13 +17,13 @@
             <h4 class="text-center">OTP Verification</h4>
           </div>
           <div class="card-body">
-            <form action="/otpverify" method="post">
+            <form id="otpForm" action="/otpverify" method="post">
               <div class="form-group">
-                                <input type="hidden" name="email" value="{{ email }}">
-
+                <input type="hidden" name="email" value="{{ email }}">
                 <label for="otp">Enter OTP</label>
                 <input type="text" name="otp" class="form-control form-control-sm" id="otp" placeholder="Enter OTP">
               </div>
+              <p id="errorMessage" class="text-danger mt-2"></p>
               <button type="submit" class="btn btn-primary btn-block">Verify OTP</button>
             </form>
           </div>
@@ -34,5 +35,43 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('otpForm');
+
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const otp = document.getElementById('otp').value;
+        const email = document.querySelector('input[name="email"]').value;
+
+        try {
+          const response = await axios.post('/otpverify', {
+            otp,
+            email
+          });
+
+          // Clear any previous error messages
+          const errorMessage = document.getElementById('errorMessage');
+          errorMessage.textContent = '';
+
+          // Handle successful OTP verification
+          window.location.href = '/';
+        } catch (error) {
+          // Handle error response
+          if (error.response && error.response.data && error.response.data.error) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = error.response.data.error;
+          } else {
+            console.error(error);
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>

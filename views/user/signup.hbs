@@ -115,7 +115,7 @@
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" name="password" required>
           </div>
-          <button type="submit" class="btn btn-primary">Loginwhw</button>
+          <button type="submit" class="btn btn-primary">Login</button>
         </form>
 
 
@@ -284,20 +284,24 @@
                                             <i class="tourmaster-lightbox-close icon_close"></i>
                                         </div>
                                         <div class="tourmaster-lightbox-content">
-                                            <form class="tourmaster-login-form tourmaster-form-field tourmaster-with-border" method="post" action="/login">
+                                            <form class="tourmaster-login-form tourmaster-form-field tourmaster-with-border" id="loginForm" method="post" action="/login">
                                                 <div class="tourmaster-login-form-fields clearfix">
                                                     <p class="tourmaster-login-user">
                                                         <label>Username  or E-Mail</label>
                                                         <input type="text" name="email" />
+                                                            <p id="emailError" class="error"></p>
+
                                                     </p>
                                                     <p class="tourmaster-login-pass">
                                                         <label>Password</label>
                                                         <input type="password" name="password" />
+                                                            <p id="passwordError" class="error"></p>
+
                                                     </p>
                                                 </div>
 
                                                 <p class="tourmaster-login-submit">
-                                                    <input type="submit" name="wp-submit" class="tourmaster-button" value="Sign In!" />
+                                                    <input type="submit"   name="wp-submit" class="tourmaster-button" value="Sign In!" />
                                                 </p>
                                                 <p class="tourmaster-login-lost-password">
                                                     <a href="#">Forget Password?</a>
@@ -955,6 +959,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
+    
+
 
     function validateForm() {
     var name = document.getElementById('name').value;
@@ -1013,6 +1019,39 @@
     return isValid;
   }
   </script>
+
+  <script>
+
+        function validateLoginForm() {
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+
+        var emailError = document.getElementById('emailError');
+        var passwordError = document.getElementById('passwordError');
+
+        var isValid = true;
+
+        if (email.trim() === '') {
+            emailError.textContent = 'Email/Username is required.';
+            isValid = false;
+        } else {
+            emailError.textContent = '';
+        }
+
+        if (password.trim() === '') {
+            passwordError.textContent = 'Password is required.';
+            isValid = false;
+        } else {
+            passwordError.textContent = '';
+        }
+
+        return isValid;
+    }
+  </script>
+
+
+
+
 </body>
 
 <!-- Mirrored from max-themes.net/demos/hotale/hotale/resort/register.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 12 Mar 2024 06:33:53 GMT -->

@@ -171,6 +171,102 @@
                                 <input type="text" id="location" class="form-control" name="location" placeholder="Location" value="{{edit.location}}">
                             </td>
                         </tr>
+
+                        <tr><td>
+                            <div class="form-group border border-color-success rounded p-2">
+                <h5>aminities</h5>
+
+                {{!-- <div id="row" class="row p m-1 ">
+                  <input type="text" class="form-control  col-11" id="aminities" name="aminities" placeholder="aminities" value="{{edit.aminities}}">
+                  <button class="btn btn-danger col-1 p-1" id="DeleteRow" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                      style="fill: rgba(247, 249, 247, 1);transform: ;msFilter:;">
+                      <path
+                        d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z">
+                      </path>
+                      <path d="M9 10h2v8H9zm4 0h2v8h-2z"></path>
+                    </svg>
+                  </button>
+                </div>
+                <div id="newInput"></div>
+                <button id="rowAdder" type="button" class=" d-flex my-3 ml-1 btn  btn-success">
+                  ADD <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                      style="fill: rgba(239, 245, 239, 1);transform: ;msFilter:;">
+                      <path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"></path>
+                    </svg>
+
+                  </div>
+
+                </button>
+
+              </div> --}}
+                                    </div>
+<div class="container">
+    <div id="row" class="row p m-1">
+        <div class="form-check col-11">
+            <input class="form-check-input amenities" type="checkbox" name="amenities[]" id="amenity1" value="TV">
+            <label class="form-check-label" for="amenity1">
+                TV
+            </label>
+        </div>
+        <div class="form-check col-11">
+            <input class="form-check-input amenities" type="checkbox" name="amenities[]" id="amenity2" value="Wi-Fi">
+            <label class="form-check-label" for="amenity2">
+                Wi-Fi
+            </label>
+        </div>
+        <div class="form-check col-11">
+            <input class="form-check-input amenities" type="checkbox" name="amenities[]" id="amenity3" value="Safe">
+            <label class="form-check-label" for="amenity3">
+                Safe
+            </label>
+        </div>
+        <div class="form-check col-11">
+            <input class="form-check-input amenities" type="checkbox" name="amenities[]" id="amenity4" value="Non Smoking">
+            <label class="form-check-label" for="amenity4">
+                None Smoking
+            </label>
+        </div>
+        <div class="form-check col-11">
+            <input class="form-check-input amenities" type="checkbox" name="amenities[]" id="amenity5" value="Air Conditioning">
+            <label class="form-check-label" for="amenity5">
+                Air Conditioning
+            </label>
+        </div>
+        <div class="form-check col-11">
+            <input class="form-check-input amenities" type="checkbox" name="amenities[]" id="amenity6" value="Heater">
+            <label class="form-check-label" for="amenity6">
+                Heater
+            </label>
+        </div>
+        <div class="form-check col-11">
+            <input class="form-check-input amenities" type="checkbox" name="amenities[]" id="amenity7" value="Phone">
+            <label class="form-check-label" for="amenity7">
+                Phone
+            </label>
+        </div>
+        <div class="form-check col-11">
+            <input class="form-check-input amenities" type="checkbox" name="amenities[]" id="amenity8" value="Hair Dryer">
+            <label class="form-check-label" for="amenity8">
+                Hair Dryer
+            </label>
+        </div>
+    </div>
+</div>
+   <div class="mb-2">
+                                        <label for="title" class="font-medium text-sm text-slate-600 dark:text-slate-400">bedType</label>
+                                        <input type="text" id="title" name="bedtype" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-brand-500 dark:focus:border-brand-500  dark:hover:border-slate-700" placeholder="Title" value="{{edit.bedtype}}">
+                                    </div>
+
+                          <div class="mb-2">
+                              <label for="title" class="font-medium text-sm text-slate-600 dark:text-slate-400">guest</label>
+                                        <input type="text" id="title" name="guest" class="form-input w-full rounded-md mt-1 border border-slate-300/60 dark:border-slate-700 dark:text-slate-300 bg-transparent px-3 py-2 focus:outline-none focus:ring-0 placeholder:text-slate-400/70 placeholder:font-normal placeholder:text-sm hover:border-slate-400 focus:border-brand-500 dark:focus:border-brand-500  dark:hover:border-slate-700" placeholder="Title" value="{{edit.guest}}">
+                                    </div>
+
+
+
+                        </td></tr>
                         <tr>
                             <td>
                                 <label for="roomImages" name="roomImages" class="form-label">Room Images</label>
@@ -179,7 +275,7 @@
                                 <div id="imageUploadContainer">
                                     {{#each edit.roomImages}}
                                     <div class="imageUploadItem">
-                                        <input type="file" id="roomImages" name="roomImage" required>
+                                        <input type="file" id="roomImages" name="roomImage" >
                                         <img src="{{this}}" alt="No image added" style="max-width: 100px;"><br>
                                     </div>
                                     {{/each}}
@@ -197,6 +293,37 @@
 
     <!-- Bootstrap JS -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+
+
+    
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+{{!-- <script>
+$('#rowAdder').click(() => {
+    const newRowAdd = `
+        <div id="aminities" class="row p m-1">
+            <input type="text" class="form-control col-11 aminities" name="aminities" id="aminities" placeholder="Amenities">
+            <button class="btn btn-danger col-1 p-1 DeleteRow" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path d="M5 20a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8h2V6h-4V4a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v2H3v2h2zM9 4h6v2H9zM8 8h9v12H7V8z"></path>
+                    <path d="M9 10h2v8H9zm4 0h2v8h-2z"></path>
+                </svg>
+            </button>
+        </div>
+    `;
+    $('#newInput').append(newRowAdd);
+});
+
+$("body").on("click", ".DeleteRow", function () {
+    $(this).closest(".row").remove();
+});
+
+// Event listener for saving the product
+
+</script> --}}
+
+
 </body>
 
 </html>

@@ -22,6 +22,15 @@
                 <input type="email" name="email"  class="form-control form-control-sm" id="email" placeholder="Enter email">
               </div>
               <button type="submit" class="btn btn-primary btn-block">Submit</button>
+
+              <div class="mt-4">
+                     {{#if errorp}}
+                     
+                                                   <p id="error-message"  class="text-danger" >{{errorp}}</p>
+                                                       {{/if}}
+                                                       {{#if erroru}}
+                                                       <p id="error-message" class="text-danger">{{erroru}}</p>
+                                                       {{/if}}
             </form>
           </div>
         </div>
