@@ -371,7 +371,7 @@ const getsingleroom = async (req, res) => {
   console.log(id);
 
   const room = await Rooms.findById(id);
-  // console.log(room);
+  console.log("vasu",room);
 
   res.render("user/singleroom", { room });
 };
@@ -437,7 +437,7 @@ const postroomsort = async (req, res) => {
       console.log("wskk",roomIds);
       const sortedRooms = await Rooms.find({ _id: { $in: roomIds } }).sort(sortQuery);
       res.json(sortedRooms);
-      console.log("jjjjisjkk",sortedRooms)
+      // console.log("jjjjisjkk",sortedRooms)
     } else {
       // If no rooms array is sent, sort all rooms
       const sortedRoomss = await Rooms.find({}).sort(sortQuery);
@@ -447,6 +447,46 @@ const postroomsort = async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+const postFilter = async (req, res) => {
+  const { categories, amenities, roomID } = req.body;
+  console.log("Received request with roomID:", roomID, amenities, categories);
+
+  try {
+    // Find room by ID or fetch all rooms if roomID is an array
+    let rooms;
+    if (Array.isArray(roomID)) {
+      rooms = await Rooms.find({ _id: { $in: roomID } });
+    } else {
+      const room = await Rooms.findById(roomID);
+      rooms = room ? [room] : [];
+    }
+
+    console.log("Retrieved rooms from the database:", rooms);
+
+    // Apply filters based on categories and amenities if provided
+    let filteredRooms = rooms;
+
+    if (categories && categories.length > 0) {
+      // Filter rooms based on categories
+      filteredRooms = filteredRooms.filter(room => categories.includes(room.category));
+    }
+
+    if (amenities && amenities.length > 0) {
+      // Filter rooms based on amenities
+      // Remove 'let' keyword here to avoid redeclaration
+      filteredRooms = filteredRooms.filter(room => room.amenities.some(amenity => amenities.includes(amenity)));
+    }
+
+    console.log("Filtered rooms:", filteredRooms);
+
+    // Send the filtered rooms as response
+    res.json(filteredRooms);
+
+  } catch (error) {
+    console.error("Error occurred:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
 
@@ -469,5 +509,8 @@ module.exports = {
   getRoomSearch,
   postPrice,
     getOtpPage,
-    postroomsort
+    postroomsort,
+    postFilter
+   
+
 };
