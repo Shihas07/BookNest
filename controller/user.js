@@ -375,12 +375,13 @@ const getsingleroom = async (req, res) => {
 
   res.render("user/singleroom", { room });
 };
+
 let getRoomSearch = async (req, res) => {
   const location = req.query.location;
-  console.log(location);
+  // console.log(location);
 
   const room = await Rooms.find({ location });
-  console.log(",ms,m,s", room);
+  // console.log(",ms,m,s", room);
 
   res.render("user/room-search", { room });
 };
@@ -395,6 +396,61 @@ const postPrice = (req, res) => {
 
   res.send(totalPrice.toString());
 };
+
+// const postroomsort=async(req,res)=>{
+//   try {
+//     const { sortBy,id } = req.query
+//        console.log(req.query)
+//     let sortQuery = {};
+
+//     if (sortBy === "low-to-high") {
+//       sortQuery = { price: 1 }; // Sort by price in ascending order
+//     } else if (sortBy === "high-to-low") {
+//       sortQuery = { price: -1 }; // Sort by price in descending order
+//     }
+
+//     const sortedRooms = await Rooms.find({}).sort(sortQuery);
+//     res.json(sortedRooms);
+//   } catch (err) {
+//     console.error(err);
+//     res.status(500).json({ message: "Internal Server Error" });
+//   }
+
+// };
+
+const postroomsort = async (req, res) => {
+  try {
+    
+    const { rooms,sortBy } = req.body;
+    console.log(req.body)
+
+    let sortQuery = {};
+
+    if (sortBy === "low-to-high") {
+      sortQuery = { price: 1 }; // Sort by price in ascending order
+    } else if (sortBy === "high-to-low") {
+      sortQuery = { price: -1 }; // Sort by price in descending order
+    }
+
+    if (rooms && rooms.length > 0) {
+      const roomIds = rooms.map(room => room);
+      console.log("wskk",roomIds);
+      const sortedRooms = await Rooms.find({ _id: { $in: roomIds } }).sort(sortQuery);
+      res.json(sortedRooms);
+      console.log("jjjjisjkk",sortedRooms)
+    } else {
+      // If no rooms array is sent, sort all rooms
+      const sortedRoomss = await Rooms.find({}).sort(sortQuery);
+      res.json(sortedRoomss);
+
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+
 
 module.exports = {
   homePage,
@@ -412,5 +468,6 @@ module.exports = {
   getsingleroom,
   getRoomSearch,
   postPrice,
-    getOtpPage
+    getOtpPage,
+    postroomsort
 };

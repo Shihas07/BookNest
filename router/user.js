@@ -36,7 +36,7 @@ router.get("/roomlist",userController.getroompage)
 router.get("/singleroom",userController.getsingleroom)
 router.get("/room-search",userController.getRoomSearch)
 router.post("/price",userController.postPrice)
-
+router.post("/room/sort",userController.postroomsort)
 
 
 module.exports = router;

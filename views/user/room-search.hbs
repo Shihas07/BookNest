@@ -35,6 +35,9 @@
         media="all"
     />
 
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+
 
 </head>
 
@@ -620,8 +623,77 @@
                                             </form>
                                         </div>
                                     </div>
+ <div class="flex justify-end">
+    <div class="w-full lg:w-1/3">
+        <label for="price-select" class="mb-1"></label>
+        <select id="price-select" class="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring focus:border-blue-300 w-full">
+            <option value="none">Select Price Range</option>
+            <option value="low-to-high">Price Low to High</option>
+            <option value="high-to-low">Price High to Low</option>
+        </select>
+    </div>
+</div>
+
+<div id="room-container">
+    <!-- Room items will be added here dynamically -->
+
+    
+{{#if sortedRooms}}
+  {{#each sortedRooms}}
+    <input type="hidden" class="room-id" value="{{ this._id }}">
+    <div class="tourmaster-tour-search-content-wrap tourmaster-column-45">
+      <div class="tourmaster-room-item clearfix tourmaster-room-item-style-side-thumbnail">
+        <div class="tourmaster-room-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
+          <div class="gdlr-core-item-list tourmaster-item-pdlr">
+            <div class="tourmaster-room-side-thumbnail">
+              <div class="tourmaster-room-side-thumbnail-inner">
+                <div class="tourmaster-room-thumbnail tourmaster-media-image">
+                  <a href="single-room.html">
+                    <img src="{{this.roomImages.[0]}}" alt="" width="600" height="600" />
+                  </a>
+                </div>
+                <div class="tourmaster-room-content-wrap gdlr-core-skin-e-background">
+                  <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
+                    <a href="" >{{this.roomName}}</a>
+                  </h3>
+                  <div class="tourmaster-info-wrap clearfix">
+                    <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">{{this.bedtype}}</span></div>
+                    <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">{{this.guest}}</span></div>
+                    <div class="tourmaster-info tourmaster-info-room-size"><i class="gdlr-icon-resize"></i><span class="tourmaster-tail"></span></div>
+                  </div>
+                  <div class="tourmaster-room-content">{{this.description}}</div>
+                  <div class="tourmaster-room-rating">
+                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                    <span class="tourmaster-room-rating-text">1 Review</span>
+                  </div>
+                  <div class="tourmaster-bottom">
+                    <a class="tourmaster-read-more tourmaster-type-text" href="/singleroom?id={{id}}">Book Now<i class="icon-arrow-right"></i></a>
+                    <div class="tourmaster-price-wrap tourmaster-no-bg">
+                      <span class="tourmaster-head">From</span><span class="tourmaster-price">{{this.price}}</span><span class="tourmaster-tail"> / night</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  {{/each}}
+{{else}}
+
+
+ 
+
+
+
+
+                                    
 
                                         {{#each room}}
+                                             <input type="hidden" class="room-id" value="{{ this._id }}">
+
+
                                     <div class="tourmaster-tour-search-content-wrap tourmaster-column-45">
                                         <div class="tourmaster-room-item clearfix tourmaster-room-item-style-side-thumbnail">
                                             <div class="tourmaster-room-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
@@ -636,22 +708,22 @@
                                                               
                                                             <div class="tourmaster-room-content-wrap gdlr-core-skin-e-background">
                                                                 <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                    <a href="">{{this.roomName}}</a>
+                                                                    <a href="" >{{this.roomName}}</a>
                                                                 </h3>
                                                                 <div class="tourmaster-info-wrap clearfix">
-                                                                    <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">1 King Bed</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">4 Guests</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-room-size"><i class="gdlr-icon-resize"></i><span class="tourmaster-tail">30 Sqm</span></div>
+                                                                    <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">{{this.bedtype}}</span></div>
+                                                                    <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">{{this.guest}}</span></div>
+                                                                    <div class="tourmaster-info tourmaster-info-room-size"><i class="gdlr-icon-resize"></i><span class="tourmaster-tail"></span></div>
                                                                 </div>
-                                                                <div class="tourmaster-room-content">Hotale Suites has been honored with the prestigious Five-Star Award by Forbes.</div>
+                                                                <div class="tourmaster-room-content">{{this.description}}</div>
                                                                 <div class="tourmaster-room-rating">
                                                                     <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
                                                                     <span class="tourmaster-room-rating-text">1 Review</span>
                                                                 </div>
                                                                 <div class="tourmaster-bottom">
-                                                                    <a class="tourmaster-read-more tourmaster-type-text" href="/singleroom?id={{id}}">Book Now<i class="icon-arrow-right"></i></a>
+                                                                    <a class="tourmaster-read-more tourmaster-type-text"   href="/singleroom?id={{id}}">Book Now<i class="icon-arrow-right"></i></a>
                                                                     <div class="tourmaster-price-wrap tourmaster-no-bg">
-                                                                        <span class="tourmaster-head">From</span><span class="tourmaster-price">{{this.price}}</span><span class="tourmaster-tail"> / night</span>
+                                                                        <span  class="tourmaster-head">From</span><span class="tourmaster-price">{{this.price}}</span><span class="tourmaster-tail"> / night</span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -661,280 +733,10 @@
                                                
 
 
-                                                {{!-- <div class="gdlr-core-item-list tourmaster-item-pdlr">
-                                                    <div class="tourmaster-room-side-thumbnail">
-                                                        <div class="tourmaster-room-side-thumbnail-inner">
-                                                            <div class="tourmaster-room-thumbnail tourmaster-media-image">
-                                                                <a href="single-room.html">
-                                                                    <img src="upload/shop-slo-vhztm9QC0L0-unsplash-600x600.jpg" alt="" width="600" height="600" />
-                                                                </a>
-                                                            </div>
-                                                            <div class="tourmaster-room-content-wrap gdlr-core-skin-e-background">
-                                                                <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                    <a href="single-room.html">Standard Deluxe</a>
-                                                                </h3>
-                                                                <div class="tourmaster-info-wrap clearfix">
-                                                                    <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">2 Single Beds</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">6 Guests</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-room-size"><i class="gdlr-icon-resize"></i><span class="tourmaster-tail">45 Sqm</span></div>
-                                                                </div>
-                                                                <div class="tourmaster-room-content">Hotale Suites has been honored with the prestigious Five-Star Award by Forbes.</div>
-                                                                <div class="tourmaster-room-rating">
-                                                                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i>
-                                                                    <span class="tourmaster-room-rating-text">2 Reviews</span>
-                                                                </div>
-                                                                <div class="tourmaster-bottom">
-                                                                    <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">Book Now<i class="icon-arrow-right"></i></a>
-                                                                    <div class="tourmaster-price-wrap tourmaster-no-bg">
-                                                                        <span class="tourmaster-head">From</span><span class="tourmaster-price">$75</span><span class="tourmaster-tail"> / night</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="gdlr-core-item-list tourmaster-item-pdlr">
-                                                    <div class="tourmaster-room-side-thumbnail">
-                                                        <div class="tourmaster-room-side-thumbnail-inner">
-                                                            <div class="tourmaster-room-thumbnail tourmaster-media-image tourmaster-with-ribbon">
-                                                                <a href="single-room.html">
-                                                                    <img
-                                                                        src="upload/roberto-nickson-emqnSQwQQDo-unsplash-scaled-600x600.jpg"
-                                                                        alt=""
-                                                                        width="600"
-                                                                        height="600"
-                                                                    />
-                                                                </a>
-                                                                <div class="tourmaster-ribbon">20% Off</div>
-                                                            </div>
-                                                            <div class="tourmaster-room-content-wrap gdlr-core-skin-e-background">
-                                                                <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                    <a href="single-room.html">The Penthouse</a>
-                                                                </h3>
-                                                                <div class="tourmaster-info-wrap clearfix">
-                                                                    <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">2 King Beds</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">6 Guests</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-room-size"><i class="gdlr-icon-resize"></i><span class="tourmaster-tail">62 Sqm</span></div>
-                                                                </div>
-                                                                <div class="tourmaster-room-content">Hotale Suites has been honored with the prestigious Five-Star Award by Forbes.</div>
-                                                                <div class="tourmaster-bottom">
-                                                                    <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">Book Now<i class="icon-arrow-right"></i></a>
-                                                                    <div class="tourmaster-price-wrap tourmaster-no-bg">
-                                                                        <span class="tourmaster-head">From</span><span class="tourmaster-price-discount">$250</span><span class="tourmaster-price">$200</span>
-                                                                        <span class="tourmaster-tail"> / night</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="gdlr-core-item-list tourmaster-item-pdlr">
-                                                    <div class="tourmaster-room-side-thumbnail">
-                                                        <div class="tourmaster-room-side-thumbnail-inner">
-                                                            <div class="tourmaster-room-thumbnail tourmaster-media-image">
-                                                                <a href="single-room.html">
-                                                                    <img src="upload/shutterstock_560973166-600x600.jpg" alt="" width="600" height="600" />
-                                                                </a>
-                                                            </div>
-                                                            <div class="tourmaster-room-content-wrap gdlr-core-skin-e-background">
-                                                                <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                    <a href="single-room.html">Grand Suite Room</a>
-                                                                </h3>
-                                                                <div class="tourmaster-info-wrap clearfix">
-                                                                    <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">1 King Bed</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">4 Guests</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-room-size"><i class="gdlr-icon-resize"></i><span class="tourmaster-tail">70 Sqm</span></div>
-                                                                </div>
-                                                                <div class="tourmaster-room-content">Hotale Suites has been honored with the prestigious Five-Star Award by Forbes.</div>
-                                                                <div class="tourmaster-room-rating">
-                                                                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                                                                    <span class="tourmaster-room-rating-text">1 Review</span>
-                                                                </div>
-                                                                <div class="tourmaster-bottom">
-                                                                    <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">
-                                                                        Book Now<i class="icon-arrow-right"></i>
-                                                                    </a>
-                                                                    <div class="tourmaster-price-wrap tourmaster-no-bg">
-                                                                        <span class="tourmaster-head">From</span><span class="tourmaster-price">$80</span><span class="tourmaster-tail"> / night</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="gdlr-core-item-list tourmaster-item-pdlr">
-                                                    <div class="tourmaster-room-side-thumbnail">
-                                                        <div class="tourmaster-room-side-thumbnail-inner">
-                                                            <div class="tourmaster-room-thumbnail tourmaster-media-image tourmaster-with-ribbon">
-                                                                <a href="single-room.html">
-                                                                    <img src="upload/andrea-davis-1uNh3B3ppl4-unsplash-600x600.jpg" alt="" width="600" height="600" />
-                                                                </a>
-                                                                <div class="tourmaster-ribbon">15% Off</div>
-                                                            </div>
-                                                            <div class="tourmaster-room-content-wrap gdlr-core-skin-e-background">
-                                                                <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                    <a href="single-room.html">Junior Suite Room</a>
-                                                                </h3>
-                                                                <div class="tourmaster-info-wrap clearfix">
-                                                                    <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">1 Double Bed</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">3 Guests</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-room-size"><i class="gdlr-icon-resize"></i><span class="tourmaster-tail">31 Sqm</span></div>
-                                                                </div>
-                                                                <div class="tourmaster-room-content">Hotale Suites has been honored with the prestigious Five-Star Award by Forbes.</div>
-                                                                <div class="tourmaster-room-rating">
-                                                                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                                                                    <span class="tourmaster-room-rating-text">1 Review</span>
-                                                                </div>
-                                                                <div class="tourmaster-bottom">
-                                                                    <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">
-                                                                        Book Now<i class="icon-arrow-right"></i>
-                                                                    </a>
-                                                                    <div class="tourmaster-price-wrap tourmaster-no-bg">
-                                                                        <span class="tourmaster-head">From</span><span class="tourmaster-price-discount">$80</span><span class="tourmaster-price">$69</span>
-                                                                        <span class="tourmaster-tail"> / night</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="gdlr-core-item-list tourmaster-item-pdlr">
-                                                    <div class="tourmaster-room-side-thumbnail">
-                                                        <div class="tourmaster-room-side-thumbnail-inner">
-                                                            <div class="tourmaster-room-thumbnail tourmaster-media-image">
-                                                                <a href="single-room.html">
-                                                                    <img
-                                                                        src="upload/collov-home-design-LSpkE5OCD_8-unsplash-600x600.jpg"
-                                                                        alt=""
-                                                                        width="600"
-                                                                        height="600"
-                                                                    />
-                                                                </a>
-                                                            </div>
-                                                            <div class="tourmaster-room-content-wrap gdlr-core-skin-e-background">
-                                                                <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                    <a href="single-room.html">Standard Room</a>
-                                                                </h3>
-                                                                <div class="tourmaster-info-wrap clearfix">
-                                                                    <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">1 Double Bed</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">4 Guests</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-room-size"><i class="gdlr-icon-resize"></i><span class="tourmaster-tail">42 Sqm</span></div>
-                                                                </div>
-                                                                <div class="tourmaster-room-content">Hotale Suites has been honored with the prestigious Five-Star Award by Forbes.</div>
-                                                                <div class="tourmaster-bottom">
-                                                                    <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">Book Now<i class="icon-arrow-right"></i></a>
-                                                                    <div class="tourmaster-price-wrap tourmaster-no-bg">
-                                                                        <span class="tourmaster-head">From</span><span class="tourmaster-price">$80</span><span class="tourmaster-tail"> / night</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="gdlr-core-item-list tourmaster-item-pdlr">
-                                                    <div class="tourmaster-room-side-thumbnail">
-                                                        <div class="tourmaster-room-side-thumbnail-inner">
-                                                            <div class="tourmaster-room-thumbnail tourmaster-media-image">
-                                                                <a href="single-room.html">
-                                                                    <img src="upload/shutterstock_324822821-600x600.jpg" alt="" width="600" height="600" />
-                                                                </a>
-                                                            </div>
-                                                            <div class="tourmaster-room-content-wrap gdlr-core-skin-e-background">
-                                                                <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                    <a href="single-room.html">Family Special Room</a>
-                                                                </h3>
-                                                                <div class="tourmaster-info-wrap clearfix">
-                                                                    <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">2 Double Beds</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">6 Guests</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-room-size"><i class="gdlr-icon-resize"></i><span class="tourmaster-tail">80 Sqm</span></div>
-                                                                </div>
-                                                                <div class="tourmaster-room-content">Hotale Suites has been honored with the prestigious Five-Star Award by Forbes.</div>
-                                                                <div class="tourmaster-room-rating">
-                                                                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i>
-                                                                    <span class="tourmaster-room-rating-text">1 Review</span>
-                                                                </div>
-                                                                <div class="tourmaster-bottom">
-                                                                    <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">
-                                                                        Book Now<i class="icon-arrow-right"></i>
-                                                                    </a>
-                                                                    <div class="tourmaster-price-wrap tourmaster-no-bg">
-                                                                        <span class="tourmaster-head">From</span><span class="tourmaster-price">$180</span><span class="tourmaster-tail"> / night</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="gdlr-core-item-list tourmaster-item-pdlr">
-                                                    <div class="tourmaster-room-side-thumbnail">
-                                                        <div class="tourmaster-room-side-thumbnail-inner">
-                                                            <div class="tourmaster-room-thumbnail tourmaster-media-image">
-                                                                <a href="single-room.html">
-                                                                    <img src="upload/paul-postema-mr0Dp231IEw-unsplash-600x600.jpg" alt="" width="600" height="600" />
-                                                                </a>
-                                                            </div>
-                                                            <div class="tourmaster-room-content-wrap gdlr-core-skin-e-background">
-                                                                <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                    <a href="single-room.html">Premium Room</a>
-                                                                </h3>
-                                                                <div class="tourmaster-info-wrap clearfix">
-                                                                    <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">2 Single Beds</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">4 Guests</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-room-size"><i class="gdlr-icon-resize"></i><span class="tourmaster-tail">90 Sqm</span></div>
-                                                                </div>
-                                                                <div class="tourmaster-room-content">Hotale Suites has been honored with the prestigious Five-Star Award by Forbes.</div>
-                                                                <div class="tourmaster-room-rating">
-                                                                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                                                                    <span class="tourmaster-room-rating-text">1 Review</span>
-                                                                </div>
-                                                                <div class="tourmaster-bottom">
-                                                                    <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">Book Now<i class="icon-arrow-right"></i></a>
-                                                                    <div class="tourmaster-price-wrap tourmaster-no-bg">
-                                                                        <span class="tourmaster-head">From</span><span class="tourmaster-price">$75</span><span class="tourmaster-tail"> / night</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="gdlr-core-item-list tourmaster-item-pdlr">
-                                                    <div class="tourmaster-room-side-thumbnail">
-                                                        <div class="tourmaster-room-side-thumbnail-inner">
-                                                            <div class="tourmaster-room-thumbnail tourmaster-media-image tourmaster-with-ribbon">
-                                                                <a href="single-room.html">
-                                                                    <img src="upload/andrea-davis-1uNh3B3ppl4-unsplash-600x600.jpg" alt="" width="600" height="600" />
-                                                                </a>
-                                                                <div class="tourmaster-ribbon">30% Off</div>
-                                                            </div>
-                                                            <div class="tourmaster-room-content-wrap gdlr-core-skin-e-background">
-                                                                <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                                    <a href="single-room.html">Deluxe Suite Room</a>
-                                                                </h3>
-                                                                <div class="tourmaster-info-wrap clearfix">
-                                                                    <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">1 King Bed</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">4 Guests</span></div>
-                                                                    <div class="tourmaster-info tourmaster-info-room-size"><i class="gdlr-icon-resize"></i><span class="tourmaster-tail">36 Sqm</span></div>
-                                                                </div>
-                                                                <div class="tourmaster-room-content">Hotale Suites has been honored with the prestigious Five-Star Award by Forbes.</div>
-                                                                <div class="tourmaster-room-rating">
-                                                                    <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
-                                                                    <span class="tourmaster-room-rating-text">1 Review</span>
-                                                                </div>
-                                                                <div class="tourmaster-bottom">
-                                                                    <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">
-                                                                        Book Now<i class="icon-arrow-right"></i>
-                                                                    </a>
-                                                                    <div class="tourmaster-price-wrap tourmaster-no-bg">
-                                                                        <span class="tourmaster-head">From</span><span class="tourmaster-price-discount">$150</span><span class="tourmaster-price">$105</span>
-                                                                        <span class="tourmaster-tail"> / night</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
                                             </div>
                                              {{/each}}
+                                             {{/if}}
+                                             </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1128,6 +930,117 @@
         /* ]]> */
     </script>
     <script type="text/javascript" src="js/plugins/goodlayers-core/include/js/page-builderd36b.js?ver=1.3.9" id="gdlr-core-page-builder-js"></script>
+
+    <script>
+
+function sortRoomsByPrice() {
+  const priceSelect = document.getElementById('price-select');
+  const selectedValue = priceSelect.value;
+
+  if (selectedValue === 'none') {
+    return; // No sorting option selected
+  }
+
+  const roomIds = Array.from(document.getElementsByClassName('room-id')).map(roomIdElement => roomIdElement.value.trim());
+
+  const requestData = {
+    sortBy: selectedValue,
+    rooms: roomIds
+  };
+
+  fetch('/room/sort', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestData)
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(sortedRooms => {
+      // Handle the sorted rooms data as needed
+      console.log(sortedRooms)
+      const roomContainer = document.getElementById('room-container');
+      roomContainer.innerHTML = ''; // Clear previous content
+
+      
+    if (sortedRooms && sortedRooms.length > 0) {
+      sortedRooms.forEach(room => {
+        const roomItem = document.createElement('div');
+        roomItem.classList.add('tourmaster-room-item');
+
+        // Create elements and populate room details
+        roomItem.innerHTML = `
+          <input type="hidden" class="room-id" value="${room._id}">
+          <div class="tourmaster-tour-search-content-wrap tourmaster-column-45">
+            <div class="tourmaster-room-item clearfix tourmaster-room-item-style-side-thumbnail">
+              <div class="tourmaster-room-item-holder gdlr-core-js-2 clearfix" data-layout="fitrows">
+                <div class="gdlr-core-item-list tourmaster-item-pdlr">
+                  <div class="tourmaster-room-side-thumbnail">
+                    <div class="tourmaster-room-side-thumbnail-inner">
+                      <div class="tourmaster-room-thumbnail tourmaster-media-image">
+                        <a href="single-room.html">
+                          <img src="${room.roomImages[0]}" alt="" width="600" height="600" />
+                        </a>
+                      </div>
+                      <div class="tourmaster-room-content-wrap gdlr-core-skin-e-background">
+                        <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
+                          <a href="">${room.roomName}</a>
+                        </h3>
+                        <div class="tourmaster-info-wrap clearfix">
+                          <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">${room.bedtype}</span></div>
+                          <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">${room.guest}</span></div>
+                          <div class="tourmaster-info tourmaster-info-room-size"><i class="gdlr-icon-resize"></i><span class="tourmaster-tail"></span></div>
+                        </div>
+                        <div class="tourmaster-room-content">${room.description}</div>
+                        <div class="tourmaster-room-rating">
+                          <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+                          <span class="tourmaster-room-rating-text">1 Review</span>
+                        </div>
+                        <div class="tourmaster-bottom">
+                          <a class="tourmaster-read-more tourmaster-type-text" href="/singleroom?id=${room._id}">Book Now<i class="icon-arrow-right"></i></a>
+                          <div class="tourmaster-price-wrap tourmaster-no-bg">
+                            <span class="tourmaster-head">From</span><span class="tourmaster-price">${room.price}</span><span class="tourmaster-tail"> / night</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        roomContainer.appendChild(roomItem);
+      });
+    } else {
+      // If sortedRooms is empty or undefined, you can display a message or handle it as needed
+      roomContainer.innerHTML = '<p>No rooms available</p>';
+    }
+    })
+    .catch(error => {
+      console.error("Fetch Error:", error); // Log the Fetch error
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  const priceSelect = document.getElementById('price-select');
+
+  priceSelect.addEventListener('change', function() {
+    sortRoomsByPrice();
+  });
+
+  // Initial sort when page loads
+  sortRoomsByPrice();
+});
+
+
+</script>
+
 
 </body>
 
