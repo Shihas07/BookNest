@@ -18,7 +18,10 @@ const mongoose=require("mongoose")
     },
     phoneNumber:{
         type:String
-    }
+    },
+    booking:[{
+        
+    }]
 })
     
 const User = mongoose.model("User", userSchema); // Create User model

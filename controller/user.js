@@ -81,6 +81,12 @@ const signupPage = async (req, res) => {
   res.redirect("/");
 };
 
+const getLoginpage=async(res,req)=>{
+    
+   res.render("user/login")
+}
+
+
 const login = async (req, res) => {
   try {
     // Get data from form
@@ -366,12 +372,12 @@ const getroompage = async (req, res) => {
 
 const getsingleroom = async (req, res) => {
   const id = req.query.id;
-  console.log(req.query);
+  // console.log(req.query);
 
-  console.log(id);
+  // console.log(id);
 
   const room = await Rooms.findById(id);
-  console.log("vasu",room);
+  // console.log("vasu",room);
 
   res.render("user/singleroom", { room });
 };
@@ -390,7 +396,7 @@ const postPrice = (req, res) => {
   console.log("edbjbdwljdjadjewh");
   const { checkOutDate } = req.body;
   console.log("Received Check-Out Date:", checkOutDate);
-  console.log("Received request body:", req.body);
+  // console.log("Received request body:", req.body);
   const roomPrice = 5000; // Room price per night
   const totalPrice = roomPrice;
 
@@ -422,7 +428,7 @@ const postroomsort = async (req, res) => {
   try {
     
     const { rooms,sortBy } = req.body;
-    console.log(req.body)
+    // console.log(req.body)
 
     let sortQuery = {};
 
@@ -488,14 +494,55 @@ const postFilter = async (req, res) => {
     console.error("Error occurred:", error);
     res.status(500).json({ error: "Internal server error" });
   }
+};const bookingGetpage = async (req, res) => {
+  try {
+    // Retrieve data from the query parameters
+    const { room_id,  checkInDate,  checkOutDate, price } = req.query;
+    console.log(req.query)
+    console.log("Room ID:", room_id);
+    console.log("Check-in Date:", checkInDate);
+    console.log("Check-out Date:", checkOutDate);
+    console.log("Price:", price);
+
+    // Check if the user is authenticated
+    if (req.cookies.user_jwt) {
+      // Decode JWT token to get user ID
+      const decodedToken = jwt.verify(req.cookies.user_jwt, process.env.JWT_SECRET);
+      const userId = decodedToken.id;
+
+      // Fetch user details from the database using user ID
+      const user = await User.findById(userId);
+
+      // Fetch room details from the database using room ID
+      const room = await Rooms.findById(room_id);
+
+      // Render the booking page with the received data
+      res.render("user/booking", { user, room, checkInDate, checkOutDate, price });
+    } else {
+      // If user is not authenticated, send an unauthorized response
+
+      res.render("user/login")
+    }
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).send("Internal Server Error");
+  }
 };
 
+
+
+
+
+   
+
+    
 
 
 module.exports = {
   homePage,
   signup,
   signupPage,
+  getLoginpage,
   login,
   userLogout,
   profile,
@@ -510,7 +557,10 @@ module.exports = {
   postPrice,
     getOtpPage,
     postroomsort,
-    postFilter
+    postFilter,
+    // bookingPostpage,
+    bookingGetpage
+
    
 
 };

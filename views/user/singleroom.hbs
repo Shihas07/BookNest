@@ -500,7 +500,6 @@
             </div>
 
 
-
             <div class="hotale-page-wrapper" id="hotale-page-wrapper">
                 <div class="tourmaster-room-single-header-title-wrap" style="border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;">
                        {{#each room}}
@@ -551,7 +550,8 @@
         <div class="tourmaster-head">
             <span class="tourmaster-label">From</span>
             <span class="tourmaster-price-discount">5000</span> <!-- Placeholder for initial price -->
-            <span class="tourmaster-price" id="displayed-price">{{room.price}}</span> <!-- Updated with JavaScript -->
+            <span class="tourmaster-price" id="displayed-price">{{room.price}}</span>
+            
         </div>
        {{!-- <span class="tourmaster-price" id="displayed-price">{{room.price}}</span> <!-- Updated with JavaScript --> --}}
 
@@ -1051,25 +1051,20 @@
                                         <div class="tourmaster-room-booking-bar-title"><span class="tourmaster-active" data-room-tab="booking">Book Your Room</span><span data-room-tab="enquiry">Enquiry</span></div>
                                         <div class="tourmaster-room-booking-bar-content">
                                             <div class="tourmaster-room-booking-wrap" class="tourmaster-active" data-room-tab="booking">
-                                                <form
-                                                    class="tourmaster-room-booking-form clearfix"
-                                                    id="tourmaster-room-booking-form"
-                                                    {{!-- action="#" --}}
-                                                    data-action="tourmaster_room_booking_form"
-                                                    {{!-- method="POST" --}}
-                                                >
+                                              {{#if room}}
+                                               <form  action="/booking"  class="tourmaster-room-booking-form">
                                                     <div
                                                         class="tourmaster-room-date-selection tourmaster-vertical"
                                                     >
                                                       <div class="tourmaster-custom-start-date gdlr-core-skin-e-background">
     <div class="tourmaster-head gdlr-core-skin-e-content">Check In</div>
     <div class="tourmaster-tail gdlr-core-skin-e-content" id="hi"  >
-    <input type="datetime-local" name="check-in-date" id="check-in-date" value="{{getCurrentDate}}"/></div>
+    <input type="date" name="checkInDate" id="check-in-date" value="{{getCurrentDate}}"/></div>
 </div>
 <div class="tourmaster-custom-end-date gdlr-core-skin-e-background">
     <div class="tourmaster-head gdlr-core-skin-e-content">Check Out</div>
     <div class="tourmaster-tail gdlr-core-skin-e-content ">
-    <input  type="datetime-local"  id="check-out-date" name="check-out-date" value="{{defaultCheckOutDate}}"/></div>
+    <input  type="date" name="checkOutDate" id="check-out-date"  value="{{defaultCheckOutDate}}"/></div>
 </div>
                                                         <div class="tourmaster-custom-datepicker-wrap" data-date-format="d M yy">
                                                             <i class="tourmaster-custom-datepicker-close icon_close"></i>
@@ -1077,57 +1072,20 @@
                                                             <div class="tourmaster-custom-datepicker-calendar"></div>
                                                         </div>
                                                     </div>
-                                             
-
-                                                    <div class="tourmaster-room-amount-selection">
-                                                        <div class="tourmaster-custom-amount-display gdlr-core-skin-e-background">
-                                                            <div class="tourmaster-head gdlr-core-skin-e-content">Room</div>
-                                                            <div class="tourmaster-tail gdlr-core-skin-e-content"><span class="tourmaster-space"></span>1</div>
-                                                        </div>
-                                                        <div class="tourmaster-custom-amount-selection-wrap">
-                                                            <div class="tourmaster-custom-amount-selection-item clearfix">
-                                                                <div class="tourmaster-head">Room</div>
-                                                                <div class="tourmaster-tail">
-                                                                    <span class="tourmaster-minus"><i class="icon_minus-06"></i></span><span class="tourmaster-amount">1</span>
-                                                                    <span class="tourmaster-plus"><i class="icon_plus"></i></span>
-                                                                </div>
-                                                                <input type="hidden" name="room_amount" value="1" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="tourmaster-room-booking-guest-selection tourmaster-one">
-                                                        <div class="tourmaster-room-amount-selection">
-                                                            <div class="tourmaster-custom-amount-display gdlr-core-skin-e-background">
-                                                                <div class="tourmaster-head gdlr-core-skin-e-content">
-                                                                    <span>Room<span class="tourmaster-number">1</span> : </span>Guest
-                                                                </div>
-                                                                <div class="tourmaster-tail gdlr-core-skin-e-content"><span class="tourmaster-space"></span>Adults 2<span class="tourmaster-space"></span>Children 0</div>
-                                                            </div>
-                                                            <div class="tourmaster-custom-amount-selection-wrap">
-                                                                <div class="tourmaster-custom-amount-selection-item clearfix" data-label="Adults">
-                                                                    <div class="tourmaster-head">Adults</div>
-                                                                    <div class="tourmaster-tail">
-                                                                        <span class="tourmaster-minus"><i class="icon_minus-06"></i></span><span class="tourmaster-amount">2</span>
-                                                                        <span class="tourmaster-plus"><i class="icon_plus"></i></span>
-                                                                    </div>
-                                                                    <input type="hidden" name="adult[]" value="2" />
-                                                                </div>
-                                                                <div class="tourmaster-custom-amount-selection-item clearfix" data-label="Children">
-                                                                    <div class="tourmaster-head">Children</div>
-                                                                    <div class="tourmaster-tail">
-                                                                        <span class="tourmaster-minus"><i class="icon_minus-06"></i></span><span class="tourmaster-amount">0</span>
-                                                                        <span class="tourmaster-plus"><i class="icon_plus"></i></span>
-                                                                    </div>
-                                                                    <input type="hidden" name="children[]" value="0" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <input type="hidden" name="room_id" value="15031" /><input type="hidden" name="post_type" value="room" />
-                                                    <input type="submit" class="tourmaster-room-button tourmaster-full" value="Book Now" />
+                                                       
+                                                    
+                                                   
+                                             <input type="hidden" name="price" id="rr" value="{{room.price}}">
+                                                   
+                                                   <input type="hidden" name="room_id" class="rr"     value="{{room._id}}"/> 
+                                                    <input type="submit" class="tourmaster-room-button tourmaster-full" value="Book Nowww"   />
                                                 </form>
+                                               
+                                                
+                                                 {{/if}}
                                             </div>
                                             <div class="tourmaster-room-enquiry-wrap" data-room-tab="enquiry">
+                                                {{#if room}}
                                                 <form
                                                     class="tourmaster-enquiry-form tourmaster-form-field tourmaster-room clearfix"
                                                     id="tourmaster-enquiry-form"
@@ -1151,8 +1109,14 @@
                                                         <div class="tourmaster-enquiry-term-message tourmaster-enquiry-form-message tourmaster-failed">Please agree to all the terms and conditions before proceeding to the next step</div>
                                                     </div>
                                                     <div class="tourmaster-enquiry-form-message"></div>
-                                                    <input type="hidden" name="room-id" value="15031" /><input type="submit" class="tourmaster-room-button tourmaster-full" value="Submit Enquiry" />
+                                                  
+                                                   
+                                                   
+                                                    <input type="submit" class="tourmaster-room-button tourmaster-full" value="Submit Enquiry" />
                                                 </form>
+                                                    
+                                                 {{!-- <input type="hidden" id="roomid" name="room-id"  value="{{this.room_id}}" /> --}}
+                                                  {{/if}}
                                             </div>
                                         </div>
                                     </div>
@@ -1577,6 +1541,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
 
         document.getElementById('displayed-price').textContent = totalPrice;
+        document.getElementById('rr').value=totalPrice;
 
         // Optional: If you want to send the price to the server
         axios.post('/price', {
@@ -1612,16 +1577,9 @@ document.addEventListener("DOMContentLoaded", function() {
     updateDisplayedPrice();
 });
 
+  </script>
 
-
-
-
-
-
-</script>
-
-
-
+ <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 
 </body>

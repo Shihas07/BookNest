@@ -9,6 +9,7 @@ const {userMiddleware,disableCache}=require("../midilware/usermidilware")
 router.get("/", userController.homePage);
 router.get("/signup",userMiddleware,userController.signup)
 router.post("/signup",userController.signupPage)
+router.get("/login",userController.getLoginpage)
 router.post("/login",disableCache,userMiddleware,userController.login)
 // router.get("login",userController.login)
 router.get('/userLogout',userController.userLogout)
@@ -38,6 +39,10 @@ router.get("/room-search",userController.getRoomSearch)
 router.post("/price",userController.postPrice)
 router.post("/room/sort",userController.postroomsort)
 router.post("/room/filter",userController.postFilter)
+// router.post("/booking",userController.bookingPostpage)
+
+router.get("/booking",userController.bookingGetpage)
+
 
 
 module.exports = router;
