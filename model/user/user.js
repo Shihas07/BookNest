@@ -20,7 +20,21 @@ const mongoose=require("mongoose")
         type:String
     },
     booking:[{
-        
+        checkInDate:{
+                type:Date,
+        },
+        checkOutDate:{
+            type:Date,
+        },
+        price:{
+            type:Number,
+        },
+        room:[{
+            roomid:{
+                type:String,
+            }
+        }]
+
     }]
 })
     

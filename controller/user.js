@@ -366,7 +366,7 @@ const profile = async (req, res) => {
 
 const getroompage = async (req, res) => {
   let rooms = await Rooms.find();
-  console.log("rooms :", rooms);
+  // console.log("rooms :", rooms);
   res.render("user/room-grid-style", { rooms });
 };
 
@@ -529,6 +529,70 @@ const postFilter = async (req, res) => {
   }
 };
 
+const Postbooking=async(req,res)=>{
+  const { userName, email, roomName, category, checkInDate, checkOutDate, price, roomid } = req.body;
+
+// Extract the date portion from the received date strings
+const formattedCheckInDate = new Date(checkInDate).toISOString().split('T')[0];
+const formattedCheckOutDate = new Date(checkOutDate).toISOString().split('T')[0];
+
+try {
+    // Find the user by email
+    let user = await User.findOne({ email });
+    if (!user) {
+        return res.status(404).send('User not found');
+    }
+
+    // Update user's booking details with the extracted date portions
+    user.booking.push({
+        checkInDate: formattedCheckInDate,
+        checkOutDate: formattedCheckOutDate,
+        price,
+        room: { roomid }
+    });
+
+    // Save the updated user document
+    await user.save();
+
+    res.redirect('/booking?success=true');
+} catch (error) {
+    console.error(error);
+    res.status(500).send('Internal server error');
+}
+}
+const apigetuser = async (req, res) => {
+  const roomId = req.query.roomId; // Use req.query.roomId to access query parameters
+  console.log("Room ID:", roomId); // Log the room ID for debugging
+
+  try {
+    const bookings = await User.find({ 'booking.room.roomid': roomId }, 'booking.checkInDate booking.checkOutDate');
+    console.log(bookings);
+    const dateRanges = bookings.flatMap(user => {
+      return user.booking.map(booking => {
+        if (!booking || !booking.checkInDate || !booking.checkOutDate) {
+          console.error("Invalid date format in database");
+          return {
+            checkInDate: "Invalid Date",
+            checkOutDate: "Invalid Date"
+          };
+        }
+      
+        return {
+          checkInDate: new Date(booking.checkInDate).toISOString().split('T')[0],
+          checkOutDate: new Date(booking.checkOutDate).toISOString().split('T')[0]
+        };
+      });
+    });
+    console.log("Date Ranges:", dateRanges); // Log date ranges for debugging
+
+    res.json(dateRanges); // Send date ranges to the frontend
+  } catch (error) {
+    console.error('Error fetching booked dates:', error);
+    res.status(500).json({ message: 'Server Error' });
+  }
+};
+
+
 
 
 
@@ -558,8 +622,10 @@ module.exports = {
     getOtpPage,
     postroomsort,
     postFilter,
-    // bookingPostpage,
-    bookingGetpage
+   
+    bookingGetpage,
+    Postbooking,
+    apigetuser
 
    
 

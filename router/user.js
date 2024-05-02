@@ -42,7 +42,8 @@ router.post("/room/filter",userController.postFilter)
 // router.post("/booking",userController.bookingPostpage)
 
 router.get("/booking",userController.bookingGetpage)
-
+router.post("/booking",userController.Postbooking)
+router.get("/api/users",userController.apigetuser)
 
 
 module.exports = router;

@@ -61,18 +61,28 @@
     <div class="left-div gx-5">
       <div class="rr"> <h2>Booking Details</h2></div>
        
-      <form>
+      <form action="/booking" method="post" >
         <div class="mb-3">
           <label for="nameInput" class="form-label">Name</label>
-          <input type="text" class="form-control" id="nameInput" placeholder="Enter your name" value="{{user.userName}}">
+          <input type="text" name="name" class="form-control" id="nameInput" placeholder="Enter your name" value="{{user.userName}}">
         </div>
         <div class="mb-3">
           <label for="emailInput" class="form-label">Email</label>
-          <input type="email" class="form-control" id="emailInput" placeholder="Enter your email" value="{{user.email}}">
+          <input type="email" class="form-control" id="emailInput" name="email" placeholder="Enter your email" value="{{user.email}}">
+            <input type="hidden" name="roomName" value="{{room.roomName}}">
+              <input type="hidden" name="roomName" value="{{room.roomName}}">
+  <input type="hidden" name="category" value="{{room.category}}">
+  <input type="hidden" name="checkInDate" value="{{checkInDate}}">
+  <input type="hidden" name="checkOutDate" value="{{checkOutDate}}">
+  <input type="hidden" name="price"  value="{{price}}">
+  <input type="hidden" name="roomid"  value="{{room._id}}">
+  
+  
+ 
         </div>
         <button type="submit" class="btn btn-success">continue</button>
-      </form>
-  
+    
+   </form>
     </div>
     <div class="right-div gx-5">
       <div class="lf"> <h2>Room Details</h2></div>
@@ -91,7 +101,7 @@
         <p>Check-in Date: {{checkInDate}}</p>
         <p>Check-out Date: {{checkOutDate}}</p>
         <p>Total Price: {{price}}</p>
-       
+        
       </div>
     </div>
   </div>
@@ -118,4 +128,37 @@
 </script>
 
 </body>
+<div class="modal fade" id="bookingSuccessModal" tabindex="-1" aria-labelledby="bookingSuccessModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookingSuccessModalLabel">Booking Successful</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Your booking has been successfully completed.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Add this script to show the modal after form submission
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get the URL parameter to check if the booking was successful
+    const urlParams = new URLSearchParams(window.location.search);
+    const bookingSuccess = urlParams.get('success');
+
+    // If booking was successful, show the modal
+    if (bookingSuccess) {
+      var myModal = new bootstrap.Modal(document.getElementById('bookingSuccessModal'), {
+        keyboard: false
+      });
+      myModal.show();
+    }
+  });
+</script>
 </html>

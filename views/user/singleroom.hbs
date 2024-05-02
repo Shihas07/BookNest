@@ -37,6 +37,15 @@
         type="text/css"
         media="all"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<style>
+  /* Optional: Custom styles for the Flatpickr calendar */
+  .flatpickr-calendar {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
@@ -1056,10 +1065,12 @@
                                                     <div
                                                         class="tourmaster-room-date-selection tourmaster-vertical"
                                                     >
-                                                      <div class="tourmaster-custom-start-date gdlr-core-skin-e-background">
+                                                      {{!-- <div class="tourmaster-custom-start-date gdlr-core-skin-e-background">
     <div class="tourmaster-head gdlr-core-skin-e-content">Check In</div>
     <div class="tourmaster-tail gdlr-core-skin-e-content" id="hi"  >
-    <input type="date" name="checkInDate" id="check-in-date" value="{{getCurrentDate}}"/></div>
+    <input  type="date" name="checkInDate" id="check-in-date" value="{{getCurrentDate}}"/> 
+    </div>
+
 </div>
 <div class="tourmaster-custom-end-date gdlr-core-skin-e-background">
     <div class="tourmaster-head gdlr-core-skin-e-content">Check Out</div>
@@ -1072,13 +1083,30 @@
                                                             <div class="tourmaster-custom-datepicker-calendar"></div>
                                                         </div>
                                                     </div>
-                                                       
+                                                        --}}
+
+                                                        <div class="tourmaster-custom-start-date gdlr-core-skin-e-background">
+    <div class="tourmaster-head gdlr-core-skin-e-content">Check In</div>
+    <div class="tourmaster-tail gdlr-core-skin-e-content" id="hi">
+        <!-- Input field for Check In date -->
+        <input type="text" name="checkInDate" id="check-in-date" placeholder="Select Check In Date"> 
+    </div>
+</div>
+
+<div class="tourmaster-custom-end-date gdlr-core-skin-e-background">
+    <div class="tourmaster-head gdlr-core-skin-e-content">Check Out</div>
+    <div class="tourmaster-tail gdlr-core-skin-e-content">
+        <!-- Input field for Check Out date -->
+        <input type="text" name="checkOutDate" id="check-out-date" placeholder="Select Check Out Date">
+    </div>
+</div>
+</div>
                                                     
                                                    
                                              <input type="hidden" name="price" id="rr" value="{{room.price}}">
                                                    
-                                                   <input type="hidden" name="room_id" class="rr"     value="{{room._id}}"/> 
-                                                    <input type="submit" class="tourmaster-room-button tourmaster-full" value="Book Nowww"   />
+                                                   <input type="hidden" name="room_id" class="rr" id="room-id"     value="{{room._id}}"/> 
+                                                    <input type="submit" class="tourmaster-room-button tourmaster-full" value="Book Now"   />
                                                 </form>
                                                
                                                 
@@ -1508,7 +1536,29 @@
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
  
-    
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize Flatpickr for the date input fields
+  flatpickr('#check-in-date', {
+    dateFormat: 'Y-m-d', // Date format (YYYY-MM-DD)
+    minDate: 'today',    // Minimum selectable date (today's date)
+    onClose: function(selectedDates, dateStr, instance) {
+      // Set the minimum selectable date for Check Out date picker based on Check In date
+      flatpickr('#check-out-date', {
+        dateFormat: 'Y-m-d', // Date format (YYYY-MM-DD)
+        minDate: dateStr    // Minimum selectable date (Check In date)
+      });
+    }
+  });
+
+  flatpickr('#check-out-date', {
+    dateFormat: 'Y-m-d', // Date format (YYYY-MM-DD)
+    minDate: 'today'    // Minimum selectable date (today's date)
+  });
+});
+</script>
 
 
 <script>
@@ -1579,7 +1629,63 @@ document.addEventListener("DOMContentLoaded", function() {
 
   </script>
 
- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+  document.getElementById('check-in-date').addEventListener('focus', async function() {
+  const roomId = document.getElementById('room-id').value; 
+  console.log(roomId)
+  try {
+    const response = await axios.get('/api/users', {
+      params: {
+        roomId: roomId
+      }
+    });
+    
+      const bookings = response.data;
+console.log(bookings)
+    // Extract and format the disabled dates from bookings data
+ const disabledDateRanges = bookings.flatMap(booking => {
+  // Extract check-in and check-out dates from each booking
+  const checkInDate = new Date(booking.checkInDate);
+  const checkOutDate = new Date(booking.checkOutDate);
+
+  // Calculate the range of dates between check-in and check-out dates
+  const range = [];
+  const currentDate = new Date(checkInDate); // Start from check-in date
+  while (currentDate <= checkOutDate) {
+    range.push(new Date(currentDate)); // Push a new Date object to avoid reference issues
+    currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
+  }
+
+  return range;
+});
+
+// Initialize Flatpickr instance for check-in date input
+const checkInDateInput = document.getElementById('check-in-date');
+const checkOutDateInput = document.getElementById('check-out-date');
+
+flatpickr(checkInDateInput, {
+  disable: disabledDateRanges,
+  // You can add more Flatpickr options here
+});
+
+flatpickr(checkOutDateInput, {
+  disable: [
+    {
+      from: checkInDateInput.value,
+      // You can add more Flatpickr options here
+    }
+  ],
+  // You can add more Flatpickr options here
+});
+  } catch (error) {
+    // Handle any errors
+    console.error('Error fetching data:', error);
+  }
+});
+
+</script>
+
 
 
 </body>
