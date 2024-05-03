@@ -2,6 +2,7 @@
      const jwt = require("jsonwebtoken")
      const Admin = require("../model/admin/admin")
      const bcrypt=require('bcrypt')
+     const User=require("../model/user/user")
 
 
    //  admin dashboard
@@ -169,7 +170,32 @@
               }
           };
 
-            
+            let getuserList=async(req,res)=>{
+
+              const user=await User.find()
+              // console.log(user);
+               res.render("admin/user-list",{user})
+            }
+
+            const postuserlist=async(req,res)=>{
+              try {
+                const { userId } = req.body; // Assuming you're sending the user's ID in the request body
+                  console.log("ffff",req.body);
+                // Find user by ID
+                const user = await User.findById(userId);
+        console.log(user)
+                // Toggle the blocked status
+                user.blocked = !user.blocked;
+        
+                // Save the updated user
+                await user.save();
+        
+                res.redirect('/admin/userlist'); // Redirect back to the user list page
+            } catch (error) {
+                console.error('Error toggling user status:', error);
+                res.status(500).send('Internal Server Error');
+            }
+            }
           
 
           
@@ -190,7 +216,9 @@
         getCategorey,
         postaddcategory,
         editpostCategory,
-        deletePostCategory
+        deletePostCategory,
+        getuserList,
+        postuserlist
      }
 
 

@@ -11,7 +11,7 @@ router.get("/signup",userMiddleware,userController.signup)
 router.post("/signup",userController.signupPage)
 router.get("/login",userController.getLoginpage)
 router.post("/login",disableCache,userMiddleware,userController.login)
-// router.get("login",userController.login)
+
 router.get('/userLogout',userController.userLogout)
 router.get("/profile",userController.profile)
 
@@ -44,6 +44,8 @@ router.post("/room/filter",userController.postFilter)
 router.get("/booking",userController.bookingGetpage)
 router.post("/booking",userController.Postbooking)
 router.get("/api/users",userController.apigetuser)
+router.get("/wishlist",userController.getwhislist)
+router.post("/wishlist",userController.postwishlist)
 
 
 module.exports = router;

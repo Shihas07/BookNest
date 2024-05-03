@@ -380,6 +380,7 @@
             {{#if erroremail}}
             <small id="emailError" class="text-danger">{{erroremail}}</small>
             {{/if}}
+
         </p>
         <p class="tourmaster-login-pass">
             <label>Password</label>
@@ -388,6 +389,10 @@
             <small id="passwordError" class="text-danger"></small>
         </p>
     </div>
+   <div id="errorMessage" class="text-danger"></div>
+
+
+
     <p class="tourmaster-login-submit">
         <input type="submit"   name="wp-submit" class="tourmaster-button" value="Sign in!"  />
 
@@ -2934,6 +2939,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
+// login.js
+
+document.getElementById("loginForm").addEventListener("submit", async function(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+
+    // Get form data
+    const formData = new FormData(this);
+
+    // Send form data to server
+    const response = await fetch("/login", {
+        method: "POST",
+        body: formData
+    });
+
+    // Parse response as JSON
+    const responseData = await response.json();
+
+    console.log("shihas", responseData);
+
+    // Check if response contains error
+    if (responseData.error) {
+        // Display error message within the modal
+        document.getElementById("errorMessage").innerText = responseData.error;
+    } else {
+        // If no error, redirect or perform any other action
+        window.location.href = "/"; // Redirect to home page
+    }
+});
 </script>
 </body>
 

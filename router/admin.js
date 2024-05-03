@@ -24,5 +24,7 @@ const adminAuth = require("../midilware/admin_jwt")
 
      router.post("/admin/editCategory",adminController.editpostCategory)
      router.post("/admin/deleteCategory/:id",adminController.deletePostCategory)
+     router.get("/admin/userlist",adminController.getuserList)
+     router.post("/admin/userlist",adminController.postuserlist)
 
      module.exports=router

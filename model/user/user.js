@@ -19,6 +19,14 @@ const mongoose=require("mongoose")
     phoneNumber:{
         type:String
     },
+    blocked:{
+         type:Boolean
+    },
+    whishlist:[{
+         roomId:{
+            type:mongoose.Schema.Types.ObjectId,
+         }        
+    }],
     booking:[{
         checkInDate:{
                 type:Date,
