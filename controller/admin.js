@@ -3,6 +3,7 @@
      const Admin = require("../model/admin/admin")
      const bcrypt=require('bcrypt')
      const User=require("../model/user/user")
+     const nodemailer=require("nodemailer")
 
 
    //  admin dashboard
@@ -196,11 +197,169 @@
                 res.status(500).send('Internal Server Error');
             }
             }
+            const getcoupenpage = async (req, res) => {
+              try {
+                  // Assuming you have the admin ID available in the request (req.adminId)
+                
+          
+                  // Find the admin document by its ID
+                  const admin = await Admin.findOne();
+          
+                  // Check if admin document exists
+                  if (!admin) {
+                      // Handle case where admin document is not found
+                      return res.status(404).json({ error: "Admin not found" });
+                  }
+          
+                  // Retrieve the coupon details from the admin document
+                  const coupons = admin.coupon;
+          
+                  // Render the admin/coupen template and pass the coupon details
+                  res.render("admin/coupen", { coupons });
+              } catch (error) {
+                  console.error("Error fetching coupon details:", error);
+                  res.status(500).json({ error: "Internal server error" });
+              }
+          };
           
 
-          
+           
+// const postaddcoupen = async (req, res) => {
+//   const { couponCode, discountAmount, validity, couponStatus, coupontype } = req.body;
 
+//   try {
+//       // Find the admin document by its ID (assuming you have admin ID available in the request)
+//       // Example: req.adminId is the ID of the admin
+//       const admin = await Admin.findOne();
+
+//       // Push the coupon details into the coupon array field
+//       admin.coupon.push({
+//           couponCode,
+//           discountAmount,
+//           validity,
+//           couponStatus,
+//           coupontype,
         
+//           // Add other fields as needed (e.g., enddate)
+//       });
+
+//       // Save the updated admin document
+//       await admin.save();
+//          res.redirect("/admin/coupen")
+//       // res.status(200).json({ message: "Coupon added successfully" });
+//   } catch (error) {
+//       console.error("Error adding coupon:", error);
+//       res.status(500).json({ error: "Internal server error" });
+//   }
+// };
+
+
+
+
+
+
+///email coupen send//
+
+const sendCouponEmails = async (users, couponDetails) => {
+  // Create a nodemailer transporter
+  const transporter = nodemailer.createTransport({
+    // Provide your email service credentials or use a service like Gmail
+    service: 'Gmail',
+    auth: {
+      user: 'shihas732@gmail.com',
+      pass: 'lkox ydmj nigs qnlb'
+    }
+  });
+
+  // Loop through users and send email to each
+  users.forEach(async (user) => {
+    // Email content
+    const mailOptions = {
+      from: 'shihas732@gmail.com',
+      to: user.email, // Assuming email is stored in user object
+      subject: 'New Coupon Available!',
+      html: `
+      <p>Dear ${user.userName},</p>
+      <p>A new coupon is available for you:</p>
+      <p>Coupon Code: ${couponDetails.couponCode}</p>
+      <p>Discount Amount: ${couponDetails.discountAmount}</p>
+      <p>Validity: ${couponDetails.validity}</p>
+      <div style="position: relative;">
+        <p style="position: absolute; top: 0; left: 0; opacity: 0;">Thank you for using our service!</p>
+  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWtzMDUyeGJlaTRmdW85b2I3bzk5YXRyYmVjZWdkNG83NzJrc3N5eSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/33zX3zllJBGY8/giphy.gif" alt="Loading Spinner" style="max-width: 100%; height: auto; display: block;">
+
+      </div>
+      `
+    };
+
+    // Send email
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log(`Email sent successfully to ${user.email}`);
+    } catch (error) {
+      console.error(`Error sending email to ${user.email}:`, error);
+    }
+  });
+};
+
+const postaddcoupen = async (req, res) => {
+  const { couponCode, discountAmount, validity, couponStatus, coupontype } = req.body;
+
+  try {
+    // Find the admin document
+    const admin = await Admin.findOne();
+
+    // Push the coupon details into the admin's coupon array
+    admin.coupon.push({
+      couponCode,
+      validity,
+      discountAmount,
+      couponStatus,
+      coupontype,
+    });
+
+    // Save the updated admin document
+    await admin.save();
+
+    // Fetch all users from the database
+    const users = await User.find();
+
+    // Send email with the coupon details to each user
+    await sendCouponEmails(users, { couponCode, discountAmount, validity, couponStatus, coupontype });
+
+    // Redirect or respond with success message
+    res.redirect("/admin/coupen");
+    // res.status(200).json({ message: "Coupon added successfully" });
+  } catch (error) {
+    console.error("Error adding coupon:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+
+          
+const deletecouponpost = async (req, res) => {
+  try {
+    const couponId = req.params.id;
+    console.log(couponId);
+
+    const admin = await Admin.findOne();
+
+    // Use correct field name 'coupons' instead of 'coupon'
+    admin.coupon = admin.coupon.filter(coupon => coupon._id.toString() !== couponId);
+
+    // Save the updated admin document
+    await admin.save();
+
+     res.redirect("/admin/coupen")
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+   
             
           
             
@@ -218,7 +377,10 @@
         editpostCategory,
         deletePostCategory,
         getuserList,
-        postuserlist
+        postuserlist,
+        getcoupenpage,
+        postaddcoupen,
+        deletecouponpost
      }
 
 

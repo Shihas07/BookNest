@@ -322,19 +322,19 @@ const getroompage = async (req, res) => {
       console.log(decodedToken);
       const userId = decodedToken.id;
       console.log(userId);
-      user = await User.findById(userId).populate('whishlist.roomId');
+     let user = await User.findById(userId).populate('whishlist.roomId');
 
       // Extract room IDs from the user's wishlist
       const roomIds = user.whishlist.map(item => item.roomId);
 
       // Find some rooms based on the room IDs
       const wishlistRooms = await Rooms.find({ _id: { $in: roomIds } });
-           console.log(wishlistRooms)
+           console.log('wihl',wishlistRooms)
       // Pass wishlist rooms along with user to the rendering engine
-      res.render("user/room-grid-style", { rooms: wishlistRooms, user });
+      res.render("user/room-grid-style", { rooms, wishlistRooms, user });
     } else {
       // If user is not logged in, just render all rooms
-       res.render("user/room-grid-style", { rooms, user });
+       res.render("user/room-grid-style", { rooms, user  });
     }
   } catch (error) {
     console.error("Error getting room page:", error);

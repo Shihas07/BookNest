@@ -22,7 +22,29 @@
         type:String,
         required:true
     },
-  }]
+  }],
+   coupon:[{
+      couponCode:{
+        type:String
+      },
+      discountAmount:{
+        type:Number
+      },
+      validity:{
+        type:Date
+      },
+      couponStatus:{
+        type:String
+      },
+      coupontype:{
+        type:String
+      },
+      startdate:{
+        type:Date,
+        default:Date.now
+      }
+
+   }]
   
 })
   
