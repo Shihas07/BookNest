@@ -48,6 +48,13 @@
       background-color: rgb(237, 237, 241);
       color: rgb(25,135,84);
      }
+     
+    
+    .form-control:focus {
+      border-color: rgb(27, 235, 75) !important;
+      box-shadow:none !important;
+    }
+  
   </style>
 </head>
 <body>
@@ -61,28 +68,51 @@
     <div class="left-div gx-5">
       <div class="rr"> <h2>Booking Details</h2></div>
        
-      <form action="/booking" method="post" >
-        <div class="mb-3">
-          <label for="nameInput" class="form-label">Name</label>
-          <input type="text" name="name" class="form-control" id="nameInput" placeholder="Enter your name" value="{{user.userName}}">
-        </div>
-        <div class="mb-3">
-          <label for="emailInput" class="form-label">Email</label>
-          <input type="email" class="form-control" id="emailInput" name="email" placeholder="Enter your email" value="{{user.email}}">
-            <input type="hidden" name="roomName" value="{{room.roomName}}">
-              <input type="hidden" name="roomName" value="{{room.roomName}}">
-  <input type="hidden" name="category" value="{{room.category}}">
-  <input type="hidden" name="checkInDate" value="{{checkInDate}}">
-  <input type="hidden" name="checkOutDate" value="{{checkOutDate}}">
-  <input type="hidden" name="price"  value="{{price}}">
-  <input type="hidden" name="roomid"  value="{{room._id}}">
-  
-  
- 
-        </div>
-        <button type="submit" class="btn btn-success">continue</button>
-    
-   </form>
+     <form action="/booking" method="post" id="bookingForm">
+    <div class="mb-3">
+        <label for="nameInput" class="form-label">Name</label>
+        <input type="text" name="name" class="form-control" id="nameInput" placeholder="Enter your name" value="{{user.userName}}">
+    </div>
+    <div class="mb-3">
+        <label for="emailInput" class="form-label">Email</label>
+        <input type="email" class="form-control" id="emailInput" name="email" placeholder="Enter your email" value="{{user.email}}">
+        <input type="hidden" name="roomName" value="{{room.roomName}}">
+        <input type="hidden" name="roomName" value="{{room.roomName}}">
+        <input type="hidden" name="category" value="{{room.category}}">
+        <input type="hidden" name="checkInDate"  value="{{checkInDate}}">
+        <input type="hidden" name="checkOutDate"  value="{{checkOutDate}}">
+        <input type="hidden" name="price"  value="" id="priceInput">
+        <input type="hidden" name="roomid"  value="{{room._id}}">
+    </div>
+    <button type="submit"  class="btn btn-success">Continue</button>
+</form>
+
+<script>
+    document.getElementById('bookingForm').addEventListener('submit', function(event) {
+        // Prevent default form submission
+        event.preventDefault();
+
+        // Get discountedPrice and priceInput elements
+        var discountedPrice = document.getElementById('discountedPrice').innerText;
+        var noDisPrice = document.getElementById('totalPrice').innerText;
+        
+
+
+        // Define a function to calculate the value
+        function calculatePrice(discountPrice, price) {
+            return discountPrice ? discountPrice : price;
+        }
+
+        // Set the value of the hidden input field based on the calculated price
+        document.getElementById('priceInput').value = calculatePrice(discountedPrice, noDisPrice);
+
+        this.submit()
+
+        
+        
+    });
+</script>
+
     </div>
     <div class="right-div gx-5">
       <div class="lf"> <h2>Room Details</h2></div>
@@ -100,12 +130,25 @@
 
         <p>Check-in Date: {{checkInDate}}</p>
         <p>Check-out Date: {{checkOutDate}}</p>
-        <p>Total Price: {{price}}</p>
-        
+     <div class="container mt-5">
+    <form class="form-inline" action="" id="couponForm">
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="couponcode" class="sr-only">Coupon Code</label>
+        <input type="text" class="form-control form-control-sm" id="couponcode" name="couponcode" placeholder="Enter coupon code">
+      </div>
+      <button type="submit" class="btn btn-primary mb-2"  id="applyButton">Apply</button>
+    </form>
+  </div>
+        <p> Price: <span id="totalPrice">{{price}}</span></p>
+<p>Discount Amount: <span id="discountAmount"></span></p>
+<p>Total  Price: <span id="discountedPrice">{{price}}</span></p>
+
       </div>
     </div>
   </div>
-
+ <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -124,6 +167,8 @@
     console.log('Check-in Date:', checkInDate);
     console.log('Check-out Date:', checkOutDate);
     console.log('Total Price:', totalPrice);
+
+    console.log(totalPrice,{{ couponCode}})
   });
 </script>
 
@@ -161,4 +206,42 @@
     }
   });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+  // Add an event listener to the button click
+  document.getElementById("applyButton").addEventListener("click", function(event) {
+    // Prevent the default form submission
+    event.preventDefault();
+
+    // Get the input field value
+    var couponCode = document.getElementById("couponcode").value;
+
+    // Make a POST request to the server using Axios
+    axios.post("/couponapply", { couponCode: couponCode })
+      .then(function(response) {
+        // Handle the response if needed
+        console.log(response.data);
+        var discountAmount = response.data.discountAmount || 0; // If no discount, default to 0
+        var totalPrice = parseFloat(document.getElementById("totalPrice").textContent);
+        var discountedPrice = totalPrice - discountAmount;
+
+        
+
+        // Update the displayed discount amount
+        document.getElementById("discountAmount").textContent = discountAmount;
+
+        // Update the displayed discounted price
+        document.getElementById("discountedPrice").textContent = discountedPrice.toFixed(2); // Show only two decimal places
+      })
+      .catch(function(error) {
+        // Handle errors
+        console.error("Error:", error);
+      });
+  });
+});
+
+</script>
+
 </html>

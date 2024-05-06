@@ -31,4 +31,6 @@ const adminAuth = require("../midilware/admin_jwt")
 
      router.post("/admin/deletecoupon/:id",adminController.deletecouponpost)
 
+     
+
      module.exports=router

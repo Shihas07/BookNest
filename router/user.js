@@ -47,5 +47,7 @@ router.get("/api/users",userController.apigetuser)
 router.get("/wishlist",userController.getwhislist)
 router.post("/wishlist",userController.postwishlist)
 
+router.post("/couponapply",userController.couponapply)
+
 
 module.exports = router;

@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const Admin = require("../model/admin/admin");
 const Room = require("../model/room");
 const cloudinary = require("../config/cloudinary");
+const User=require("../model/user/user")
 // const upload = require("../config/multer"); // Import Multer configuration
 // const bodyParser = require("body-parser")
 
@@ -311,6 +312,41 @@ let deleteRoom = async (req, res) => {
       res.status(500).json({ error: 'Server error' });
   }
 };
+const getbooking = async (req, res) => {
+  try {
+   
+    const usersWithBookings = await User.find({}, 'userName email booking');
+
+   
+    const bookingDetails = [];
+
+    
+    for (const user of usersWithBookings) {
+        for (const booking of user.booking) {
+         
+            const room = await Room.findById(booking.room[0].roomid);
+            
+            bookingDetails.push({
+                userName: user.userName,
+                email: user.email,
+                checkInDate: booking.checkInDate,
+                checkOutDate: booking.checkOutDate,
+                price: booking.price,
+                roomDetails: room 
+            });
+        }
+    }
+
+    // console.log(bookingDetails)
+
+  
+    res.render("vendor/booking", { bookingDetails });
+} catch (error) {
+    console.error("Error fetching booking details:", error);
+   
+    res.status(500).send("Internal Server Error");
+}
+};
 
 
 
@@ -328,5 +364,5 @@ module.exports = {
   getEditRoompage,
   postEditRoompage,
   deleteRoom,
-  
+  getbooking
 };

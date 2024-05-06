@@ -4,6 +4,7 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const otpService = require("../services/otp");
+const Admin = require("../model/admin/admin");
 
 const cookieparser = require("cookie-parser");
 
@@ -488,6 +489,11 @@ const postFilter = async (req, res) => {
 
 const Postbooking=async(req,res)=>{
   const { userName, email, roomName, category, checkInDate, checkOutDate, price, roomid } = req.body;
+  console.log(price)
+  if(!checkInDate || !checkOutDate){
+    console.log("provide date")
+    return 
+  }
 
 // Extract the date portion from the received date strings
 const formattedCheckInDate = new Date(checkInDate).toISOString().split('T')[0];
@@ -523,7 +529,7 @@ const apigetuser = async (req, res) => {
 
   try {
     const bookings = await User.find({ 'booking.room.roomid': roomId }, 'booking.checkInDate booking.checkOutDate');
-    console.log(bookings);
+    // console.log(bookings);
     const dateRanges = bookings.flatMap(user => {
       return user.booking.map(booking => {
         if (!booking || !booking.checkInDate || !booking.checkOutDate) {
@@ -540,7 +546,7 @@ const apigetuser = async (req, res) => {
         };
       });
     });
-    console.log("Date Ranges:", dateRanges); // Log date ranges for debugging
+    // console.log("Date Ranges:", dateRanges); // Log date ranges for debugging
 
     res.json(dateRanges); // Send date ranges to the frontend
   } catch (error) {
@@ -643,6 +649,48 @@ const postwishlist = async (req, res) => {
 
 
 
+const couponapply=async(req,res)=>{
+  try {
+    const { couponCode } = req.body;
+    console.log(couponCode)
+
+    // Find the admin document in the database
+    const admin = await Admin.findOne();
+
+    // console.log("admin",admin)
+    if (!admin) {
+        return res.status(404).json({ error: 'Admin not found' });
+    }
+
+    // Check if the coupon exists in the admin's coupons array
+    const coupon = admin.coupon.find(c => c.couponCode === couponCode);
+    console.log("coupon",coupon);
+
+    if (!coupon) {
+        return res.status(404).json({ error: 'Coupon not found' });
+    }
+
+    // If the coupon exists, retrieve its details
+    const couponDetails = {
+        couponCode: coupon.couponCode,
+        discountAmount: coupon.discountAmount,
+        validity: coupon.validity,
+        couponStatus: coupon.couponStatus,
+        couponType: coupon.couponType,
+        startDate: coupon.startDate
+    };
+
+    // Send the coupon details to the frontend
+    res.status(200).json(couponDetails);
+} catch (error) {
+    console.error('Error applying coupon:', error);
+    res.status(500).json({ error: 'Internal server error' });
+}
+     
+}
+
+
+
 
 
    
@@ -675,7 +723,8 @@ module.exports = {
     Postbooking,
     apigetuser,
     getwhislist,
-    postwishlist
+    postwishlist,
+    couponapply
 
    
 
