@@ -5,8 +5,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const otpService = require("../services/otp");
 const Admin = require("../model/admin/admin");
+const nodemailer = require("nodemailer");
 const Razorpay = require("razorpay");
 require("dotenv").config();
+
 
 const router = express.Router();
 
@@ -543,7 +545,31 @@ const Postbooking = async (req, res) => {
     // Save the updated user document
     await user.save();
 
-    res.redirect("/booking?success=true");
+       // Send email to the user
+       const transporter = nodemailer.createTransport({
+        service: 'Gmail', // Update with your email service
+        auth: {
+          user: 'shihas732@gmail.com', // Update with your email
+          pass: 'lkox ydmj nigs qnlb', // Update with your password
+        },
+      });
+  
+      const mailOptions = {
+        from: 'your_email@gmail.com',
+        to: user.email,
+        subject: 'Booking Confirmation',
+        text: `Hello ${user.userName},\n\nYour booking details:\nRoom: ${roomName}\nCheck-in Date: ${formattedCheckInDate}\nCheck-out Date: ${formattedCheckOutDate}\nPrice: ${price}`,
+      };
+  
+      transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.error(error);
+          res.status(500).send("Failed to send email");
+        } else {
+          console.log('Email sent: ' + info.response);
+          res.redirect("/booking?success=true");
+        }
+      });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error");
