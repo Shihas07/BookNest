@@ -1643,13 +1643,13 @@ document.addEventListener("DOMContentLoaded", function() {
     
       const bookings = response.data;
 console.log(bookings)
-    // Extract and format the disabled dates from bookings data
+   
  const disabledDateRanges = bookings.flatMap(booking => {
   // Extract check-in and check-out dates from each booking
   const checkInDate = new Date(booking.checkInDate);
   const checkOutDate = new Date(booking.checkOutDate);
 
-  // Calculate the range of dates between check-in and check-out dates
+  
   const range = [];
   const currentDate = new Date(checkInDate); // Start from check-in date
   while (currentDate <= checkOutDate) {

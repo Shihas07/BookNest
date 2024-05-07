@@ -48,6 +48,7 @@ router.get("/wishlist",userController.getwhislist)
 router.post("/wishlist",userController.postwishlist)
 
 router.post("/couponapply",userController.couponapply)
+router.post('/razorPayment',userController.razorpayment)
 
 
 module.exports = router;

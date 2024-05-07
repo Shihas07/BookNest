@@ -68,7 +68,8 @@
     <div class="left-div gx-5">
       <div class="rr"> <h2>Booking Details</h2></div>
        
-     <form action="/booking" method="post" id="bookingForm">
+    <form action="" method="post" id="bookingForm" onsubmit="event.preventDefault(); ">
+
     <div class="mb-3">
         <label for="nameInput" class="form-label">Name</label>
         <input type="text" name="name" class="form-control" id="nameInput" placeholder="Enter your name" value="{{user.userName}}">
@@ -76,42 +77,20 @@
     <div class="mb-3">
         <label for="emailInput" class="form-label">Email</label>
         <input type="email" class="form-control" id="emailInput" name="email" placeholder="Enter your email" value="{{user.email}}">
-        <input type="hidden" name="roomName" value="{{room.roomName}}">
-        <input type="hidden" name="roomName" value="{{room.roomName}}">
-        <input type="hidden" name="category" value="{{room.category}}">
-        <input type="hidden" name="checkInDate"  value="{{checkInDate}}">
-        <input type="hidden" name="checkOutDate"  value="{{checkOutDate}}">
-        <input type="hidden" name="price"  value="" id="priceInput">
-        <input type="hidden" name="roomid"  value="{{room._id}}">
+        <input type="hidden" name="roomName" value="{{room.roomName}}" id="roomName">
+        <input type="hidden" name="roomName" value="{{room.roomName}}" id="">
+        <input type="hidden" name="category" value="{{room.category}}" id="category">
+        <input type="hidden" name="checkInDate"  value="{{checkInDate}}" id="checkInDate">
+        <input type="hidden" name="checkOutDate"  value="{{checkOutDate}}" id="checkOutDate">
+        <input type="hidden" name="price"  value="" id="priceInput" id="price">
+        <input type="hidden" name="roomid"  value="{{room._id}}" id="roomid">
     </div>
-    <button type="submit"  class="btn btn-success">Continue</button>
+    <button type="button"  onclick="razorpay()" class="btn btn-success" >Continue</button>
 </form>
 
-<script>
-    document.getElementById('bookingForm').addEventListener('submit', function(event) {
-        // Prevent default form submission
-        event.preventDefault();
-
-        // Get discountedPrice and priceInput elements
-        var discountedPrice = document.getElementById('discountedPrice').innerText;
-        var noDisPrice = document.getElementById('totalPrice').innerText;
-        
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 
-        // Define a function to calculate the value
-        function calculatePrice(discountPrice, price) {
-            return discountPrice ? discountPrice : price;
-        }
-
-        // Set the value of the hidden input field based on the calculated price
-        document.getElementById('priceInput').value = calculatePrice(discountedPrice, noDisPrice);
-
-        this.submit()
-
-        
-        
-    });
-</script>
 
     </div>
     <div class="right-div gx-5">
@@ -241,6 +220,130 @@
       });
   });
 });
+
+</script>
+
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+   
+
+
+
+
+  
+
+
+
+
+    document.getElementById('bookingForm').addEventListener('submit', function(event) {
+        // Prevent default form submission
+        event.preventDefault();
+
+        
+        
+
+        // Get discountedPrice and priceInput elements
+        var discountedPrice = document.getElementById('discountedPrice').innerText;
+        var noDisPrice = document.getElementById('totalPrice').innerText;
+        
+
+
+        // Define a function to calculate the value
+        function calculatePrice(discountPrice, price) {
+            return discountPrice ? discountPrice : price;
+        }
+
+        // Set the value of the hidden input field based on the calculated price
+        document.getElementById('priceInput').value = calculatePrice(discountedPrice, noDisPrice);
+
+        this.submit()
+
+        
+        
+    });
+
+
+    /// RAZORPAY PAYMENT
+              function razorpay() {
+    const totalValue = document.getElementById("discountedPrice").innerText;
+    console.log("sjhfladskjklsjf :", totalValue);
+
+    axios.post('/razorPayment', { total: totalValue })
+        .then(response => {
+            const { orderId, totalPrice, key_id } = response.data;
+
+            const options = {
+                key: key_id,
+                amount: totalPrice * 100, // Amount in the smallest currency unit (paise)
+                currency: 'INR',
+                name: 'Booknest',
+                description: 'Test Transaction',
+                image: 'https://example.com/your_logo.png',
+                order_id: orderId,
+                handler: function (razorpayResponse) {
+                    // After successful payment, extract necessary data
+                    console.log(razorpayResponse)
+  const email = document.getElementById("emailInput").value;
+    const userName = document.getElementById("nameInput").value;
+    const roomName = document.getElementById("roomName").value;
+    const category = document.getElementById("category").value;
+    const checkInDate = document.getElementById("checkInDate").value;
+    const checkOutDate = document.getElementById("checkOutDate").value;
+    const price = document.getElementById("priceInput").value;
+    const roomid = document.getElementById("roomid").value;
+
+                    
+
+                    // Additional data to be sent
+                    const postData = {
+                        email,
+                        userName,
+                        roomName,
+                        category,
+                        checkInDate,
+                        checkOutDate,
+                        price: totalValue, // Use totalValue as it's already in the correct format
+                        roomid
+                    };
+                    console.log(postData)
+
+                    // Make a POST request to your /booking route using Axios
+                    axios.post('/booking', postData)
+                        .then(response => {
+                            // Handle success response
+                            console.log('Booking successful:', response.data);
+                            // Show the booking success modal
+                            var myModal = new bootstrap.Modal(document.getElementById('bookingSuccessModal'), {
+                                keyboard: false
+                            });
+                            myModal.show();
+                        })
+                        .catch(error => {
+                            // Handle error
+                            console.error('Booking failed:', error);
+                            // Show error message to the user
+                        });
+                },
+                prefill: {
+                    name: 'Shihas',
+                    email: 'shihas732@gmail.com',
+                    contact: '7994126039',
+                },
+                theme: {
+                    color: '#F37254',
+                },
+            };
+
+            const rzp = new Razorpay(options);
+            rzp.open();
+        })
+        .catch(error => {
+            console.log("Error:", error);
+            // Handle error
+            // Show error message to the user
+        });
+}
 
 </script>
 

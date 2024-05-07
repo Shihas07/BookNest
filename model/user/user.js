@@ -41,7 +41,11 @@ const mongoose=require("mongoose")
             roomid:{
                 type:String,
             }
-        }]
+
+        }],
+        payment:{
+            type:String
+        }
 
     }]
 })

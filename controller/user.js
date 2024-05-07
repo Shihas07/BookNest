@@ -5,6 +5,15 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const otpService = require("../services/otp");
 const Admin = require("../model/admin/admin");
+const Razorpay = require("razorpay");
+require("dotenv").config();
+
+const router = express.Router();
+
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_SECRET_KEY,
+});
 
 const cookieparser = require("cookie-parser");
 
@@ -82,11 +91,9 @@ const signupPage = async (req, res) => {
   res.redirect("/");
 };
 
-const getLoginpage=async(res,req)=>{
-    
-  res.render("user/login")
-}
-
+const getLoginpage = async (res, req) => {
+  res.render("user/login");
+};
 
 const login = async (req, res) => {
   try {
@@ -104,9 +111,11 @@ const login = async (req, res) => {
     if (!user) {
       return res.status(400).send("User not found");
     }
-    if(user.blocked){
-       
-      return res.status(403).json({ error: 'Your account has been blocked. Please contact the administrator.' });
+    if (user.blocked) {
+      return res.status(403).json({
+        error:
+          "Your account has been blocked. Please contact the administrator.",
+      });
     }
 
     // Compare hashed passwords
@@ -142,7 +151,6 @@ const login = async (req, res) => {
 };
 
 //google auth//
-
 
 const googleLogin = async (req, res) => {
   if (!req.user) {
@@ -191,8 +199,6 @@ let loginGetOtpPage = async (req, res) => {
   res.render("user/emailotp");
 };
 
-   
-
 let postEmail = async (req, res) => {
   const { email } = req.body;
   console.log(email);
@@ -215,22 +221,23 @@ let postEmail = async (req, res) => {
     }
 
     // If the email doesn't exist, return an error
-    return res.status(400).render("user/emailotp", { errorp: "Email does not exist" });
+    return res
+      .status(400)
+      .render("user/emailotp", { errorp: "Email does not exist" });
   } catch (error) {
     console.error("Error sending OTP:", error);
     res.status(500).json({ error: "Failed to send OTP" });
   }
 };
 
-const getOtpPage=async(req,res)=>{
-
-    res.render("user/otpverify")
-}
+const getOtpPage = async (req, res) => {
+  res.render("user/otpverify");
+};
 
 const postOtpVerify = async (req, res) => {
   try {
     const { email, otp } = req.body;
-    console.log("kjsksk",email, otp);
+    console.log("kjsksk", email, otp);
 
     // Check if the provided email and OTP match the stored values
     if (email && otp) {
@@ -298,7 +305,7 @@ const profile = async (req, res) => {
 //       const userId = decodedToken.id;
 //       console.log(userId);
 //       user = await User.findById(userId);
-     
+
 //     }
 //     console.log("ddd",user)
 
@@ -308,7 +315,6 @@ const profile = async (req, res) => {
 //     res.status(500).send("Internal Server Error");
 //   }
 // };
-
 
 const getroompage = async (req, res) => {
   try {
@@ -323,30 +329,25 @@ const getroompage = async (req, res) => {
       console.log(decodedToken);
       const userId = decodedToken.id;
       console.log(userId);
-     let user = await User.findById(userId).populate('whishlist.roomId');
+      let user = await User.findById(userId).populate("whishlist.roomId");
 
       // Extract room IDs from the user's wishlist
-      const roomIds = user.whishlist.map(item => item.roomId);
+      const roomIds = user.whishlist.map((item) => item.roomId);
 
       // Find some rooms based on the room IDs
       const wishlistRooms = await Rooms.find({ _id: { $in: roomIds } });
-           console.log('wihl',wishlistRooms)
+      console.log("wihl", wishlistRooms);
       // Pass wishlist rooms along with user to the rendering engine
       res.render("user/room-grid-style", { rooms, wishlistRooms, user });
     } else {
       // If user is not logged in, just render all rooms
-       res.render("user/room-grid-style", { rooms, user  });
+      res.render("user/room-grid-style", { rooms, user });
     }
   } catch (error) {
     console.error("Error getting room page:", error);
     res.status(500).send("Internal Server Error");
   }
 };
-
-
-
-
-
 
 const getsingleroom = async (req, res) => {
   const id = req.query.id;
@@ -381,11 +382,9 @@ const postPrice = (req, res) => {
   res.send(totalPrice.toString());
 };
 
-
 const postroomsort = async (req, res) => {
   try {
-    
-    const { rooms,sortBy } = req.body;
+    const { rooms, sortBy } = req.body;
     // console.log(req.body)
 
     let sortQuery = {};
@@ -397,16 +396,17 @@ const postroomsort = async (req, res) => {
     }
 
     if (rooms && rooms.length > 0) {
-      const roomIds = rooms.map(room => room);
-      console.log("wskk",roomIds);
-      const sortedRooms = await Rooms.find({ _id: { $in: roomIds } }).sort(sortQuery);
+      const roomIds = rooms.map((room) => room);
+      console.log("wskk", roomIds);
+      const sortedRooms = await Rooms.find({ _id: { $in: roomIds } }).sort(
+        sortQuery
+      );
       res.json(sortedRooms);
       // console.log("jjjjisjkk",sortedRooms)
     } else {
       // If no rooms array is sent, sort all rooms
       const sortedRoomss = await Rooms.find({}).sort(sortQuery);
       res.json(sortedRoomss);
-
     }
   } catch (err) {
     console.error(err);
@@ -434,38 +434,45 @@ const postFilter = async (req, res) => {
 
     if (categories && categories.length > 0) {
       // Filter rooms based on categories
-      filteredRooms = filteredRooms.filter(room => categories.includes(room.category));
+      filteredRooms = filteredRooms.filter((room) =>
+        categories.includes(room.category)
+      );
     }
 
     if (amenities && amenities.length > 0) {
       // Filter rooms based on amenities
       // Remove 'let' keyword here to avoid redeclaration
-      filteredRooms = filteredRooms.filter(room => room.amenities.some(amenity => amenities.includes(amenity)));
+      filteredRooms = filteredRooms.filter((room) =>
+        room.amenities.some((amenity) => amenities.includes(amenity))
+      );
     }
 
     console.log("Filtered rooms:", filteredRooms);
 
     // Send the filtered rooms as response
     res.json(filteredRooms);
-
   } catch (error) {
     console.error("Error occurred:", error);
     res.status(500).json({ error: "Internal server error" });
   }
-};const bookingGetpage = async (req, res) => {
+};
+const bookingGetpage = async (req, res) => {
   try {
     // Retrieve data from the query parameters
-    const { room_id,  checkInDate,  checkOutDate, price } = req.query;
-    console.log(req.query)
-    console.log("Room ID:", room_id);
-    console.log("Check-in Date:", checkInDate);
-    console.log("Check-out Date:", checkOutDate);
-    console.log("Price:", price);
+    const { room_id, checkInDate, checkOutDate, price } = req.query;
+    // console.log(req.query)
+    // console.log("Room ID:", room_id);
+    // console.log("Check-in Date:", checkInDate);
+    // console.log("Check-out Date:", checkOutDate);
+    // console.log("Price:", price);
 
     // Check if the user is authenticated
     if (req.cookies.user_jwt) {
       // Decode JWT token to get user ID
-      const decodedToken = jwt.verify(req.cookies.user_jwt, process.env.JWT_SECRET);
+      const decodedToken = jwt.verify(
+        req.cookies.user_jwt,
+        process.env.JWT_SECRET
+      );
       const userId = decodedToken.id;
 
       // Fetch user details from the database using user ID
@@ -475,11 +482,17 @@ const postFilter = async (req, res) => {
       const room = await Rooms.findById(room_id);
 
       // Render the booking page with the received data
-      res.render("user/booking", { user, room, checkInDate, checkOutDate, price });
+      res.render("user/booking", {
+        user,
+        room,
+        checkInDate,
+        checkOutDate,
+        price,
+      });
     } else {
       // If user is not authenticated, send an unauthorized response
 
-      res.render("user/login")
+      res.render("user/login");
     }
   } catch (error) {
     console.error("Error:", error);
@@ -487,216 +500,283 @@ const postFilter = async (req, res) => {
   }
 };
 
-const Postbooking=async(req,res)=>{
-  const { userName, email, roomName, category, checkInDate, checkOutDate, price, roomid } = req.body;
-  console.log(price)
-  if(!checkInDate || !checkOutDate){
-    console.log("provide date")
-    return 
+const Postbooking = async (req, res) => {
+  const {
+    userName,
+    email,
+    roomName,
+    category,
+    checkInDate,
+    checkOutDate,
+    price,
+    roomid,
+  } = req.body;
+  console.log(price);
+  if (!checkInDate || !checkOutDate) {
+    console.log("provide date");
+    return;
   }
 
-// Extract the date portion from the received date strings
-const formattedCheckInDate = new Date(checkInDate).toISOString().split('T')[0];
-const formattedCheckOutDate = new Date(checkOutDate).toISOString().split('T')[0];
+  // Extract the date portion from the received date strings
+  const formattedCheckInDate = new Date(checkInDate)
+    .toISOString()
+    .split("T")[0];
+  const formattedCheckOutDate = new Date(checkOutDate)
+    .toISOString()
+    .split("T")[0];
 
-try {
+  try {
     // Find the user by email
     let user = await User.findOne({ email });
     if (!user) {
-        return res.status(404).send('User not found');
+      return res.status(404).send("User not found");
     }
 
     // Update user's booking details with the extracted date portions
     user.booking.push({
-        checkInDate: formattedCheckInDate,
-        checkOutDate: formattedCheckOutDate,
-        price,
-        room: { roomid }
+      checkInDate: formattedCheckInDate,
+      checkOutDate: formattedCheckOutDate,
+      price,
+      room: { roomid },
     });
 
     // Save the updated user document
     await user.save();
 
-    res.redirect('/booking?success=true');
-} catch (error) {
+    res.redirect("/booking?success=true");
+  } catch (error) {
     console.error(error);
-    res.status(500).send('Internal server error');
-}
-}
+    res.status(500).send("Internal server error");
+  }
+};
+
 const apigetuser = async (req, res) => {
   const roomId = req.query.roomId; // Use req.query.roomId to access query parameters
   console.log("Room ID:", roomId); // Log the room ID for debugging
 
   try {
-    const bookings = await User.find({ 'booking.room.roomid': roomId }, 'booking.checkInDate booking.checkOutDate');
-    // console.log(bookings);
-    const dateRanges = bookings.flatMap(user => {
-      return user.booking.map(booking => {
+    const bookings = await User.find(
+      { "booking.room.roomid": roomId },
+      "booking.checkInDate booking.checkOutDate"
+    );
+    console.log("asdfghj",bookings);
+    const dateRanges = bookings.flatMap((user) => {
+      return user.booking.map((booking) => {
         if (!booking || !booking.checkInDate || !booking.checkOutDate) {
           console.error("Invalid date format in database");
           return {
             checkInDate: "Invalid Date",
-            checkOutDate: "Invalid Date"
+            checkOutDate: "Invalid Date",
           };
         }
-      
+
         return {
-          checkInDate: new Date(booking.checkInDate).toISOString().split('T')[0],
-          checkOutDate: new Date(booking.checkOutDate).toISOString().split('T')[0]
+          checkInDate: new Date(booking.checkInDate)
+            .toISOString()
+            .split("T")[0],
+          checkOutDate: new Date(booking.checkOutDate)
+            .toISOString()
+            .split("T")[0],
         };
       });
     });
-    // console.log("Date Ranges:", dateRanges); // Log date ranges for debugging
+    console.log("Date Ranges:", dateRanges); // Log date ranges for debugging
 
     res.json(dateRanges); // Send date ranges to the frontend
   } catch (error) {
-    console.error('Error fetching booked dates:', error);
-    res.status(500).json({ message: 'Server Error' });
+    console.error("Error fetching booked dates:", error);
+    res.status(500).json({ message: "Server Error" });
   }
 };
-
 
 const getwhislist = async (req, res) => {
   if (req.cookies.user_jwt) {
-      try {
-          // Decode the JWT token to extract the user ID
-          const decodedToken = jwt.verify(req.cookies.user_jwt, process.env.JWT_SECRET);
-          // console.log("Decoded Token:", decodedToken);
-          const userId = decodedToken.id;
-          // console.log("User ID:", userId);
+    try {
+      // Decode the JWT token to extract the user ID
+      const decodedToken = jwt.verify(
+        req.cookies.user_jwt,
+        process.env.JWT_SECRET
+      );
+      // console.log("Decoded Token:", decodedToken);
+      const userId = decodedToken.id;
+      // console.log("User ID:", userId);
 
-           const userDeatails=await User.findById(userId)
-          //  console.log("asdf",userDeatails)
-          // Find the user by ID
-          const user = await User.findById(userId).populate('whishlist.roomId');
-          if (!user) {
-              console.log("User not found");
-              return res.status(404).json({ error: "User not found" });
-          }
-
-          // Extract wishlist from the user document
-          const wishlist = user.whishlist;
-
-          // Array to store room details
-          const roomDetails = [];
-
-          // Fetch room details for each room ID in the wishlist
-          for (const item of wishlist) {
-              const room = await Rooms.findById(item.roomId);
-              if (room) {
-                  roomDetails.push(room);
-              }
-          }
-                                          //  console.log("werty",roomDetails);
-          // Pass wishlist data and room details to the rendering engine
-          res.render("user/wislist", { wishlist, roomDetails,userDeatails });
-      } catch (error) {
-          // Handle any errors that occur during token decoding or database operations
-          console.error("Error:", error);
-          return res.status(500).json({ error: "Internal server error" });
+      const userDeatails = await User.findById(userId);
+      //  console.log("asdf",userDeatails)
+      // Find the user by ID
+      const user = await User.findById(userId).populate("whishlist.roomId");
+      if (!user) {
+        console.log("User not found");
+        return res.status(404).json({ error: "User not found" });
       }
+
+      // Extract wishlist from the user document
+      const wishlist = user.whishlist;
+
+      // Array to store room details
+      const roomDetails = [];
+
+      // Fetch room details for each room ID in the wishlist
+      for (const item of wishlist) {
+        const room = await Rooms.findById(item.roomId);
+        if (room) {
+          roomDetails.push(room);
+        }
+      }
+      //  console.log("werty",roomDetails);
+      // Pass wishlist data and room details to the rendering engine
+      res.render("user/wislist", { wishlist, roomDetails, userDeatails });
+    } catch (error) {
+      // Handle any errors that occur during token decoding or database operations
+      console.error("Error:", error);
+      return res.status(500).json({ error: "Internal server error" });
+    }
   } else {
-      // Handle case when JWT token is not present in cookies
-      console.log("JWT token not found in cookies");
-      return res.status(401).json({ error: "JWT token not found in cookies" });
+    // Handle case when JWT token is not present in cookies
+    console.log("JWT token not found in cookies");
+    return res.status(401).json({ error: "JWT token not found in cookies" });
   }
 };
-
-
 
 const postwishlist = async (req, res) => {
   const roomId = req.body.roomId; // Accessing roomId from req.body
   console.log("Room ID:", roomId);
 
   if (req.cookies.user_jwt) {
-      try {
-          // Decode the JWT token to extract the user ID
-          const decodedToken = jwt.verify(req.cookies.user_jwt, process.env.JWT_SECRET);
-          console.log("Decoded Token:", decodedToken);
-          const userId = decodedToken.id;
-          console.log("User ID:", userId);
+    try {
+      // Decode the JWT token to extract the user ID
+      const decodedToken = jwt.verify(
+        req.cookies.user_jwt,
+        process.env.JWT_SECRET
+      );
+      console.log("Decoded Token:", decodedToken);
+      const userId = decodedToken.id;
+      console.log("User ID:", userId);
 
-          // Find the user by ID
-          const user = await User.findById(userId);
-          if (!user) {
-              console.log("User not found"); 
-              return res.status(404).json({ error: "User not found" });
-          }
-
-          const roomExists = user.whishlist.some(item => item.roomId.toString() === roomId);
-          if (roomExists) {
-              console.log("Room already exists in the wishlist");
-              return res.status(400).json({ error: "Room already exists in the wishlist" });
-          }
-          
-          // Add roomId to the user's wishlist
-          user.whishlist.push({ roomId });
-          await user.save();
-          
-          // Send a success response
-          return res.status(200).json({ message: "Wishlist updated successfully" });
-      } catch (error) {
-          // Handle any errors that occur during token decoding or database operations
-          console.error("Error:", error);
-          return res.status(500).json({ error: "Internal server error" });
+      // Find the user by ID
+      const user = await User.findById(userId);
+      if (!user) {
+        console.log("User not found");
+        return res.status(404).json({ error: "User not found" });
       }
+
+      const roomExists = user.whishlist.some(
+        (item) => item.roomId.toString() === roomId
+      );
+      if (roomExists) {
+        console.log("Room already exists in the wishlist");
+        return res
+          .status(400)
+          .json({ error: "Room already exists in the wishlist" });
+      }
+
+      // Add roomId to the user's wishlist
+      user.whishlist.push({ roomId });
+      await user.save();
+
+      // Send a success response
+      return res.status(200).json({ message: "Wishlist updated successfully" });
+    } catch (error) {
+      // Handle any errors that occur during token decoding or database operations
+      console.error("Error:", error);
+      return res.status(500).json({ error: "Internal server error" });
+    }
   } else {
-      // Handle case when JWT token is not present in cookies
-      console.log("JWT token not found in cookies");
-      return res.status(401).json({ error: "JWT token not found in cookies" });
+    // Handle case when JWT token is not present in cookies
+    console.log("JWT token not found in cookies");
+    return res.status(401).json({ error: "JWT token not found in cookies" });
   }
 };
 
-
-
-const couponapply=async(req,res)=>{
+const couponapply = async (req, res) => {
   try {
     const { couponCode } = req.body;
-    console.log(couponCode)
+    console.log(couponCode);
 
     // Find the admin document in the database
     const admin = await Admin.findOne();
 
     // console.log("admin",admin)
     if (!admin) {
-        return res.status(404).json({ error: 'Admin not found' });
+      return res.status(404).json({ error: "Admin not found" });
     }
 
     // Check if the coupon exists in the admin's coupons array
-    const coupon = admin.coupon.find(c => c.couponCode === couponCode);
-    console.log("coupon",coupon);
+    const coupon = admin.coupon.find((c) => c.couponCode === couponCode);
+    console.log("coupon", coupon);
 
     if (!coupon) {
-        return res.status(404).json({ error: 'Coupon not found' });
+      return res.status(404).json({ error: "Coupon not found" });
     }
 
     // If the coupon exists, retrieve its details
     const couponDetails = {
-        couponCode: coupon.couponCode,
-        discountAmount: coupon.discountAmount,
-        validity: coupon.validity,
-        couponStatus: coupon.couponStatus,
-        couponType: coupon.couponType,
-        startDate: coupon.startDate
+      couponCode: coupon.couponCode,
+      discountAmount: coupon.discountAmount,
+      validity: coupon.validity,
+      couponStatus: coupon.couponStatus,
+      couponType: coupon.couponType,
+      startDate: coupon.startDate,
     };
 
     // Send the coupon details to the frontend
     res.status(200).json(couponDetails);
-} catch (error) {
-    console.error('Error applying coupon:', error);
-    res.status(500).json({ error: 'Internal server error' });
-}
-     
-}
+  } catch (error) {
+    console.error("Error applying coupon:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
 
+const orders = async (req, res) => {
+  try {
+    const instance = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_SECRET,
+    });
 
+    const options = {
+      amount: 50000,
+      currency: "INR",
+      receipt: "receipt_order_74394",
+    };
 
+    const order = await instance.orders.create(options);
 
+    if (!order) return res.status(500).send("Some error occured");
 
-   
+    res.json(order);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
 
-    
+let razorpayment = async (req, res) => {
+  const { total } = req.body;
+  const totalPrice = parseFloat(total);
+  console.log("SKNF;SKDFEWFKFMSD;KLFJDK  :", totalPrice);
+  try {
+    const options = {
+      amount: totalPrice * 100,
+      currency: "INR",
+      receipt: "orderId",
+    };
 
+    razorpay.orders.create(options, function (err, booking) {
+      if (err) {
+        console.log("kshhfsf :", err);
+        res.status(400).json({ error: err.message });
+      } else {
+        res.status(200).json({
+          orderId: booking.id,
+          key_id: process.env.RAZORPAY_KEY_ID,
+          totalPrice,
+        });
+      }
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 module.exports = {
   homePage,
@@ -715,17 +795,15 @@ module.exports = {
   getsingleroom,
   getRoomSearch,
   postPrice,
-    getOtpPage,
-    postroomsort,
-    postFilter,
-   
-    bookingGetpage,
-    Postbooking,
-    apigetuser,
-    getwhislist,
-    postwishlist,
-    couponapply
+  getOtpPage,
+  postroomsort,
+  postFilter,
 
-   
-
+  bookingGetpage,
+  Postbooking,
+  apigetuser,
+  getwhislist,
+  postwishlist,
+  couponapply,
+  razorpayment,
 };
