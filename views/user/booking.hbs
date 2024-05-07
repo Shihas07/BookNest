@@ -224,6 +224,8 @@
 </script>
 
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <script>
    
@@ -304,7 +306,13 @@
                         checkInDate,
                         checkOutDate,
                         price: totalValue, 
-                        roomid
+                        roomid,
+                         orderId: razorpayResponse.razorpay_order_id,
+      paymentId: razorpayResponse.razorpay_payment_id
+
+
+              
+
                     };
                     console.log(postData)
 
@@ -313,11 +321,13 @@
                         .then(response => {
                             // Handle success response
                             console.log('Booking successful:', response.data);
-                            // Show the booking success modal
-                            var myModal = new bootstrap.Modal(document.getElementById('bookingSuccessModal'), {
-                                keyboard: false
-                            });
-                            myModal.show();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Order Placed Successfully!',
+                                html: `Your order with ID <strong>${11111}</strong> has been placed.<br>
+                                Total Price: <strong>${111111}</strong>`
+                                confirmButtonText: "Ok"
+                            })
                         })
                         .catch(error => {
                             // Handle error

@@ -7,8 +7,8 @@ const otpService = require("../services/otp");
 const Admin = require("../model/admin/admin");
 const nodemailer = require("nodemailer");
 const Razorpay = require("razorpay");
+const mongoose = require("mongoose");
 require("dotenv").config();
-
 
 const router = express.Router();
 
@@ -93,7 +93,7 @@ const signupPage = async (req, res) => {
   res.redirect("/");
 };
 
-const getLoginpage = async (res, req) => {
+const getLoginpage = async (req, res) => {
   res.render("user/login");
 };
 
@@ -512,10 +512,12 @@ const Postbooking = async (req, res) => {
     checkOutDate,
     price,
     roomid,
+    orderId,
+    paymentId,
   } = req.body;
   console.log(price);
   if (!checkInDate || !checkOutDate) {
-    console.log("provide date");
+    // console.log("provide date");
     return;
   }
 
@@ -540,36 +542,38 @@ const Postbooking = async (req, res) => {
       checkOutDate: formattedCheckOutDate,
       price,
       room: { roomid },
+      orderId,
+      paymentId,
     });
 
     // Save the updated user document
     await user.save();
 
-       // Send email to the user
-       const transporter = nodemailer.createTransport({
-        service: 'Gmail', // Update with your email service
-        auth: {
-          user: 'shihas732@gmail.com', // Update with your email
-          pass: 'lkox ydmj nigs qnlb', // Update with your password
-        },
-      });
-  
-      const mailOptions = {
-        from: 'your_email@gmail.com',
-        to: user.email,
-        subject: 'Booking Confirmation',
-        text: `Hello ${user.userName},\n\nYour booking details:\nRoom: ${roomName}\nCheck-in Date: ${formattedCheckInDate}\nCheck-out Date: ${formattedCheckOutDate}\nPrice: ${price}`,
-      };
-  
-      transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-          console.error(error);
-          res.status(500).send("Failed to send email");
-        } else {
-          console.log('Email sent: ' + info.response);
-          res.redirect("/booking?success=true");
-        }
-      });
+    // Send email to the user
+    const transporter = nodemailer.createTransport({
+      service: "Gmail", // Update with your email service
+      auth: {
+        user: "shihas732@gmail.com", // Update with your email
+        pass: "lkox ydmj nigs qnlb", // Update with your password
+      },
+    });
+
+    const mailOptions = {
+      from: "your_email@gmail.com",
+      to: user.email,
+      subject: "Booking Confirmation",
+      text: `Hello ${user.userName},\n\nYour booking details:\nRoom: ${roomName}\nCheck-in Date: ${formattedCheckInDate}\nCheck-out Date: ${formattedCheckOutDate}\nPrice: ${price}`,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.error(error);
+        res.status(500).send("Failed to send email");
+      } else {
+        console.log("Email sent: " + info.response);
+        res.redirect("/booking?success=true");
+      }
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal server error");
@@ -585,7 +589,7 @@ const apigetuser = async (req, res) => {
       { "booking.room.roomid": roomId },
       "booking.checkInDate booking.checkOutDate"
     );
-    console.log("asdfghj",bookings);
+    console.log("asdfghj", bookings);
     const dateRanges = bookings.flatMap((user) => {
       return user.booking.map((booking) => {
         if (!booking || !booking.checkInDate || !booking.checkOutDate) {
@@ -804,6 +808,106 @@ let razorpayment = async (req, res) => {
   }
 };
 
+const getbookindetails = async (req, res) => {
+  try {
+    if (req.cookies.user_jwt) {
+      const decodedToken = jwt.verify(
+        req.cookies.user_jwt,
+        process.env.JWT_SECRET
+      );
+      const userId = decodedToken.id;
+
+      console.log(userId);
+      const user = await User.findById(userId);
+
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+
+      // Use aggregation to fetch booking details with room information
+      const bookingss = await User.aggregate([
+        { $match: { _id: new mongoose.Types.ObjectId(userId) } }, // Match user by ID
+        { $unwind: { path: "$booking" } },
+        { $unwind: { path: "$booking.room" } },
+        {
+          $lookup: {
+            from: "rooms",
+            let: {
+              roomid: {
+                $toObjectId: "$booking.room.roomid",
+              },
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: { $eq: ["$_id", "$$roomid"] },
+                },
+              },
+            ],
+            as: "booking.roomDetails",
+          },
+        },
+      ]);
+
+      bookingss.reverse()
+
+      console.log("checking booking  : ", bookingss);
+
+      res.status(200).render("user/bookingdetails",{bookingss, user})
+    }
+  } catch (err) {
+    // Handle JWT verification errors or database errors
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+
+const postcancel = async (req, res) => {
+  try {
+      const bookingId = req.body.bookingId;
+      console.log("Booking ID:", bookingId);
+
+      // Verify JWT Token
+      if (req.cookies.user_jwt) {
+          const decodedToken = jwt.verify(req.cookies.user_jwt, process.env.JWT_SECRET);
+          const userId = decodedToken.id;
+
+          console.log("User ID:", userId);
+
+          // Find user
+          const user = await User.findById(userId);
+
+          if (!user) {
+              throw new Error("User not found");
+          }
+
+          // Find order by bookingId and update its status to 'cancel'
+          const booking = user.booking.find(booking => booking._id.toString() === bookingId);
+          if (!booking) {
+              throw new Error("Order not found");
+          }
+
+          booking.staus = "cancel";
+
+          // Save updated user document
+          await user.save();
+
+          // Send response
+          res.redirect("/bookingdetails");
+      } else {
+          throw new Error("JWT token not found in cookies");
+      }
+  } catch (error) {
+      console.error("Error in cancel booking:", error);
+      res.status(500).send("Internal Server Error");
+  }
+};
+
+
+
+
 module.exports = {
   homePage,
   signup,
@@ -832,4 +936,6 @@ module.exports = {
   postwishlist,
   couponapply,
   razorpayment,
+  getbookindetails,
+  postcancel
 };

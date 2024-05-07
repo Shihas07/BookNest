@@ -50,5 +50,8 @@ router.post("/wishlist",userController.postwishlist)
 router.post("/couponapply",userController.couponapply)
 router.post('/razorPayment',userController.razorpayment)
 
+router.get("/bookingdetails",userController.getbookindetails)
+router.post('/cancelbooking',userController.postcancel)
+
 
 module.exports = router;

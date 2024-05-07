@@ -37,15 +37,28 @@ const mongoose=require("mongoose")
         price:{
             type:Number,
         },
+        staus:{
+            type:String,
+            
+            default:"pending"
+
+        },
         room:[{
             roomid:{
                 type:String,
             }
 
+
         }],
         payment:{
             type:String
-        }
+        },
+         orderId: {
+            type: String
+          },
+          paymentId: {
+            type: String
+          }
 
     }]
 })
