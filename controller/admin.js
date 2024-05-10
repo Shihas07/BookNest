@@ -4,6 +4,7 @@
      const bcrypt=require('bcrypt')
      const User=require("../model/user/user")
      const nodemailer=require("nodemailer")
+     const Rooms=require("../model/room")
 
 
    //  admin dashboard
@@ -359,6 +360,82 @@ const deletecouponpost = async (req, res) => {
   }
 };
 
+const getbooking = async (req, res) => {
+  try {
+    const usersWithBookings = await User.find({}, 'userName email booking');
+
+    const bookingDetails = [];
+
+    for (const user of usersWithBookings) {
+      for (const booking of user.booking) {
+        const room = await Rooms.findById(booking.room[0].roomid);
+
+        bookingDetails.push({
+          userName: user.userName,
+          email: user.email,
+          checkInDate: booking.checkInDate,
+          checkOutDate: booking.checkOutDate,
+          price: booking.price,
+          status: booking.staus, 
+          orderId: booking._id, 
+          userId: user._id,
+          roomDetails: room
+
+        });
+      }
+    }
+
+    // Now, pass bookingDetails to the rendering context
+    res.render("admin/booking", { bookingDetails });
+  } catch (error) {
+    console.error("Error fetching booking details:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+
+const postCancelBooking = async (req, res) => {
+  try {
+    const { orderId, userId } = req.body;
+
+    // Check if user ID is provided
+    if (!userId) {
+      throw new Error("User ID not provided");
+    }
+
+    // Find the user by ID
+    const user = await User.findById(userId);
+
+    if (!user) {
+      throw new Error("User not found");
+    }
+
+    
+    const booking = user.booking.find(booking => booking._id.toString() === orderId);
+
+    if (!booking) {
+      throw new Error("Booking not found");
+    }
+
+    // Update booking status to 'cancelled'
+    booking.staus = "cancelled";
+    // If booking is cancelled, set checkInDate and checkOutDate to null
+    if (booking.staus === "cancel") {
+      booking.checkInDate = null;
+      booking.checkOutDate = null;
+    }
+
+    // Save the updated user document
+    await user.save();
+
+    // Redirect to booking details page
+    res.redirect("/admin/booking");
+  } catch (error) {
+    console.error("Error in cancel booking:", error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
    
             
           
@@ -380,7 +457,9 @@ const deletecouponpost = async (req, res) => {
         postuserlist,
         getcoupenpage,
         postaddcoupen,
-        deletecouponpost
+        deletecouponpost,
+        getbooking,
+        postCancelBooking
      }
 
 

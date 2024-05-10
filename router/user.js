@@ -52,6 +52,7 @@ router.post('/razorPayment',userController.razorpayment)
 
 router.get("/bookingdetails",userController.getbookindetails)
 router.post('/cancelbooking',userController.postcancel)
+router.post("/updateprofile",userController.postUpdateProfile)
 
 
 module.exports = router;

@@ -5,9 +5,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const otpService = require("../services/otp");
 const Admin = require("../model/admin/admin");
+const mongoose = require("mongoose");
 const nodemailer = require("nodemailer");
 const Razorpay = require("razorpay");
-const mongoose = require("mongoose");
+
 require("dotenv").config();
 
 const router = express.Router();
@@ -48,13 +49,13 @@ const signup = (req, res) => {
 };
 
 const signupPage = async (req, res) => {
-  //extract data from body
+
   const { userName, email, password, phoneNumber } = req.body;
-  //data excit
+  
   if (!(userName, email, password, phoneNumber)) {
     res.status(400).send("if the data doesent excit");
   }
-  //data alredy excit
+  
 
   const Userexcicte = await User.findOne({ email });
 
@@ -74,7 +75,7 @@ const signupPage = async (req, res) => {
   });
   await newUser.save();
 
-  //jwt token
+ 
 
   const token = jwt.sign(
     {
@@ -99,7 +100,7 @@ const getLoginpage = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    // Get data from form
+    
     const { email, password } = req.body;
     console.log(req.body);
 
@@ -107,7 +108,7 @@ const login = async (req, res) => {
       return res.status(400).send("Email and password are required");
     }
 
-    // Find user in MongoDB
+    
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -124,7 +125,7 @@ const login = async (req, res) => {
     const hashpassword = await bcrypt.compare(password, user.password);
 
     if (!hashpassword) {
-      // return res.status(400).redirect('/login?emailError=Invalid password or email');
+      
       return res.status(400).send("invalid");
     }
 
@@ -140,11 +141,11 @@ const login = async (req, res) => {
       }
     );
 
-    // Set JWT token in a cookie
+   
     res.cookie("user_jwt", token, { httpOnly: true, maxAge: 86400000 });
 
     console.log("User logged in successfully, token created");
-    // Redirect the user to the home page
+    
     res.redirect("/");
   } catch (error) {
     console.log(error);
@@ -286,12 +287,60 @@ let userLogout = async (req, res) => {
 };
 
 const profile = async (req, res) => {
-  const decodedToken = jwt.verify(req.cookies.user_jwt, process.env.JWT_SECRET);
-  const userId = decodedToken.id;
-  const user = await User.findById(userId);
+  try {
+    if (req.cookies.user_jwt) {
+      const decodedToken = jwt.verify(
+        req.cookies.user_jwt,
+        process.env.JWT_SECRET
+      );
+      const userId = decodedToken.id;
 
-  res.render("user/profile", { user });
+      console.log(userId);
+      const user = await User.findById(userId);
+
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+
+      // Use aggregation to fetch booking details with room information
+      const bookingss = await User.aggregate([
+        { $match: { _id: new mongoose.Types.ObjectId(userId) } }, // Match user by ID
+        { $unwind: { path: "$booking" } },
+        { $unwind: { path: "$booking.room" } },
+        {
+          $lookup: {
+            from: "rooms",
+            let: {
+              roomid: {
+                $toObjectId: "$booking.room.roomid",
+              },
+            },
+            pipeline: [
+              {
+                $match: {
+                  $expr: { $eq: ["$_id", "$$roomid"] },
+                },
+              },
+            ],
+            as: "booking.roomDetails",
+          },
+        },
+      ]);
+
+      bookingss.reverse()
+
+      console.log("checking booking  : ", bookingss);
+
+      res.status(200).render("user/profile",{bookingss, user})
+    }
+  } catch (err) {
+    // Handle JWT verification errors or database errors
+    console.error(err);
+    res.status(500).send("Internal Server Error");
+  }
 };
+
 
 // const getroompage = async (req, res) => {
 //   try {
@@ -442,8 +491,7 @@ const postFilter = async (req, res) => {
     }
 
     if (amenities && amenities.length > 0) {
-      // Filter rooms based on amenities
-      // Remove 'let' keyword here to avoid redeclaration
+     
       filteredRooms = filteredRooms.filter((room) =>
         room.amenities.some((amenity) => amenities.includes(amenity))
       );
@@ -468,9 +516,9 @@ const bookingGetpage = async (req, res) => {
     // console.log("Check-out Date:", checkOutDate);
     // console.log("Price:", price);
 
-    // Check if the user is authenticated
+   
     if (req.cookies.user_jwt) {
-      // Decode JWT token to get user ID
+     
       const decodedToken = jwt.verify(
         req.cookies.user_jwt,
         process.env.JWT_SECRET
@@ -517,11 +565,11 @@ const Postbooking = async (req, res) => {
   } = req.body;
   console.log(price);
   if (!checkInDate || !checkOutDate) {
-    // console.log("provide date");
+   
     return;
   }
 
-  // Extract the date portion from the received date strings
+  
   const formattedCheckInDate = new Date(checkInDate)
     .toISOString()
     .split("T")[0];
@@ -622,28 +670,28 @@ const apigetuser = async (req, res) => {
 const getwhislist = async (req, res) => {
   if (req.cookies.user_jwt) {
     try {
-      // Decode the JWT token to extract the user ID
+     
       const decodedToken = jwt.verify(
         req.cookies.user_jwt,
         process.env.JWT_SECRET
       );
-      // console.log("Decoded Token:", decodedToken);
+     
       const userId = decodedToken.id;
-      // console.log("User ID:", userId);
+   
 
       const userDeatails = await User.findById(userId);
       //  console.log("asdf",userDeatails)
-      // Find the user by ID
+      
       const user = await User.findById(userId).populate("whishlist.roomId");
       if (!user) {
         console.log("User not found");
         return res.status(404).json({ error: "User not found" });
       }
 
-      // Extract wishlist from the user document
+      
       const wishlist = user.whishlist;
 
-      // Array to store room details
+     
       const roomDetails = [];
 
       // Fetch room details for each room ID in the wishlist
@@ -683,7 +731,7 @@ const postwishlist = async (req, res) => {
       const userId = decodedToken.id;
       console.log("User ID:", userId);
 
-      // Find the user by ID
+      
       const user = await User.findById(userId);
       if (!user) {
         console.log("User not found");
@@ -717,6 +765,9 @@ const postwishlist = async (req, res) => {
     return res.status(401).json({ error: "JWT token not found in cookies" });
   }
 };
+
+
+
 
 const couponapply = async (req, res) => {
   try {
@@ -888,8 +939,13 @@ const postcancel = async (req, res) => {
           if (!booking) {
               throw new Error("Order not found");
           }
+          booking.staus = "cancel"
+         if( booking.staus = "cancel"){
+                   booking.checkInDate = null;
+          booking.checkOutDate = null;
+         }
 
-          booking.staus = "cancel";
+         
 
           // Save updated user document
           await user.save();
@@ -905,7 +961,34 @@ const postcancel = async (req, res) => {
   }
 };
 
+const postUpdateProfile = async (req, res) => {
+  const { id, name, email, contact } = req.body;
+  console.log("ggggg",id, name, email, contact);
 
+  try {
+      const user = await User.findById(id);
+      console.log("user", user);
+
+      if (!user) {
+          return res.status(404).json({ error: "User not found" });
+      }
+
+      
+      user.userName = name;
+      user.email = email; 
+      user.phoneNumber = contact;
+
+      // Save the updated user
+      await user.save();
+
+    
+
+      res.status(200).json({ message: "Success" });
+  } catch (error) {
+      console.error("Error updating profile:", error);
+      res.status(500).json({ error: "Internal server error" });
+  }
+};
 
 
 module.exports = {
@@ -937,5 +1020,6 @@ module.exports = {
   couponapply,
   razorpayment,
   getbookindetails,
-  postcancel
+  postcancel,
+  postUpdateProfile
 };

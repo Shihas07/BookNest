@@ -30,6 +30,8 @@ const adminAuth = require("../midilware/admin_jwt")
      router.post("/admin/addcoupen",adminController.postaddcoupen)
 
      router.post("/admin/deletecoupon/:id",adminController.deletecouponpost)
+     router.get("/admin/booking",adminAuth,adminController.getbooking)
+     router.post("/admin/cancelbooking",adminController.postCancelBooking)
 
      
 

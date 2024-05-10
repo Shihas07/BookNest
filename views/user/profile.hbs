@@ -1,247 +1,528 @@
-{{!-- <!DOCTYPE html>
+
+
+ 
+
+
+
+
+
+
+
+  
+<!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Profile</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Profile</title>
+    <link rel="stylesheet" href="assets/css/profile.css" />
+    <style>
+       
+        .list-group-item.active {
+    background: #30b457 !important;
+}
+.bg-warning {
+    background: #06C167 !important;
+}
+.modal-content {
+        background-color: #c5b9b9;
+        margin: 4% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 70%;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out;
+        /*transform: translateY(-100%);*/
+    }
+    .close {
+        float: right;
+        text-align: right;
+        font-size: 30px;
+    }
+    .modal-content h2 {
+        text-align: center;
+        margin-top: -35px;
+    }
+    .button_div {
+        justify-content: center;
+        text-align: center;
+    }
+    .button_div button {
+        margin-right: 10px;
+        background: #06C167;
+        border: 1px solid #06C167;
+        padding: 5px 15px;
+        color: #FFFFFF;
+        border-radius: 2px;
+    }
+    #addAddressForm input {
+        padding: 5px;
+    }
+    .nice-select {
+        padding: 0px !important;
+        height: 38px !important;
+        line-height: 38px !important;
+    }
+    
+    .add_address_button {
+        background: #06C167;
+        border: 1px solid #06C167;
+        padding: 5px 15px;
+        color: #FFFFFF;
+        border-radius: 2px;
+    }
+
+    #updatebtn{
+     border: #06C167;
+     color: white;
+    }
+    .
+
+    
+    @media (max-width: 768px) {
+        .main_flex_div {
+            display: flex;
+            flex-direction: column;
+        }
+        .inner_flex_div {
+            min-width: 100% !important;
+        }
+        .modal-content {
+            padding: 10px 0px !important;
+            min-width: 95% !important;
+            height: 700px;
+            overflow: scroll;
+        }
+        .close {
+            margin-right: 10px;
+        }
+    }
+      .editable-field input {
+        border: 2px solid green;
+    }
+    .container-fluid{
+        background-color: #0d0e0d;
+    }
+    #cc{
+        background-color: rgb(3, 59, 16);
+    }
+   
+    
+    
+    
+    </style>
 </head>
+
 <body>
-{{#if user}}
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="text-center">User Profile</h3>
+     {{#if user}}
+    <section class="my-5">
+        <div class="container">
+            <div class="main-body">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtbEsykx-0fhTred6UwHDYtMFd2UgTJCG4gaklT1dx4suRO4_n5LJr4Gg28kquSX5fpNo&usqp=CAU" alt="Admin"
+                                        class="rounded-circle p-1 bg-warning" width="110">
+                                    <div class="mt-3">
+                                        <h4>{{user.userName}}</h4>
+                                        <p class="text-secondary mb-1">{{user.email}}</p>
+                                        {{!-- <p class="text-muted font-size-sm">Delhi, NCR</p> --}}
+                                    </div>
+                                </div>
+                                <div class="list-group list-group-flush text-center mt-4">
+                                    <a href="#" class="list-group-item list-group-item-action border-0 active" onclick="showProfileDetails()">
+                                        Profile Informaton
+                                    </a>
+                                    <a href="#" class="list-group-item list-group-item-action border-0 " onclick="showOrderDetails()">Booking</a>
+                                    
+                                   
+                                    <a href="/userLogout" class="list-group-item list-group-item-action border-0">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div  id="orderDetails" class="order_card">
+                        <div class="card">
+                            <div class="card-body">
+  {{#if user}}
+  {{#each bookingss}}
+    <div class="container-fluid my-5 d-sm-flex justify-content-center">
+      <div class="card px-2" style="max-width: 400px;" id="cc"> <!-- Adjust the max-width to your desired width -->
+        <div class="card-header bg-white">
+          <div class="row justify-content-between">
+            <div class="col">
+               
+              <p class="text-muted">Booking ID <span class="font-weight-bold text-dark">{{this.booking._id}}</span></p>
+              <p class="text-muted">Booked On <span class="font-weight-bold text-dark">{{this.createdAt}}</span></p>
+            </div>
+            <div class="flex-col my-auto">
+              <h6 class="ml-auto mr-3">
+                <a href="#">View Details</a>
+              </h6>
+            </div>
+          </div>
         </div>
         <div class="card-body">
-          <div class="form-group">
-            <label for="name">Name:</label>
-            <p id="name">{{ user.userName }}</p>
+          <div class="media flex-column flex-sm-row">
+            <div class="media-body">
+            
+              <h5 class="bold">{{this.booking.roomDetails.[0].roomName}}</h5>
+              <p class="text-muted">Check-in: {{this.booking.checkInDate}}</p>
+              <p class="text-muted">Check-out: {{this.booking.checkOutDate}}</p>
+              <p class="text-muted">Guests: {{this.booking.roomDetails.[0].guest}}</p>
+              <h4 class="mt-3 mb-4 bold">Total Price: <span class="mt-5">₹ {{this.booking.price}}</span></h4>
+              <p class="text-muted">Status: {{this.booking.staus}}</p>
+               <form action="/cancelbooking" method="post">
+                <input type="hidden" name="bookingId" value="{{this.booking._id}}">
+              <button type="submit" class="btn btn-outline-primary d-flex">cancel</button>
+               </form>
+            </div>
+            <img class="align-self-center img-fluid" src="{{this.booking.roomDetails.[0].roomImages.[0]}}" width="180" height="180">
           </div>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <p id="email">{{ user.email }}</p>
-          </div>
-          <a id="logoutBtn" class="btn btn-danger btn-block" href="/userLogout" >Logout</a>
-          
         </div>
       </div>
     </div>
-  </div>
+  {{/each}}
+{{/if}}
+
+                            </div>
+                        </div>
+                        {{!-- <div class="card mt-4">
+                            <div class="card-body p-0 table-responsive">
+                                <h4 class="p-3 mb-0">Product Description</h4>
+                                <table class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Description</th>
+                                            <th scope="col"></th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            
+                                            <th>
+                                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"
+                                                    alt="product" class="" width="80">
+                                            </th>
+                                            <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorem,
+                                                facilis.</td>
+                                            <td>₹100 X 2</td>
+                                            <td><strong>₹200</strong></td>
+                                            <td><span class="badge badge-warning">PENDING</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="3">
+                                                <span>Status:</span>
+                                                <span class="badge badge-success">PAID</span>
+                                            </th>
+                                            <td>
+                                                <span class="text-muted">Total Price</span>
+                                                <strong>₹200</strong>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted">Total Paid</span>
+                                                <strong>₹200</strong>
+                                            </td>
+                                           
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card mt-4">
+                            <div class="card-body">
+                                <h4>Timeline</h4>
+                                    <ul class="timeline">
+                                        <li class="active">
+                                            <h6>PICKED</h6>
+                                            <p class="mb-0 text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque Lorem ipsum dolor</p>
+                                            <o class="text-muted">21 March, 2014</o></p>
+                                        </li>
+                                        <li>
+                                            <h6>PICKED</h6>
+                                            <p class="mb-0 text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque</p>
+                                            <o class="text-muted">21 March, 2014</o></p>
+                                        </li>
+                                        <li>
+                                            <h6>PICKED</h6>
+                                            <p class="mb-0 text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque</p>
+                                            <o class="text-muted">21 March, 2014</o></p>
+                                        </li>
+                                        <li>
+                                            <h6>PICKED</h6>
+                                            <p class="mb-0 text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque</p>
+                                            <o class="text-muted">21 March, 2014</o></p>
+                                        </li>
+                                        <li>
+                                            <h6>PICKED</h6>
+                                            <p class="mb-0 text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque</p>
+                                            <o class="text-muted">21 March, 2014</o></p>
+                                        </li>
+                                    </ul>
+                            </div>
+                        </div> --}}
+                        </div>
+                        
+                         <div id="profileDetails" class="card" style="display: none;">
+                        <div class="card-body">
+                           <div class="profile-info">
+
+   <div class="profile-info">
+    <h5>Profile Information</h5>
+    <div class="editable-field">
+        <form>
+        <input type="hidden" id="id" name="id" value="{{user._id}}">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{user.userName}}" >
+    </div>
+    
+    
+    <div class="editable-field">
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" value="{{user.email}}">
+    </div>
+  
+    
+    <div class="editable-field">
+        <label for="contact">Contact:</label>
+        <input type="text" id="contact" name="contact" value="{{user.phoneNumber}}" >
+    </div>
+    
+</div>
+
+    {{!-- <div class="editable-field">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" value="******" readonly>
+        <button class="edit-btn" onclick="toggleEdit('password')">Edit</button>
+    </div> --}}
+    <!-- Add other fields as needed -->
+    <p><strong>Role:</strong> User</p>
+</div>
+        <button class="bg-success" onclick="profile()"  id="updatebtn">UPDATE</button> 
+        </form>
+                        </div>
+                    </div>
+                    
+                    <div id="addressBook" class="card" style="display: none;">
+                        <div class="card-body">
+                            <h5>Address Book</h5>
+                            <button class="add_address_button" onclick="showAddAddressModal()">Add Address</button>
+                            
+                            <div id="addressList">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="addAddressModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeAddAddressModal()">&times;</span>
+        <h2>Add Address</h2>
+        <form id="addAddressForm" onsubmit="saveAddress(event)">
+            
+            <div class="col-12 d-flex main_flex_div">
+            <div class="col-4 d-flex flex-column inner_flex_div">
+                <label for="name">Name:</label>
+            <input type="text" id="name" required><br>
+            </div>
+            <div class="col-4 d-flex flex-column inner_flex_div">
+                <label for="mobile">Mobile No.:</label>
+            <input type="tel" id="mobile" required pattern="[0-9]{10}">
+            </div>
+            <div class="col-4 d-flex flex-column inner_flex_div">
+                 <label for="pincode">Pin code:</label>
+            <input type="text" id="pincode" required><br>
+
+            </div>
+            </div>
+            
+            
+             <div class="col-12 d-flex main_flex_div">
+            
+            <div class="col-4 d-flex flex-column inner_flex_div">
+                <label for="locality">Locality:</label>
+            <input type="text" id="locality" required><br>
+            </div>
+
+            <div class="col-4 d-flex flex-column inner_flex_div">
+               <label for="city">City/District/Town:</label>
+            <input type="text" id="city" required><br>
+
+            </div>
+            
+            <div class="col-4 d-flex flex-column inner_flex_div">
+               <label for="state">State:</label>
+            <select id="state" required>
+                <option value="">Select a state</option>
+                <option value="State 1">State 1</option>
+                <option value="State 2">State 2</option>
+                <option value="State 3">State 3</option>
+            </select><br>
+            </div>
+            
+            </div>
+            
+             <div class="col-12 d-flex main_flex_div">
+            <div class="col-12 d-flex flex-column inner_flex_div">
+                <label for="address">Address:</label>
+             <textarea id="address" required></textarea><br>
+            </div>
+           
+            </div>
+            
+            
+             <div class="col-12 d-flex main_flex_div">
+            <div class="col-6 d-flex flex-column inner_flex_div">
+                  <label for="landmark">Landmark (Optional):</label>
+            <input type="text" id="landmark"><br>
+
+            </div>
+            <div class="col-6 d-flex flex-column inner_flex_div">
+               <label for="alternatePhone">Alternate Phone (Optional):</label>
+            <input type="tel" id="alternatePhone" pattern="[0-9]{10}"><br>
+            </div>
+
+            
+            </div>
+            
+             <div class="col-12 d-flex button_div">
+             <button type="submit">Save</button>
+            <button type="button" onclick="closeAddAddressModal()">Cancel</button>
+            </div>
+            
+            
+        </form>
+    </div>
 </div>
 {{/if}}
 
-<!-- Bootstrap JS (Optional) -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html> --}}
-{{!-- 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Booking Profile</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <!-- Navigation Links -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item"><a class="nav-link" href="#orders">Orders</a></li>
-                <li class="nav-item"><a class="nav-link" href="#edit-profile">Edit Profile</a></li>
-                <li class="nav-item"><a class="nav-link" href="#view-profile">View Profile</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <main class="container">
-        <!-- Orders Section -->
-        <section id="orders" class="mt-5">
-            <h2>My Orders</h2>
-            <!-- Display user's orders here -->
-        </section>
 
-        <!-- Edit Profile Section -->
-        <section id="edit-profile" class="mt-5">
-            <h2>Edit Profile</h2>
-            <!-- Form to edit profile information -->
-            {{#if user}}
-            <div class="card bg-light mb-3" style="max-width: 400px;">
-                <div class="card-header">Edit Profile</div>
-                <div class="card-body">
-                    <form action="/edit-profile" method="post">
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" class="form-control" id="name" name="name" value="{{user.userName}}">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{user.email}}">
-                        </div>
-                        <!-- Other profile fields -->
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    </form>
+                    </div>
                 </div>
             </div>
-            {{/if}}
-        </section>
+        </div>
+    </section>
 
-        <!-- View Profile Section -->
-        <section id="view-profile" class="mt-5">
-            <h2>View Profile</h2>
-            <!-- Display user's profile details here -->
-            <div class="card bg-light mb-3" style="max-width: 400px;">
-                <div class="card-header">Profile</div>
-                <div class="card-body">
-                    <p><strong>Name:</strong> {{user.userName}}</p>
-                    <p><strong>Email:</strong> {{user.email}}</p>
-                    <!-- Other profile details -->
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Bootstrap JS (optional, only required if you need Bootstrap JavaScript features) -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html> --}}
-
-
-
--- <!DOCTYPE html>
-  <html lang="en">
-  <head>
-              <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+        
+          <script>
           
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-       <style>
-    * {
-    margin: 0;
-    padding: 0
+           function showAddAddressModal() {
+        const modal = document.getElementById('addAddressModal');
+        modal.style.display = 'block';
+        isFormVisible = true;
+    }
+
+    function closeAddAddressModal() {
+        const modal = document.getElementById('addAddressModal');
+        modal.style.display = 'none';
+        isFormVisible = false;
+    }
+          
+        function showProfileDetails() {
+            hideAllSections();
+            document.getElementById('profileDetails').style.display = 'block';
+            setActiveLink(0);
+        }
+
+        function showOrderDetails() {
+            hideAllSections();
+            document.getElementById('orderDetails').style.display = 'block';
+            setActiveLink(1);
+        }
+
+        function showAddressBook() {
+            hideAllSections();
+            document.getElementById('addressBook').style.display = 'block';
+            setActiveLink(2);
+        }
+
+        function hideAllSections() {
+            document.getElementById('orderDetails').style.display = 'none';
+            document.getElementById('profileDetails').style.display = 'none';
+            document.getElementById('addressBook').style.display = 'none';
+        }
+
+        function setActiveLink(index) {
+            document.querySelector('.list-group-item.active').classList.remove('active');
+            document.querySelectorAll('.list-group-item')[index].classList.add('active');
+        }
+
+        showProfileDetails();
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+function profile() {
+  
+    const id = document.getElementById("id").value;
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const contact = document.getElementById("contact").value;
+
+    const formData = {
+        id: id,
+        name: name,
+        email: email,
+        contact: contact
+    };
+
+    fetch("/updateprofile", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Response from server:", data); 
+        if (data.message) {
+            Swal.fire({
+                title: "Success!",
+                text: data.message,
+                 time:"5000",
+                icon: "success"
+               
+            });
+        } else {
+            Swal.fire({
+                title: "Error!",
+                text: data.error || "Something went wrong",
+                icon: "error"
+            });
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
 }
-
-body {
-    background-color: #000
-}
-
-.card {
-    width: 350px;
-    background-color: #efefef;
-    border: none;
-    cursor: pointer;
-    transition: all 0.5s;
-}
-
-.image img {
-    transition: all 0.5s
-}
-
-.card:hover .image img {
-    transform: scale(1.5)
-}
-
-.btn {
-    height: 140px;
-    width: 140px;
-    border-radius: 50%
-}
-
-.name {
-    font-size: 22px;
-    font-weight: bold
-}
-
-.idd {
-    font-size: 14px;
-    font-weight: 600
-}
-
-.idd1 {
-    font-size: 12px
-}
-
-.number {
-    font-size: 22px;
-    font-weight: bold
-}
-
-.follow {
-    font-size: 12px;
-    font-weight: 500;
-    color: #444444
-}
-
-.btn1 {
-    height: 40px;
-    width: 150px;
-    border: none;
-    background-color: #000;
-    color: #aeaeae;
-    font-size: 15px
-}
-
-.text span {
-    font-size: 13px;
-    color: #545454;
-    font-weight: 500
-}
-
-.icons i {
-    font-size: 19px
-}
-
-hr .new1 {
-    border: 1px solid
-}
-
-.join {
-    font-size: 14px;
-    color: #a0a0a0;
-    font-weight: bold
-}
-
-.date {
-    background-color: #ccc
-}
-</style>
-  </head>
-
-  <body>
-    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center"> 
-      <div class="card p-4"> <div class=" image d-flex flex-column justify-content-center align-items-center">
-         <button class="btn btn-secondary"> <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
-         </button> <span class="name mt-3">{{user.userName}}</span> <span class="idd">{{user.email}}</span>
-          <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1"></span>
-          <span><i class="fa fa-copy"></i></span> 
-          </div> <div class="d-flex flex-row justify-content-center align-items-center mt-3"> 
-            <span class="number"> <span class="follow">Followers</span></span> </div> 
-            <div class=" d-flex mt-2"> <button class="btn1 btn-dark">Edit Profile</button> </div>
-             {{!-- <div class="text mt-3"> <span>Eleanor Pena is a creator of minimalistic x bold graphics and digital artwork.<br><br> Artist/ Creative Director by Day #NFT minting@ with FND night. </span> </div>  --}}
-             <div class="gap-3 mt-3 icons d-flex flex-row justify-content-center align-items-center"> <span><i class="fa fa-twitter"></i></span> <span><i class="fa fa-facebook-f"></i></span> <span><i class="fa fa-instagram"></i></span> <span><i class="fa fa-linkedin"></i></span> </div>
-              {{!-- <div class=" px-2 rounded mt-4 date "> <span class="join">Joined May,2021</span> </div> </div> </div> --}}
-</div>
+</script>
 
 
-             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
-                 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        
+</body>
 
-  </body>
-  </html> 
-
-
-
-
-
+</html>

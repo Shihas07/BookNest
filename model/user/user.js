@@ -40,7 +40,7 @@ const mongoose=require("mongoose")
         staus:{
             type:String,
             
-            default:"pending"
+            default:"booked"
 
         },
         room:[{

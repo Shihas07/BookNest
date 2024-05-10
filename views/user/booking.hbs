@@ -85,7 +85,8 @@
         <input type="hidden" name="price"  value="" id="priceInput" id="price">
         <input type="hidden" name="roomid"  value="{{room._id}}" id="roomid">
     </div>
-    <button type="button"  onclick="razorpay()" class="btn btn-success" >Continue</button>
+   <button type="button" class="btn btn-success" onclick="razorpay()">Continue</button>
+
 </form>
 
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -267,6 +268,8 @@
 
 
     /// RAZORPAY PAYMENT
+
+
               function razorpay() {
     const totalValue = document.getElementById("discountedPrice").innerText;
     console.log("sjhfladskjklsjf :", totalValue);
@@ -307,27 +310,25 @@
                         checkOutDate,
                         price: totalValue, 
                         roomid,
-                         orderId: razorpayResponse.razorpay_order_id,
+                          //orderId: razorpayResponse.razorpay_order_id,
       paymentId: razorpayResponse.razorpay_payment_id
 
 
               
 
                     };
-                    console.log(postData)
+                    console.log("ggg",postData)
 
                     // Make a POST request to your /booking route using Axios
                     axios.post('/booking', postData)
                         .then(response => {
                             // Handle success response
                             console.log('Booking successful:', response.data);
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Order Placed Successfully!',
-                                html: `Your order with ID <strong>${11111}</strong> has been placed.<br>
-                                Total Price: <strong>${111111}</strong>`
-                                confirmButtonText: "Ok"
-                            })
+
+                           var myModal = new bootstrap.Modal(document.getElementById('bookingSuccessModal'), {
+                                keyboard: false
+                            });
+                            myModal.show();
                         })
                         .catch(error => {
                             // Handle error

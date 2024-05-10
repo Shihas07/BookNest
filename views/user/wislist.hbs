@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Hotale &#8211; Hotel HTML Template</title>
+    <title>booknest &#8211; Hotel HTML Template</title>
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome (optional, if you're using font awesome icons) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -68,7 +68,7 @@
 
                     <!-- LOGIN & Register Forms. -->
 
-                    <div class="tourmaster-user-top-bar tourmaster-guest tourmaster-style-2" data-redirect="index.html" data-ajax-url="#">
+                    {{!-- <div class="tourmaster-user-top-bar tourmaster-guest tourmaster-style-2" data-redirect="index.html" data-ajax-url="#">
                         <span class="tourmaster-user-top-bar-login" data-tmlb="login"><i class="icon_lock_alt"></i><span class="tourmaster-text">Login</span></span>
                         <div class="tourmaster-lightbox-content-wrap" data-tmlb-id="login">
                             <div class="tourmaster-lightbox-head">
@@ -103,14 +103,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="hotale-mobile-menu">
                         <a class="hotale-mm-menu-button hotale-mobile-menu-button hotale-mobile-button-hamburger" href="#hotale-mobile-menu"><span></span></a>
                         <div class="hotale-mm-menu-wrap hotale-navigation-font" id="hotale-mobile-menu" data-slide="right">
                             <ul id="menu-main-navigation" class="m-menu">
                                 <li class="menu-item menu-item-home current-menu-item  menu-item-has-children" >
-                                    <a href="index.html" aria-current="page">Home</a>
-                                    <ul class="sub-menu">
+                                    <a href="/" aria-current="page">Home</a>
+                                    {{!-- <ul class="sub-menu">
                                         <li class="menu-item menu-item-home">
                                             <a href="index.html" aria-current="page">Home &#8211; Resort 1</a>
                                         </li>
@@ -129,9 +129,9 @@
                                         <li class="menu-item">
                                             <a target="_blank" rel="noopener" href="https://max-themes.net/demos/hotale/hotale/apartment2/index.html">Home &#8211; Apartment 2</a>
                                         </li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
-                                <li class="menu-item menu-item-has-children">
+                                {{!-- <li class="menu-item menu-item-has-children">
                                     <a href="#">Pages</a>
                                     <ul class="sub-menu">
                                         <li class="menu-item"><a href="about-us.html">About Us</a></li>
@@ -146,22 +146,22 @@
                                         <li class="menu-item"><a href="coming-soon.html">Coming Soon</a></li>
                                         <li class="menu-item"><a href="404.html">404 Page</a></li>
                                     </ul>
-                                </li>
+                                </li> --}}
                                 <li class="menu-item menu-item-has-children">
-                                    <a href="room-grid-style-1.html">Rooms</a>
-                                    <ul class="sub-menu">
+                                    <a href="/roomlist">Rooms</a>
+                                    {{!-- <ul class="sub-menu">
                                         <li class="menu-item"><a href="room-grid-style-1.html">Room Grid Style 1</a></li>
                                         <li class="menu-item"><a href="room-grid-style-2.html">Room Grid Style 2</a></li>
                                         <li class="menu-item"><a href="room-grid-style-3.html">Room Grid Style 3</a></li>
                                         <li class="menu-item"><a href="room-grid-style-4.html">Room Grid Style 4</a></li>
                                         <li class="menu-item"><a href="room-modern-style.html">Room Modern Style</a></li>
                                         <li class="menu-item"><a href="room-side-thumbnail.html">Room Side Thumbnail</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
-                                <li class="menu-item"><a href="room-search.html">Reservation</a></li>
+                                <li class="/whishlist"><a href="room-search.html">Reservation</a></li>
                                 <li class="menu-item menu-item-has-children">
-                                    <a href="blog-full-right-sidebar.html">Blog</a>
-                                    <ul class="sub-menu">
+                                    <a href="/bookingdetails">Booking</a>
+                                    {{!-- <ul class="sub-menu">
                                         <li class="menu-item menu-item-has-children">
                                             <a href="blog-3-columns-with-frame.html">Blog Columns</a>
                                             <ul class="sub-menu">
@@ -220,9 +220,9 @@
                                             </ul>
                                         </li>
                                         <li class="menu-item"><a href="single-blog.html">Single Posts</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
-                                <li class="menu-item"><a href="contact.html">Contact</a></li>
+                                {{!-- <li class="menu-item"><a href="contact.html">Contact</a></li> --}}
                             </ul>
                         </div>
                     </div>
@@ -239,12 +239,12 @@
                         <div class="hotale-top-bar-container-inner clearfix">
                             <div class="hotale-top-bar-left hotale-item-pdlr">
                                 <div class="hotale-top-bar-left-text">
-                                    <i class="icon-phone" style="font-size: 15px; color: #ffffff; margin-right: 10px;"></i>1-634-567-34
+                                    <i class="icon-phone" style="font-size: 15px; color: #ffffff; margin-right: 10px;"></i>
                                     <i class="icon-envelope" style="font-size: 15px; color: #ffffff; margin-left: 25px; margin-right: 10px;"></i>
-                                    <a href="#">test@gmail.com</a>
+                                    <a href="#"></a>
                                 </div>
                             </div>
-                            <div class="hotale-top-bar-right hotale-item-pdlr">
+                            {{!-- <div class="hotale-top-bar-right hotale-item-pdlr">
                                 <div
                                     class="tourmaster-user-top-bar tourmaster-guest tourmaster-style-2"
                                     data-redirect="index.html"
@@ -285,7 +285,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -295,18 +295,18 @@
                         <div class="hotale-header-container-inner clearfix">
                             <div class="hotale-logo hotale-item-pdlr">
                                 <div class="hotale-logo-inner">
-                                    <a class="hotale-fixed-nav-logo" href="index.html">
+                                    <a class="hotale-fixed-nav-logo" href="/">
                                         <img
-                                            src="/upload/logo-nx1.png"
+                                            src=""
                                             alt=""
                                             width="147"
                                             height="37"
                                             title="logo-nx1"
                                         />
                                     </a>
-                                    <a class="hotale-orig-logo" href="index.html">
+                                    <a class="hotale-orig-logo" href="/">
                                         <img
-                                            src="/upload/logo-nx1.png"
+                                            src=""
                                             alt=""
                                             width="147"
                                             height="37"
@@ -321,8 +321,8 @@
                                         <li
                                             class="menu-item menu-item-home menu-item-has-children hotale-normal-menu"
                                         >
-                                            <a href="index.html" class="sf-with-ul-pre">Home</a>
-                                            <ul class="sub-menu">
+                                            <a href="/" class="sf-with-ul-pre">Home</a>
+                                            {{!-- <ul class="sub-menu">
                                                 <li class="menu-item menu-item-home" data-size="60">
                                                     <a href="index.html">Home &#8211; Resort 1</a>
                                                 </li>
@@ -341,9 +341,9 @@
                                                 <li class="menu-item" data-size="60">
                                                     <a target="_blank" href="https://max-themes.net/demos/hotale/hotale/apartment2/index.html">Home &#8211; Apartment 2</a>
                                                 </li>
-                                            </ul>
+                                            </ul> --}}
                                         </li>
-                                        <li class="menu-item menu-item-has-children hotale-normal-menu">
+                                        {{!-- <li class="menu-item menu-item-has-children hotale-normal-menu">
                                             <a href="#" class="sf-with-ul-pre">Pages</a>
                                             <ul class="sub-menu">
                                                 <li class="menu-item" data-size="60"><a href="about-us.html">About Us</a></li>
@@ -358,10 +358,10 @@
                                                 <li class="menu-item" data-size="60"><a href="coming-soon.html">Coming Soon</a></li>
                                                 <li class="menu-item" data-size="60"><a href="404.html">404 Page</a></li>
                                             </ul>
-                                        </li>
+                                        </li> --}}
                                         <li class="menu-item current-menu-item  menu-item-has-children hotale-normal-menu">
-                                            <a href="room-grid-style-1.html" class="sf-with-ul-pre">Rooms</a>
-                                            <ul class="sub-menu">
+                                            <a href="/roomlist" class="sf-with-ul-pre">Rooms</a>
+                                            {{!-- <ul class="sub-menu">
                                                 <li class="menu-item" data-size="60">
                                                     <a href="room-grid-style-1.html">Room Grid Style 1</a>
                                                 </li>
@@ -380,14 +380,14 @@
                                                 <li class="menu-item" data-size="60">
                                                     <a href="room-side-thumbnail.html">Room Side Thumbnail</a>
                                                 </li>
-                                            </ul>
+                                            </ul> --}}
                                         </li>
                                         <li class="menu-item hotale-normal-menu">
-                                            <a href="room-search.html">Reservation</a>
+                                            <a href="/whishlist">Reservation</a>
                                         </li>
                                         <li class="menu-item menu-item-has-children hotale-normal-menu">
-                                            <a href="blog-full-right-sidebar.html" class="sf-with-ul-pre">Blog</a>
-                                            <ul class="sub-menu">
+                                            <a href="/bookingdetails" class="sf-with-ul-pre">Booking</a>
+                                            {{!-- <ul class="sub-menu">
                                                 <li class="menu-item menu-item-has-children" data-size="60">
                                                     <a href="blog-3-columns-with-frame.html" class="sf-with-ul-pre">Blog Columns</a>
                                                     <ul class="sub-menu">
@@ -452,14 +452,14 @@
                                                     </ul>
                                                 </li>
                                                 <li class="menu-item" data-size="60"><a href="single-blog.html" class="sf-with-ul-pre">Single Posts</a></li>
-                                            </ul>
+                                            </ul> --}}
                                         </li>
-                                        <li class="menu-ite hotale-normal-menu"><a href="contact.html" class="sf-with-ul-pre">Contact</a></li>
+                                        {{!-- <li class="menu-ite hotale-normal-menu"><a href="contact.html" class="sf-with-ul-pre">Contact</a></li> --}}
                                     </ul>
                                     <div class="hotale-navigation-slide-bar hotale-navigation-slide-bar-style-2 hotale-left" data-size-offset="0" data-width="19px" id="hotale-navigation-slide-bar"></div>
                                 </div>
                                 <div class="hotale-main-menu-right-wrap clearfix hotale-item-mglr hotale-navigation-top">
-                                    <div class="tourmaster-currency-switcher">
+                                    {{!-- <div class="tourmaster-currency-switcher">
                                         <span class="tourmaster-head"><span>USD</span><i class="fa fa-sort-down"></i></span>
                                         <div class="tourmaster-currency-switcher-inner">
                                             <div class="tourmaster-currency-switcher-content">
@@ -469,12 +469,12 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="tourmaster-room-navigation-checkout-wrap">
                                         <a
                                             id="tourmaster-room-navigation-checkout-button"
                                             class="tourmaster-room-navigation-checkout-button"
-                                            href="room-search.html"
+                                            href="/roomlist"
                                             data-checkout-label="Check Out"
                                             data-label="Book Now"
                                         >
