@@ -1,16 +1,55 @@
 
      const jwt = require("jsonwebtoken")
      const Admin = require("../model/admin/admin")
+     
      const bcrypt=require('bcrypt')
      const User=require("../model/user/user")
      const nodemailer=require("nodemailer")
      const Rooms=require("../model/room")
+     const Excel = require('exceljs');
 
 
    //  admin dashboard
-     const index=async(req,res)=>{ 
-        res.render('admin/index')
-     }
+
+   const index = async (req, res) => { 
+    try {
+        const admin=await Admin.find()
+        const users = await User.find().populate('booking.room');
+
+        const booking=await User.find().populate("booking")
+        let totalBookings = 0;
+       booking.forEach(user => {
+            totalBookings += user.booking.length;
+        });
+
+
+        const user=await User.find()
+         const totaluser=user.length
+         console.log(totaluser)
+        console.log(totalBookings)
+
+        const bookingPrices = [];
+
+       
+        users.forEach(user => {
+            
+            user.booking.forEach(booking => {
+               
+                bookingPrices.push(booking.price);
+            });
+        });
+
+        const total = bookingPrices.reduce((a, b) => a + b, 0);
+        console.log(total);
+
+        // console.log(bookingPrices);
+        res.render('admin/index', {admin, total ,totaluser ,totalBookings }); 
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+}; 
+
 
       const adminSignup=async(req,res)=>{
          res.render("admin/register")
@@ -436,6 +475,142 @@ const postCancelBooking = async (req, res) => {
   }
 };
 
+
+  //  const postBookingreport=async(req,res)=>{
+      
+  //      const{ startDate,endDate } =req.body
+  //      console.log("body axios",startDate,endDate);
+
+  //        const user=await User.find()
+  //         console.log(user);
+
+
+  //  }
+  const postBookingreport = async (req, res) => {
+    const { startDate, endDate } = req.body;
+
+    try {
+        const allBookings = await User.aggregate([
+            { $unwind: "$booking" },
+            {
+                $match: {
+                    "booking.checkInDate": { $gte: new Date(startDate), $lte: new Date(endDate) }
+                }
+            },
+            {
+                $group: {
+                    _id: null,
+                    roomIds: { $addToSet: "$booking.room.roomid" } // Collect all room IDs
+                }
+            }
+        ]);
+
+      
+        const roomIds = allBookings.length > 0 ? allBookings[0].roomIds : [];
+
+        const roomDetails = await Rooms.find({ _id: { $in: roomIds } });
+
+        const bookingsWithRoomDetails = await User.aggregate([
+            { $unwind: "$booking" },
+            {
+                $match: {
+                    "booking.checkInDate": { $gte: new Date(startDate), $lte: new Date(endDate) }
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    userId: "$_id",
+                    roomId: "$booking.room.roomid",
+                    checkInDate: "$booking.checkInDate",
+                    checkOutDate: "$booking.checkOutDate",
+                    price: "$booking.price",
+                    status: "$booking.staus",
+                    payment: "$booking.payment",
+                    orderId: "$booking.orderId",
+                    paymentId: "$booking.paymentId"
+                }
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: "userId",
+                    foreignField: "_id",
+                    as: "userDetails"
+                }
+            },
+            {
+                $project: {
+                    userId: 1,
+                    roomId: 1,
+                    checkInDate: 1,
+                    checkOutDate: 1,
+                    price: 1,
+                    status: 1,
+                    payment: 1,
+                    orderId: 1,
+                    paymentId: 1,
+                    userName: { $arrayElemAt: ["$userDetails.userName", 0] },
+                    email: { $arrayElemAt: ["$userDetails.email", 0] },
+                    phoneNumber: { $arrayElemAt: ["$userDetails.phoneNumber", 0] }
+                }
+            }
+        ]);
+
+        // Add room details to each booking
+        const bookingsWithFullDetails = bookingsWithRoomDetails.map(booking => {
+            const roomDetail = roomDetails.find(room => room._id.toString() === booking.roomId.toString());
+            return { ...booking, roomDetails: roomDetail };
+        });
+
+        console.log("bookingreport", bookingsWithFullDetails);
+
+        // CREATE NEW WORKBOOK
+        const workbook = new Excel.Workbook();
+        const worksheet = workbook.addWorksheet("Bookings");
+
+        // HEADERS TO WORKSHEET
+        worksheet.columns = [
+            { header: "Room ID", key: "roomId", width: 30 },
+            { header: "User Name", key: "userName", width: 20 },
+            { header: "Room Name", key: "roomName", width: 20 },
+            { header: "Check In Date", key: "checkInDate", width: 20 },
+            { header: "Check Out Date", key: "checkOutDate", width: 20 },
+            { header: "Price", key: "price", width: 20 },
+            { header: "Status", key: "status", width: 20 },
+        ];
+
+        // DATA ROWS TO WORKSHEET
+        bookingsWithFullDetails.forEach((booking) => {
+            worksheet.addRow({
+                roomId: booking.roomId,
+                userName: booking.userName,
+                roomName:booking.roomDetails.roomName,
+                checkInDate: booking.checkInDate,
+                checkOutDate: booking.checkOutDate,
+                price: booking.price,
+                status: booking.status,
+            });
+        });
+
+        res.setHeader(
+            "Content-Type",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        );
+        res.setHeader(
+            "Content-Disposition",
+            "attachment; filename=booking_report.xlsx"
+        );
+
+        await workbook.xlsx.write(res);
+
+        res.end();
+    } catch (error) {
+        console.error("Error generating Excel report:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
    
             
           
@@ -459,7 +634,8 @@ const postCancelBooking = async (req, res) => {
         postaddcoupen,
         deletecouponpost,
         getbooking,
-        postCancelBooking
+        postCancelBooking,
+        postBookingreport
      }
 
 

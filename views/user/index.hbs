@@ -365,16 +365,21 @@
     <h3 style="color: white;">{{user.userName}}</h3>
  
 {{else}}
-    <span class="tourmaster-user-top-bar-login" data-tmlb="login"><i class="icon_lock_alt"></i><span class="tourmaster-text">Login</span></span>
+    {{!-- <span class="tourmaster-user-top-bar-login" data-tmlb="login"><i class="icon_lock_alt"></i><span class="tourmaster-text" >Login</span></span> --}}
+    <a href="/login" class="tourmaster-user-top-bar-login" data-tmlb="login">
+  <i class="icon_lock_alt"></i>
+  <span class="tourmaster-text">Login</span>
+</a>
+
     <div class="tourmaster-lightbox-content-wrap" data-tmlb-id="login">
-        <div class="tourmaster-lightbox-head">
+        {{!-- <div class="tourmaster-lightbox-head">
             <h3 class="tourmaster-lightbox-title">Login</h3>
             <i class="tourmaster-lightbox-close icon_close"></i>
-        </div>
-        <div class="tourmaster-lightbox-content">
-<form class="tourmaster-login-form tourmaster-form-field tourmaster-with-border" id="loginForm" method="post" action="/login" >
-    <div class="tourmaster-login-form-fields clearfix">
-        <p class="tourmaster-login-user">
+        </div> --}}
+        {{!-- <div class="tourmaster-lightbox-content">
+            <form class="tourmaster-login-form tourmaster-form-field tourmaster-with-border" id="loginForm" method="post" action="/login" >
+              <div class="tourmaster-login-form-fields clearfix">
+             <p class="tourmaster-login-user">
             <label>Username or E-Mail</label>
             <input type="text" name="email" id="email" />
             {{#if erroremail}}
@@ -420,7 +425,7 @@
                 <a class="tourmaster-login-bottom-link" href="/signup"  >Create an Account</a>
             </div>
             
-        </div>
+        </div> --}}
     </div>
 {{/if}}
 

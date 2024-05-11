@@ -100,39 +100,32 @@ const getLoginpage = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    
     const { email, password } = req.body;
     console.log(req.body);
 
     if (!(email && password)) {
-      return res.status(400).send("Email and password are required");
+      return res.status(400).redirect("/login");
     }
 
-    
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.status(400).send("User not found");
-    }
-    if (user.blocked) {
-      return res.status(403).json({
-        error:
-          "Your account has been blocked. Please contact the administrator.",
-      });
+      return res.status(400).render("user/login",{errop:"invali email"});
     }
 
-    // Compare hashed passwords
+    if (user.blocked) {
+      return res.status(403).render("user/login",{errod:"Your account has been blocked. Please contact the administrator"});
+    }
+
     const hashpassword = await bcrypt.compare(password, user.password);
 
     if (!hashpassword) {
-      
-      return res.status(400).send("invalid");
+      return res.status(400).render("user/login",{erroru:"Invalid password"});
     }
 
-    // Generate JWT token
     const token = jwt.sign(
       {
-        id: user._id, // Include user ID in the token payload
+        id: user._id,
         email: user.email,
       },
       process.env.JWT_SECRET,
@@ -141,7 +134,6 @@ const login = async (req, res) => {
       }
     );
 
-   
     res.cookie("user_jwt", token, { httpOnly: true, maxAge: 86400000 });
 
     console.log("User logged in successfully, token created");
@@ -152,6 +144,7 @@ const login = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+
 
 //google auth//
 
@@ -382,16 +375,16 @@ const getroompage = async (req, res) => {
       console.log(userId);
       let user = await User.findById(userId).populate("whishlist.roomId");
 
-      // Extract room IDs from the user's wishlist
+     
       const roomIds = user.whishlist.map((item) => item.roomId);
-
-      // Find some rooms based on the room IDs
+                console.log(roomIds)             
+     
       const wishlistRooms = await Rooms.find({ _id: { $in: roomIds } });
       console.log("wihl", wishlistRooms);
-      // Pass wishlist rooms along with user to the rendering engine
-      res.render("user/room-grid-style", { rooms, wishlistRooms, user });
+      
+      res.render("user/room-grid-style", { rooms, wishlistRooms, user, roomIds });
     } else {
-      // If user is not logged in, just render all rooms
+     
       res.render("user/room-grid-style", { rooms, user });
     }
   } catch (error) {
@@ -686,6 +679,7 @@ const getwhislist = async (req, res) => {
       if (!user) {
         console.log("User not found");
         return res.status(404).json({ error: "User not found" });
+        // res.redirect("/user/login")
       }
 
       
@@ -712,7 +706,8 @@ const getwhislist = async (req, res) => {
   } else {
     // Handle case when JWT token is not present in cookies
     console.log("JWT token not found in cookies");
-    return res.status(401).json({ error: "JWT token not found in cookies" });
+     return res.status(401).json({ error: "JWT token not found in cookies" });
+    // res.redirect("/login")
   }
 };
 
@@ -731,29 +726,29 @@ const postwishlist = async (req, res) => {
       const userId = decodedToken.id;
       console.log("User ID:", userId);
 
-      
       const user = await User.findById(userId);
       if (!user) {
         console.log("User not found");
         return res.status(404).json({ error: "User not found" });
       }
 
-      const roomExists = user.whishlist.some(
+      const roomIndex = user.whishlist.findIndex(
         (item) => item.roomId.toString() === roomId
       );
-      if (roomExists) {
-        console.log("Room already exists in the wishlist");
-        return res
-          .status(400)
-          .json({ error: "Room already exists in the wishlist" });
+
+      if (roomIndex !== -1) {
+        // If room already exists in the wishlist, remove it
+        user.whishlist.splice(roomIndex, 1);
+        await user.save();
+        return res.status(200).json({ message: "Room removed from wishlist" });
       }
 
-      // Add roomId to the user's wishlist
+      // If room does not exist in the wishlist, add it
       user.whishlist.push({ roomId });
       await user.save();
 
       // Send a success response
-      return res.status(200).json({ message: "Wishlist updated successfully" });
+      return res.status(200).json({ message: "Room added to wishlist" });
     } catch (error) {
       // Handle any errors that occur during token decoding or database operations
       console.error("Error:", error);
@@ -765,7 +760,6 @@ const postwishlist = async (req, res) => {
     return res.status(401).json({ error: "JWT token not found in cookies" });
   }
 };
-
 
 
 

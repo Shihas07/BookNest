@@ -33,6 +33,8 @@ const adminAuth = require("../midilware/admin_jwt")
      router.get("/admin/booking",adminAuth,adminController.getbooking)
      router.post("/admin/cancelbooking",adminController.postCancelBooking)
 
+     router.post("/bookingreport",adminAuth,adminController.postBookingreport)
+
      
 
      module.exports=router

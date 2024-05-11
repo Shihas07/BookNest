@@ -4,11 +4,13 @@
     
 <!-- Mirrored from techzaa.getappui.com/velonic/layouts/pages-starter.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Mar 2024 09:36:18 GMT -->
 <head>
+  
         <meta charset="utf-8" />
         <title>Starter Page | Velonic - Bootstrap 5 Admin & Dashboard Template</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
         <meta content="Techzaa" name="author" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
@@ -27,6 +29,17 @@
 
         <!-- Icons css -->
         <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+<style>
+    {{!-- #exc{
+         
+         display: flex;
+         justify-content: center;
+
+        
+    } --}}
+</style>
+
     </head>
 
     <body>
@@ -882,10 +895,43 @@
       <h1 class="h6 text-center mb-4">Room booking  Management</h1>
 
       <!-- Button to trigger Add Room Modal -->
-     
+    <div style="text-align: center">
+<button type="button" id="exc" class="btn btn-primary" data-toggle="modal" data-target="#bookingModal">
+  sales report
+</button>
+</div> 
+<!-- Booking Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" role="dialog" aria-labelledby="bookingModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookingModalLabel">Book Sales</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="bookingForm">
+          <div class="form-group">
+            <label for="startDate">Start Date</label>
+            <input type="date" class="form-control" id="startDate" name="startDate">
+          </div>
+          <div class="form-group">
+            <label for="endDate">End Date</label>
+            <input type="date" class="form-control" id="endDate" name="endDate">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="submitBooking()">submit</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-      <!-- Table for Room Categories -->
-      
+
+
 
       
 {{#if bookingDetails}}
@@ -1171,6 +1217,49 @@
         
         <!-- App js -->
         <script src="assets/js/app.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+<script>
+     function submitBooking(){
+
+        const startDate=    document.getElementById("startDate").value
+        const endDate=    document.getElementById("endDate").value
+
+        console.log("startDate",startDate)
+        console.log("enddate",endDate)
+
+
+         axios.post("/bookingreport", { startDate: startDate, endDate: endDate }, { responseType: 'blob'})
+            .then(response => {
+      // Create a blob from the response
+      const blob = new Blob([response.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+
+      // Create a link element to trigger the download
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = 'orders_report.xlsx';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+
+     }
+</script>
+
 
     </body>
 

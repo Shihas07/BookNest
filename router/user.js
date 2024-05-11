@@ -7,10 +7,10 @@ const {userMiddleware,disableCache}=require("../midilware/usermidilware")
 
 
 router.get("/", userController.homePage);
-router.get("/signup",userMiddleware,userController.signup)
+router.get("/signup",userController.signup)
 router.post("/signup",userController.signupPage)
 router.get("/login",userController.getLoginpage)
-router.post("/login",disableCache,userMiddleware,userController.login)
+router.post("/login",disableCache,userController.login)
 
 router.get('/userLogout',userController.userLogout)
 router.get("/profile",userController.profile)
@@ -25,10 +25,10 @@ passport.authenticate('google',{successRedirect:'/success',failureRedirect:'/fai
 router.get('/success',userController.googleLogin)
 router.get('/failure',userController.failureGoogleLogin)
 // /otp//
-router.get('/loginwithotp',disableCache,userMiddleware,userController.loginGetOtpPage)
-router.get("/otpverify",disableCache,userMiddleware,userController.getOtpPage)
-router.post("/otpemail",disableCache,userMiddleware,userController.postEmail)
-router.post("/otpverify",disableCache,userMiddleware,userController.postOtpVerify)
+router.get('/loginwithotp',disableCache,userController.loginGetOtpPage)
+router.get("/otpverify",disableCache,userController.getOtpPage)
+router.post("/otpemail",disableCache,userController.postEmail)
+router.post("/otpverify",disableCache,userController.postOtpVerify)
 
 
 
@@ -44,13 +44,13 @@ router.post("/room/filter",userController.postFilter)
 router.get("/booking",userController.bookingGetpage)
 router.post("/booking",userController.Postbooking)
 router.get("/api/users",userController.apigetuser)
-router.get("/wishlist",userController.getwhislist)
+router.get("/wishlist",userMiddleware,userController.getwhislist)
 router.post("/wishlist",userController.postwishlist)
 
 router.post("/couponapply",userController.couponapply)
 router.post('/razorPayment',userController.razorpayment)
 
-router.get("/bookingdetails",userController.getbookindetails)
+router.get("/bookingdetails",userMiddleware,userController.getbookindetails)
 router.post('/cancelbooking',userController.postcancel)
 router.post("/updateprofile",userController.postUpdateProfile)
 
