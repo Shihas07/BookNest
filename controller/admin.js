@@ -7,6 +7,7 @@
      const nodemailer=require("nodemailer")
      const Rooms=require("../model/room")
      const Excel = require('exceljs');
+const { json } = require("body-parser")
 
 
    //  admin dashboard
@@ -42,14 +43,64 @@
         const total = bookingPrices.reduce((a, b) => a + b, 0);
         console.log(total);
 
-        // console.log(bookingPrices);
-        res.render('admin/index', {admin, total ,totaluser ,totalBookings }); 
+        const getMonthName = (monthNumber) => {
+          const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+          return monthNames[monthNumber];
+      };
+      
+      const bookingsByMonth = {}
+      
+      // Initialize counts for all months
+      for (let i = 0; i < 12; i++) {
+          const monthName = getMonthName(i);
+          bookingsByMonth[monthName] = 0;
+      }
+      
+      users.forEach(user => {
+          user.booking.forEach(booking => {
+              const bookingMonth = new Date(booking.checkInDate).getMonth(); // Get month (0-indexed)
+              const monthName = getMonthName(bookingMonth);
+              bookingsByMonth[monthName]++;
+          });
+      });
+
+          
+        const bookingsByMonthJSON = JSON.stringify(bookingsByMonth);
+        console.log(bookingsByMonthJSON);
+
+
+        const bookingCounts = await User.aggregate([
+          
+          { $unwind: '$booking' },
+          // Group by roomId and count the number of bookings for each room
+          { $group: { _id: '$booking.room.roomid', count: { $sum: 1 } } }
+      ]);
+
+      // Fetch room details based on roomId
+      const roomDetailsPromises = bookingCounts.map(async ({ _id, count }) => {
+          const room = await Rooms.findById(_id);
+          return { roomName: room.roomName, bookingCount: count };
+      });
+      const roomData = await Promise.all(roomDetailsPromises);
+const roomDataFormatted = roomData.reduce((acc, { roomName, bookingCount }) => {
+  acc[roomName] = bookingCount;
+  return acc;
+}, {});
+
+
+console.log(roomDataFormatted);
+
+
+    const  roomDatajson=  JSON.stringify(roomDataFormatted)
+      console.log("rfef",roomDatajson);
+        
+        res.render('admin/index', {admin, total ,totaluser ,totalBookings,bookingsByMonthJSON,roomDatajson }); 
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
     }
 }; 
-
+ 
 
       const adminSignup=async(req,res)=>{
          res.render("admin/register")
@@ -82,7 +133,7 @@
              // Password matches, proceed with login
              const token = jwt.sign({
                  id: admin._id,
-                 name: admin.adminname,
+                 name: admin.adminName,
                  email: admin.email,
                },
                process.env.JWT_SECRET, {
@@ -457,7 +508,7 @@ const postCancelBooking = async (req, res) => {
     }
 
     // Update booking status to 'cancelled'
-    booking.staus = "cancelled";
+    booking.staus = "cancel";
     // If booking is cancelled, set checkInDate and checkOutDate to null
     if (booking.staus === "cancel") {
       booking.checkInDate = null;

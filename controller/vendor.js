@@ -10,23 +10,110 @@ const User=require("../model/user/user")
 
 require("dotenv").config();
 
+// const index = async (req, res) => {
+//   try {
+//     if (req.cookies.vendor_jwt) {
+//       const decodedToken = jwt.verify(
+//         req.cookies.vendor_jwt,
+//         process.env.JWT_SECRET
+//       );
+//       console.log(decodedToken);
+//       const vendorId = decodedToken.id;
+//       console.log(vendorId);
+//       const vendor = await Vendor.findById(vendorId);
+//           const user=await User.find()
+//        const booking= user.booking
+//      console.log("ttt",booking)
+
+        
+
+//       res.render("vendor/index", { vendor });
+//     }
+
+//     //   console.log(vendor);
+//     // res.render('vendor/index',{vendor});
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Internal Server Error");
+//   }
+// };
+
+
 const index = async (req, res) => {
   try {
     if (req.cookies.vendor_jwt) {
-      const decodedToken = jwt.verify(
-        req.cookies.vendor_jwt,
-        process.env.JWT_SECRET
-      );
-      console.log(decodedToken);
+      const decodedToken = jwt.verify(req.cookies.vendor_jwt, process.env.JWT_SECRET);
       const vendorId = decodedToken.id;
-      console.log(vendorId);
+      
+      // Retrieve vendor information
       const vendor = await Vendor.findById(vendorId);
+      
+      const bookingCounts = await User.aggregate([
+        { $unwind: '$booking' },
+        { $group: { _id: '$booking.room.roomid', count: { $sum: 1 } } }
+    ]);
+    
+    // Retrieve the IDs of rooms with bookings
+    const roomIdsWithBookings = bookingCounts.map(booking => booking._id);
+    
+    const rooms = await Room.find({ 
+      _id: { $in: roomIdsWithBookings }, 
+      vendor: vendorId // Only retrieve rooms owned by the same vendor
+  });
 
-      res.render("vendor/index", { vendor });
+    const roomData = rooms.map(room => {
+      // Find the corresponding booking count for the room
+      const bookingCount = bookingCounts.find(booking => booking._id.toString() === room._id.toString());
+      // If booking count is found, return the count, otherwise return 0
+      const totalBookings = bookingCount ? bookingCount.count : 0;
+      return { roomName: room.roomName, bookingCount: totalBookings };
+  });
+
+  const totalBookings = bookingCounts.reduce((total, booking) => total + booking.count, 0);
+  
+  console.log("Room Data:",totalBookings );
+
+
+  const vendorRooms = await Room.find({ vendor: vendorId });
+
+  // Step 2: Extract Room IDs
+  const roomIds = vendorRooms.map(room => room._id);
+
+  const bookedUser = await User.find({ 'booking.room.roomid': { $in: roomIds } });
+   console.log("fff",bookedUser);
+
+
+ 
+  let totalPrice = []
+  
+ 
+
+       
+  bookedUser.forEach(user => {
+      
+      user.booking.forEach(booking => {
+         
+        totalPrice.push(booking.price);
+      });
+  });
+
+  let total=totalPrice.reduce((a,b)=>a+b,0)
+  
+  const bookedUsers = await User.distinct('userName', { 'booking.room.roomid': { $in: roomIds } });
+
+ 
+  const bookedUsersCount = bookedUsers.length;
+  
+  console.log("User Counts:", bookedUsersCount,total);
+
+
+  
+    
+
+      res.render("vendor/index", { vendor, totalBookings,bookedUsersCount,total });
+    } else {
+      res.status(401).send("Unauthorized");
     }
-
-    //   console.log(vendor);
-    // res.render('vendor/index',{vendor});
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -134,7 +221,8 @@ const signout = async (req, res) => {
 const roomgetPage = async (req, res) => {
   try {
     // Fetch room data from the database
-    const rooms = await Room.find();
+    const rooms = await Room.find({vendor:req.user.id});
+
     // console.log(rooms);
     // Render the template and pass the room data
     res.render("vendor/roomlist", { rooms });
@@ -145,6 +233,7 @@ const roomgetPage = async (req, res) => {
   // res.render("vendor/roomlist")
 };
 const getaddproduect = async (req, res) => {
+ 
   try {
     const adminData = await Admin.findOne();
     let Category = [];
@@ -166,6 +255,8 @@ const getaddproduect = async (req, res) => {
 };
 
 const postaddroom = async (req, res) => {
+  const  vendorId = req.user.id
+
   // console.log("req.files:", req.files);
   const roomImages = req.files; // Assuming this is an array of files
   const roomData = req.body;
@@ -200,8 +291,10 @@ const postaddroom = async (req, res) => {
       roomImages: imageUrls,
       amenities:roomData.amenities,
       bedtype,
-      guest
-    });
+      guest,
+      vendor: vendorId
+
+    })
 
     await newRoom.save();
 

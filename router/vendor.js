@@ -21,8 +21,8 @@
       router.get("/vendor/login",vendorController.getlogin)
       router.post("/vendor/login",vendorController.postLogin)
       router.get("/vendor/signout",vendorController.signout)
-      router.get("/vendor/roomlist",vendorController.roomgetPage)
-      router.get("/vendor/addproduct",vendorController.getaddproduect)
+      router.get("/vendor/roomlist",vendorAuth,vendorController.roomgetPage)
+      router.get("/vendor/addproduct",vendorAuth,vendorController.getaddproduect)
 
       router.post("/vendor/addroom",vendorAuth, upload.array('roomImage',3),vendorController.postaddroom)
       router.get("/vendor/editroom/:id",vendorController.getEditRoompage)

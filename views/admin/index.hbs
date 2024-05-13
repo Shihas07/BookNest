@@ -27,6 +27,12 @@
 
         <!-- Icons css -->
         <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+        {{!-- <style>
+            #myChart{
+                width: 10px;
+            }
+        </style> --}}
     </head>
 
     <body>
@@ -529,7 +535,7 @@
                         <!-- end page title -->
 
                         <div class="row">
-                            <div class="col-xxl-3 col-sm-6">
+                            {{!-- <div class="col-xxl-3 col-sm-6">
                                 <div class="card widget-flat text-bg-pink">
                                     <div class="card-body">
                                         <div class="float-end">
@@ -543,7 +549,7 @@
                                         </p>
                                     </div>
                                 </div>
-                            </div> <!-- end col-->
+                            </div> <!-- end col--> --}}
                             {{#if total}}
 
                             <div class="col-xxl-3 col-sm-6">
@@ -602,127 +608,127 @@
                         </div>
                         {{/if}}
 
-                              <canvas id="myChart" width="400" height="400"></canvas>
-                              <script>
-                                const config = {
-                      type: 'doughnut',
-                        data: data,
-                   options: {
-                   responsive: true,
-                               plugins: {
-                           legend: {
-                           position: 'top',
-                    },
-                      title: {
-                        display: true,
-                         text: 'Chart.js Doughnut Chart'
-                                                    }
-                                                          }
-                             },
-                           };</script>
+       
+<input type="hidden" name="" id="dataForChart" value="{{bookingsByMonthJSON}}">
 
-                        {{!-- <div class="row">
-                            <div class="col-lg-8">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="card-widgets">
-                                            <a href="javascript:;" data-bs-toggle="reload"><i class="ri-refresh-line"></i></a>
-                                            <a data-bs-toggle="collapse" href="#weeklysales-collapse" role="button" aria-expanded="false" aria-controls="weeklysales-collapse"><i class="ri-subtract-line"></i></a>
-                                            <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
-                                        </div>
-                                        <h5 class="header-title mb-0">Weekly Sales Report</h5>
+<div >
+    <h1>Monthly booking summary</h1>
+  <canvas   id="myChart"></canvas>
+</div>
 
-                                        <div id="weeklysales-collapse" class="collapse pt-3 show">
-                                            <div dir="ltr">
-                                                <div id="revenue-chart" class="apex-charts" data-colors="#3bc0c3,#1a2942,#d1d7d973"></div>
-                                            </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const ctx = document.getElementById('myChart');
+
     
-                                            <div class="row text-center">
-                                                <div class="col">
-                                                    <p class="text-muted mt-3">Current Week</p>
-                                                    <h3 class=" mb-0">
-                                                        <span>$506.54</span>
-                                                    </h3>
-                                                </div>
-                                                <div class="col">
-                                                    <p class="text-muted mt-3">Previous Week</p>
-                                                    <h3 class=" mb-0">
-                                                        <span>$305.25 </span>
-                                                    </h3>
-                                                </div>
-                                                <div class="col">
-                                                    <p class="text-muted mt-3">Conversation</p>
-                                                    <h3 class=" mb-0">
-                                                        <span>3.27%</span>
-                                                    </h3>
-                                                </div>
-                                                <div class="col">
-                                                    <p class="text-muted mt-3">Customers</p>
-                                                    <h3 class=" mb-0">
-                                                        <span>3k</span>
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
+    const dataForChartInput = document.getElementById('dataForChart');
+    const bookingsByMonthJSON = dataForChartInput.value;
+       console.log("kfksffk",bookingsByMonthJSON)
+    
+    const bookingsByMonth = JSON.parse(bookingsByMonthJSON);
 
-                                    </div> <!-- end card-body-->
-                                </div> <!-- end card-->
-                            </div> <!-- end col-->
-                            <div class="col-lg-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="card-widgets">
-                                            <a href="javascript:;" data-bs-toggle="reload"><i class="ri-refresh-line"></i></a>
-                                            <a data-bs-toggle="collapse" href="#yearly-sales-collapse" role="button" aria-expanded="false" aria-controls="yearly-sales-collapse"><i class="ri-subtract-line"></i></a>
-                                            <a href="#" data-bs-toggle="remove"><i class="ri-close-line"></i></a>
-                                        </div>
-                                        <h5 class="header-title mb-0">Yearly Sales Report</h5>
+   
+    const monthNames = Object.keys(bookingsByMonth)
+    const data = Object.values(bookingsByMonth);
 
-                                        <div id="yearly-sales-collapse" class="collapse pt-3 show">
-                                            <div dir="ltr">
-                                                <div id="yearly-sales-chart" class="apex-charts" data-colors="#3bc0c3,#1a2942,#d1d7d973"></div>
-                                            </div>
-                                            <div class="row text-center">
-                                                <div class="col">
-                                                    <p class="text-muted mt-3 mb-2">Quarter 1</p>
-                                                    <h4 class="mb-0">$56.2k</h4>
-                                                </div>
-                                                <div class="col">
-                                                    <p class="text-muted mt-3 mb-2">Quarter 2</p>
-                                                    <h4 class="mb-0">$42.5k</h4>
-                                                </div>
-                                                <div class="col">
-                                                    <p class="text-muted mt-3 mb-2">All Time</p>
-                                                    <h4 class="mb-0">$102.03k</h4>
-                                                </div>
-                                            </div>
-                                        </div>
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: monthNames,
+        datasets: [{
+          label: '# of Bookings',
+          data: data,
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  });
 
-                                    </div> <!-- end card-body-->
-                                </div> <!-- end card-->
+    
+    
+     
+</script>
 
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex align-items-center">
-                                            <div class="flex-grow-1 overflow-hidden">
-                                                <h4 class="fs-22 fw-semibold">69.25%</h4>
-                                                <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> US Dollar Share</p>
-                                            </div>
-                                            <div class="flex-shrink-0">
-                                                <div id="us-share-chart" class="apex-charts" dir="ltr"></div>
-                                            </div>
-                                        </div>
-                                    </div><!-- end card body -->
-                                </div> <!-- end card-->
-                            </div> <!-- end col-->
 
-                        </div> --}}
-                        <!-- end row -->
+ <input type="hidden" name="" id="dougnutchart" value="{{roomDatajson}}">
+<div style="height: 300px;">
+    <h1>BOOKING SUMMAREY BASED ON ROOMS</h1>
+  <canvas id="myChart2"></canvas>
+</div>
+ 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const ctx = document.getElementById('myChart2');
+
+  const dougnutchartInput = document.getElementById('dougnutchart');
+  const roomDataJSON = dougnutchartInput.value;
+  console.log(roomDataJSON)
+  const roomData = JSON.parse(roomDataJSON);
+
+    const roomNames = Object.keys(roomData)
+    const counts = Object.values(roomData);
+
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: roomNames,
+      datasets: [{
+        label: '# of Bookings',
+        data:counts,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(54, 162, 235, 0.5)',
+          'rgba(255, 205, 86, 0.5)',
+          'rgba(75, 192, 192, 0.5)',
+          'rgba(153, 102, 255, 0.5)',
+          'rgba(255, 159, 64, 0.5)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 205, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Room Bookings'
+        }
+      }
+    }
+  });
+});
+</script>
+
+
+                        
                         
 
                     </div>
-                    <!-- container -->
+                   
 
                 </div> 
                 <!-- content -->

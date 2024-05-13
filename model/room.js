@@ -2,7 +2,7 @@
    const mongoose= require("mongoose")
    
    const roomschema=new mongoose.Schema({
-         
+       
          roomName: {
             type:String,
          },
@@ -34,7 +34,11 @@
             guest:{
                 
               type:Number
-            }
+            },
+            vendor: {
+              type: mongoose.Schema.Types.ObjectId,
+              ref: 'Vendor'
+          }
 
    })
 
