@@ -381,8 +381,19 @@ const getroompage = async (req, res) => {
      
       const wishlistRooms = await Rooms.find({ _id: { $in: roomIds } });
       console.log("wihl", wishlistRooms);
+
+      const admin = await Admin.find({}, { banner: 1 });
+
+      const banners = admin.flatMap(adminDoc =>
+          adminDoc.banner.flatMap(banner => ({
+              bannerName: banner.bannerName,
+              bannerHead: banner.bannerHead,
+              bannerImages: banner.bannerImages.map(image => image)
+          }))
+      );
+        console.log("admin",banners)
       
-      res.render("user/room-grid-style", { rooms, wishlistRooms, user, roomIds });
+      res.render("user/room-grid-style", { rooms, wishlistRooms, user, roomIds, banners });
     } else {
      
       res.render("user/room-grid-style", { rooms, user });
@@ -395,12 +406,10 @@ const getroompage = async (req, res) => {
 
 const getsingleroom = async (req, res) => {
   const id = req.query.id;
-  // console.log(req.query);
-
-  // console.log(id);
+  
 
   const room = await Rooms.findById(id);
-  // console.log("vasu",room);
+ 
 
   res.render("user/singleroom", { room });
 };

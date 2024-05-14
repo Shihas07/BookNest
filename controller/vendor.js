@@ -69,9 +69,14 @@ const index = async (req, res) => {
       return { roomName: room.roomName, bookingCount: totalBookings };
   });
 
+  const roomDataFormatted = roomData.reduce((acc, { roomName, bookingCount }) => {
+    acc[roomName] = bookingCount;
+    return acc;
+  }, {});
+
   const totalBookings = bookingCounts.reduce((total, booking) => total + booking.count, 0);
   
-  console.log("Room Data:",totalBookings );
+  console.log("Room Data:",totalBookings,roomData );
 
 
   const vendorRooms = await Room.find({ vendor: vendorId });
@@ -107,10 +112,39 @@ const index = async (req, res) => {
   console.log("User Counts:", bookedUsersCount,total);
 
 
-  
+     //chart monthly booking//
+     const getMonthName = (monthNumber) => {
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      return monthNames[monthNumber];
+    };
+    
+    const bookingsByMonth = {};
+    
+    // Initialize counts for all months
+    for (let i = 0; i < 12; i++) {
+        const monthName = getMonthName(i);
+        bookingsByMonth[monthName] = 0;
+    }
+    
+    // Count bookings by month
+    bookedUser.forEach(user => {
+        user.booking.forEach(booking => {
+            const bookingMonth = new Date(booking.checkInDate).getMonth(); // Get month (0-indexed)
+            const monthName = getMonthName(bookingMonth);
+            bookingsByMonth[monthName]++;
+        });
+    });
+   
+    const bookingsByMonthJSON = JSON.stringify(bookingsByMonth);
+    console.log(bookingsByMonthJSON);
+
     
 
-      res.render("vendor/index", { vendor, totalBookings,bookedUsersCount,total });
+       ///roomname and count
+    console.log(roomDataFormatted);
+    const roomDataJson = JSON.stringify(roomDataFormatted);
+
+      res.render("vendor/index", { vendor, totalBookings,bookedUsersCount,total,bookingsByMonthJSON,roomDataJson});
     } else {
       res.status(401).send("Unauthorized");
     }
@@ -119,6 +153,9 @@ const index = async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 };
+
+
+
 
 const signupGetPage = async (req, res) => {
   res.render("vendor/register");

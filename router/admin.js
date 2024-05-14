@@ -3,6 +3,8 @@
   const router=  express.Router()
   const adminController = require("../controller/admin")
 const adminAuth = require("../midilware/admin_jwt")
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
   // const adminAuth = require('../midilware/admin_jwt');
 
@@ -34,6 +36,10 @@ const adminAuth = require("../midilware/admin_jwt")
      router.post("/admin/cancelbooking",adminController.postCancelBooking)
 
      router.post("/bookingreport",adminAuth,adminController.postBookingreport)
+     router.post("/admin/addbanner",adminAuth,upload.single('img'),adminController.postBanner)
+     router.get("/admin/listbanner",adminController.getlistBanner)
+     router.post("/admin/bannerdelete/:id", adminController.deletebanner);
+
 
      
 

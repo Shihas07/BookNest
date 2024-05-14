@@ -7,6 +7,7 @@
      const nodemailer=require("nodemailer")
      const Rooms=require("../model/room")
      const Excel = require('exceljs');
+     const cloudinary = require("../config/cloudinary");
 const { json } = require("body-parser")
 
 
@@ -662,15 +663,87 @@ const postCancelBooking = async (req, res) => {
     }
 };
 
+const postBanner = async (req, res) => {
+  try {
+    const img = req.file; // Single file object, not an array
+    const roomData = req.body;
+    
+    const { bname, heading } = roomData;
+
+    // Upload the single file to Cloudinary
+    const result = await cloudinary.uploader.upload(img.path);
+    const imageUrl = result.secure_url;
+
+    // Create a new banner object
+    const newBanner = {
+      bannerName: bname,
+      bannerImages: [imageUrl], // Storing the image URL in an array
+      bannerHead: heading
+    };
+
+    // Find the admin by ID or any other unique identifier
+    const adminId = req.admin.id; // Assuming you have authentication middleware that adds the user ID to req.user
+         
+    // Find the admin by ID
+    const admin = await Admin.findById(adminId);
+ console.log(admin)
+    // Add the new banner to the admin's banners array
+    admin.banner.push(newBanner);
+
+    // Save the updated admin document to the database
+    await admin.save();
+
+    // Send a success response
+    res.status(200).redirect("/admin/index");
+  } catch (error) {
+    // Handle any errors
+    console.error('Error:', error);
+    // Send an error response
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+
+    const getlistBanner=async(req,res)=>{
+      const admin = await Admin.find({}, { banner: 1 });
+
+      const banners = admin.flatMap(adminDoc =>
+          adminDoc.banner.flatMap(banner => ({
+              bannerName: banner.bannerName,
+              bannerHead: banner.bannerHead,
+              bannerImages: banner.bannerImages.map(image => image),
+              id: banner._id
+          }))
+      );
+        console.log("admin",banners)
+         res.render("admin/listbanner",{banners})
+    }
+            
+      
+const deletebanner = async (req, res) => {
+  try {
+    const bannerId = req.params.id;
+    console.log("Banner ID to delete:", bannerId);
+
    
-            
-          
-            
+    const updatedAdmin = await Admin.findOneAndUpdate(
+      { 'banner._id': bannerId },
+      { $pull: { banner: { _id: bannerId } } },
+      { new: true }
+    );
 
+    if (!updatedAdmin) {
+      return res.status(404).json({ message: 'Banner not found' });
+    }
 
+    res.status(200).redirect("/admin/listbanner");
+  } catch (error) {
+    console.error('Error deleting banner:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
      module.exports = {
-        
-        index,
+            index,
         adminSignup,
         login,
         loginPostPage,
@@ -686,7 +759,10 @@ const postCancelBooking = async (req, res) => {
         deletecouponpost,
         getbooking,
         postCancelBooking,
-        postBookingreport
+        postBookingreport,
+        postBanner,
+        getlistBanner,
+        deletebanner
      }
 
 

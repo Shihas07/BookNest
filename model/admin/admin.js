@@ -44,10 +44,21 @@
         default:Date.now
       }
 
+   }],
+   banner:[{
+     bannerName:{
+      type:String
+     },
+     bannerImages:{
+      type:Array
+     },
+     bannerHead:{
+      type:String
+     }
    }]
   
 })
   
-const Admin = mongoose.model("Admin", adminSchema); // Create User model
+const Admin = mongoose.model("Admin", adminSchema); 
 
 module.exports = Admin;

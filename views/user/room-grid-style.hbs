@@ -40,6 +40,12 @@
     />
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+     <style>.with-background-image {
+    background-image: url('');
+    
+}
+</style>
 </head>
 
 <body
@@ -171,14 +177,34 @@
                 <!-- header -->
             </div>
 
+{{#if banners}}
+<div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    {{#each banners}}
+    <div class="carousel-item {{#if @first}}active{{/if}}">
+      <div class="hotale-page-title-wrap hotale-style-custom hotale-center-align with-background-image" style="background-image: url('{{this.bannerImages.[0]}}')">
+        <div class="hotale-header-transparent-substitute"></div>
+        <div class="hotale-page-title-overlay"></div>
+        <div class="hotale-page-title-container hotale-container">
+          <div class="hotale-page-title-content hotale-item-pdlr">
+            <h1 class="hotale-page-title">{{this.bannerHead}}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+{{/if}}
 
-             <div class="hotale-page-title-wrap hotale-style-custom hotale-center-align">
-                <div class="hotale-header-transparent-substitute"></div>
-                <div class="hotale-page-title-overlay"></div>
-                <div class="hotale-page-title-container hotale-container"> 
-                    <div class="hotale-page-title-content hotale-item-pdlr"><h1 class="hotale-page-title">Room Grid Style 1</h1></div>
-                </div>
-            </div>
 
 
 {{!--             
@@ -497,6 +523,10 @@
         }; 
         /* ]]> */
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/5.5.2/js/bootstrap.min.js"></script>
+
     <script type="text/javascript" src="js/plugins/tourmaster/tourmaster.js" id="tourmaster-script-js"></script>
     <script type="text/javascript" src="js/plugins/tourmaster/room/tourmaster-room.js" id="tourmaster-room-script-js"></script>
     <script type="text/javascript" src="js/plugins/jquery.mmenu.js" id="hotale-jquery-mmenu-js"></script>

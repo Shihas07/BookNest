@@ -2,37 +2,62 @@
 <html lang="en">
 
     
-<!-- Mirrored from techzaa.getappui.com/velonic/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Mar 2024 09:35:08 GMT -->
+<!-- Mirrored from techzaa.getappui.com/velonic/layouts/pages-starter.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Mar 2024 09:36:18 GMT -->
 <head>
         <meta charset="utf-8" />
-        <title>Dashboard | Velonic - Bootstrap 5 Admin & Dashboard Template</title>
+        <title>Starter Page | Velonic - Bootstrap 5 Admin & Dashboard Template</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
         <meta content="Techzaa" name="author" />
 
         <!-- App favicon -->
-        <link rel="shortcut icon" href="/admin/assets/images/favicon.ico">
-
-        <!-- Daterangepicker css -->
-        <link rel="stylesheet" href="/admin/assets/vendor/daterangepicker/daterangepicker.css">
-
-        <!-- Vector Map css -->
-        <link rel="stylesheet" href="/admin/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css">
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- Bootstrap JS and its dependencies (jQuery and Popper) -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
         <!-- Theme Config Js -->
-        <script src="/admin/assets/js/config.js"></script>
+        <script src="assets/js/config.js"></script>
 
         <!-- App css -->
-        <link href="/admin/assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
+        <link href="assets/css/app.min.css" rel="stylesheet" type="text/css" id="app-style" />
 
         <!-- Icons css -->
-        <link href="/admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/icons.min.css" rel="stylesheet" type="text/css" />
 
-        {{!-- <style>
-            #myChart{
-                width: 10px;
-            }
-        </style> --}}
+         <style>
+  /* Table styles */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  /* Image styles */
+  img {
+    max-width: 100px;
+    height: auto;
+  }
+
+  /* Link styles */
+  a {
+    text-decoration: none;
+    color: rgb(98, 98, 195);
+    margin-right: 5px;
+  }
+</style>
     </head>
 
     <body>
@@ -50,20 +75,20 @@
                             <!-- Logo light -->
                             <a href="index.html" class="logo-light">
                                 <span class="logo-lg">
-                                    <img src="/admin/assets/images/logo.png" alt="logo">
+                                    <img src="assets/images/logo.png" alt="logo">
                                 </span>
                                 <span class="logo-sm">
-                                    <img src="/admin/assets/images/logo-sm.png" alt="small logo">
+                                    <img src="assets/images/logo-sm.png" alt="small logo">
                                 </span>
                             </a>
 
                             <!-- Logo Dark -->
                             <a href="index.html" class="logo-dark">
                                 <span class="logo-lg">
-                                    <img src="/admin/assets/images/logo-dark.png" alt="dark logo">
+                                    <img src="assets/images/logo-dark.png" alt="dark logo">
                                 </span>
                                 <span class="logo-sm">
-                                    <img src="/admin/assets/images/logo-sm.png" alt="small logo">
+                                    <img src="assets/images/logo-sm.png" alt="small logo">
                                 </span>
                             </a>
                         </div>
@@ -110,7 +135,7 @@
                         <li class="dropdown">
                             <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
                                 aria-haspopup="false" aria-expanded="false">
-                                <img src="/admin/assets/images/flags/us.jpg" alt="user-image" class="me-0 me-sm-1" height="12">
+                                <img src="assets/images/flags/us.jpg" alt="user-image" class="me-0 me-sm-1" height="12">
                                 <span class="align-middle d-none d-lg-inline-block">English</span> <i
                                     class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i>
                             </a>
@@ -118,25 +143,25 @@
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="/admin/assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span
+                                    <img src="assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span
                                         class="align-middle">German</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="/admin/assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span
+                                    <img src="assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span
                                         class="align-middle">Italian</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="/admin/assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span
+                                    <img src="assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span
                                         class="align-middle">Spanish</span>
                                 </a>
 
                                 <!-- item-->
                                 <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="/admin/assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span
+                                    <img src="assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span
                                         class="align-middle">Russian</span>
                                 </a>
 
@@ -172,7 +197,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <div class="notify-icon">
-                                                        <img src="/admin/assets/images/users/avatar-1.jpg" class="img-fluid rounded-circle"
+                                                        <img src="assets/images/users/avatar-1.jpg" class="img-fluid rounded-circle"
                                                             alt="" />
                                                     </div>
                                                 </div>
@@ -193,7 +218,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <div class="notify-icon">
-                                                        <img src="/admin/assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle"
+                                                        <img src="assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle"
                                                             alt="" />
                                                     </div>
                                                 </div>
@@ -213,7 +238,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <div class="notify-icon">
-                                                        <img src="/admin/assets/images/users/avatar-3.jpg" class="img-fluid rounded-circle"
+                                                        <img src="assets/images/users/avatar-3.jpg" class="img-fluid rounded-circle"
                                                             alt="" />
                                                     </div>
                                                 </div>
@@ -233,7 +258,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <div class="notify-icon">
-                                                        <img src="/admin/assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle"
+                                                        <img src="assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle"
                                                             alt="" />
                                                     </div>
                                                 </div>
@@ -254,7 +279,7 @@
                                             <div class="d-flex align-items-center">
                                                 <div class="flex-shrink-0">
                                                     <div class="notify-icon">
-                                                        <img src="/admin/assets/images/users/avatar-5.jpg" class="img-fluid rounded-circle"
+                                                        <img src="assets/images/users/avatar-5.jpg" class="img-fluid rounded-circle"
                                                             alt="" />
                                                     </div>
                                                 </div>
@@ -381,39 +406,53 @@
                         </li>
 
                         <li class="dropdown">
-    <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#" role="button"
-        aria-haspopup="false" aria-expanded="false">
-        {{#if admin}}
-        <span class="account-user-avatar">
-            <img src="/admin/assets/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle">
-        </span>
-        <span class="d-lg-block d-none">
-            <h5 class="my-0 fw-normal">{{admin.[0].adminName}} <i
-                    class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i></h5>
-        </span>
-        {{/if}}
-    </a>
-    <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
-        <!-- item-->
-        <div class=" dropdown-header noti-title">
-            {{#if admin}}
-            <h6 class="text-overflow m-0">Welcome {{admin.[0].adminName}}!</h6>
-            {{/if}}
-        </div>
+                            <a class="nav-link dropdown-toggle arrow-none nav-user" data-bs-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="false" aria-expanded="false">
+                                <span class="account-user-avatar">
+                                    <img src="assets/images/users/avatar-1.jpg" alt="user-image" width="32" class="rounded-circle">
+                                </span>
+                                <span class="d-lg-block d-none">
+                                    <h5 class="my-0 fw-normal">Thomson <i
+                                            class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i></h5>
+                                </span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated profile-dropdown">
+                                <!-- item-->
+                                <div class=" dropdown-header noti-title">
+                                    <h6 class="text-overflow m-0">Welcome !</h6>
+                                </div>
 
-        <!-- item-->
-        <a href="pages-profile.html" class="dropdown-item">
-            <i class="ri-account-circle-line fs-18 align-middle me-1"></i>
-            <span>My Account</span>
+                                <!-- item-->
+                                <a href="pages-profile.html" class="dropdown-item">
+                                    <i class="ri-account-circle-line fs-18 align-middle me-1"></i>
+                                    <span>My Account</span>
+                                </a>
 
-            <a href="/admin/adminLogout" class="dropdown-item">
+                                <!-- item-->
+                                <a href="pages-profile.html" class="dropdown-item">
+                                    <i class="ri-settings-4-line fs-18 align-middle me-1"></i>
+                                    <span>Settings</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="pages-faq.html" class="dropdown-item">
+                                    <i class="ri-customer-service-2-line fs-18 align-middle me-1"></i>
+                                    <span>Support</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="auth-lock-screen.html" class="dropdown-item">
+                                    <i class="ri-lock-password-line fs-18 align-middle me-1"></i>
+                                    <span>Lock Screen</span>
+                                </a>
+
+                                <!-- item-->
+                                <a href="auth-logout-2.html" class="dropdown-item">
                                     <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
                                     <span>Logout</span>
                                 </a>
-        </a>
-    </div>
-</li>
-
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -426,20 +465,20 @@
                 <!-- Brand Logo Light -->
                 <a href="index.html" class="logo logo-light">
                     <span class="logo-lg">
-                        <img src="/admin/assets/images/logo.png" alt="logo">
+                        <img src="assets/images/logo.png" alt="logo">
                     </span>
                     <span class="logo-sm">
-                        <img src="/admin/assets/images/logo-sm.png" alt="small logo">
+                        <img src="assets/images/logo-sm.png" alt="small logo">
                     </span>
                 </a>
 
                 <!-- Brand Logo Dark -->
                 <a href="index.html" class="logo logo-dark">
                     <span class="logo-lg">
-                        <img src="/admin/assets/images/logo-dark.png" alt="dark logo">
+                        <img src="assets/images/logo-dark.png" alt="dark logo">
                     </span>
                     <span class="logo-sm">
-                        <img src="/admin/assets/images/logo-sm.png" alt="small logo">
+                        <img src="assets/images/logo-sm.png" alt="small logo">
                     </span>
                 </a>
 
@@ -467,26 +506,34 @@
                             <div class="collapse" id="sidebarPages">
                                 <ul class="side-nav-second-level">
                                     <li>
-                                        <a href="/admin/category">room</a>
+                                        <a href="pages-starter.html">Starter Page</a>
                                     </li>
                                     <li>
-                                        <a href="/admin/userlist">User List</a>
+                                        <a href="pages-contact-list.html">Contact List</a>
                                     </li>
                                     <li>
                                         <a href="pages-profile.html">Profile</a>
                                     </li>
                                     <li>
-                                        <a href="/admin/coupen">coupen   </a>
+                                        <a href="pages-timeline.html">Timeline</a>
                                     </li>
                                     <li>
-                                        <a href="/admin/booking">BOOKING</a>
+                                        <a href="pages-invoice.html">Invoice</a>
                                     </li>
-                                   
-                                    
-                                    
-                                    
                                     <li>
-                                        <a href="/admin/listbanner">Banner</a>
+                                        <a href="pages-faq.html">FAQ</a>
+                                    </li>
+                                    <li>
+                                        <a href="pages-pricing.html">Pricing</a>
+                                    </li>
+                                    <li>
+                                        <a href="pages-maintenance.html">Maintenance</a>
+                                    </li>
+                                    <li>
+                                        <a href="error-404.html">Error 404</a>
+                                    </li>
+                                    <li>
+                                        <a href="error-404-alt.html">Error 404-alt</a>
                                     </li>
                                     <li>
                                         <a href="error-500.html">Error 500</a>
@@ -495,13 +542,363 @@
                             </div>
                         </li>
 
-                     
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarPagesAuth" aria-expanded="false" aria-controls="sidebarPagesAuth" class="side-nav-link">
+                                <i class="ri-group-2-line"></i>
+                                <span> Authentication </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarPagesAuth">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="auth-login.html">Login</a>
+                                    </li>
+                                    <li>
+                                        <a href="auth-register.html">Register</a>
+                                    </li>
+                                    <li>
+                                        <a href="auth-logout.html">Logout</a>
+                                    </li>
+                                    <li>
+                                        <a href="auth-forgotpw.html">Forgot Password</a>
+                                    </li>
+                                    <li>
+                                        <a href="auth-lock-screen.html">Lock Screen</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarLayouts" aria-expanded="false" aria-controls="sidebarLayouts" class="side-nav-link">
+                                <i class="ri-layout-line"></i>
+                                <span class="badge bg-warning float-end">New</span>
+                                <span> Layouts </span>
+                            </a>
+                            <div class="collapse" id="sidebarLayouts">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="layouts-horizontal.html" target="_blank">Horizontal</a>
+                                    </li>
+                                    <li>
+                                        <a href="layouts-light-sidebar.html" target="_blank">Light Sidebar</a>
+                                    </li>
+                                    <li>
+                                        <a href="layouts-sm-sidebar.html" target="_blank">Small Sidebar</a>
+                                    </li>
+                                    <li>
+                                        <a href="layouts-collapsed-sidebar.html" target="_blank">Collapsed Sidebar</a>
+                                    </li>
+                                    <li>
+                                        <a href="layouts-unsticky-layout.html" target="_blank">Unsticky Layout</a>
+                                    </li>
+                                    <li>
+                                        <a href="layouts-boxed.html" target="_blank">Boxed Layout</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-title">Components</li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarBaseUI" aria-expanded="false" aria-controls="sidebarBaseUI" class="side-nav-link">
+                                <i class="ri-briefcase-line"></i>
+                                <span> Base UI </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarBaseUI">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="ui-accordions.html">Accordions</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-alerts.html">Alerts</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-avatars.html">Avatars</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-buttons.html">Buttons</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-badges.html">Badges</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-breadcrumb.html">Breadcrumb</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-cards.html">Cards</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-carousel.html">Carousel</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-collapse.html">Collapse</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-dropdowns.html">Dropdowns</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-embed-video.html">Embed Video</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-grid.html">Grid</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-links.html">Links</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-list-group.html">List Group</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-modals.html">Modals</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-notifications.html">Notifications</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-offcanvas.html">Offcanvas</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-placeholders.html">Placeholders</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-pagination.html">Pagination</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-popovers.html">Popovers</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-progress.html">Progress</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-spinners.html">Spinners</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-tabs.html">Tabs</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-tooltips.html">Tooltips</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-typography.html">Typography</a>
+                                    </li>
+                                    <li>
+                                        <a href="ui-utilities.html">Utilities</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarExtendedUI" aria-expanded="false" aria-controls="sidebarExtendedUI" class="side-nav-link">
+                                <i class="ri-compasses-2-line"></i>
+                                <span> Extended UI </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarExtendedUI">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="extended-portlets.html">Portlets</a>
+                                    </li>
+                                    <li>
+                                        <a href="extended-scrollbar.html">Scrollbar</a>
+                                    </li>
+                                    <li>
+                                        <a href="extended-range-slider.html">Range Slider</a>
+                                    </li>
+                                    <li>
+                                        <a href="extended-scrollspy.html">Scrollspy</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarIcons" aria-expanded="false" aria-controls="sidebarIcons" class="side-nav-link">
+                                <i class="ri-pencil-ruler-2-line"></i>
+                                <span> Icons </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarIcons">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="icons-remixicons.html">Remix Icons</a>
+                                    </li>
+                                    <li>
+                                        <a href="icons-bootstrap.html">Bootstrap Icons</a>
+                                    </li>
+                                    <li>
+                                        <a href="icons-mdi.html">Material Design Icons</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarCharts" aria-expanded="false" aria-controls="sidebarCharts" class="side-nav-link">
+                                <i class="ri-donut-chart-fill"></i>
+                                <span> Charts </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarCharts">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="charts-apex.html">Apex Charts</a>
+                                    </li>
+                                    <li>
+                                        <a href="charts-chartjs.html">Chartjs</a>
+                                    </li>
+                                    <li>
+                                        <a href="charts-sparklines.html">Sparkline Charts</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarForms" aria-expanded="false" aria-controls="sidebarForms" class="side-nav-link">
+                                <i class="ri-survey-line"></i>
+                                <span> Forms </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarForms">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="form-elements.html">Basic Elements</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-advanced.html">Form Advanced</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-validation.html">Form Validation</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-wizard.html">Form Wizard</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-fileuploads.html">File Uploads</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-editors.html">Form Editors</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-image-crop.html">Image Crop</a>
+                                    </li>
+                                    <li>
+                                        <a href="form-x-editable.html">X Editable</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarTables" aria-expanded="false" aria-controls="sidebarTables" class="side-nav-link">
+                                <i class="ri-table-line"></i>
+                                <span> Tables </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarTables">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="tables-basic.html">Basic Tables</a>
+                                    </li>
+                                    <li>
+                                        <a href="tables-datatable.html">Data Tables</a>
+                                    </li>
+                                    <li>
+                                        <a href="tables-editable.html">Editable Tables</a>
+                                    </li>
+                                    <li>
+                                        <a href="tables-responsive.html">Responsive Table</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarMaps" aria-expanded="false" aria-controls="sidebarMaps" class="side-nav-link">
+                                <i class="ri-map-pin-line"></i>
+                                <span> Maps </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarMaps">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="maps-google.html">Google Maps</a>
+                                    </li>
+                                    <li>
+                                        <a href="maps-vector.html">Vector Maps</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="side-nav-item">
+                            <a data-bs-toggle="collapse" href="#sidebarMultiLevel" aria-expanded="false" aria-controls="sidebarMultiLevel" class="side-nav-link">
+                                <i class="ri-share-line"></i>
+                                <span> Multi Level </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="sidebarMultiLevel">
+                                <ul class="side-nav-second-level">
+                                    <li>
+                                        <a href="javascript: void(0);">Level 1.1</a>
+                                    </li>
+                                    <li class="side-nav-item">
+                                        <a data-bs-toggle="collapse" href="#sidebarSecondLevel" aria-expanded="false" aria-controls="sidebarSecondLevel">
+                                            <span> Level 1.2 </span>
+                                            <span class="menu-arrow"></span>
+                                        </a>
+                                        <div class="collapse" id="sidebarSecondLevel">
+                                            <ul class="side-nav-third-level">
+                                                <li>
+                                                    <a href="javascript: void(0);">Item 1</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript: void(0);">Item 2</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="side-nav-item">
+                                        <a data-bs-toggle="collapse" href="#sidebarThirdLevel" aria-expanded="false" aria-controls="sidebarThirdLevel">
+                                            <span> Level 1.3 </span>
+                                            <span class="menu-arrow"></span>
+                                        </a>
+                                        <div class="collapse" id="sidebarThirdLevel">
+                                            <ul class="side-nav-third-level">
+                                                <li>
+                                                    <a href="javascript: void(0);">Item 1</a>
+                                                </li>
+                                                <li class="side-nav-item">
+                                                    <a data-bs-toggle="collapse" href="#sidebarFourthLevel" aria-expanded="false" aria-controls="sidebarFourthLevel">
+                                                        <span> Item 2 </span>
+                                                        <span class="menu-arrow"></span>
+                                                    </a>
+                                                    <div class="collapse" id="sidebarFourthLevel">
+                                                        <ul class="side-nav-forth-level">
+                                                            <li>
+                                                                <a href="javascript: void(0);">Item 2.1</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="javascript: void(0);">Item 2.2</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
 
 
                     </ul>
-                    <!--- End Sidemenu -->
+                    {{!-- <!--- End Sidemenu --> --}}
 
-                    <div class="clearfix"></div>
+                     <div class="clearfix"></div>
                 </div>
             </div>
             <!-- ========== Left Sidebar End ========== -->
@@ -509,295 +906,73 @@
             <!-- ============================================================== -->
             <!-- Start Page Content here -->
             <!-- ============================================================== -->
-            <div class="content-page">
-                <div class="content">
+ <!-- ============================================================== -->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="h6 text-center mb-4">Room Management</h1>
 
-                    <!-- Start Content-->
-                    <div class="container-fluid">
-
-                        <!-- start page title -->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="page-title-box">
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">BookNest</a></li>
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Dashboards</a></li>
-                                            <li class="breadcrumb-item active">Welcome!</li>
-                                        </ol>
-                                    </div>
-                                     {{#if admin}}
-                                    <h4 class="page-title">Welcome!{{admin.[0].adminName}}</h4>
-                                    {{/if}}
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end page title -->
-
-                           {{!-- //modal banner// --}}
-
-
-                        <div style="text-align: center;">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">add banner</button></div>
-
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Banner</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="/admin/addbanner" method="post"  enctype="multipart/form-data" >
-                    <div class="form-group">
-                        <label for="banner-name" class="col-form-label">Banner Name:</label>
-                        <input type="text" class="form-control" id="bannername" name="bname">
-                    </div>
-                    <div class="form-group">
-                        <label for="banner-image" class="col-form-label">Banner Image:</label>
-                        <input type="file" class="form-control-file" id="bannerimage" name="img">
-                    </div>
-                    <div class="form-group">
-                        <label for="banner-heading" class="col-form-label">Banner Heading:</label>
-                        <input type="text" class="form-control" id="bannerheading" name="heading">
-                    </div>
-               
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save Banner</button>
-                 </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-                        <div class="row">
-                            {{!-- <div class="col-xxl-3 col-sm-6">
-                                <div class="card widget-flat text-bg-pink">
-                                    <div class="card-body">
-                                        <div class="float-end">
-                                            <i class="ri-eye-line widget-icon"></i>
-                                        </div>
-                                        <h6 class="text-uppercase mt-0" title="Customers">Daily Visits</h6>
-                                        <h2 class="my-2">8,652</h2>
-                                        <p class="mb-0">
-                                            <span class="badge bg-white bg-opacity-10 me-1">2.97%</span>
-                                            <span class="text-nowrap">Since last month</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div> <!-- end col--> --}}
-                            {{#if total}}
-
-                            <div class="col-xxl-3 col-sm-6">
-                                <div class="card widget-flat text-bg-purple">
-                                    <div class="card-body">
-                                        <div class="float-end">
-                                            <i class="ri-wallet-2-line widget-icon"></i>
-                                        </div>
-                                        <h6 class="text-uppercase mt-0" title="Customers">Revenue</h6>
-                                        <h2 class="my-2">{{total}}</h2>
-                                        <p class="mb-0">
-                                            <span class="badge bg-white bg-opacity-10 me-1"></span>
-                                            <span class="text-nowrap"></span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            {{/if}}
-
-                             <!-- end col-->
-                               {{#if totalBookings}}
-                            <div class="col-xxl-3 col-sm-6">
-                                <div class="card widget-flat text-bg-info">
-                                    <div class="card-body">
-                                        <div class="float-end">
-                                            <i class="ri-shopping-basket-line widget-icon"></i>
-                                        </div>
-                                        <h6 class="text-uppercase mt-0" title="Customers">booking</h6>
-                                        <h2 class="my-2">{{totalBookings}}</h2>
-                                        <p class="mb-0">
-                                            <span class="badge bg-white bg-opacity-25 me-1"></span>
-                                            <span class="text-nowrap"></span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            {{/if}}
-                             <!-- end col-->
-                             {{#if totaluser}}
-
-                            <div class="col-xxl-3 col-sm-6">
-                                <div class="card widget-flat text-bg-primary">
-                                    <div class="card-body">
-                                        <div class="float-end">
-                                            <i class="ri-group-2-line widget-icon"></i>
-                                        </div>
-                                        <h6 class="text-uppercase mt-0" title="Customers">Users</h6>
-                                        <h2 class="my-2">{{totaluser}}</h2>
-                                        <p class="mb-0">
-                                            <span class="badge bg-white bg-opacity-10 me-1"></span>
-                                            <span class="text-nowrap"></span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div> <!-- end col-->
-                        </div>
-                        {{/if}}
-
-       
-<input type="hidden" name="" id="dataForChart" value="{{bookingsByMonthJSON}}">
-
-<div >
-    <h1>Monthly booking summary</h1>
-  <canvas   id="myChart"></canvas>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const ctx = document.getElementById('myChart');
-
-    
-    const dataForChartInput = document.getElementById('dataForChart');
-    const bookingsByMonthJSON = dataForChartInput.value;
-       console.log("kfksffk",bookingsByMonthJSON)
-    
-    const bookingsByMonth = JSON.parse(bookingsByMonthJSON);
-
-   
-    const monthNames = Object.keys(bookingsByMonth)
-    const data = Object.values(bookingsByMonth);
-
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: monthNames,
-        datasets: [{
-          label: '# of Bookings',
-          data: data,
-          backgroundColor: 'rgba(54, 162, 235, 0.2)',
-          borderColor: 'rgba(54, 162, 235, 1)',
-          borderWidth: 1
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-  });
-
-    
-    
-     
-</script>
-
-
- <input type="hidden" name="" id="dougnutchart" value="{{roomDatajson}}">
-<div style="height: 300px;">
-    <h1>BOOKING SUMMAREY BASED ON ROOMS</h1>
-  <canvas id="myChart2"></canvas>
-</div>
+      <!-- Button to trigger Add Room Modal -->
+  
  
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  const ctx = document.getElementById('myChart2');
+<table>
+  <thead>
+    <tr>
+      <th>Banner Name</th>
+      <th>Banner Head</th>
+      <th>Banner Image</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each banners}}
+    <tr>
+      <td>{{this.bannerName}}</td>
+      <td>{{this.bannerHead}}</td>
+      <td>
+        <img src="{{this.bannerImages.[0]}}" alt="Banner Image">
+      </td>
+        <td>
+            {{!-- <input type="text" value="{{this.id}}"> --}}
+      <form action="/admin/bannerdelete/{{id}}" method="POST">
+  <button type="submit" class="btn btn-danger">Delete</button>
+</form>
 
-  const dougnutchartInput = document.getElementById('dougnutchart');
-  const roomDataJSON = dougnutchartInput.value;
-  console.log(roomDataJSON)
-  const roomData = JSON.parse(roomDataJSON);
-
-    const roomNames = Object.keys(roomData)
-    const counts = Object.values(roomData);
-
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: roomNames,
-      datasets: [{
-        label: '# of Bookings',
-        data:counts,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.5)',
-          'rgba(54, 162, 235, 0.5)',
-          'rgba(255, 205, 86, 0.5)',
-          'rgba(75, 192, 192, 0.5)',
-          'rgba(153, 102, 255, 0.5)',
-          'rgba(255, 159, 64, 0.5)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 205, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-        title: {
-          display: true,
-          text: 'Room Bookings'
-        }
-      }
-    }
-  });
-});
-</script>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
 
 
-                        
-                        
 
-                    </div>
-                   
-
-                </div> 
-                <!-- content -->
-
-                <!-- Footer Start -->
+<div>
+{{!--                  
                 <footer class="footer">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-12 text-center">
-                                <script>document.write(new Date().getFullYear())</script> © BookNest - Theme by <b>Techzaa</b>
+                                <script>document.write(new Date().getFullYear())</script> © Velonic - Theme by <b>Techzaa</b>
                             </div>
                         </div>
                     </div>
-                </footer>
+                </footer> --}}
                 <!-- end Footer -->
 
             </div>
 
+
+             
+           
             <!-- ============================================================== -->
             <!-- End Page content -->
             <!-- ============================================================== -->
 
         </div>
         <!-- END wrapper -->
-
-        <!-- Theme Settings -->
+        
+         
         <div class="offcanvas offcanvas-end" tabindex="-1" id="theme-settings-offcanvas">
             <div class="d-flex align-items-center bg-primary p-3 offcanvas-header">
                 <h5 class="text-white m-0">Theme Settings</h5>
@@ -814,7 +989,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div class="form-check form-switch card-switch mb-1">
                                     <input class="form-check-input" type="checkbox" name="data-bs-theme" id="layout-color-light" value="light">
                                     <label class="form-check-label" for="layout-color-light">
-                                        <img src="/admin/assets/images/layouts/light.png" alt="" class="img-fluid">
+                                        <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
                                     </label>
                                 </div>
                                 <h5 class="font-14 text-center text-muted mt-2">Light</h5>
@@ -824,7 +999,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div class="form-check form-switch card-switch mb-1">
                                     <input class="form-check-input" type="checkbox" name="data-bs-theme" id="layout-color-dark" value="dark">
                                     <label class="form-check-label" for="layout-color-dark">
-                                        <img src="/admin/assets/images/layouts/dark.png" alt="" class="img-fluid">
+                                        <img src="assets/images/layouts/dark.png" alt="" class="img-fluid">
                                     </label>
                                 </div>
                                 <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
@@ -839,7 +1014,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-layout-mode" id="layout-mode-fluid" value="fluid">
                                         <label class="form-check-label" for="layout-mode-fluid">
-                                            <img src="/admin/assets/images/layouts/light.png" alt="" class="img-fluid">
+                                            <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Fluid</h5>
@@ -850,7 +1025,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                         <div class="form-check form-switch card-switch mb-1">
                                             <input class="form-check-input" type="checkbox" name="data-layout-mode" id="layout-mode-boxed" value="boxed">
                                             <label class="form-check-label" for="layout-mode-boxed">
-                                                <img src="/admin/assets/images/layouts/boxed.png" alt="" class="img-fluid">
+                                                <img src="assets/images/layouts/boxed.png" alt="" class="img-fluid">
                                             </label>
                                         </div>
                                         <h5 class="font-14 text-center text-muted mt-2">Boxed</h5>
@@ -866,7 +1041,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div class="form-check form-switch card-switch mb-1">
                                     <input class="form-check-input" type="checkbox" name="data-topbar-color" id="topbar-color-light" value="light">
                                     <label class="form-check-label" for="topbar-color-light">
-                                        <img src="/admin/assets/images/layouts/light.png" alt="" class="img-fluid">
+                                        <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
                                     </label>
                                 </div>
                                 <h5 class="font-14 text-center text-muted mt-2">Light</h5>
@@ -876,7 +1051,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 <div class="form-check form-switch card-switch mb-1">
                                     <input class="form-check-input" type="checkbox" name="data-topbar-color" id="topbar-color-dark" value="dark">
                                     <label class="form-check-label" for="topbar-color-dark">
-                                        <img src="/admin/assets/images/layouts/topbar-dark.png" alt="" class="img-fluid">
+                                        <img src="assets/images/layouts/topbar-dark.png" alt="" class="img-fluid">
                                     </label>
                                 </div>
                                 <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
@@ -891,7 +1066,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-menu-color" id="leftbar-color-light" value="light">
                                         <label class="form-check-label" for="leftbar-color-light">
-                                            <img src="/admin/assets/images/layouts/sidebar-light.png" alt="" class="img-fluid">
+                                            <img src="assets/images/layouts/sidebar-light.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Light</h5>
@@ -901,7 +1076,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-menu-color" id="leftbar-color-dark" value="dark">
                                         <label class="form-check-label" for="leftbar-color-dark">
-                                            <img src="/admin/assets/images/layouts/light.png" alt="" class="img-fluid">
+                                            <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Dark</h5>
@@ -917,7 +1092,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-default" value="default">
                                         <label class="form-check-label" for="leftbar-size-default">
-                                            <img src="/admin/assets/images/layouts/light.png" alt="" class="img-fluid">
+                                            <img src="assets/images/layouts/light.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Default</h5>
@@ -927,7 +1102,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-compact" value="compact">
                                         <label class="form-check-label" for="leftbar-size-compact">
-                                            <img src="/admin/assets/images/layouts/compact.png" alt="" class="img-fluid">
+                                            <img src="assets/images/layouts/compact.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Compact</h5>
@@ -937,7 +1112,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-small" value="condensed">
                                         <label class="form-check-label" for="leftbar-size-small">
-                                            <img src="/admin/assets/images/layouts/sm.png" alt="" class="img-fluid">
+                                            <img src="assets/images/layouts/sm.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Condensed</h5>
@@ -948,7 +1123,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     <div class="form-check form-switch card-switch mb-1">
                                         <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-full" value="full">
                                         <label class="form-check-label" for="leftbar-size-full">
-                                            <img src="/admin/assets/images/layouts/full.png" alt="" class="img-fluid">
+                                            <img src="assets/images/layouts/full.png" alt="" class="img-fluid">
                                         </label>
                                     </div>
                                     <h5 class="font-14 text-center text-muted mt-2">Full Layout</h5>
@@ -980,50 +1155,61 @@ document.addEventListener('DOMContentLoaded', function () {
                     </div>
                 </div>
             </div>
-        </div>        
-        
+        </div>
+            
         <!-- Vendor js -->
-        <script src="/admin/assets/js/vendor.min.js"></script>
-
-        <!-- Daterangepicker js -->
-        <script src="/admin/assets/vendor/daterangepicker/moment.min.js"></script>
-        <script src="/admin/assets/vendor/daterangepicker/daterangepicker.js"></script>
+        <script src="assets/js/vendor.min.js"></script>
         
-        <!-- Apex Charts js -->
-        <script src="/admin/assets/vendor/apexcharts/apexcharts.min.js"></script>
-
-        <!-- Vector Map js -->
-        <script src="/admin/assets/vendor/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
-        <script src="/admin/assets/vendor/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
-
-        <!-- Dashboard App js -->
-        <script src="/admin/assets/js/pages/dashboard.js"></script>
-
-
         <!-- App js -->
-        <script src="/admin/assets/js/app.min.js"></script>
-
-
-          <!-- Bootstrap JS and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- Your script for modal -->
-  <script>
-    $('#exampleModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var recipient = button.data('whatever'); // Extract info from data-* attributes
-        var modal = $(this);
-        modal.find('.modal-title').text('New Banner'); // Set modal title to "New Banner"
-        // You can also set other modal content dynamically if needed
-        modal.find('.modal-body input').val(''); // Clear input fields when modal is opened
-    });
-</script>
-
-        
+        <script src="assets/js/app.min.js"></script>
 
     </body>
 
-<!-- Mirrored from techzaa.getappui.com/velonic/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Mar 2024 09:35:48 GMT -->
-</html> 
+
+     <script>
+ 
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    function openEditModal(categoryId, categoryName) {
+        document.getElementById('editRoomId').value = categoryId;
+        document.getElementById('editCategory').value = categoryName;
+        $('#editRoomModal').modal('show');
+
+        document.getElementById("buttonEditCategory").addEventListener("click",()=>{
+            let id = document.getElementById("editRoomId").value
+            let category = document.getElementById("editCategory").value
+            console.log("ddd:",id,category)
+            const data = {
+                id,
+                category
+            }
+
+            console.log(data)
+
+            axios.post("/admin/editCategory",{id:id, category:category})
+            .then((data)=>{
+                window.location.href="/admin/category"
+            })
+            .catch((error)=>{
+                console.log(error)
+            })
+
+        })
+    }
+</script>
+
+<!-- Script for Deleting Room -->
+<script>
+  function deleteRoom(roomId) {
+    // Implement your delete functionality here
+    console.log('Deleting room with ID:', roomId);
+  }
+</script>
+
+
+
+<!-- Mirrored from techzaa.getappui.com/velonic/layouts/pages-starter.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Mar 2024 09:36:18 GMT -->
+</html>
