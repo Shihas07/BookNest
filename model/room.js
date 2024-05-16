@@ -38,7 +38,22 @@
             vendor: {
               type: mongoose.Schema.Types.ObjectId,
               ref: 'Vendor'
-          }
+          },
+          review:[{
+            user:{
+              type:String
+            },
+            rating:{
+              type:Number           
+            },
+            comment:{
+              type:String
+            },
+            createdAt: {
+              type: Date,
+              default: Date.now
+            }
+          }]
 
    })
 

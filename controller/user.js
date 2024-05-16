@@ -370,17 +370,17 @@ const getroompage = async (req, res) => {
         req.cookies.user_jwt,
         process.env.JWT_SECRET
       );
-      console.log(decodedToken);
+      // console.log(decodedToken);
       const userId = decodedToken.id;
-      console.log(userId);
+      // console.log(userId);
       let user = await User.findById(userId).populate("whishlist.roomId");
 
      
       const roomIds = user.whishlist.map((item) => item.roomId);
-                console.log(roomIds)             
+                // console.log(roomIds)             
      
       const wishlistRooms = await Rooms.find({ _id: { $in: roomIds } });
-      console.log("wihl", wishlistRooms);
+      // console.log("wihl", wishlistRooms);
 
       const admin = await Admin.find({}, { banner: 1 });
 
@@ -391,7 +391,7 @@ const getroompage = async (req, res) => {
               bannerImages: banner.bannerImages.map(image => image)
           }))
       );
-        console.log("admin",banners)
+        console.log("admin",rooms)
       
       res.render("user/room-grid-style", { rooms, wishlistRooms, user, roomIds, banners });
     } else {
@@ -994,6 +994,53 @@ const postUpdateProfile = async (req, res) => {
 };
 
 
+  const postreviews=async(req,res)=>{
+
+    try {
+      const { roomId, rating, comment } = req.body;
+      const userId = req.userId;
+      console.log(roomId)
+  
+      // Check if all required fields are present
+      if (!roomId || !rating || !comment) {
+        return res.status(400).json({ error: 'Room ID, rating, and comment are required.' });
+      }
+  
+
+      const room = await Rooms.findById(roomId);
+      // console.log("room",room)l
+
+      
+      if (!room) {
+        return res.status(404).json({ error: 'Room not found.' });
+      }
+      // Create a new review object
+      const newReview = {
+        user: userId,
+        rating,
+        comment,
+        createdAt: new Date()
+      };
+  
+      // Find the room by ID
+    
+  
+  
+      
+      room.review.push(newReview);
+  
+     
+      await room.save();
+  
+      res.status(201).json({ message: 'Review submitted successfully.' });
+    } catch (error) {
+      console.error('Error submitting review:', error);
+      res.status(500).json({ error: 'An error occurred while submitting your review. Please try again later.' });
+    }
+
+  }
+
+
 module.exports = {
   homePage,
   signup,
@@ -1024,5 +1071,6 @@ module.exports = {
   razorpayment,
   getbookindetails,
   postcancel,
-  postUpdateProfile
+  postUpdateProfile,
+  postreviews
 };

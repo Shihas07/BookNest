@@ -51,6 +51,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>body {
     letter-spacing: 0.8px;
@@ -196,7 +198,7 @@ a{
 .card {
     background-color: #fff ;
     box-shadow: 2px 4px 15px 0px rgb(0, 108, 170);
-    z-index: 0;
+   
 }
 
 small{
@@ -219,7 +221,31 @@ small{
     font-size: 1.1em;
     color: #8C9EFF;
     cursor: pointer;
-}</style>
+
+}
+
+
+    .star-rating {
+            direction: rtl;
+            display: inline-flex;
+        }
+        .star-rating input[type="radio"] {
+            display: none;
+        }
+        .star-rating label {
+            font-size: 2rem;
+            color: lightgray;
+            cursor: pointer;
+        }
+        .star-rating input[type="radio"]:checked ~ label {
+            color: gold;
+        }
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: gold;
+        }
+
+</style>
 </head>
 <body>
 
@@ -236,7 +262,56 @@ small{
             </div>
             <div class="flex-col my-auto">
               <h6 class="ml-auto mr-3">
-                <a href="#">View Details</a>
+                    <!-- Button trigger modal -->
+
+<button type="button" class="btn btn-primary open-review-modal" data-roomid="{{this.booking.room.roomid}}">
+    Add Review
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal-{{this.booking.room.roomid}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">        
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Review</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Room ID -->
+                <input type="text" id="roomid-{{this.booking.room.roomid}}" value="{{this.booking.room.roomid}}">
+                <!-- Star Rating -->
+                <div class="form-group">
+                    <label for="starRating-{{this.booking.room.roomid}}">Star Rating</label>
+                    <div class="star-rating" id="starRating-{{this.booking.room.roomid}}">
+                        <input type="radio" id="star5-{{this.booking.room.roomid}}" name="rating-{{this.booking.room.roomid}}" value="5"><label for="star5-{{this.booking.room.roomid}}">☆</label>
+                        <input type="radio" id="star4-{{this.booking.room.roomid}}" name="rating-{{this.booking.room.roomid}}" value="4"><label for="star4-{{this.booking.room.roomid}}">☆</label>
+                        <input type="radio" id="star3-{{this.booking.room.roomid}}" name="rating-{{this.booking.room.roomid}}" value="3"><label for="star3-{{this.booking.room.roomid}}">☆</label>
+                        <input type="radio" id="star2-{{this.booking.room.roomid}}" name="rating-{{this.booking.room.roomid}}" value="2"><label for="star2-{{this.booking.room.roomid}}">☆</label>
+                        <input type="radio" id="star1-{{this.booking.room.roomid}}" name="rating-{{this.booking.room.roomid}}" value="1"><label for="star1-{{this.booking.room.roomid}}">☆</label>
+                    </div>
+                </div>
+                <!-- Comment -->
+                <div class="form-group">
+                    <label for="comment-{{this.booking.room.roomid}}">Comment</label>
+                    <textarea class="form-control" id="comment-{{this.booking.room.roomid}}" name="comment-{{this.booking.room.roomid}}" rows="3" required></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="saveReviewBtn-{{this.booking.room.roomid}}">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
               </h6>
             </div>
           </div>
@@ -252,7 +327,7 @@ small{
               <h4 class="mt-3 mb-4 bold">Total Price: <span class="mt-5">₹ {{this.booking.price}}</span></h4>
               <p class="text-muted">Status: {{this.booking.staus}}</p>
                <form action="/cancelbooking" method="post">
-                <input type="hidden" name="bookingId" value="{{this.booking._id}}">
+                <input type="hidden" id="ID" name="bookingId" value="{{this.booking._id}}"> 
               <button type="submit" class="btn btn-outline-primary d-flex">cancel</button>
                </form>
             </div>
@@ -278,10 +353,80 @@ small{
         </div>
       </div>
     </div>
+         <input type="text" id="roomid" name="roomid" value="{{this.booking.room.roomid}}">  
   {{/each}}
 {{/if}}
 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+  
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click event listener to all open-review-modal buttons
+    document.querySelectorAll('.open-review-modal').forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Retrieve the room ID from the button's data attribute
+        const roomId = this.getAttribute('data-roomid');
+            console.log("jkjdkj",roomId)
+            // Open the modal with the corresponding ID
+            $('#exampleModal-'+roomId).modal('show');
+        });
+    });
+
+    
+    document.querySelectorAll('[id^="saveReviewBtn"]').forEach(function(button) {
+        button.addEventListener('click', function () {
+            // Retrieve the selected rating, comment, and room ID
+            const rating = document.querySelector('input[name="rating-' + this.id.split('-')[1] + '"]:checked');
+            const comment = document.getElementById('comment-' + this.id.split('-')[1]).value;
+            const roomId = document.getElementById("roomid-" + this.id.split('-')[1]).value;
+
+            console.log("Rating:", rating);
+            console.log("Comment:", comment);
+            console.log("Room ID:", roomId);
+
+            // Validate that both rating and comment are provided
+            if (rating && comment) {
+                // Data to send to the server
+                const reviewData = {
+                    roomId: roomId,
+                    rating: rating.value,
+                    comment: comment
+                };
+
+                // Send the review data to the server using Axios
+                axios.post('/addreview', reviewData)
+                .then(response => {
+                    console.log('Review submitted:', response.data);
+
+                    // Close the modal
+                    $('#exampleModal-' + roomId).modal('hide');
+                    // Alert user
+                    alert('Thank you for your review!');
+                    // Optionally reload the page after a successful review
+                    window.location.reload();
+                })
+                .catch(error => {
+                    console.error('Error submitting review:', error);
+                    // Display error message to user if needed
+                    alert('There was an error submitting your review. Please try again later.');
+                });
+            } else {
+                // Alert user if rating or comment is missing
+                alert('Please provide a rating and a comment.');
+            }
+        });
+    });
+});
+</script>
+
+
+
+
 </body>
 </html>
