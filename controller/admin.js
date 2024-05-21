@@ -508,9 +508,9 @@ const postCancelBooking = async (req, res) => {
       throw new Error("Booking not found");
     }
 
-    // Update booking status to 'cancelled'
+   
     booking.staus = "cancel";
-    // If booking is cancelled, set checkInDate and checkOutDate to null
+    
     if (booking.staus === "cancel") {
       booking.checkInDate = null;
       booking.checkOutDate = null;
@@ -518,6 +518,10 @@ const postCancelBooking = async (req, res) => {
 
     // Save the updated user document
     await user.save();
+
+    
+
+      
 
     // Redirect to booking details page
     res.redirect("/admin/booking");

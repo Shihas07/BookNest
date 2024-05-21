@@ -39,12 +39,17 @@
               type: mongoose.Schema.Types.ObjectId,
               ref: 'Vendor'
           },
+          ratingavg : {
+            type:Number,
+            default:0
+          },
           review:[{
             user:{
               type:String
             },
             rating:{
-              type:Number           
+              type:Number,
+                         
             },
             comment:{
               type:String

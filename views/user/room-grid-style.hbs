@@ -300,17 +300,23 @@
                                                             <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">{{this.bedType}}</span></div>
                                                             <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">{{this.guests}} Guests</span></div>
                                                         </div>
+                                                        <div id="rating">
                                                         <div class="tourmaster-room-rating">
-                                                            {{#if this.rating}}
-                                                                {{#each this.rating}}
-                                                                    <i class="fa fa-star"></i>
-                                                                {{/each}}
-                                                                <span class="tourmaster-room-rating-text">{{this.reviews}} Review{{#unless (eq this.reviews 1)}}s{{/unless}}</span>
-                                                            {{else}}
-                                                                <span class="tourmaster-room-rating-text">No reviews yet</span>
-                                                       {{/if}}
-<div>
+                                                            {{!-- {{#if this.rating}} --}}
+                                                                {{!-- {{#each this.rating}} --}}
+                                                                  
+                                                                
+                                                                    <i class="fa fa-star">{{this.ratingavg}}</i>
+                                                                   
+                                                                {{!-- {{/each}} --}}
+                                                                {{!-- <span class="tourmaster-room-rating-text">{{this.reviews}} Review{{#unless (eq this.reviews 1)}}s{{/unless}}</span> --}}
+                                                             <span class="tourmaster-room-rating-text"></span>
 
+                                                            {{!-- {{else}} --}}
+                                                                {{!-- <span class="tourmaster-room-rating-text">No reviews yet</span> --}}
+                                                      
+<div>
+</div>
  
 {{#if wishlistRooms}}
   <span onclick="toggleWishlist('{{this._id}}', '{{user._id}}')" id="wishlist-{{this._id}}" style="cursor: pointer; color: rgb(255, 255, 255);">
@@ -457,7 +463,7 @@
                                 <a href="contact.html" style="margin-right: 22px;">Contact</a>
                             </div>
                         </div>
-                        <div class="hotale-copyright-right hotale-item-pdlr">Copyright © GoodLayers. All Rights Reserved.</div>
+                        <div class="hotale-copyright-right hotale-item-pdlr"></div>
                     </div>
                 </div>
             </footer>

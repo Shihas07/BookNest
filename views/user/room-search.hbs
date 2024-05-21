@@ -579,7 +579,7 @@
 <div id="room-container">
     <!-- Room items will be added here dynamically -->
 
-    {{#each room}}
+    {{#each availableRooms}}
 
  <div><input type="hidden" class="ami-s" name="ami" id="ami" value={{this.amenities}}></div>
   <div><input type="hidden" name="ees" class="cat-d" id="ee" value={{this.category}}></div>
@@ -637,7 +637,7 @@
 
                                     
 
-                                        {{#each room}}
+                                        {{#each availableRooms}}
                                              <input type="hidden" class="room-id" value="{{ this._id }}">
 
 

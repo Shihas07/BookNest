@@ -13,6 +13,8 @@ const session=require("express-session")
 const passport=require("passport")
 require('dotenv').config()
 const passportSetup=require("./helpers/passport")
+const Handlebars = require('handlebars');
+
 
 
 const mongoose = require("mongoose");
@@ -31,6 +33,8 @@ app.use((req, res, next) => {
   res.setHeader('Cache-Control', 'no-store');
   next();
 });
+
+
 
 app.use(bodyParser.json());
 
@@ -52,6 +56,10 @@ app.use("/", userRouter); // User routes will be handled at '/'
 app.use("/", adminRouter);
 app.use("/", vendorRouter);
  // Admin routes will be handled at '/admin'
+//  hbs.registerPartials(path.join(__dirname, 'views/partials'));
+
+// Define a Handlebars helper function to convert rating average to stars
+
 
 // Connect to MongoDB
 const mongoURI = 'mongodb://localhost:27017/mydatabase';

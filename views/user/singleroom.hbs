@@ -8,6 +8,7 @@
 
     <title>booknest &#8211; Hotel HTML Template</title>
 
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-5TcRm9Z/6wZ0lsJYBLfpBp9kX3yfqF5xtbYliEqZ4KTIQ5AXf8B6RMogfaWk9Jx5" crossorigin="anonymous">
 
 
     <link rel="stylesheet"  href="js/plugins/goodlayers-core/plugins/fontawesome/font-awesome.css" type="text/css" media="all" />
@@ -61,6 +62,12 @@
 
 .zoom-container.zoomed img {
   cursor: zoom-out;
+}
+
+
+     <style>.with-background-image {
+    background-image: url('');
+    
 }
 
 
@@ -528,13 +535,40 @@
             </div>
 
 
-            <div class="hotale-page-wrapper" id="hotale-page-wrapper">
-                <div class="tourmaster-room-single-header-title-wrap" style="border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;">
-                       {{#each room}}
-                    <div class="tourmaster-room-single-header-background-overlay"></div>
-                    <div class="tourmaster-container"><h1 class="tourmaster-item-pdlr">{{this.roomName}}</h1></div>
-                    {{/each}}
-                </div>
+{{#if banners}}
+<div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    {{#each banners}}
+    
+    <div class="carousel-item {{#if @first}}active{{/if}}">
+      <div class="hotale-page-title-wrap hotale-style-custom hotale-center-align with-background-image" style="background-image: url('{{this.bannerImages.[0]}}')">
+        <div class="hotale-header-transparent-substitute"></div>
+        <div class="hotale-page-title-overlay"></div>
+
+        <div class="hotale-page-title-container hotale-container">
+          <div class="hotale-page-title-content hotale-item-pdlr">
+            <h1 class="hotale-page-title">{{this.roomName}}</h1>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    {{/each}}
+
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+{{/if}}
+
+
+
                 <div class="gdlr-core-page-builder-body">
                     <div class="gdlr-core-pbf-sidebar-wrapper gdlr-core-sticky-sidebar gdlr-core-js" id="gdlr-core-sidebar-wrapper-1">
                         <div class="gdlr-core-pbf-sidebar-container gdlr-core-line-height-0 clearfix gdlr-core-js gdlr-core-container">
@@ -1322,50 +1356,56 @@
 
 
 
-
-                <div class="tourmaster-single-review-container tourmaster-container">
-                    <div class="tourmaster-single-review-item tourmaster-item-pdlr">
-                        <div class="tourmaster-single-review" id="tourmaster-room-single-review">
-                            <div class="tourmaster-single-review-head clearfix">
-                                <div class="tourmaster-single-review-head-info">
-                                    <div class="tourmaster-room-rating">
-                                        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><span class="tourmaster-room-rating-text">1 Review</span>
-                                    </div>
-                                    <div class="tourmaster-single-review-filter" id="tourmaster-single-review-filter">
-                                        <div class="tourmaster-single-review-sort-by">
-                                            <span class="tourmaster-head">Sort By:</span><span class="tourmaster-sort-by-field" data-sort-by="rating">Rating</span>
-                                            <span class="tourmaster-sort-by-field tourmaster-active" data-sort-by="date">Date</span>
-                                        </div>
-                                    </div>
-                                </div>
+            <div class="tourmaster-single-review-container tourmaster-container">
+    {{#each room.review}}
+        <div class="tourmaster-single-review-item tourmaster-item-pdlr">
+            <div class="tourmaster-single-review" id="tourmaster-room-single-review">
+                <div class="tourmaster-single-review-head clearfix">
+                    
+                </div>
+                
+                <div class="tourmaster-single-review-content" id="tourmaster-single-review-content" data-room-id="15031" data-ajax-url="https://demo.goodlayers.com/hotale/resort/wp-admin/admin-ajax.php">
+                    <div class="tourmaster-single-review-content-item clearfix">
+                        <div class="tourmaster-single-review-user clearfix">
+                            <div class="tourmaster-single-review-avatar tourmaster-media-image">
+                                <img
+                                    alt=""
+                                    src="https://secure.gravatar.com/avatar/03b9ebd1ab10d2362a586d5492188d1f?s=90&amp;d=mm&amp;r=g"
+                                    srcset="https://secure.gravatar.com/avatar/03b9ebd1ab10d2362a586d5492188d1f?s=180&#038;d=mm&#038;r=g 2x"
+                                    class="avatar avatar-90 photo"
+                                    height="90"
+                                    width="90"
+                                    loading="lazy"
+                                />
                             </div>
-                            <div class="tourmaster-single-review-content" id="tourmaster-single-review-content" data-room-id="15031" data-ajax-url="https://demo.goodlayers.com/hotale/resort/wp-admin/admin-ajax.php">
-                                <div class="tourmaster-single-review-content-item clearfix">
-                                    <div class="tourmaster-single-review-user clearfix">
-                                        <div class="tourmaster-single-review-avatar tourmaster-media-image">
-                                            <img
-                                                alt=""
-                                                src="https://secure.gravatar.com/avatar/03b9ebd1ab10d2362a586d5492188d1f?s=90&amp;d=mm&amp;r=g"
-                                                srcset="https://secure.gravatar.com/avatar/03b9ebd1ab10d2362a586d5492188d1f?s=180&#038;d=mm&#038;r=g 2x"
-                                                class="avatar avatar-90 photo"
-                                                height="90"
-                                                width="90"
-                                                loading="lazy"
-                                            />
-                                        </div>
-                                        <h4 class="tourmaster-single-review-user-name">John Smith</h4>
-                                    </div>
-                                    <div class="tourmaster-single-review-detail">
-                                        <div class="tourmaster-single-review-detail-description"><p>Very nice room!</p></div>
-                                        <div class="tourmaster-single-review-detail-rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></div>
-                                        <div class="tourmaster-single-review-detail-date">Feb 2, 2022</div>
-                                    </div>
-                                </div>
+                            <h4 class="tourmaster-single-review-user-name">{{ this.user }}</h4>
+                        </div>
+                        <div class="tourmaster-single-review-detail">
+                            <div class="tourmaster-single-review-detail-description"><p>{{ this.comment }}</p></div>
+                            <div class="tourmaster-single-review-detail-rating">
+                                {{ this.rating}}
+                                    <i class="fa fa-star"></i>
+                               
                             </div>
+                            <div class="tourmaster-single-review-detail-date">{{ this.createdAt }}</div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    {{/each}}
+</div>
+
+
+          {{!-- <div>
+
+            {{#each room.review}}
+
+               <p>
+                {{comment}}
+               </p>
+               {{/each}}
+          </div> --}}
 
 
             <footer>

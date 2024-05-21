@@ -280,7 +280,7 @@ small{
             </div>
             <div class="modal-body">
                 <!-- Room ID -->
-                <input type="text" id="roomid-{{this.booking.room.roomid}}" value="{{this.booking.room.roomid}}">
+                <input type="hidden" id="roomid-{{this.booking.room.roomid}}" value="{{this.booking.room.roomid}}">
                 <!-- Star Rating -->
                 <div class="form-group">
                     <label for="starRating-{{this.booking.room.roomid}}">Star Rating</label>
@@ -325,11 +325,53 @@ small{
               <p class="text-muted">Check-out: {{this.booking.checkOutDate}}</p>
               <p class="text-muted">Guests: {{this.booking.roomDetails.[0].guest}}</p>
               <h4 class="mt-3 mb-4 bold">Total Price: <span class="mt-5">₹ {{this.booking.price}}</span></h4>
-              <p class="text-muted">Status: {{this.booking.staus}}</p>
-               <form action="/cancelbooking" method="post">
-                <input type="hidden" id="ID" name="bookingId" value="{{this.booking._id}}"> 
-              <button type="submit" class="btn btn-outline-primary d-flex">cancel</button>
-               </form>
+             <div class="booking">
+
+  <p class="text-muted status">Status: {{this.booking.staus}}</p>
+
+  <p class="payment-message"></p>
+</div>
+
+
+ 
+
+
+
+  
+  <form action="/cancelbooking" method="post">
+    <input type="hidden" id="ID" name="bookingId" value="{{this.booking._id}}"> 
+    <button type="submit" class="btn btn-outline-primary d-flex cancel-button">Cancel</button>
+  </form>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+   
+    var statuses = document.querySelectorAll('.status');
+    
+    statuses.forEach(function(statusElem) {
+      
+      var status = statusElem.textContent.trim().replace('Status: ', '').trim();
+
+      console.log(status);
+
+      var paymentMessage = statusElem.nextElementSibling;
+            var cancelButton = document.querySelector('.cancel-button');
+
+              console.log("ndjbjd",cancelButton)
+     
+      if (status === "cancel") {
+        paymentMessage.innerHTML = "Your payment refund in 48 hours";
+        paymentMessage.style.color = "red";
+        
+          if (cancelButton) {
+          cancelButton.style.display = "none"; // Hide the cancel button
+        }
+      } else {
+        
+        paymentMessage.innerHTML = "";
+      }
+    });
+  });
+</script>
             </div>
             <img class="align-self-center img-fluid" src="{{this.booking.roomDetails.[0].roomImages.[0]}}" width="180" height="180">
           </div>
@@ -353,7 +395,7 @@ small{
         </div>
       </div>
     </div>
-         <input type="text" id="roomid" name="roomid" value="{{this.booking.room.roomid}}">  
+         
   {{/each}}
 {{/if}}
 
@@ -424,6 +466,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+
+
 
 
 

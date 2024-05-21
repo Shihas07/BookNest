@@ -19,6 +19,7 @@ const razorpay = new Razorpay({
 });
 
 const cookieparser = require("cookie-parser");
+const { log } = require("handlebars");
 
 require("dotenv").config();
 
@@ -362,7 +363,7 @@ const profile = async (req, res) => {
 
 const getroompage = async (req, res) => {
   try {
-    let rooms = await Rooms.find();
+    let rooms = await Rooms.find().populate('review');
     let user = null;
 
     if (req.cookies.user_jwt) {
@@ -391,8 +392,14 @@ const getroompage = async (req, res) => {
               bannerImages: banner.bannerImages.map(image => image)
           }))
       );
-        console.log("admin",rooms)
-      
+
+
+             console.log(rooms)
+
+
+
+
+     
       res.render("user/room-grid-style", { rooms, wishlistRooms, user, roomIds, banners });
     } else {
      
@@ -405,24 +412,105 @@ const getroompage = async (req, res) => {
 };
 
 const getsingleroom = async (req, res) => {
-  const id = req.query.id;
+  try {
+      const id = req.query.id;
+
+      const room = await Rooms.findById(id);
+      console.log(room);
+
+      const userIds = room.review.map(review => review.user);
+
+      console.log(userIds);
+
+      const users = await User.find({ _id: { $in: userIds } });
+
+      const userMap = {}; // Map to store user names by user ID
+      users.forEach(user => {
+          userMap[user._id] = user.userName; // Storing user name by user ID
+      });
+
+      room.review.forEach((review) => {
+          const userName = userMap[review.user];
+          if (userName) {
+              review.user = userName;
+          } else {
+              console.error(`User name not found for review with user ID ${review.user}`);
+          }
+      });
+
+      const admin = await Admin.find({}, { banner: 1 });
+      console.log("admin",admin)
+      const banners = admin.flatMap(adminDoc =>
+        adminDoc.banner.flatMap(banner => ({
+            bannerName: banner.bannerName,
+            bannerHead: banner.bannerHead,
+            bannerImages: banner.bannerImages.map(image => image)
+        }))
+    );
+
+
+      res.render("user/singleroom", { room,banners });
+  } catch (error) {
+      console.error('Error fetching room details:', error);
+      res.status(500).send('An error occurred while fetching room details.');
+  }
+};
+
+
+
+
+// let getRoomSearch = async (req, res) => {
+//   const location = req.query.location;
+//   // console.log(location);
+
+//   const room = await Rooms.find({ location });
+//   // console.log(",ms,m,s", room);
   
 
-  const room = await Rooms.findById(id);
- 
+//   res.render("user/room-search", { room });
+// };
 
-  res.render("user/singleroom", { room });
-};
 
-let getRoomSearch = async (req, res) => {
-  const location = req.query.location;
-  // console.log(location);
+let getRoomSearch=async(req,res)=>{
+  try {
+    const { start_date, end_date, location } = req.query;
 
-  const room = await Rooms.find({ location });
-  // console.log(",ms,m,s", room);
+    const startDate = new Date(start_date);
+    const endDate = new Date(end_date);
 
-  res.render("user/room-search", { room });
-};
+    // Find all rooms
+    const room = await Rooms.find({ location: location[0] });
+
+    // Get all bookings that overlap with the requested date range
+    const overlappingBookings = await User.find({
+        $and: [
+            { 'booking.checkInDate': { $lt: endDate } },
+            { 'booking.checkOutDate': { $gt: startDate } }
+        ]
+    });
+
+      console.log("overlapping",overlappingBookings)
+
+
+
+    // Extract room IDs from the overlapping bookings
+    const bookedRoomIds = overlappingBookings.flatMap(user => user.booking.map(booking => booking.room));
+           
+    // Filter rooms based on availability
+    const availableRooms = room.filter(room => !bookedRoomIds.includes(room.roomid));
+console.log("avail",availableRooms);
+res.render("user/room-search", {availableRooms,room  });
+
+} catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+}
+}
+
+
+
+
+
 
 const postPrice = (req, res) => {
   console.log("edbjbdwljdjadjewh");
@@ -630,25 +718,28 @@ const Postbooking = async (req, res) => {
   }
 };
 
-const apigetuser = async (req, res) => {
+const  apigetuser = async (req, res) => {
   const roomId = req.query.roomId; // Use req.query.roomId to access query parameters
   console.log("Room ID:", roomId); // Log the room ID for debugging
 
   try {
     const bookings = await User.find(
       { "booking.room.roomid": roomId },
-      "booking.checkInDate booking.checkOutDate"
+      "booking.checkInDate booking.checkOutDate booking.staus"
     );
     console.log("asdfghj", bookings);
-    const dateRanges = bookings.flatMap((user) => {
-      return user.booking.map((booking) => {
-        if (!booking || !booking.checkInDate || !booking.checkOutDate) {
-          console.error("Invalid date format in database");
-          return {
-            checkInDate: "Invalid Date",
-            checkOutDate: "Invalid Date",
-          };
-        }
+    const dateRanges = bookings.flatMap(user => {
+      return user.booking
+        .filter(booking => booking.staus !== "cancel") // Filter out cancelled bookings
+        .map(booking => {
+          // Validate the booking dates
+          if (!booking || !booking.checkInDate || !booking.checkOutDate) {
+            console.error("Invalid date format in database");
+            return {
+              checkInDate: "Invalid Date",
+              checkOutDate: "Invalid Date",
+            };
+          }
 
         return {
           checkInDate: new Date(booking.checkInDate)
@@ -660,7 +751,7 @@ const apigetuser = async (req, res) => {
         };
       });
     });
-    console.log("Date Ranges:", dateRanges); // Log date ranges for debugging
+    console.log("Date Ranges:", dateRanges); 
 
     res.json(dateRanges); // Send date ranges to the frontend
   } catch (error) {
@@ -918,6 +1009,7 @@ const getbookindetails = async (req, res) => {
 };
 
 
+
 const postcancel = async (req, res) => {
   try {
       const bookingId = req.body.bookingId;
@@ -939,14 +1031,18 @@ const postcancel = async (req, res) => {
 
           // Find order by bookingId and update its status to 'cancel'
           const booking = user.booking.find(booking => booking._id.toString() === bookingId);
+          console.log("shiiihhhshshs",booking)
           if (!booking) {
               throw new Error("Order not found");
           }
+         
+          
           booking.staus = "cancel"
-         if( booking.staus = "cancel"){
-                   booking.checkInDate = null;
-          booking.checkOutDate = null;
-         }
+
+        //  if( booking.staus = "cancel"){
+        //            booking.checkInDate = null;
+        //   booking.checkOutDate = null;
+        //  }
 
          
 
@@ -994,51 +1090,59 @@ const postUpdateProfile = async (req, res) => {
 };
 
 
-  const postreviews=async(req,res)=>{
-
-    try {
+const postreviews = async (req, res) => {
+  try {
       const { roomId, rating, comment } = req.body;
       const userId = req.userId;
-      console.log(roomId)
-  
+
       // Check if all required fields are present
       if (!roomId || !rating || !comment) {
-        return res.status(400).json({ error: 'Room ID, rating, and comment are required.' });
+          return res.status(400).json({ error: 'Room ID, rating, and comment are required.' });
       }
-  
 
       const room = await Rooms.findById(roomId);
-      // console.log("room",room)l
+
+      if (!room) {
+          return res.status(404).json({ error: 'Room not found.' });
+      }
 
       
-      if (!room) {
-        return res.status(404).json({ error: 'Room not found.' });
+      const existingReview = room.review.find(review => review.user.toString() === userId);
+      if (existingReview) {
+          
+          existingReview.rating = rating;
+          existingReview.comment = comment;
+      } else {
+          
+          const newReview = {
+              user: userId,
+              rating,
+              comment,
+              createdAt: new Date()
+          };
+          room.review.push(newReview);
       }
-      // Create a new review object
-      const newReview = {
-        user: userId,
-        rating,
-        comment,
-        createdAt: new Date()
-      };
-  
-      // Find the room by ID
-    
-  
-  
-      
-      room.review.push(newReview);
-  
-     
+
+      const totalRatings = room.review.reduce((total, review) => total + review.rating, 0);
+      const ratingCount = room.review.length;
+      const newRatingAvg = totalRatings / ratingCount;
+
+      // Round the rating to the nearest 0.5 increment
+      function roundToHalf(value) {
+          return Math.round(value * 2) / 2;
+      }
+
+      room.ratingavg = roundToHalf(newRatingAvg);
+
       await room.save();
-  
+
       res.status(201).json({ message: 'Review submitted successfully.' });
-    } catch (error) {
+  } catch (error) {
       console.error('Error submitting review:', error);
       res.status(500).json({ error: 'An error occurred while submitting your review. Please try again later.' });
-    }
-
   }
+}
+
 
 
 module.exports = {

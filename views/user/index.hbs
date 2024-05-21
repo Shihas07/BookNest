@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-US" class="no-js">
 
-<!-- Mirrored from max-themes.net/demos/hotale/hotale/resort/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 12 Mar 2024 06:31:30 GMT -->
+<!-- Mirrored from max-themes.net/demos/hotale/hotale/resort/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 12 Mar 2024 06:31:30 GMT --> 
 <head>
     <style>
         .google-login-button {
@@ -47,6 +47,7 @@
     <title>BookNest &#8211;</title>
 
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <link rel="stylesheet"  href="/js/plugins/goodlayers-core/plugins/fontawesome/font-awesome.css" type="text/css" media="all" />
     <link rel="stylesheet"  href="/js/plugins/goodlayers-core/plugins/fa5/fa5.css" type="text/css" media="all" />
@@ -106,55 +107,39 @@
                       
 
 
-                	<!-- LOGIN & Register Forms. windowss-->
+                
 
 
 
-{{!--                         
                     <div class="tourmaster-user-top-bar tourmaster-guest tourmaster-style-2" data-redirect="index.html" data-ajax-url="#">
-                        <span class="tourmaster-user-top-bar-login" data-tmlb="login"><i class="icon_lock_alt"></i><span class="tourmaster-text">Login</span></span>
-                        <div class="tourmaster-lightbox-content-wrap" data-tmlb-id="login">
-                            
-                           
-                             <div class="tourmaster-lightbox-head">
-                                <h3 class="tourmaster-lightbox-title">profile</h3>
-                                <i class="tourmaster-lightbox-close icon_close"></i>
-                            </div>
-                          
-                            <div class="tourmaster-lightbox-head">
-                                <h3 class="tourmaster-lightbox-title">Login</h3>
-                                <i class="tourmaster-lightbox-close icon_close"></i>
-                            </div>
-
-                            <div class="tourmaster-lightbox-content">
-                                <form class="tourmaster-login-form tourmaster-form-field tourmaster-with-border" method="post" action="/login">
-                                    <div class="tourmaster-login-form-fields clearfix">
-                                        <p class="tourmaster-login-user">
-                                            <label>Username or E-Mail</label>
-                                            <input type="text" name="email" />
-                                        </p>
-                                        <p class="tourmaster-login-pass">
-                                            <label>Password</label>
-                                            <input type="password" name="password" />
-                                        </p>
+                       
+                                         
+   {{!-- <div class="hotale-main-menu-right-wrap clearfix hotale-item-mglr hotale-navigation-top"> --}}
+                                      {{#if user}}
+                                    <div class="tourmaster-currency-switcher">
+                                        <span class="tourmaster-head"><span>{{user.userName}}</span><i class="fa fa-sort-down"></i></span>
+                                        <div class="tourmaster-currency-switcher-inner">
+                                            <div class="tourmaster-currency-switcher-content">
+                                                <ul>
+                                                    <li><a href="/profile">My Account</a></li>
+                                                    <li><a href="/userLogout">logout</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
+                                 
+ 
+{{else}}
+    {{!-- <span class="tourmaster-user-top-bar-login" data-tmlb="login"><i class="icon_lock_alt"></i><span class="tourmaster-text" >Login</span></span> --}}
+    <a href="/login" class="tourmaster-user-top-bar-login" data-tmlb="login">
+  <i class="icon_lock_alt"></i>
+  <span class="tourmaster-text">Login</span>
+</a>
 
-                                    <p class="tourmaster-login-submit">
-                                        <input type="submit" name="wp-submit" class="tourmaster-button" value="Sign In!" />
-                                        {{!-- <button type="submit">hiii</button> --}}
-                                    </p>
-                                    <p class="tourmaster-login-lost-password">
-                                        <a href="#">Forget Password?</a>
-                                    </p>
-
-                                </form>
-
-                                <div class="tourmaster-login-bottom">
-                                    <h3 class="tourmaster-login-bottom-title">Do not have an account?</h3>
-                                    <a class="tourmaster-login-bottom-link" href="/signup">Create an Account</a>
-                                </div>
-                            </div>
-                        </div> --}}
+    <div class="tourmaster-lightbox-content-wrap" data-tmlb-id="login">
+       
+    </div>
+{{/if}}
                     </div>
                     <div class="hotale-mobile-menu">
                         <a class="hotale-mm-menu-button hotale-mobile-menu-button hotale-mobile-button-hamburger" href="#hotale-mobile-menu"><span></span></a>
@@ -164,7 +149,7 @@
                                     <a href="index.html" aria-current="page">Home</a>
                                     <ul class="sub-menu">
                                         <li class="menu-item menu-item-home current-menu-item page_item page-item-14980 current_page_item">
-                                            <a href="index.html" aria-current="page">Home &#8211; Resort 1</a>
+                                            <a href="/" aria-current="page">Home  </a>
                                         </li>
                                         {{!-- <li class="menu-item">
                                             <a target="_blank" rel="noopener" href="https://max-themes.net/demos/hotale/hotale/resort2/index.html">Home &#8211; Resort 2</a>
@@ -183,7 +168,7 @@
                                         </li> --}}
                                     </ul>
                                 </li>
-                                <li class="menu-item menu-item-has-children">
+                                {{!-- <li class="menu-item menu-item-has-children">
                                     <a href="#">Pages</a>
                                     <ul class="sub-menu">
                                         <li class="menu-item"><a href="about-us.html">About Us</a></li>
@@ -199,25 +184,31 @@
                                         <li class="menu-item"><a href="coming-soon.html">Coming Soon</a></li>
                                         <li class="menu-item"><a href="404.html">404 Page</a></li>
                                     </ul>
-                                </li>
+                                </li> --}}
                                 <li class="menu-item menu-item-has-children">
-                                    <a href="room-grid-style-1.html">Rooms</a>
-                                    <ul class="sub-menu">
+                                    <a href="/roomlist">Rooms</a>
+                                    {{!-- <ul class="sub-menu">
                                         <li class="menu-item"><a href="room-grid-style-1.html">Room Grid Style 1</a></li>
                                         <li class="menu-item"><a href="room-grid-style-2.html">Room Grid Style 2</a></li>
                                         <li class="menu-item"><a href="room-grid-style-3.html">Room Grid Style 3</a></li>
                                         <li class="menu-item"><a href="room-grid-style-4.html">Room Grid Style 4</a></li>
                                         <li class="menu-item"><a href="room-modern-style.html">Room Modern Style</a></li>
                                         <li class="menu-item"><a href="room-side-thumbnail.html">Room Side Thumbnail</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
-                                <li class="menu-item"><a href="">Reservation</a></li>
+
+                                 <li>
+                                    
+                                 </li>
+                                <li class="menu-item"><a href="/whishlist">Reservation</a></li>
                                 <li class="menu-item menu-item-has-children">
-                                    <a href="blog-full-right-sidebar.html">Blog</a>
+                                    <a href="/bookingdetis">Booking</a>
                                     <ul class="sub-menu">
                                         <li class="menu-item menu-item-has-children">
-                                            <a href="blog-3-columns-with-frame.html">Blog Columns</a>
-                                            <ul class="sub-menu">
+                                            <a href="blog-3-columns-with-frame.html">profile</a>
+                                            
+
+                                            {{!-- <ul class="sub-menu">
                                                 <li class="menu-item"><a href="blog-2-columns.html">Blog 2 Columns</a></li>
                                                 <li class="menu-item">
                                                     <a href="blog-2-columns-with-frame.html">Blog 2 Columns With Frame</a>
@@ -273,17 +264,25 @@
                                             </ul>
                                         </li>
                                         <li class="menu-item"><a href="single-blog.html">Single Posts</a></li>
-                                    </ul>
+                                    </ul> --}}
                                 </li>
+                               
                                 <li class="menu-item"><a href="contact.html">Contact</a></li>
                             </ul>
+
+                            
+                            
                         </div>
+
+                        
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
-
+   
+                                   
 
         {{!-- ///----windows-----//// --}}
     <div class="hotale-body-outer-wrapper">
@@ -372,60 +371,7 @@
 </a>
 
     <div class="tourmaster-lightbox-content-wrap" data-tmlb-id="login">
-        {{!-- <div class="tourmaster-lightbox-head">
-            <h3 class="tourmaster-lightbox-title">Login</h3>
-            <i class="tourmaster-lightbox-close icon_close"></i>
-        </div> --}}
-        {{!-- <div class="tourmaster-lightbox-content">
-            <form class="tourmaster-login-form tourmaster-form-field tourmaster-with-border" id="loginForm" method="post" action="/login" >
-              <div class="tourmaster-login-form-fields clearfix">
-             <p class="tourmaster-login-user">
-            <label>Username or E-Mail</label>
-            <input type="text" name="email" id="email" />
-            {{#if erroremail}}
-            <small id="emailError" class="text-danger">{{erroremail}}</small>
-            {{/if}}
-
-        </p>
-        <p class="tourmaster-login-pass">
-            <label>Password</label>
-            <input type="password" name="password" id="password" />
-            
-            <small id="passwordError" class="text-danger"></small>
-        </p>
-    </div>
-   <div id="errorMessage" class="text-danger"></div>
-
-
-
-    <p class="tourmaster-login-submit">
-        <input type="submit"   name="wp-submit" class="tourmaster-button" value="Sign in!"  />
-
-    </p>
-    <p class="tourmaster-login-lost-password">
-        <a href="#">Forget Password?</a>
-    </p>
-        <div class="google-sign-in">
-        <a href="/auth/google" class="google-login-button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24" height="24" style="vertical-align: middle; margin-right: 8px;">
-                <path fill="#EA4335" d="M24 9.5c3.94 0 6.96 1.69 9.05 4.49l6.87-6.87C35.9 2.69 30.73 0 24 0 14.61 0 6.67 5.38 2.89 13.13l7.53 5.82C12.45 11.9 17.74 9.5 24 9.5z"/>
-                <path fill="#4285F4" d="M46.54 24.63c0-1.45-.13-2.87-.38-4.25H24v8.08h12.62c-.54 2.92-2.18 5.38-4.62 7.08l7.11 5.52c4.16-3.85 6.55-9.51 6.55-16.43z"/>
-                <path fill="#FBBC05" d="M9.42 18.95l-7.53-5.82C.96 16.66 0 20.24 0 24s.96 7.34 1.89 10.87l7.53-5.82C8.34 27.09 7.5 25.63 7.5 24c0-1.63.84-3.09 1.92-4.05z"/>
-                <path fill="#34A853" d="M24 48c6.73 0 12.9-2.69 17.11-7.11l-7.11-5.52c-2.32 1.56-5.3 2.48-8.45 2.48-6.26 0-11.55-4.22-13.47-9.94l-7.53 5.82C6.67 42.62 14.61 48 24 48z"/>
-                <path fill="none" d="M0 0h48v48H0z"/>
-            </svg>
-          
-              log in with
-        </a>
-    </div>
-     <div><a href="/loginwithotp">login-otp</a></div>
-</form>
-            <div class="tourmaster-login-bottom">
-                <h3 class="tourmaster-login-bottom-title">Do not have an account?</h3>
-                <a class="tourmaster-login-bottom-link" href="/signup"  >Create an Account</a>
-            </div>
-            
-        </div> --}}
+       
     </div>
 {{/if}}
 
@@ -729,25 +675,30 @@
                                                         action="/room-search"
                                                         method="get"
                                                     >
-                                                        <div class="tourmaster-room-search-size10">
-                                                            <div class="tourmaster-room-date-selection tourmaster-horizontal" data-avail-date="">
-                                                                <div class="tourmaster-custom-start-date gdlr-core-skin-e-background">
-                                                                    <div class="tourmaster-head gdlr-core-skin-e-content">Check In</div>
-                                                                    <div class="tourmaster-tail gdlr-core-skin-e-content"></div>
-                                                                    <input type="hidden" name="start_date" value="{{currentDate}}" />
-                                                                </div>
-                                                                <div class="tourmaster-custom-end-date gdlr-core-skin-e-background">
-                                                                    <div class="tourmaster-head gdlr-core-skin-e-content">Check Out</div>
-                                                                    <div class="tourmaster-tail gdlr-core-skin-e-content"></div>
-                                                                    <input type="hidden" name="end_date" value="" />
-                                                                </div>
-                                                                <div class="tourmaster-custom-datepicker-wrap" data-date-format="d M yy">
-                                                                    <i class="tourmaster-custom-datepicker-close icon_close"></i>
-                                                                    <div class="tourmaster-custom-datepicker-title"></div>
-                                                                    <div class="tourmaster-custom-datepicker-calendar"></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+
+                                                    {{!-- ////calender/// --}}
+                                                     <div class="tourmaster-room-search-size10">
+    <div class="tourmaster-room-date-selection tourmaster-horizontal" data-avail-date="">
+        <div class="tourmaster-custom-start-date gdlr-core-skin-e-background">
+            <div class="tourmaster-head gdlr-core-skin-e-content">Check In</div>
+            <div class="tourmaster-tail gdlr-core-skin-e-content"></div>
+            <input id="start-date" type="text" name="start_date" value="{{currentDate}}" />
+        </div>
+        <div class="tourmaster-custom-end-date gdlr-core-skin-e-background">
+            <div class="tourmaster-head gdlr-core-skin-e-content">Check Out</div>
+            <div class="tourmaster-tail gdlr-core-skin-e-content"></div>
+            <input id="end-date" type="text" name="end_date" value="" />
+        </div>
+        {{!-- <div class="tourmaster-custom-datepicker-wrap" data-date-format="d M yy">
+            <i class="tourmaster-custom-datepicker-close icon_close"></i>
+            <div class="tourmaster-custom-datepicker-title"></div>
+            <div class="tourmaster-custom-datepicker-calendar"></div>
+        </div> --}}
+    </div>
+</div>
+
+
+
                                                         <div class="tourmaster-room-size2">
                                                             <div class="tourmaster-room-amount-selection">
                                                                 <div class="mb-3">
@@ -2976,6 +2927,31 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         window.location.href = "/"; // Redirect to home page
     }
 });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const currentDate = new Date();
+        flatpickr("#start-date", {
+            minDate: currentDate,
+            dateFormat: "d M Y",
+            onChange: function(selectedDates, dateStr, instance) {
+                // Set the minimum date of the end date to be the selected start date
+                if (selectedDates.length > 0) {
+                    const endDatePicker = document.getElementById("end-date")._flatpickr;
+                    endDatePicker.set("minDate", selectedDates[0]);
+                }
+            }
+        });
+        
+        flatpickr("#end-date", {
+            minDate: currentDate,
+            dateFormat: "d M Y"
+        });
+    });
 </script>
 
 </body>
