@@ -1099,6 +1099,7 @@ const postreviews = async (req, res) => {
       if (!roomId || !rating || !comment) {
           return res.status(400).json({ error: 'Room ID, rating, and comment are required.' });
       }
+      
 
       const room = await Rooms.findById(roomId);
 

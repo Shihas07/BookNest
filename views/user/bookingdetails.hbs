@@ -264,9 +264,60 @@ small{
               <h6 class="ml-auto mr-3">
                     <!-- Button trigger modal -->
 
-<button type="button" class="btn btn-primary open-review-modal" data-roomid="{{this.booking.room.roomid}}">
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const statuses = document.querySelectorAll('.status');
+
+  statuses.forEach(function(statusElem) {
+    const status = statusElem.textContent.trim().replace('Status: ', '').trim();
+    console.log(status);
+
+    const paymentMessage = statusElem.nextElementSibling;
+
+    if (status === "cancel") {
+      paymentMessage.innerHTML = "Your payment refund in 48 hours";
+      paymentMessage.style.color = "red";
+
+      const closestCard = statusElem.closest('.card');
+      var cancelButton = closestCard.querySelector('.hh');
+      const reviewButton = closestCard.querySelector('.review');
+
+      if (cancelButton && reviewButton) { 
+        cancelButton.style.display = "none";
+        reviewButton.style.display = "none";
+      }
+    } 
+    else if(status === "checkout"){
+      const closestCard = statusElem.closest('.card');
+      var cancelButton = closestCard.querySelector('.hh');
+      if (cancelButton) { 
+        cancelButton.style.display = "none";
+      }
+    } 
+    else if(status === "booked"){
+      const closestCard = statusElem.closest('.card');
+      const reviewButton = closestCard.querySelector('.review');
+      if (reviewButton) { 
+        reviewButton.style.display = "none";
+      }
+    }
+    else {
+      paymentMessage.innerHTML = "";
+    }
+  });
+});
+
+
+
+</script>
+
+<div class="review"><button type="button" class="btn btn-primary open-review-modal" data-roomid="{{this.booking.room.roomid}}">
     Add Review
-</button>
+</button></div>
+
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal-{{this.booking.room.roomid}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">        
@@ -340,38 +391,15 @@ small{
   
   <form action="/cancelbooking" method="post">
     <input type="hidden" id="ID" name="bookingId" value="{{this.booking._id}}"> 
-    <button type="submit" class="btn btn-outline-primary d-flex cancel-button">Cancel</button>
+    <div class="hh">
+    <button type="submit"  class="btn btn-outline-primary d-flex cancel-button">Cancel</button>
+
+    </div>
   </form>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-   
-    var statuses = document.querySelectorAll('.status');
-    
-    statuses.forEach(function(statusElem) {
-      
-      var status = statusElem.textContent.trim().replace('Status: ', '').trim();
 
-      console.log(status);
 
-      var paymentMessage = statusElem.nextElementSibling;
-            var cancelButton = document.querySelector('.cancel-button');
 
-              console.log("ndjbjd",cancelButton)
-     
-      if (status === "cancel") {
-        paymentMessage.innerHTML = "Your payment refund in 48 hours";
-        paymentMessage.style.color = "red";
-        
-          if (cancelButton) {
-          cancelButton.style.display = "none"; // Hide the cancel button
-        }
-      } else {
-        
-        paymentMessage.innerHTML = "";
-      }
-    });
-  });
-</script>
+
             </div>
             <img class="align-self-center img-fluid" src="{{this.booking.roomDetails.[0].roomImages.[0]}}" width="180" height="180">
           </div>

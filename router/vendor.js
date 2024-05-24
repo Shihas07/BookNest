@@ -29,6 +29,10 @@
       router.post("/vendor/editroom",upload.array('roomImage',3),vendorController.postEditRoompage)
       router.post("/vendor/deleteroom/:id",vendorController.deleteRoom)
       router.get("/vendor/booking",vendorAuth,vendorController.getbooking)
+      router.post("/venor/cancelbooking",vendorAuth,vendorController.postcancel)
+      router.post("/vendor/checkinbooking",vendorController. postcheckin)
+      router.post("/vendor/checkoutbooking",vendorController.postchekout)
+
      
 
 module.exports=router

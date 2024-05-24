@@ -1150,6 +1150,50 @@
                         </div>
                     </div>
                 </div><!--end container-->
+
+
+                  
+<script>
+         
+
+ document.addEventListener('DOMContentLoaded', function () {
+      
+      const rows = document.querySelectorAll('table tr');
+      
+     
+      rows.forEach(row => {
+          const statusElement = row.querySelector('#status');
+          if (statusElement) {
+              const status = statusElement.textContent.trim();
+              console.log("status:", status);
+              
+              if (status === "cancel") {
+                  const bookingid = row.querySelector('[id^="cancel-btn-"]').id.split('-')[2];
+                  row.querySelector('#cancel-btn-' + bookingid).style.display = 'none';
+                   row.querySelector('#checkin-btn-' + bookingid).style.display = 'none'; 
+                    row.querySelector('#checkout-btn-' + bookingid).style.display = 'none'; 
+
+
+              }
+              else if (status === "checkin") {
+                const bookingid = row.querySelector('[id^="cancel-btn-"]').id.split('-')[2];
+                        row.querySelector('#cancel-btn-' + bookingid).style.display = 'none';
+                 row.querySelector('#checkin-btn-' + bookingid).style.display = 'none'; 
+
+      }
+      else if(status==="checkout"){
+          const bookingid = row.querySelector('[id^="cancel-btn-"]').id.split('-')[2];
+                  row.querySelector('#cancel-btn-' + bookingid).style.display = 'none';
+                   row.querySelector('#checkin-btn-' + bookingid).style.display = 'none'; 
+                    row.querySelector('#checkout-btn-' + bookingid).style.display = 'none'; 
+      }
+          }
+      });
+  });
+
+</script>
+
+      
             
 {{#if bookingDetails}}
 <div class="container">
@@ -1163,6 +1207,8 @@
         <th scope="col">Room Image</th>
         <th scope="col">Booking Date</th>
         <th scope="col">Payment</th>
+        <th scope="col">status</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -1174,6 +1220,19 @@
         <td><img src="{{this.roomDetails.roomImages.[0]}}" alt="Room Image" style="max-width: 100px;"></td>
         <td>{{this.checkInDate}}</td>
         <td>{{this.price}}</td>
+         <td id="status">{{this.status}}</td>
+        <td>
+      <input type="hidden" class="userid-{{this.bookingid}}" name="userid" value="{{this.userid}}">
+
+          <button class="btn btn-danger" id="cancel-btn-{{this.bookingid}}" onclick="cancelBooking('{{this.bookingid}}')">Cancel</button>
+          {{!-- <input type="text" value="{{this.bookingid}}"> --}}
+
+          <button class="btn btn-success" id="checkin-btn-{{this.bookingid}}" onclick="checkIn('{{this.bookingid}}')">CheckIn</button>
+
+                    <button class="btn btn-primary" id="checkout-btn-{{this.bookingid}}" onclick="checkOut('{{this.bookingid}}')">Checkout</button>
+
+
+        </td>
       </tr>
       {{/each}}
     </tbody>
@@ -1181,7 +1240,8 @@
 </div>
 {{else}}
 <div>No booking details available</div>
-{{/if}}                                            
+{{/if}}
+                                          
                    <!-- footer -->
                     <div class="absolute bottom-0 -left-4 -right-4 block print:hidden border-t p-4 h-[52px] dark:border-slate-700/40">
                         <div class="container">
@@ -1221,8 +1281,62 @@
 
 
         <script src="assets/js/app.js"></script>
-        <!-- JAVASCRIPTS -->
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+
+ <script>
+   
+  function cancelBooking(bookingid) {
+         const userid = document.querySelector('.userid-' + bookingid).value;
+
+        console.log("guygduhug",userid)
+
+    axios.post('/venor/cancelbooking', { bookingid: bookingid,userid: userid })
+      .then(response => {
+        console.log('Booking cancelled:', response.data);
+         
+                window.location.reload() 
+      })
+      .catch(error => {
+        console.error('There was an error cancelling the booking!', error);
+      });
+  }
+
+  function checkIn(bookingid) {
+       const userid = document.querySelector('.userid-' + bookingid).value;
+
+    axios.post('/vendor/checkinbooking', { bookingid: bookingid ,userid:userid})
+      .then(response => {
+        console.log('Checked in:', response.data);
+        // Optionally, update the UI to reflect the check-in
+        window.location.reload()
+      })
+      .catch(error => {
+        console.error('There was an error checking in!', error);
+      });
+  }
+    function checkOut(bookingid) {
+       const userid = document.querySelector('.userid-' + bookingid).value;
+
+    axios.post("/vendor/checkoutbooking", { bookingid: bookingid ,userid:userid})
+      .then(response => {
+        console.log('Checked in:', response.data);
+        // Optionally, update the UI to reflect the check-in
+        window.location.reload()
+      })
+      .catch(error => {
+        console.error('There was an error checking in!', error);
+      });
+  }
+
+   
+
+</script>
+        
     </body>
 
-<!-- Mirrored from mannatthemes.com/robotech/default/admin-products.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Apr 2024 07:56:42 GMT -->
 </html>

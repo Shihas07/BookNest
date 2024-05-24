@@ -511,10 +511,7 @@ const postCancelBooking = async (req, res) => {
    
     booking.staus = "cancel";
     
-    if (booking.staus === "cancel") {
-      booking.checkInDate = null;
-      booking.checkOutDate = null;
-    }
+  
 
     // Save the updated user document
     await user.save();

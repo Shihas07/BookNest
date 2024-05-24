@@ -462,6 +462,9 @@ const getbooking = async (req, res) => {
                 checkInDate: booking.checkInDate,
                 checkOutDate: booking.checkOutDate,
                 price: booking.price,
+                status: booking.staus,
+                bookingid: booking._id,
+                userid:user._id,
                 roomDetails: room 
             });
         }
@@ -477,6 +480,107 @@ const getbooking = async (req, res) => {
     res.status(500).send("Internal Server Error");
 }
 };
+  
+const postcancel = async (req, res) => {
+  try {
+      const { bookingid, userid } = req.body;
+
+     console.log(req.body)
+      const user = await User.findById(userid);
+
+     
+      const booking = user.booking.find(booking => booking._id.toString() === bookingid);
+
+      if (!booking) {
+         
+          return res.status(404).send("Booking not found");
+      }
+
+     
+      booking.staus = "cancel";
+
+      // Save the changes to the user
+      await user.save();
+
+      console.log(booking.staus);
+
+      // Redirect user to the booking page
+      res.status(200).json({message:"success"})
+
+      // console.log(user);
+  } catch (error) {
+      // Handle any errors that occur during the process
+      console.error("Error cancelling booking:", error);
+      res.status(500).send("Internal Server Error");
+  }
+};
+
+const postcheckin=async(req,res)=>{
+  try {
+    const { bookingid, userid } = req.body;
+
+   
+    const user = await User.findById(userid);
+
+   
+    const booking = user.booking.find(booking => booking._id.toString() === bookingid);
+
+    if (!booking) {
+       
+        return res.status(404).send("Booking not found");
+    }
+
+   
+    booking.staus = "checkin";
+
+    
+    await user.save();
+
+    console.log(booking.staus);
+
+  
+    res.status(200).json({message:"success"})
+
+    
+} catch (error) {
+    
+    console.error("Error cancelling booking:", error);
+    res.status(500).send("Internal Server Error");
+}
+}
+const postchekout=async(req,res)=>{
+  try {
+    const { bookingid, userid } = req.body;
+
+   
+    const user = await User.findById(userid);
+
+   
+    const booking = user.booking.find(booking => booking._id.toString() === bookingid);
+
+    if (!booking) {
+       
+        return res.status(404).send("Booking not found");
+    }
+
+   
+    booking.staus = "checkout";
+
+    
+    await user.save();
+
+    console.log(booking.staus);
+
+  
+    res.status(200).json({message:"success"})
+
+    
+} catch (error) {
+    
+    console.error("Error cancelling booking:", error);
+    res.status(500).send("Internal Server Error");
+}
+}
 
 
 
@@ -494,5 +598,8 @@ module.exports = {
   getEditRoompage,
   postEditRoompage,
   deleteRoom,
-  getbooking
+  getbooking,
+  postcancel,
+  postcheckin,
+  postchekout
 };
