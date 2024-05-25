@@ -16,6 +16,9 @@ email:{
 password:{
     type:String,
     required:true
+},
+blocked:{
+    type:Boolean
 }
 
 })

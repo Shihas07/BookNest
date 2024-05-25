@@ -5,7 +5,7 @@
 <!-- Mirrored from techzaa.getappui.com/velonic/layouts/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 29 Mar 2024 09:35:08 GMT -->
 <head>
         <meta charset="utf-8" />
-        <title>Dashboard | Velonic - Bootstrap 5 Admin & Dashboard Template</title>
+        <title> Admin & Dashboard Template</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="A fully responsive admin theme which can be used to build CRM, CMS,ERP etc." name="description" />
         <meta content="Techzaa" name="author" />
@@ -33,6 +33,24 @@
                 width: 10px;
             }
         </style> --}}
+
+        <style>
+            .piechart{
+                margin-top: 50px;
+            }
+
+             .charts-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .chart-wrapper {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            margin: 10px;
+        }
+        </style>
     </head>
 
     <body>
@@ -46,7 +64,7 @@
                     <div class="d-flex align-items-center gap-1">
 
                         <!-- Topbar Brand Logo -->
-                        <div class="logo-topbar">
+                        {{!-- <div class="logo-topbar">
                             <!-- Logo light -->
                             <a href="index.html" class="logo-light">
                                 <span class="logo-lg">
@@ -66,7 +84,7 @@
                                     <img src="/admin/assets/images/logo-sm.png" alt="small logo">
                                 </span>
                             </a>
-                        </div>
+                        </div> --}}
 
                         <!-- Sidebar Menu Toggle Button -->
                         <button class="button-toggle-menu">
@@ -83,290 +101,17 @@
                         </button>
 
                         <!-- Topbar Search Form -->
-                        <div class="app-search d-none d-lg-block">
-                            <form>
-                                <div class="input-group">
-                                    <input type="search" class="form-control" placeholder="Search...">
-                                    <span class="ri-search-line search-icon text-muted"></span>
-                                </div>
-                            </form>
-                        </div>
+                       
                     </div>
 
                     <ul class="topbar-menu d-flex align-items-center gap-3">
-                        <li class="dropdown d-lg-none">
-                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="false" aria-expanded="false">
-                                <i class="ri-search-line fs-22"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-animated dropdown-lg p-0">
-                                <form class="p-3">
-                                    <input type="search" class="form-control" placeholder="Search ..."
-                                        aria-label="Recipient's username">
-                                </form>
-                            </div>
-                        </li>
+                        
 
-                        <li class="dropdown">
-                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="false" aria-expanded="false">
-                                <img src="/admin/assets/images/flags/us.jpg" alt="user-image" class="me-0 me-sm-1" height="12">
-                                <span class="align-middle d-none d-lg-inline-block">English</span> <i
-                                    class="ri-arrow-down-s-line d-none d-sm-inline-block align-middle"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated">
+                      
 
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="/admin/assets/images/flags/germany.jpg" alt="user-image" class="me-1" height="12"> <span
-                                        class="align-middle">German</span>
-                                </a>
+                        
 
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="/admin/assets/images/flags/italy.jpg" alt="user-image" class="me-1" height="12"> <span
-                                        class="align-middle">Italian</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="/admin/assets/images/flags/spain.jpg" alt="user-image" class="me-1" height="12"> <span
-                                        class="align-middle">Spanish</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item">
-                                    <img src="/admin/assets/images/flags/russia.jpg" alt="user-image" class="me-1" height="12"> <span
-                                        class="align-middle">Russian</span>
-                                </a>
-
-                            </div>
-                        </li>
-
-                        <li class="dropdown notification-list">
-                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="false" aria-expanded="false">
-                                <i class="ri-mail-line fs-22"></i>
-                                <span class="noti-icon-badge badge text-bg-purple">4</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
-                                <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h6 class="m-0 fs-16 fw-semibold"> Messages</h6>
-                                        </div>
-                                        <div class="col-auto">
-                                            <a href="javascript: void(0);" class="text-dark text-decoration-underline">
-                                                <small>Clear All</small>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div style="max-height: 300px;" data-simplebar>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <div class="notify-icon">
-                                                        <img src="/admin/assets/images/users/avatar-1.jpg" class="img-fluid rounded-circle"
-                                                            alt="" />
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 text-truncate ms-2">
-                                                    <h5 class="noti-item-title fw-semibold fs-14">Cristina Pride <small
-                                                            class="fw-normal text-muted float-end ms-1">1 day ago</small></h5>
-                                                    <small class="noti-item-subtitle text-muted">Hi, How are you? What about our
-                                                        next meeting</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <div class="notify-icon">
-                                                        <img src="/admin/assets/images/users/avatar-2.jpg" class="img-fluid rounded-circle"
-                                                            alt="" />
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 text-truncate ms-2">
-                                                    <h5 class="noti-item-title fw-semibold fs-14">Sam Garret <small
-                                                            class="fw-normal text-muted float-end ms-1">2 day ago</small></h5>
-                                                    <small class="noti-item-subtitle text-muted">Yeah everything is fine</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <div class="notify-icon">
-                                                        <img src="/admin/assets/images/users/avatar-3.jpg" class="img-fluid rounded-circle"
-                                                            alt="" />
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 text-truncate ms-2">
-                                                    <h5 class="noti-item-title fw-semibold fs-14">Karen Robinson <small
-                                                            class="fw-normal text-muted float-end ms-1">2 day ago</small></h5>
-                                                    <small class="noti-item-subtitle text-muted">Wow that's great</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <div class="notify-icon">
-                                                        <img src="/admin/assets/images/users/avatar-4.jpg" class="img-fluid rounded-circle"
-                                                            alt="" />
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 text-truncate ms-2">
-                                                    <h5 class="noti-item-title fw-semibold fs-14">Sherry Marshall <small
-                                                            class="fw-normal text-muted float-end ms-1">3 day ago</small></h5>
-                                                    <small class="noti-item-subtitle text-muted">Hi, How are you? What about our
-                                                        next meeting</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);"
-                                        class="dropdown-item p-0 notify-item read-noti card m-0 shadow-none">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <div class="notify-icon">
-                                                        <img src="/admin/assets/images/users/avatar-5.jpg" class="img-fluid rounded-circle"
-                                                            alt="" />
-                                                    </div>
-                                                </div>
-                                                <div class="flex-grow-1 text-truncate ms-2">
-                                                    <h5 class="noti-item-title fw-semibold fs-14">Shawn Millard <small
-                                                            class="fw-normal text-muted float-end ms-1">4 day ago</small></h5>
-                                                    <small class="noti-item-subtitle text-muted">Yeah everything is fine</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <!-- All-->
-                                <a href="javascript:void(0);"
-                                    class="dropdown-item text-center text-primary text-decoration-underline fw-bold notify-item border-top border-light py-2">
-                                    View All
-                                </a>
-
-                            </div>
-                        </li>
-
-                        <li class="dropdown notification-list">
-                            <a class="nav-link dropdown-toggle arrow-none" data-bs-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="false" aria-expanded="false">
-                                <i class="ri-notification-3-line fs-22"></i>
-                                <span class="noti-icon-badge badge text-bg-pink">3</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-animated dropdown-lg py-0">
-                                <div class="p-2 border-top-0 border-start-0 border-end-0 border-dashed border">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h6 class="m-0 fs-16 fw-semibold"> Notification</h6>
-                                        </div>
-                                        <div class="col-auto">
-                                            <a href="javascript: void(0);" class="text-dark text-decoration-underline">
-                                                <small>Clear All</small>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div style="max-height: 300px;" data-simplebar>
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-primary-subtle">
-                                            <i class="mdi mdi-comment-account-outline text-primary"></i>
-                                        </div>
-                                        <p class="notify-details">Caleb Flakelar commented on Admin
-                                            <small class="noti-time">1 min ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-warning-subtle">
-                                            <i class="mdi mdi-account-plus text-warning"></i>
-                                        </div>
-                                        <p class="notify-details">New user registered.
-                                            <small class="noti-time">5 hours ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-danger-subtle">
-                                            <i class="mdi mdi-heart text-danger"></i>
-                                        </div>
-                                        <p class="notify-details">Carlos Crouch liked
-                                            <small class="noti-time">3 days ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-pink-subtle">
-                                            <i class="mdi mdi-comment-account-outline text-pink"></i>
-                                        </div>
-                                        <p class="notify-details">Caleb Flakelar commented on Admi
-                                            <small class="noti-time">4 days ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-purple-subtle">
-                                            <i class="mdi mdi-account-plus text-purple"></i>
-                                        </div>
-                                        <p class="notify-details">New user registered.
-                                            <small class="noti-time">7 days ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-success-subtle">
-                                            <i class="mdi mdi-heart text-success"></i>
-                                        </div>
-                                        <p class="notify-details">Carlos Crouch liked <b>Admin</b>.
-                                            <small class="noti-time">Carlos Crouch liked</small>
-                                        </p>
-                                    </a>
-                                </div>
-
-                                <!-- All-->
-                                <a href="javascript:void(0);"
-                                    class="dropdown-item text-center text-primary text-decoration-underline fw-bold notify-item border-top border-light py-2">
-                                    View All
-                                </a>
-
-                            </div>
-                        </li>
+                        
 
                         <li class="d-none d-sm-inline-block">
                             <a class="nav-link" data-bs-toggle="offcanvas" href="#theme-settings-offcanvas">
@@ -424,14 +169,7 @@
             <div class="leftside-menu">
 
                 <!-- Brand Logo Light -->
-                <a href="index.html" class="logo logo-light">
-                    <span class="logo-lg">
-                        <img src="/admin/assets/images/logo.png" alt="logo">
-                    </span>
-                    <span class="logo-sm">
-                        <img src="/admin/assets/images/logo-sm.png" alt="small logo">
-                    </span>
-                </a>
+           
 
                 <!-- Brand Logo Dark -->
                 <a href="index.html" class="logo logo-dark">
@@ -448,52 +186,66 @@
                     <!--- Sidemenu -->
                     <ul class="side-nav">
 
-                        <li class="side-nav-title">Main</li>
+                        <li class="side-nav-title">ADMIN</li>
 
                         <li class="side-nav-item">
-                            <a href="index.html" class="side-nav-link">
+                            <a href="/admin/index" class="side-nav-link">
                                 <i class="ri-dashboard-3-line"></i>
-                                <span class="badge bg-success float-end">9+</span>
+                                <span class="badge bg-success float-end"></span>
                                 <span> Dashboard </span>
                             </a>
                         </li>
 
-                        <li class="side-nav-item">
-                            <a data-bs-toggle="collapse" href="#sidebarPages" aria-expanded="false" aria-controls="sidebarPages" class="side-nav-link">
-                                <i class="ri-pages-line"></i>
-                                <span> Pages </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarPages">
-                                <ul class="side-nav-second-level">
-                                    <li>
-                                        <a href="/admin/category">room</a>
-                                    </li>
-                                    <li>
-                                        <a href="/admin/userlist">User List</a>
-                                    </li>
-                                    <li>
-                                        <a href="pages-profile.html">Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href="/admin/coupen">coupen   </a>
-                                    </li>
-                                    <li>
-                                        <a href="/admin/booking">BOOKING</a>
-                                    </li>
-                                   
-                                    
-                                    
-                                    
-                                    <li>
-                                        <a href="/admin/listbanner">Banner</a>
-                                    </li>
-                                    <li>
-                                        <a href="error-500.html">Error 500</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+   <ul class="side-nav">
+    <li class="side-nav-item">
+        <a href="/admin/category" class="side-nav-link">
+            <i class="ri-pages-line"></i>
+            <span>Room categorey</span>
+        </a>
+    </li>
+    <li class="side-nav-item">
+        <a href="/admin/userlist" class="side-nav-link">
+            <i class="ri-user-line"></i>
+            <span>User List</span>
+        </a>
+    </li>
+    {{!-- <li class="side-nav-item">
+        <a href="pages-profile.html" class="side-nav-link">
+            <i class="ri-profile-line"></i>
+            <span>Profile</span>
+        </a>
+    </li> --}}
+    <li class="side-nav-item">
+        <a href="/admin/coupen" class="side-nav-link">
+            <i class="ri-coupon-line"></i>
+            <span>Coupen</span>
+        </a>
+    </li>
+    <li class="side-nav-item">
+        <a href="/admin/booking" class="side-nav-link">
+            <i class="ri-calendar-line"></i>
+            <span>Booking</span>
+        </a>
+    </li>
+    <li class="side-nav-item">
+        <a href="/admin/listbanner" class="side-nav-link">
+            <i class="ri-image-line"></i>
+            <span>Banner</span>
+        </a>
+    </li>
+    {{!-- <li class="side-nav-item">
+        <a href="error-500.html" class="side-nav-link">
+            <i class="ri-error-warning-line"></i>
+            <span>Error 500</span>
+        </a>
+    </li> --}}
+    <li class="side-nav-item">
+        <a href="/admin/vendorcontroll" class="side-nav-link">
+            <i class="ri-user-3-line"></i> <!-- Use an appropriate icon for vendor -->
+            <span>Vendor</span>
+        </a>
+    </li>
+</ul>
 
                      
 
@@ -537,62 +289,12 @@
                            {{!-- //modal banner// --}}
 
 
-                        <div style="text-align: center;">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">add banner</button></div>
-
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">New Banner</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="/admin/addbanner" method="post"  enctype="multipart/form-data" >
-                    <div class="form-group">
-                        <label for="banner-name" class="col-form-label">Banner Name:</label>
-                        <input type="text" class="form-control" id="bannername" name="bname">
-                    </div>
-                    <div class="form-group">
-                        <label for="banner-image" class="col-form-label">Banner Image:</label>
-                        <input type="file" class="form-control-file" id="bannerimage" name="img">
-                    </div>
-                    <div class="form-group">
-                        <label for="banner-heading" class="col-form-label">Banner Heading:</label>
-                        <input type="text" class="form-control" id="bannerheading" name="heading">
-                    </div>
-               
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save Banner</button>
-                 </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
 
                         <div class="row">
-                            {{!-- <div class="col-xxl-3 col-sm-6">
-                                <div class="card widget-flat text-bg-pink">
-                                    <div class="card-body">
-                                        <div class="float-end">
-                                            <i class="ri-eye-line widget-icon"></i>
-                                        </div>
-                                        <h6 class="text-uppercase mt-0" title="Customers">Daily Visits</h6>
-                                        <h2 class="my-2">8,652</h2>
-                                        <p class="mb-0">
-                                            <span class="badge bg-white bg-opacity-10 me-1">2.97%</span>
-                                            <span class="text-nowrap">Since last month</span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div> <!-- end col--> --}}
+                           
                             {{#if total}}
 
                             <div class="col-xxl-3 col-sm-6">
@@ -703,71 +405,128 @@
      
 </script>
 
+<div class="charts-container">
+    <div class="chart-wrapper">
+        <input type="hidden" name="" id="doughnutChartData" value='{{roomDatajson}}'>
+        <div style="height: 300px;">
+            <h1>Booking Summary Based on Rooms</h1>
+            <canvas id="doughnutChart"></canvas>
+        </div>
+    </div>
 
- <input type="hidden" name="" id="dougnutchart" value="{{roomDatajson}}">
-<div style="height: 300px;">
-    <h1>BOOKING SUMMAREY BASED ON ROOMS</h1>
-  <canvas id="myChart2"></canvas>
+    <div class="chart-wrapper">
+        <input type="hidden" name="" id="pieChartData" value='{{bookingsByVendorJSON}}'>
+        <div style="height: 300px;">
+            <h1>Vendors Booking</h1>
+            <canvas id="pieChart"></canvas>
+        </div>
+    </div>
 </div>
- 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
-  const ctx = document.getElementById('myChart2');
+    // Doughnut Chart
+    const doughnutCtx = document.getElementById('doughnutChart');
+    const doughnutInput = document.getElementById('doughnutChartData');
+    const doughnutDataJSON = doughnutInput.value;
+    console.log(doughnutDataJSON);
+    const doughnutData = JSON.parse(doughnutDataJSON);
 
-  const dougnutchartInput = document.getElementById('dougnutchart');
-  const roomDataJSON = dougnutchartInput.value;
-  console.log(roomDataJSON)
-  const roomData = JSON.parse(roomDataJSON);
+    const roomNames = Object.keys(doughnutData);
+    const roomCounts = Object.values(doughnutData);
 
-    const roomNames = Object.keys(roomData)
-    const counts = Object.values(roomData);
-
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: roomNames,
-      datasets: [{
-        label: '# of Bookings',
-        data:counts,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.5)',
-          'rgba(54, 162, 235, 0.5)',
-          'rgba(255, 205, 86, 0.5)',
-          'rgba(75, 192, 192, 0.5)',
-          'rgba(153, 102, 255, 0.5)',
-          'rgba(255, 159, 64, 0.5)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 205, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
+    new Chart(doughnutCtx, {
+        type: 'doughnut',
+        data: {
+            labels: roomNames,
+            datasets: [{
+                label: '# of Bookings',
+                data: roomCounts,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 205, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 205, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
         },
-        title: {
-          display: true,
-          text: 'Room Bookings'
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Room Bookings'
+                }
+            }
         }
-      }
-    }
-  });
+    });
+
+    // Pie Chart
+    const pieCtx = document.getElementById('pieChart');
+    const pieInput = document.getElementById('pieChartData');
+    const pieDataJSON = pieInput.value;
+    console.log(pieDataJSON);
+    const pieData = JSON.parse(pieDataJSON);
+
+    const vendorNames = Object.keys(pieData);
+    const vendorCounts = Object.values(pieData);
+
+    new Chart(pieCtx, {
+        type: 'pie',
+        data: {
+            labels: vendorNames,
+            datasets: [{
+                label: '# of Bookings',
+                data: vendorCounts,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 205, 86, 0.5)',
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)',
+                    'rgba(255, 159, 64, 0.5)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 205, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Vendors Booking'
+                }
+            }
+        }
+    });
 });
 </script>
 
-
-                        
                         
 
                     </div>

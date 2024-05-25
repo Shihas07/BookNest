@@ -560,19 +560,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each user}}
+                            {{#each vendor}}
                             <tr>
-                                <td>{{this.userName}}</td>
+                                <td>{{this.vendorName}}</td>
                                 <td>{{this.email}}</td>
                                 <td>
-                                 <form action="/admin/userlist" method="post">
-                                  <input type="hidden" name="userId" value="{{this._id}}">
+                                 <form action="/admin/vendorlist" method="post">
+                                  <input type="hidden" name="vendorId" value="{{this._id}}">
+    
     {{#if this.blocked}}
-    <button type="submit" class="btn btn-success btn-sm">Unblock</button>
+       
+        <button type="submit" class="btn btn-success btn-sm">Unblock</button>
     {{else}}
-   
-    <button type="submit" class="btn btn-danger btn-sm">Block</button>
+       
+        <button type="submit" class="btn btn-danger btn-sm">Block</button>
     {{/if}}
+  
 </form>
                                 </td>
                             </tr>

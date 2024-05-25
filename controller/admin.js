@@ -6,6 +6,7 @@
      const User=require("../model/user/user")
      const nodemailer=require("nodemailer")
      const Rooms=require("../model/room")
+     const Vendor=require("../model/vendor/vendor")
      const Excel = require('exceljs');
      const cloudinary = require("../config/cloudinary");
 const { json } = require("body-parser")
@@ -17,6 +18,7 @@ const { json } = require("body-parser")
     try {
         const admin=await Admin.find()
         const users = await User.find().populate('booking.room');
+        const userss = await User.find()
 
         const booking=await User.find().populate("booking")
         let totalBookings = 0;
@@ -28,7 +30,7 @@ const { json } = require("body-parser")
         const user=await User.find()
          const totaluser=user.length
          console.log(totaluser)
-        console.log(totalBookings)
+        // console.log(totalBookings)
 
         const bookingPrices = [];
 
@@ -42,7 +44,7 @@ const { json } = require("body-parser")
         });
 
         const total = bookingPrices.reduce((a, b) => a + b, 0);
-        console.log(total);
+        // console.log(total);
 
         const getMonthName = (monthNumber) => {
           const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -67,7 +69,7 @@ const { json } = require("body-parser")
 
           
         const bookingsByMonthJSON = JSON.stringify(bookingsByMonth);
-        console.log(bookingsByMonthJSON);
+        // console.log(bookingsByMonthJSON);
 
 
         const bookingCounts = await User.aggregate([
@@ -89,13 +91,97 @@ const roomDataFormatted = roomData.reduce((acc, { roomName, bookingCount }) => {
 }, {});
 
 
-console.log(roomDataFormatted);
+// console.log(roomDataFormatted);
 
 
     const  roomDatajson=  JSON.stringify(roomDataFormatted)
-      console.log("rfef",roomDatajson);
+      // console.log("rfef",roomDatajson);
+
+     
+
+ 
+      // Step 1: Retrieve all booking room IDs from users
+     // Your existing aggregation query to retrieve booking IDs
+const bookingIdsAggregate = await User.aggregate([
+  {
+      $match: {
+          $and: [
+              { booking: { $exists: true, $ne: [] } }, // Filter out users with no bookings
+              { booking: { $elemMatch: { 'room.roomid': { $exists: true } } } } // Filter out bookings with no roomid
+          ]
+      }
+  },
+  {
+      $unwind: '$booking' // Deconstruct the booking array
+  },
+  {
+      $group: {
+          _id: null, // Group all results into one document
+          bookingIds: { $push: '$booking.room.roomid' } // Push all roomids into an array
+      }
+  }
+]);
+
+// Extract booking IDs from the aggregation result
+const bookingIds = bookingIdsAggregate.length > 0 ? bookingIdsAggregate[0].bookingIds : [];
+
+// Get the count of rooms for each vendor
+const roomCountByVendor = await Rooms.aggregate([
+  {
+      $match: {
+          vendor: { $exists: true, $ne: null } 
+      }
+  },
+  {
+      $group: {
+          _id: "$vendor", 
+          count: { $sum: 1 } 
+      }
+  }
+]);
+
+// Create a map to store the count of rooms for each vendor
+const roomCountMap = new Map();
+roomCountByVendor.forEach(item => {
+  roomCountMap.set(item._id, item.count);
+});
+
+// Initialize object to store count of rooms for each vendor
+const vendorRoomCount = {};
+
+// Iterate through the bookingIds array and find the vendor for each room
+for (const bookingId of bookingIds) {
+  const room = await Rooms.findOne({ _id: bookingId }); // Find the room by its ID
+  if (room) {
+      const vendorId = room.vendor.toString(); // Get the vendor ID
+      const vendorName = (await Vendor.findById(vendorId)).vendorName; // Get the vendor name
+      if (!vendorRoomCount[vendorName]) {
+          vendorRoomCount[vendorName] = 1; // Initialize count if not present
+      } else {
+          vendorRoomCount[vendorName]++; // Increment count
+      }
+  }
+}
+
+// Output the count of rooms for each vendor
+console.log("Count of rooms for each vendor:");
+for (const vendorName in vendorRoomCount) {
+  console.log(`${vendorName}: ${vendorRoomCount[vendorName]}`);
+}
+
+  
+    
+const bookingsByVendor = {};
+for (const vendorName in vendorRoomCount) {
+    bookingsByVendor[vendorName] = vendorRoomCount[vendorName];
+}
+
+const bookingsByVendorJSON = JSON.stringify(bookingsByVendor);
+console.log(bookingsByVendorJSON);
+
+      
         
-        res.render('admin/index', {admin, total ,totaluser ,totalBookings,bookingsByMonthJSON,roomDatajson }); 
+        res.render('admin/index', {admin, total ,totaluser ,totalBookings,bookingsByMonthJSON,roomDatajson,bookingsByVendorJSON }); 
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
@@ -272,15 +358,15 @@ console.log(roomDataFormatted);
 
             const postuserlist=async(req,res)=>{
               try {
-                const { userId } = req.body; // Assuming you're sending the user's ID in the request body
+                const { userId } = req.body; 
                   console.log("ffff",req.body);
                 // Find user by ID
                 const user = await User.findById(userId);
         console.log(user)
-                // Toggle the blocked status
+               
                 user.blocked = !user.blocked;
         
-                // Save the updated user
+               
                 await user.save();
         
                 res.redirect('/admin/userlist'); // Redirect back to the user list page
@@ -743,6 +829,46 @@ const deletebanner = async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
+      const getvendorlist=async(req,res)=>{
+
+        const vendor=await Vendor.find()
+         
+
+         res.render("admin/vendorlist",{vendor})
+      }
+
+
+       const postblock=async(req,res)=>{
+
+        try {
+         
+          const { vendorId } = req.body;
+      
+         
+          const vendor = await Vendor.findById(vendorId);
+      
+          if (!vendor) {
+            return res.status(404).send('Vendor not found'); 
+          }
+      
+        
+          vendor.blocked = !vendor.blocked;
+      
+         
+          await vendor.save();
+      
+          
+          res.redirect("/admin/vendorcontroll");
+        } catch (error) {
+          console.error(error);
+          
+        }
+       }
+
+
+
+
      module.exports = {
             index,
         adminSignup,
@@ -763,7 +889,9 @@ const deletebanner = async (req, res) => {
         postBookingreport,
         postBanner,
         getlistBanner,
-        deletebanner
+        deletebanner,
+        getvendorlist,
+        postblock
      }
 
 

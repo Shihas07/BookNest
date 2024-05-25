@@ -907,6 +907,44 @@
             <!-- Start Page Content here -->
             <!-- ============================================================== -->
  <!-- ============================================================== -->
+
+   
+                        <div style="text-align: center; ">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">add banner</button></div>
+
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Banner</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="/admin/addbanner" method="post"  enctype="multipart/form-data" >
+                    <div class="form-group">
+                        <label for="banner-name" class="col-form-label">Banner Name:</label>
+                        <input type="text" class="form-control" id="bannername" name="bname">
+                    </div>
+                    <div class="form-group">
+                        <label for="banner-image" class="col-form-label">Banner Image:</label>
+                        <input type="file" class="form-control-file" id="bannerimage" name="img">
+                    </div>
+                    <div class="form-group">
+                        <label for="banner-heading" class="col-form-label">Banner Heading:</label>
+                        <input type="text" class="form-control" id="bannerheading" name="heading">
+                    </div>
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save Banner</button>
+                 </form>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">

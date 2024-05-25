@@ -39,6 +39,8 @@ const upload = multer({ dest: 'uploads/' });
      router.post("/admin/addbanner",adminAuth,upload.single('img'),adminController.postBanner)
      router.get("/admin/listbanner",adminController.getlistBanner)
      router.post("/admin/bannerdelete/:id", adminController.deletebanner);
+     router.get("/admin/vendorcontroll",adminController.getvendorlist)
+     router.post("/admin/vendorlist",adminController.postblock)
 
 
      

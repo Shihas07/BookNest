@@ -194,7 +194,7 @@ footer{ overflow: hidden; border-radius: 20px; -moz-border-radius: 20px; -webkit
 .hotale-body .hotale-top-bar a:hover{ color: #ffffff; } 
 .hotale-top-bar .hotale-top-bar-right-social a, .hotale-header-style-side .hotale-header-social a{ color: #ffffff; } 
 .hotale-top-bar .hotale-top-bar-right-social a:hover, .hotale-header-style-side .hotale-header-social a:hover{ color: #c6c6c6; } 
-.hotale-header-background, .hotale-sticky-menu-placeholder, .hotale-header-style-boxed.hotale-fixed-navigation, body.single-product .hotale-header-background-transparent{ background-color: #1c1c1c; } 
+.hotale-header-background, .hotale-sticky-menu-placeholder, .hotale-header-style-boxed.hotale-fixed-navigation, body.single-product .hotale-header-background-transparent{ background-color: black; } 
 .hotale-header-wrap.hotale-header-style-plain{ border-color: #e8e8e8; } 
 .hotale-header-side-nav.hotale-style-side-toggle .hotale-logo{ background-color: #ffffff; } 
 .hotale-top-menu-button i, .hotale-mobile-menu-button i{ color: #ffffff; }.hotale-main-menu-right-wrap .tourmaster-user-top-bar, .hotale-mobile-menu-right .tourmaster-user-top-bar-name, .hotale-mobile-menu-right .tourmaster-user-top-bar.tourmaster-guest .tourmaster-text{ color: #ffffff; }.hotale-mobile-button-hamburger:before, .hotale-mobile-button-hamburger:after, .hotale-mobile-button-hamburger span, .hotale-mobile-button-hamburger-small:before, .hotale-mobile-button-hamburger-small:after, .hotale-mobile-button-hamburger-small span{ background: #ffffff; }.hotale-side-content-menu-button span,.hotale-side-content-menu-button:before, .hotale-side-content-menu-button:after{ background: #ffffff; } 

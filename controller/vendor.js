@@ -221,6 +221,11 @@ const postLogin = async (req, res) => {
     if (!vendor) {
       return res.status(400).send("Vendor not found");
     }
+    if(vendor.blocked){
+      return res
+      .status(400)
+      .render("vendor/login", { errorp: "blocked ! pleaase contact admin" });
+    }
 
     const hashPassword = await bcrypt.compare(password, vendor.password);
     if (!hashPassword) {
