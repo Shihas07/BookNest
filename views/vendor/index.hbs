@@ -53,6 +53,18 @@
                                     <span>VENDOR</span>
                                     <i class="icofont-thin-down ms-auto inline-block text-[14px] transform transition-transform duration-300 text-slate-800 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400 fc-collapse-open:rotate-180 "></i>
                                 </a>
+    
+<a href="/vendor/roomlist"
+   class="nav-link hover:text-primary-500 rounded-md dark:hover:text-primary-500 relative flex items-center decoration-0 px-3 py-3 group-data-[sidebar=brand]:hover:text-slate-200">
+    <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+    room
+</a>
+<a href="/vendor/booking"
+   class="nav-link hover:text-primary-500 rounded-md dark:hover:text-primary-500 relative flex items-center decoration-0 px-3 py-3 group-data-[sidebar=brand]:hover:text-slate-200">
+    <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
+    booking
+</a>
+
 
                                 <div id="Admin-flush" class="hidden  overflow-hidden">
                                     <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2">
@@ -122,160 +134,8 @@
                                     <span>Customer</span>
                                     <i class="icofont-thin-down ms-auto inline-block text-[14px] transform transition-transform duration-300 text-slate-800 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400 fc-collapse-open:rotate-180 "></i>
                                 </a> --}}
-                                <div id="Customer-flush" class="hidden  overflow-hidden">
-                                    {{!-- <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2">
-                                        <li class="nav-item relative block">
-                                            <a href="customers-home.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative   flex items-center decoration-0 px-3 py-3 group-data-[sidebar=brand]:hover:text-slate-200">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400 "></i>
-                                                Home 
-                                            </a>
-                                        </li>
-                                        <li class="nav-item relative block">
-                                            <a href="customers-pro-details.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative   flex items-center decoration-0 px-3 py-3 group-data-[sidebar=brand]:hover:text-slate-200">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                                Product details
-                                            </a>
-                                        </li>
-                                        <li class="nav-item relative block">
-                                            <a href="customers-products.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative   flex items-center decoration-0 px-3 py-3 group-data-[sidebar=brand]:hover:text-slate-200">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                               Product filter
-                                            </a>
-                                        </li>
-                                        <li class="nav-item relative block">
-                                            <a href="customers-cart.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative   flex items-center decoration-0 px-3 py-3 group-data-[sidebar=brand]:hover:text-slate-200">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                                Cart
-                                            </a>
-                                        </li>
-                                        <li class="nav-item relative block">
-                                            <a href="customers-checkout.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative   flex items-center decoration-0 px-3 py-3 group-data-[sidebar=brand]:hover:text-slate-200">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                                Checkout
-                                            </a>
-                                        </li>
-                                        <li class="nav-item relative block">
-                                            <a href="customers-profile.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative   flex items-center decoration-0 px-3 py-3 group-data-[sidebar=brand]:hover:text-slate-200">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                                Profile
-                                            </a>
-                                        </li>
-                                        <li class="nav-item relative block">
-                                            <a href="customers-stores.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative   flex items-center decoration-0 px-3 py-3 group-data-[sidebar=brand]:hover:text-slate-200">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                               Favourite store
-                                            </a>
-                                        </li>
-                                        <li class="nav-item relative block">
-                                            <a href="customers-wishlist.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative   flex items-center decoration-0 px-3 py-3 group-data-[sidebar=brand]:hover:text-slate-200">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                               Wishlist
-                                            </a>
-                                        </li>
-                                        <li class="nav-item relative block">
-                                            <a href="customers-order-track.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative   flex items-center decoration-0 px-3 py-3 group-data-[sidebar=brand]:hover:text-slate-200">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                               Order track
-                                            </a>
-                                        </li>
-                                        <li class="nav-item relative block">
-                                            <a href="customers-invoice.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative   flex items-center decoration-0 px-3 py-3 group-data-[sidebar=brand]:hover:text-slate-200">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                               Invoice
-                                            </a>
-                                        </li>
-                                    </ul>                             --}}
-                                </div>
-                                {{!-- <div data-fc-type="collapse" data-fc-parent="parent-accordion">
-                                    <a href="#"
-                                       class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200">
-                                        <span data-lucide="grid"
-                                              class="w-5 h-5 text-center text-slate-800 me-2 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></span>
-                                        <span>Apps</span>
-                                        <i class="icofont-thin-down fc-collapse-open:rotate-180 ms-auto inline-block text-[14px] transform transition-transform duration-300 text-slate-800 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400"></i>
-                                    </a>
-                                </div> --}}
-                                {{!-- <div class="hidden  overflow-hidden">
-                                    <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2" id="apps-accordion"
-                                        data-fc-type="accordion">
-                                        <li class="nav-item relative block">
-                                            <a href="apps-chat.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200  flex items-center decoration-0 px-3 py-3">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                                Chat
-                                            </a>
-                                        </li>
-                                        <li class="nav-item relative block">
-                                            <a href="apps-contact-list.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                                Contact List
-                                            </a>
-                                        </li>
-                                        <li class="nav-item relative block">
-                                            <a href="apps-calendar.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                                Calendar
-                                            </a>
-                                        </li>
-                                        <li class="nav-item relative block">
-                                            <a href="apps-files.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                                File Mamager
-                                            </a>
-                                        </li>
-                                        <li class="nav-item relative block">
-                                            <a href="apps-invoice.html"
-                                               class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
-                                                <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                                Invoice
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <div id="Email" data-fc-type="collapse" data-fc-parent="apps-accordion">
-                                                <a href="#"
-                                                   class="nav-link hover:bg-transparent hover:text-black  rounded-md dark:hover:text-slate-200   flex items-center  decoration-0 px-3 py-3 cursor-pointer group-data-[sidebar=dark]:hover:text-slate-200 group-data-[sidebar=brand]:hover:text-slate-200 "
-                                                   aria-expanded="false" aria-controls="Email-flush">
-                                                    <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                                    <span>Email</span>
-                                                    <i class="icofont-thin-down ms-auto inline-block text-[14px] transform transition-transform duration-300 text-slate-800 dark:text-slate-400 group-data-[sidebar=dark]:text-slate-400 group-data-[sidebar=brand]:text-slate-400  fc-collapse-open:rotate-180"></i>
-                                                </a>
-                                            </div>
-                                            <div id="Email-flush" class=" hidden  overflow-hidden "
-                                                 aria-labelledby="Email">
-                                                <ul class="nav flex-col flex flex-wrap ps-0 mb-0 ms-2">
-                                                    <li class="nav-item relative block">
-                                                        <a href="apps-email-inbox.html"
-                                                           class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
-                                                            <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                                            Inbox
-                                                        </a>
-                                                    </li>
-                                                    <li class="nav-item relative block">
-                                                        <a href="apps-email-read.html"
-                                                           class="nav-link  hover:text-primary-500  rounded-md dark:hover:text-primary-500 relative group-data-[sidebar=brand]:hover:text-slate-200   flex items-center decoration-0 px-3 py-3">
-                                                            <i class="icofont-dotted-right me-2 text-slate-600 text-[8px] group-data-[sidebar=brand]:text-slate-400"></i>
-                                                            Read Email
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                
-                                    </ul>
-                                </div> --}}
+                         
+                           
 
                         
                                 {{!-- <div class="border-b border-dashed dark:border-slate-700/40 my-3 group-data-[sidebar=dark]:border-slate-700/40 group-data-[sidebar=brand]:border-slate-700/40"></div>
@@ -1078,36 +938,9 @@
                     id="navUserdata">
             
                     <ul class="py-1" aria-labelledby="navUserdata">
-                      <li>
-                        <a
-                          href="#"
-                          class="flex items-center py-2 px-3 text-sm text-gray-700 hover:bg-gray-50
-                          dark:text-gray-200 dark:hover:bg-gray-900/20
-                          dark:hover:text-white">
-                          <span data-lucide="user"
-                                          class="w-4 h-4 inline-block text-slate-800 dark:text-slate-400 me-2"></span>
-                          Profile</a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          class="flex items-center py-2 px-3 text-sm text-gray-700 hover:bg-gray-50
-                          dark:text-gray-200 dark:hover:bg-gray-900/20
-                          dark:hover:text-white">
-                          <span data-lucide="settings"
-                                          class="w-4 h-4 inline-block text-slate-800 dark:text-slate-400 me-2"></span>
-                          Settings</a>
-                      </li>
-                      <li>
-                        <a
-                          href="#"
-                          class="flex items-center py-2 px-3 text-sm text-gray-700 hover:bg-gray-50
-                          dark:text-gray-200 dark:hover:bg-gray-900/20
-                          dark:hover:text-white">
-                          <span data-lucide="dollar-sign"
-                                          class="w-4 h-4 inline-block text-slate-800 dark:text-slate-400 me-2"></span>
-                          Earnings</a>
-                      </li>
+                     
+                      
+                      
                       <li>
                         <a
                           href="/vendor/signout"

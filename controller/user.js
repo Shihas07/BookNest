@@ -34,7 +34,8 @@ const homePage = async (req, res) => {
       const userId = decodedToken.id;
       console.log(userId);
       const user = await User.findById(userId);
-      res.render("user/index", { user });
+      const rooms=await Rooms.find()
+      res.render("user/index", { user,rooms });
     } else {
       // Render home page without user message
       res.render("user/index");
@@ -115,7 +116,7 @@ const login = async (req, res) => {
     }
 
     if (user.blocked) {
-      return res.status(403).render("user/login",{errod:"Your account has been blocked. Please contact the administrator"});
+      return res.status(400).render("user/login",{erroru:"Your account has been blocked. Please contact the administrator"});
     }
 
     const hashpassword = await bcrypt.compare(password, user.password);
@@ -489,7 +490,7 @@ let getRoomSearch=async(req,res)=>{
         ]
     });
 
-      console.log("overlapping",overlappingBookings)
+      // console.log("overlapping",overlappingBookings)
 
 
 
@@ -498,7 +499,7 @@ let getRoomSearch=async(req,res)=>{
            
     // Filter rooms based on availability
     const availableRooms = room.filter(room => !bookedRoomIds.includes(room.roomid));
-console.log("avail",availableRooms);
+// console.log("avail",availableRooms);
 res.render("user/room-search", {availableRooms,room  });
 
 } catch (error) {

@@ -297,6 +297,17 @@ document.addEventListener("DOMContentLoaded", function() {
         cancelButton.style.display = "none";
       }
     } 
+      else if(status === "checkin"){
+      const closestCard = statusElem.closest('.card');
+      var cancelButton = closestCard.querySelector('.hh');
+            const reviewButton = closestCard.querySelector('.review');
+
+      if (cancelButton&&reviewButton) { 
+        cancelButton.style.display = "none";
+                reviewButton.style.display = "none";
+
+      }
+    } 
     else if(status === "booked"){
       const closestCard = statusElem.closest('.card');
       const reviewButton = closestCard.querySelector('.review');
