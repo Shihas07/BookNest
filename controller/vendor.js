@@ -61,6 +61,7 @@ const index = async (req, res) => {
       vendor: vendorId // Only retrieve rooms owned by the same vendor
   });
 
+ 
     const roomData = rooms.map(room => {
       // Find the corresponding booking count for the room
       const bookingCount = bookingCounts.find(booking => booking._id.toString() === room._id.toString());
@@ -69,12 +70,20 @@ const index = async (req, res) => {
       return { roomName: room.roomName, bookingCount: totalBookings };
   });
 
+
+   let totalBookings = 0
+
   const roomDataFormatted = roomData.reduce((acc, { roomName, bookingCount }) => {
     acc[roomName] = bookingCount;
+    totalBookings += bookingCount;
+
+
     return acc;
   }, {});
 
-  const totalBookings = bookingCounts.reduce((total, booking) => total + booking.count, 0);
+
+
+  // const totalBookings = bookingCounts.reduce((total, booking) => total + booking.count, 0);
   
   console.log("Room Data:",totalBookings,roomData );
 
@@ -85,7 +94,7 @@ const index = async (req, res) => {
   const roomIds = vendorRooms.map(room => room._id);
 
   const bookedUser = await User.find({ 'booking.room.roomid': { $in: roomIds } });
-   console.log("fff",bookedUser);
+  //  console.log("fff",bookedUser);
 
 
  
@@ -109,7 +118,7 @@ const index = async (req, res) => {
  
   const bookedUsersCount = bookedUsers.length;
   
-  console.log("User Counts:", bookedUsersCount,total);
+  // console.log("User Counts:", bookedUsersCount,total);
 
 
      //chart monthly booking//

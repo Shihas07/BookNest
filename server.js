@@ -62,8 +62,7 @@ app.use("/", vendorRouter);
 
 
 // Connect to MongoDB
-const mongoURI = 'mongodb://localhost:27017/mydatabase';
-mongoose.connect(mongoURI)
+mongoose.connect(process.env.mongoURI)
   .then(() => {
     console.log('Connected to MongoDB');
   })
