@@ -60,7 +60,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
     <div class="container">
-      <a class="navbar-brand navbar-brand-custom" href="#">BOOKNEST</a>
+      <a class="navbar-brand navbar-brand-custom" href="/">BOOKNEST</a>
       <!-- You can add other navbar items here if needed -->
     </div>
   </nav>
@@ -183,6 +183,9 @@
         keyboard: false
       });
       myModal.show();
+      closeButton.addEventListener('click', function () {
+        window.location.href = '/'; // Redirect to home page
+      });
     }
   });
 </script>
@@ -329,12 +332,16 @@
                                 keyboard: false
                             });
                             myModal.show();
+
+                        
+                           
                         })
                         .catch(error => {
                             // Handle error
                             console.error('Booking failed:', error);
                             // Show error message to the user
                         });
+                        
                 },
                 prefill: {
                     name: 'Shihas',

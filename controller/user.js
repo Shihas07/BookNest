@@ -476,8 +476,12 @@ let getRoomSearch=async(req,res)=>{
   try {
     const { start_date, end_date, location } = req.query;
 
+      
+
     const startDate = new Date(start_date);
     const endDate = new Date(end_date);
+
+  
 
     // Find all rooms
     const room = await Rooms.find({ location: location[0] });
@@ -692,8 +696,8 @@ const Postbooking = async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "Gmail", // Update with your email service
       auth: {
-        user: "shihas732@gmail.com", // Update with your email
-        pass: "lkox ydmj nigs qnlb", // Update with your password
+        user: "shihas732@gmail.com", 
+        pass: "lkox ydmj nigs qnlb", 
       },
     });
 
@@ -711,6 +715,7 @@ const Postbooking = async (req, res) => {
       } else {
         console.log("Email sent: " + info.response);
         res.redirect("/booking?success=true");
+        
       }
     });
   } catch (error) {
