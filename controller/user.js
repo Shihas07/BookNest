@@ -322,8 +322,20 @@ const profile = async (req, res) => {
           },
         },
       ]);
-
-      bookingss.reverse()
+      bookingss.forEach((booking) => {
+        if (booking.booking.checkInDate) {
+          booking.booking.checkInDateFormatted = new Date(booking.booking.checkInDate).toLocaleDateString("en-GB");
+        }
+        if (booking.booking.checkOutDate) {
+          booking.booking.checkOutDateFormatted = new Date(booking.booking.checkOutDate).toLocaleDateString("en-GB");
+        }
+        if (booking.createdAt) {
+          booking.createdAtFormatted = new Date(booking.createdAt).toLocaleDateString("en-GB");
+        }
+      });
+  
+      bookingss.reverse();
+  
 
       console.log("checking booking  : ", bookingss);
 
@@ -692,6 +704,9 @@ const Postbooking = async (req, res) => {
     // Save the updated user document
     await user.save();
 
+
+      
+
     // Send email to the user
     const transporter = nodemailer.createTransport({
       service: "Gmail", // Update with your email service
@@ -714,7 +729,7 @@ const Postbooking = async (req, res) => {
         res.status(500).send("Failed to send email");
       } else {
         console.log("Email sent: " + info.response);
-        res.redirect("/booking?success=true");
+        res.status(200).redirect("/booking?success=true");
         
       }
     });
@@ -736,7 +751,7 @@ const  apigetuser = async (req, res) => {
     console.log("asdfghj", bookings);
     const dateRanges = bookings.flatMap(user => {
       return user.booking
-        .filter(booking => booking.staus !== "cancel") // Filter out cancelled bookings
+        .filter(booking => booking.staus !== "cancel")
         .map(booking => {
           // Validate the booking dates
           if (!booking || !booking.checkInDate || !booking.checkOutDate) {
@@ -1001,8 +1016,21 @@ const getbookindetails = async (req, res) => {
         },
       ]);
 
-      bookingss.reverse()
-
+      
+      bookingss.forEach((booking) => {
+        if (booking.booking.checkInDate) {
+          booking.booking.checkInDateFormatted = new Date(booking.booking.checkInDate).toLocaleDateString("en-GB");
+        }
+        if (booking.booking.checkOutDate) {
+          booking.booking.checkOutDateFormatted = new Date(booking.booking.checkOutDate).toLocaleDateString("en-GB");
+        }
+        if (booking.createdAt) {
+          booking.createdAtFormatted = new Date(booking.createdAt).toLocaleDateString("en-GB");
+        }
+      });
+  
+      bookingss.reverse();
+  
       console.log("checking booking  : ", bookingss);
 
       res.status(200).render("user/bookingdetails",{bookingss, user})

@@ -152,8 +152,7 @@
   });
 </script>
 
-</body>
-<div class="modal fade" id="bookingSuccessModal" tabindex="-1" aria-labelledby="bookingSuccessModalLabel" aria-hidden="true">
+{{!-- <div class="modal fade" id="bookingSuccessModal" tabindex="-1" aria-labelledby="bookingSuccessModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -164,30 +163,33 @@
         Your booking has been successfully completed.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" onclick="location()" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
-</div>
+</div> --}}
+</body>
+
 
 <script>
   // Add this script to show the modal after form submission
-  document.addEventListener('DOMContentLoaded', function() {
+ // document.addEventListener('DOMContentLoaded', function() {
     // Get the URL parameter to check if the booking was successful
-    const urlParams = new URLSearchParams(window.location.search);
-    const bookingSuccess = urlParams.get('success');
+   // const urlParams = new URLSearchParams(window.location.search);
+    /const bookingSuccess = urlParams.get('success');
 
     // If booking was successful, show the modal
-    if (bookingSuccess) {
-      var myModal = new bootstrap.Modal(document.getElementById('bookingSuccessModal'), {
-        keyboard: false
-      });
-      myModal.show();
-      closeButton.addEventListener('click', function () {
-        window.location.href = '/'; // Redirect to home page
-      });
-    }
-  });
+   // if (bookingSuccess) {
+     // var myModal = new bootstrap.Modal(document.getElementById('bookingSuccessModal'), {
+       // keyboard: false
+      //});
+      //myModal.show();
+      //closeButton.addEventListener('click', function () {
+        //window.location.href = '/bookingdetails'; // Redirect to home page
+      //});
+  //  }
+  //});
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
@@ -327,11 +329,23 @@
                         .then(response => {
                             // Handle success response
                             console.log('Booking successful:', response.data);
+                            console.log(response )
 
-                           var myModal = new bootstrap.Modal(document.getElementById('bookingSuccessModal'), {
-                                keyboard: false
-                            });
-                            myModal.show();
+                        if(response.status == 200) {
+                                  Swal.fire({
+                                        title: "Booking is  successfully! completed",
+                                        text: "Successfully  booked your room!",
+                                        icon: "success",
+                                        timer: 3000, 
+                                        showConfirmButton: false 
+                                  }).then(() => {
+                                      
+                                      setTimeout(function() {
+                                          window.location.href = '/bookingdetails';
+                                      }, 0); // No delay needed here because SweetAlert's timer has already handled the delay
+                                  });
+                              }
+
 
                         
                            

@@ -27,6 +27,7 @@
     <link rel="stylesheet"  href="css/hotale-style-customafa1.css?1653801118&amp;ver=6.0.1" type="text/css" media="all" />
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.11.2/toastify.min.css">
 
 
 
@@ -75,6 +76,8 @@
 
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
 
 
 </head>
@@ -148,119 +151,18 @@
                             <ul id="menu-main-navigation" class="m-menu">
                                 <li class="menu-item menu-item-home current-menu-item  menu-item-has-children" >
                                     <a href="/" aria-current="page">Home</a>
-                                    {{!-- <ul class="sub-menu">
-                                        <li class="menu-item menu-item-home">
-                                            <a href="index.html" aria-current="page">Home &#8211; Resort 1</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a target="_blank" rel="noopener" href="https://max-themes.net/demos/hotale/hotale/resort2/index.html">Home &#8211; Resort 2</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a target="_blank" rel="noopener" href="https://max-themes.net/demos/hotale/hotale/hotel1/index.html">Home &#8211; Hotel 1</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a target="_blank" rel="noopener" href="https://max-themes.net/demos/hotale/hotale/hotel2/index.html">Home &#8211; Hotel 2</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a target="_blank" rel="noopener" href="https://max-themes.net/demos/hotale/hotale/apartment/index.html">Home &#8211; Apartment</a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a target="_blank" rel="noopener" href="https://max-themes.net/demos/hotale/hotale/apartment2/index.html">Home &#8211; Apartment 2</a>
-                                        </li>
-                                    </ul> --}}
+                                   
                                 </li>
-                                {{!-- <li class="menu-item menu-item-has-children">
-                                    <a href="#">Pages</a>
-                                    <ul class="sub-menu">
-                                        <li class="menu-item"><a href="about-us.html">About Us</a></li>
-                                        <li class="menu-item"><a href="about-us-2.html">About Us 2</a></li>
-                                        <li class="menu-item"><a href="about-us-3.html">About Us 3</a></li>
-                                        <li class="menu-item"><a href="our-team.html">Our Team</a></li>
-                                        <li class="menu-item"><a href="hotel-review.html">Hotel Review</a></li>
-                                        <li class="menu-item"><a href="faq.html">FAQ</a></li>
-                                        <li class="menu-item"><a href="gallery.html">Gallery</a></li>
-                                        <li class="menu-item"><a href="price-table.html">Price Table</a></li>
-                                        <li class="menu-item"><a href="maintenance.html">Maintenance</a></li>
-                                        <li class="menu-item"><a href="coming-soon.html">Coming Soon</a></li>
-                                        <li class="menu-item"><a href="404.html">404 Page</a></li>
-                                    </ul>
-                                </li> --}}
+                               
                                 <li class="menu-item menu-item-has-children">
                                     <a href="/roomlist">Rooms</a>
-                                    {{!-- <ul class="sub-menu">
-                                        <li class="menu-item"><a href="room-grid-style-1.html">Room Grid Style 1</a></li>
-                                        <li class="menu-item"><a href="room-grid-style-2.html">Room Grid Style 2</a></li>
-                                        <li class="menu-item"><a href="room-grid-style-3.html">Room Grid Style 3</a></li>
-                                        <li class="menu-item"><a href="room-grid-style-4.html">Room Grid Style 4</a></li>
-                                        <li class="menu-item"><a href="room-modern-style.html">Room Modern Style</a></li>
-                                        <li class="menu-item"><a href="room-side-thumbnail.html">Room Side Thumbnail</a></li>
-                                    </ul> --}}
+                                  
                                 </li>
-                                <li class="menu-item"><a href="room-search.html">Reservation</a></li>
+                                <li class="menu-item"><a href="/wishlist">wishlist</a></li>
                                 <li class="menu-item menu-item-has-children">
                                     <a href="/bookingdetails">Booking</a>
-                                    {{!-- <ul class="sub-menu">
-                                        <li class="menu-item menu-item-has-children">
-                                            <a href="blog-3-columns-with-frame.html">Blog Columns</a>
-                                            <ul class="sub-menu">
-                                                <li class="menu-item"><a href="blog-2-columns.html">Blog 2 Columns</a></li>
-                                                <li class="menu-item">
-                                                    <a href="blog-2-columns-with-frame.html">Blog 2 Columns With Frame</a>
-                                                </li>
-                                                <li class="menu-item"><a href="blog-3-columns.html">Blog 3 Columns</a></li>
-                                                <li class="menu-item">
-                                                    <a href="blog-3-columns-with-frame.html">Blog 3 Columns With Frame</a>
-                                                </li>
-                                                <li class="menu-item"><a href="blog-4-columns.html">Blog 4 Columns</a></li>
-                                                <li class="menu-item">
-                                                    <a href="blog-4-columns-with-frame.html">Blog 4 Columns With Frame</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item menu-item-has-children">
-                                            <a href="blog-full-right-sidebar.html">Blog Full</a>
-                                            <ul class="sub-menu">
-                                                <li class="menu-item">
-                                                    <a href="blog-full-right-sidebar.html">Blog Full Right Sidebar</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="blog-full-right-sidebar-with-frame.html">Blog Full Right Sidebar With Frame</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="blog-full-left-sidebar.html">Blog Full Left Sidebar</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="blog-full-left-sidebar-with-frame.html">Blog Full Left Sidebar With Frame</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="blog-full-both-sidebar.html">Blog Full Both Sidebar</a>
-                                                </li>
-                                                <li class="menu-item">
-                                                    <a href="blog-full-both-sidebar-with-frame.html">Blog Full Both Sidebar With Frame</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item menu-item-has-children">
-                                            <a href="blog-grid-3-columns.html">Blog Grid</a>
-                                            <ul class="sub-menu">
-                                                <li class="menu-item"><a href="blog-grid-2-columns.html">Blog Grid 2 Columns</a></li>
-                                                <li class="menu-item">
-                                                    <a href="blog-grid-2-columns-no-space.html">Blog Grid 2 Columns No Space</a>
-                                                </li>
-                                                <li class="menu-item"><a href="blog-grid-3-columns.html">Blog Grid 3 Columns</a></li>
-                                                <li class="menu-item">
-                                                    <a href="blog-grid-3-columns-no-space.html">Blog Grid 3 Columns No Space</a>
-                                                </li>
-                                                <li class="menu-item"><a href="blog-grid-4-columns.html">Blog Grid 4 Columns</a></li>
-                                                <li class="menu-item">
-                                                    <a href="blog-grid-4-columns-no-space.html">Blog Grid 4 Columns No Space</a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li class="menu-item"><a href="single-blog.html">Single Posts</a></li>
-                                    </ul> --}}
+                                   
                                 </li>
-                                {{!-- <li class="menu-item"><a href="contact.html">Contact</a></li> --}}
                             </ul>
                         </div>
                     </div>
@@ -763,307 +665,7 @@
                                             </div>
                                         </div>
                                     </div>
-{{!-- 
-                                    {{#if room.amenities}}
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-60 gdlr-core-column-first">
-                                        <div class="gdlr-core-pbf-column-content-margin gdlr-core-js">
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 40px;">
-                                                        <div class="gdlr-core-title-item-title-wrap">
-                                                            <h3 class="gdlr-core-title-item-title gdlr-core-skin-title class-test" style="font-size: 25px; font-weight: 500; letter-spacing: 0px; text-transform: none;">
-                                                                Room Amenities<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                            </h3>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20 gdlr-core-column-first" id="gdlr-core-column-8">
-                                        <div
-                                            class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow"
-                                            style="margin: 0px 10px 20px 20px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;"
-                                        >
-                                            <div
-                                                class="gdlr-core-pbf-background-wrap"
-                                                style="
-                                                    border-radius: 20px 20px 20px 20px;
-                                                    -moz-border-radius: 20px 20px 20px 20px;
-                                                    -webkit-border-radius: 20px 20px 20px 20px;
-                                                    border-width: 1px 1px 1px 1px;
-                                                    border-color: #e5e5e5;
-                                                    border-style: solid;
-                                                "
-                                            ></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
-                                                        <div class="gdlr-core-title-item-left-icon" style="margin: -12px 16px 0px 0px; font-size: 35px;"><i class="gdlr-icon-watch-tv" style="color: #1e1e1e;"></i></div>
-                                                        <div class="gdlr-core-title-item-left-icon-wrap">
-                                                            <div class="gdlr-core-title-item-title-wrap">
-                                                                <h3
-                                                                    class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
-                                                                    style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
-                                                                >
-                                                                    TV<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20" id="gdlr-core-column-9">
-                                        <div
-                                            class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow"
-                                            style="margin: 0px 10px 20px 10px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;"
-                                        >
-                                            <div
-                                                class="gdlr-core-pbf-background-wrap"
-                                                style="
-                                                    border-radius: 20px 20px 20px 20px;
-                                                    -moz-border-radius: 20px 20px 20px 20px;
-                                                    -webkit-border-radius: 20px 20px 20px 20px;
-                                                    border-width: 1px 1px 1px 1px;
-                                                    border-color: #e5e5e5;
-                                                    border-style: solid;
-                                                "
-                                            ></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
-                                                        <div class="gdlr-core-title-item-left-icon" style="margin: -12px 15px 0px 0px; font-size: 35px;"><i class="gdlr-icon-wifi-signal" style="color: #1e1e1e;"></i></div>
-                                                        <div class="gdlr-core-title-item-left-icon-wrap">
-                                                            <div class="gdlr-core-title-item-title-wrap">
-                                                                <h3
-                                                                    class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
-                                                                    style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
-                                                                >
-                                                                   wifi<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20" id="gdlr-core-column-10">
-                                        <div
-                                            class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow"
-                                            style="margin: 0px 20px 20px 10px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;"
-                                        >
-                                            <div
-                                                class="gdlr-core-pbf-background-wrap"
-                                                style="
-                                                    border-radius: 20px 20px 20px 20px;
-                                                    -moz-border-radius: 20px 20px 20px 20px;
-                                                    -webkit-border-radius: 20px 20px 20px 20px;
-                                                    border-width: 1px 1px 1px 1px;
-                                                    border-color: #e5e5e5;
-                                                    border-style: solid;
-                                                "
-                                            ></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
-                                                        <div class="gdlr-core-title-item-left-icon" style="margin: -12px 15px 0px 0px; font-size: 35px;"><i class="gdlr-icon-safe-box1" style="color: #1e1e1e;"></i></div>
-                                                        <div class="gdlr-core-title-item-left-icon-wrap">
-                                                            <div class="gdlr-core-title-item-title-wrap">
-                                                                <h3
-                                                                    class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
-                                                                    style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
-                                                                >
-                                                                    Safe<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20 gdlr-core-column-first" id="gdlr-core-column-11">
-                                        <div
-                                            class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow"
-                                            style="margin: 0px 10px 20px 20px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;"
-                                        >
-                                            <div
-                                                class="gdlr-core-pbf-background-wrap"
-                                                style="
-                                                    border-radius: 20px 20px 20px 20px;
-                                                    -moz-border-radius: 20px 20px 20px 20px;
-                                                    -webkit-border-radius: 20px 20px 20px 20px;
-                                                    border-width: 1px 1px 1px 1px;
-                                                    border-color: #e5e5e5;
-                                                    border-style: solid;
-                                                "
-                                            ></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
-                                                        <div class="gdlr-core-title-item-left-icon" style="margin: -12px 16px 0px 0px; font-size: 35px;"><i class="gdlr-icon-shower" style="color: #1e1e1e;"></i></div>
-                                                        <div class="gdlr-core-title-item-left-icon-wrap">
-                                                            <div class="gdlr-core-title-item-title-wrap">
-                                                                <h3
-                                                                    class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
-                                                                    style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
-                                                                >
-                                                                    None Smoking<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20" id="gdlr-core-column-12">
-                                        <div
-                                            class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow"
-                                            style="margin: 0px 10px 20px 10px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;"
-                                        >
-                                            <div
-                                                class="gdlr-core-pbf-background-wrap"
-                                                style="
-                                                    border-radius: 20px 20px 20px 20px;
-                                                    -moz-border-radius: 20px 20px 20px 20px;
-                                                    -webkit-border-radius: 20px 20px 20px 20px;
-                                                    border-width: 1px 1px 1px 1px;
-                                                    border-color: #e5e5e5;
-                                                    border-style: solid;
-                                                "
-                                            ></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
-                                                        <div class="gdlr-core-title-item-left-icon" style="margin: -12px 15px 0px 0px; font-size: 35px;"><i class="gdlr-icon-air-conditioner1" style="color: #1e1e1e;"></i></div>
-                                                        <div class="gdlr-core-title-item-left-icon-wrap">
-                                                            <div class="gdlr-core-title-item-title-wrap">
-                                                                <h3
-                                                                    class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
-                                                                    style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
-                                                                >
-                                                                    Air Conditioning<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20" id="gdlr-core-column-13">
-                                        <div
-                                            class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow"
-                                            style="margin: 0px 20px 20px 10px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;"
-                                        >
-                                            <div
-                                                class="gdlr-core-pbf-background-wrap"
-                                                style="
-                                                    border-radius: 20px 20px 20px 20px;
-                                                    -moz-border-radius: 20px 20px 20px 20px;
-                                                    -webkit-border-radius: 20px 20px 20px 20px;
-                                                    border-width: 1px 1px 1px 1px;
-                                                    border-color: #e5e5e5;
-                                                    border-style: solid;
-                                                "
-                                            ></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
-                                                        <div class="gdlr-core-title-item-left-icon" style="margin: -12px 15px 0px 0px; font-size: 35px;"><i class="gdlr-icon-oil-heater-1" style="color: #1e1e1e;"></i></div>
-                                                        <div class="gdlr-core-title-item-left-icon-wrap">
-                                                            <div class="gdlr-core-title-item-title-wrap">
-                                                                <h3
-                                                                    class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
-                                                                    style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
-                                                                >
-                                                                    Heater<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20 gdlr-core-column-first" id="gdlr-core-column-14">
-                                        <div
-                                            class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow"
-                                            style="margin: 0px 10px 20px 20px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;"
-                                        >
-                                            <div
-                                                class="gdlr-core-pbf-background-wrap"
-                                                style="
-                                                    border-radius: 20px 20px 20px 20px;
-                                                    -moz-border-radius: 20px 20px 20px 20px;
-                                                    -webkit-border-radius: 20px 20px 20px 20px;
-                                                    border-width: 1px 1px 1px 1px;
-                                                    border-color: #e5e5e5;
-                                                    border-style: solid;
-                                                "
-                                            ></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
-                                                        <div class="gdlr-core-title-item-left-icon" style="margin: -12px 16px 0px 0px; font-size: 35px;"><i class="gdlr-icon-telephone" style="color: #1e1e1e;"></i></div>
-                                                        <div class="gdlr-core-title-item-left-icon-wrap">
-                                                            <div class="gdlr-core-title-item-title-wrap">
-                                                                <h3
-                                                                    class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
-                                                                    style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
-                                                                >
-                                                                    Phone<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="gdlr-core-pbf-column gdlr-core-column-20" id="gdlr-core-column-15">
-                                        <div
-                                            class="gdlr-core-pbf-column-content-margin gdlr-core-js gdlr-core-move-up-with-shadow"
-                                            style="margin: 0px 10px 20px 10px; padding: 25px 0px 0px 10px; border-radius: 20px 20px 20px 20px; -moz-border-radius: 20px 20px 20px 20px; -webkit-border-radius: 20px 20px 20px 20px;"
-                                        >
-                                            <div
-                                                class="gdlr-core-pbf-background-wrap"
-                                                style="
-                                                    border-radius: 20px 20px 20px 20px;
-                                                    -moz-border-radius: 20px 20px 20px 20px;
-                                                    -webkit-border-radius: 20px 20px 20px 20px;
-                                                    border-width: 1px 1px 1px 1px;
-                                                    border-color: #e5e5e5;
-                                                    border-style: solid;
-                                                "
-                                            ></div>
-                                            <div class="gdlr-core-pbf-column-content clearfix gdlr-core-js">
-                                                <div class="gdlr-core-pbf-element">
-                                                    <div class="gdlr-core-title-item gdlr-core-item-pdb clearfix gdlr-core-left-align gdlr-core-title-item-caption-top gdlr-core-item-pdlr" style="padding-bottom: 10px;">
-                                                        <div class="gdlr-core-title-item-left-icon" style="margin: -12px 15px 0px 0px; font-size: 35px;"><i class="gdlr-icon-hair-dryer1" style="color: #1e1e1e;"></i></div>
-                                                        <div class="gdlr-core-title-item-left-icon-wrap">
-                                                            <div class="gdlr-core-title-item-title-wrap">
-                                                                <h3
-                                                                    class="gdlr-core-title-item-title gdlr-core-skin-title class-test"
-                                                                    style="font-size: 17px; font-weight: 500; letter-spacing: 0px; text-transform: none; color: #848484;"
-                                                                >
-                                                                    Hair Dryer<span class="gdlr-core-title-item-title-divider gdlr-core-skin-divider"></span>
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {{else}}
-    <!-- No amenities available -->
-    <p>No amenities available for this room.</p>
-    {{/if}} --}}
+
 
 
 
@@ -1118,54 +720,51 @@
                                         <div class="tourmaster-room-booking-bar-content">
                                             <div class="tourmaster-room-booking-wrap" class="tourmaster-active" data-room-tab="booking">
                                               {{#if room}}
-                                               <form  action="/booking"  class="tourmaster-room-booking-form">
-                                                    <div
-                                                        class="tourmaster-room-date-selection tourmaster-vertical"
-                                                    >
-                                                      {{!-- <div class="tourmaster-custom-start-date gdlr-core-skin-e-background">
-    <div class="tourmaster-head gdlr-core-skin-e-content">Check In</div>
-    <div class="tourmaster-tail gdlr-core-skin-e-content" id="hi"  >
-    <input  type="date" name="checkInDate" id="check-in-date" value="{{getCurrentDate}}"/> 
+                                              <form action="/booking" class="tourmaster-room-booking-form" id="booking-form" onsubmit="return validateForm()">
+    <div class="tourmaster-custom-start-date gdlr-core-skin-e-background">
+        <div class="tourmaster-head gdlr-core-skin-e-content">Check In</div>
+        <div class="tourmaster-tail gdlr-core-skin-e-content" id="hi">
+            <!-- Input field for Check In date -->
+            <input type="date" name="checkInDate" id="check-in-date" required>
+        </div>
     </div>
-
-</div>
-<div class="tourmaster-custom-end-date gdlr-core-skin-e-background">
-    <div class="tourmaster-head gdlr-core-skin-e-content">Check Out</div>
-    <div class="tourmaster-tail gdlr-core-skin-e-content ">
-    <input  type="date" name="checkOutDate" id="check-out-date"  value="{{defaultCheckOutDate}}"/></div>
-</div>
-                                                        <div class="tourmaster-custom-datepicker-wrap" data-date-format="d M yy">
-                                                            <i class="tourmaster-custom-datepicker-close icon_close"></i>
-                                                            <div class="tourmaster-custom-datepicker-title"></div>
-                                                            <div class="tourmaster-custom-datepicker-calendar"></div>
-                                                        </div>
-                                                    </div>
-                                                        --}}
-
-                                                        <div class="tourmaster-custom-start-date gdlr-core-skin-e-background">
-    <div class="tourmaster-head gdlr-core-skin-e-content">Check In</div>
-    <div class="tourmaster-tail gdlr-core-skin-e-content" id="hi">
-        <!-- Input field for Check In date -->
-        <input type="text" name="checkInDate" id="check-in-date" placeholder="Select Check In Date"> 
+    <div class="tourmaster-custom-end-date gdlr-core-skin-e-background">
+        <div class="tourmaster-head gdlr-core-skin-e-content">Check Out</div>
+        <div class="tourmaster-tail gdlr-core-skin-e-content">
+            <!-- Input field for Check Out date -->
+            <input type="date" name="checkOutDate" id="check-out-date" required>
+        </div>
     </div>
-</div>
+    <input type="hidden" name="price" id="rr" value="{{room.price}}">
+    <input type="hidden" name="room_id" class="rr" id="room-id" value="{{room._id}}">
+    <input type="submit" class="tourmaster-room-button tourmaster-full" value="Book Now" />
+</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.11.2/toastify.min.js"></script>
 
-<div class="tourmaster-custom-end-date gdlr-core-skin-e-background">
-    <div class="tourmaster-head gdlr-core-skin-e-content">Check Out</div>
-    <div class="tourmaster-tail gdlr-core-skin-e-content">
-        <!-- Input field for Check Out date -->
-        <input type="text" name="checkOutDate" id="check-out-date" placeholder="Select Check Out Date">
-    </div>
-</div>
-</div>
-                                                    
-                                                   
-                                             <input type="hidden" name="price" id="rr" value="{{room.price}}">
-                                                   
-                                                   <input type="hidden" name="room_id" class="rr" id="room-id"     value="{{room._id}}"/> 
-                                                    <input type="submit" class="tourmaster-room-button tourmaster-full" value="Book Now"   />
-                                                </form>
-                                               
+
+<script>
+    function validateForm() {
+        var checkInDate = document.getElementById('check-in-date').value;
+        var checkOutDate = document.getElementById('check-out-date').value;
+
+        // Custom validation example using Toastify
+        if (checkInDate === '' || checkOutDate === '') {
+            Toastify({
+                text: "Please select both Check In and Check Out dates.",
+                duration: 3000, 
+                gravity: "top", 
+                position: 'center',
+                backgroundColor: "linear-gradient(to right, #ff416c, #ff4b2b)",
+            }).showToast();
+            return false;
+        }
+
+        // Additional validation logic can be added here
+
+        return true; // Submit the form if validation passes
+    }
+</script>
+
                                                 
                                                  {{/if}}
                                             </div>

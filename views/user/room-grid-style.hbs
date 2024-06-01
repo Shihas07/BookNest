@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>booknest &#8211; Hotel HTML Template</title>
+    <title>booknest &#8211;</title>
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome (optional, if you're using font awesome icons) -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -86,7 +86,7 @@
                                     <a href="/roomlist">Rooms</a>
                                    
                                 </li>
-                                <li class="menu-item"><a href="/whishlist">Reservation</a></li>
+                                <li class="menu-item"><a href="/wishlist">wishlist</a></li>
                               <li class="menu-item menu-item-has-children">
                                     <a href="/bookingdetails">Booking</a>
                                     
@@ -161,7 +161,7 @@
                                             
                                         </li>
                                         <li class="menu-item hotale-normal-menu">
-                                            <a href="/wishlist">Reservation</a>
+                                            <a href="/wishlist">wishlist</a>
                                         </li>
                                          <li class="menu-item menu-item-has-children hotale-normal-menu">
                                             <a href="/bookingdetails" class="sf-with-ul-pre">Booking</a>
@@ -207,63 +207,7 @@
 
 
 
-{{!--             
-<div class="hotale-page-wrapper" id="hotale-page-wrapper">
-    <div class="gdlr-core-page-builder-body">
-        <div class="gdlr-core-pbf-wrapper" style="padding: 80px 0px 15px 0px;">
-             <div class="gdlr-core-pbf-background-wrap"></div>
-            <div class="gdlr-core-pbf-wrapper-content gdlr-core-js">
-                  <div class="gdlr-core-pbf-wrapper-container clearfix gdlr-core-container">
-                    <div class="gdlr-core-pbf-element">
-                        <div class="tourmaster-room-item clearfix tourmaster-room-item-style-grid">
-                            <div class="tourmaster-room-item-holder gdlr-core-js-2 clearfix row col-12" data-layout="fitrows">
-<div class="gdlr-core-item-list tourmaster-item-pdlr tourmaster-column-20 tourmaster-column-first col-4 g-0">
-    <div class="row">
-        {{#each rooms}}
-        <div class="col-md-4">
-            <div class="tourmaster-room-grid tourmaster-grid-frame" style="margin-bottom: 40px;">
-                <div class="tourmaster-room-grid-inner" style="box-shadow: 0px 20px 35px rgba(10, 10, 10, 0.06); -moz-box-shadow: 0px 20px 35px rgba(10, 10, 10, 0.06); -webkit-box-shadow: 0px 20px 35px rgba(10, 10, 10, 0.06); border-radius: 20px; -moz-border-radius: 20px; -webkit-border-radius: 20px;">
-                    <div class="tourmaster-room-thumbnail tourmaster-media-image gdlr-core-outer-frame-element tourmaster-with-price">
-                        <a href="single-room.html">
-                            <img src="{{this.roomImages.[1]}}" alt="{{this.roomName}}" width="700" height="450" />
-                        </a>
-                        <div class="tourmaster-price-wrap tourmaster-with-bg" style="border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px;">
-                            <span class="tourmaster-head">From</span><span class="tourmaster-price">${{this.price}}</span><span class="tourmaster-tail"> / night</span>
-                        </div>
-                    </div>
-                    <div class="tourmaster-room-content-wrap gdlr-core-skin-e-background gdlr-core-js" data-sync-height="room-item-10" style="padding-top: 45px; padding-bottom: 30px;">
-                        <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                            <a href="single-room.html">{{this.roomName}}</a>
-                        </h3>
-                        <div class="tourmaster-info-wrap clearfix">
-                            <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">1 King Bed</span></div>
-                            <div class="tourmaster-info tourmaster-info-guest-amount"><i class="gdlr-icon-group"></i><span class="tourmaster-tail">4 Guests</span></div>
-                        </div>
-                        <div class="tourmaster-room-rating">
-                            {{#if this.rating}}
-                                {{#each this.rating}}
-                                    <i class="fa fa-star"></i>
-                                {{/each}}
-                                <span class="tourmaster-room-rating-text">{{this.reviews}} Review{{#unless (eq this.reviews 1)}}s{{/unless}}</span>
-                            {{else}}
-                                <span class="tourmaster-room-rating-text">No reviews yet</span>
-                            {{/if}}
-                        </div>
-                        <a class="tourmaster-read-more tourmaster-type-text" href="single-room.html">Book Now<i class="icon-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{/each}}
-    </div>
-</div>
-    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> 
- --}}
+
 
 
 <div class="hotale-page-wrapper" id="hotale-page-wrapper">
@@ -282,7 +226,7 @@
                                             <div class="tourmaster-room-grid tourmaster-grid-frame" style="margin-bottom: 40px;">
                                                 <div class="tourmaster-room-grid-inner" style="box-shadow: 0px 20px 35px rgba(10, 10, 10, 0.06); border-radius: 20px;">
                                                     <div class="tourmaster-room-thumbnail tourmaster-media-image gdlr-core-outer-frame-element tourmaster-with-price">
-                                                        <a href="single-room.html">
+                                                        <a href="/singleroom?id={{id}}">
                                                             <img src="{{this.roomImages.[0]}}" alt="" width="700" height="450" />
                                                         </a>
                                                         <div class="tourmaster-price-wrap tourmaster-with-bg" style="border-radius: 10px;">
@@ -291,10 +235,10 @@
                                                     </div>
                                                     <div class="tourmaster-room-content-wrap gdlr-core-skin-e-background gdlr-core-js" data-sync-height="room-item-10" style="padding-top: 45px; padding-bottom: 30px;">
                                                         <h3 class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                            <a href="single-room.html">{{this.roomName}}</a>
+                                                            <a href="/singleroom?id={{id}}">{{this.roomName}}</a>
                                                         </h3>
                                                         <p class="tourmaster-room-title gdlr-core-skin-title" style="text-transform: none;">
-                                                            <a href="single-room.html">{{this.category}}</a>
+                                                            <a href="/singleroom?id={{id}}">{{this.category}}</a>
                                                         </p>
                                                         <div class="tourmaster-info-wrap clearfix">
                                                             <div class="tourmaster-info tourmaster-info-bed-type"><i class="gdlr-icon-double-bed2"></i><span class="tourmaster-tail">{{this.bedType}}</span></div>
