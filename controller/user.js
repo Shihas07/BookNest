@@ -37,7 +37,7 @@ const homePage = async (req, res) => {
       const rooms=await Rooms.find()
       res.render("user/index", { user,rooms });
     } else {
-      // Render home page without user message
+      
       res.render("user/index");
     }
   } catch (error) {

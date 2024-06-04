@@ -55,13 +55,7 @@ app.use(passport.session());
 app.use("/", userRouter); // User routes will be handled at '/'
 app.use("/", adminRouter);
 app.use("/", vendorRouter);
- // Admin routes will be handled at '/admin'
-//  hbs.registerPartials(path.join(__dirname, 'views/partials'));
-
-// Define a Handlebars helper function to convert rating average to stars
-
-
-// Connect to MongoDB
+ 
 mongoose.connect(process.env.mongoURI)
   .then(() => {
     console.log('Connected to MongoDB');
