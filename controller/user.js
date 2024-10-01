@@ -1,7 +1,9 @@
 const User = require("../model/user/user");
 const Rooms = require("../model/room");
 const express = require("express");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
+
 const jwt = require("jsonwebtoken");
 const otpService = require("../services/otp");
 const Admin = require("../model/admin/admin");

@@ -2,7 +2,9 @@
      const jwt = require("jsonwebtoken")
      const Admin = require("../model/admin/admin")
      
-     const bcrypt=require('bcrypt')
+    //  const bcrypt=require('bcrypt')
+    const bcrypt = require('bcryptjs');
+
      const User=require("../model/user/user")
      const nodemailer=require("nodemailer")
      const Rooms=require("../model/room")

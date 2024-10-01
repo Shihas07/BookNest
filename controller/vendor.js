@@ -1,5 +1,7 @@
 const Vendor = require("../model/vendor/vendor");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
+
 const jwt = require("jsonwebtoken");
 const Admin = require("../model/admin/admin");
 const Room = require("../model/room");
