@@ -26,5 +26,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-oauth2": "^1.8.0",
     "razorpay": "^2.9.3"
+  },
+  "scripts": {
+    "start": "node server.js"
   }
 }
